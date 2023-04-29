@@ -16,6 +16,10 @@
     "browser:watch": "node run/browser.js -- watch",
     "esm:build": "node run/esm.js",
     "esm:watch": "node run/esm.js -- watch",
+    "example:build": "node run/example.js",
+    "example:watch": "node run/example.js -- watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "eslint": "eslint ./src/**",
     "typescript-declarations": "tsc --emitDeclarationOnly --noEmit false"
   },
