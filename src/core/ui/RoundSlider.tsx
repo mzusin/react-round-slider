@@ -1,4 +1,6 @@
 import { IRoundSlider } from '../interfaces';
+import { circleMovementAfterMouse } from 'mz-math';
+import { useEffect, useRef, MouseEvent } from 'react';
 
 const polarToCartesian = (cx: number, cy: number, rx: number, ry: number, angleInDegrees: number) : [number, number] => {
     const angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
@@ -10,6 +12,8 @@ const polarToCartesian = (cx: number, cy: number, rx: number, ry: number, angleI
 }
 
 export const RoundSlider = (props: IRoundSlider) => {
+
+    const handleRef = useRef(null);
 
     let { rx, ry, startAngle, endAngle, strokeWidth, stroke } = props; // TODO: make const except endAngle
 
@@ -30,6 +34,28 @@ export const RoundSlider = (props: IRoundSlider) => {
     const startPos = polarToCartesian(cx, cy, rx, ry, startAngle);
     const endPos = polarToCartesian(cx, cy, rx, ry, endAngle);
 
+    useEffect(() => {
+
+        const update = (evt: MouseEvent) => {
+
+            if(!handleRef || !handleRef.current) return;
+
+            const mouse = [evt?.clientX ?? 0, evt?.clientY ?? 0];
+
+            // set circle css position ----------------------
+            const position = circleMovementAfterMouse(mouse, [cx, cy], rx);
+            handleRef.current.setAttribute('cx', `${ position[0] }px`);
+            handleRef.current.setAttribute('cy', `${ position[1] }px`);
+        };
+
+        document.addEventListener('mousemove', update);
+
+        return () => {
+            document.removeEventListener('mousemove', update);
+        };
+
+    }, []);
+
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -43,6 +69,15 @@ export const RoundSlider = (props: IRoundSlider) => {
                 fill="none"
                 shapeRendering="geometricPrecision"
                 strokeLinecap="round"
+                cursor="pointer"
+            />
+
+            <circle
+                ref={ handleRef }
+                cx={ startPos[0] }
+                cy={ startPos[1] }
+                r="20"
+                cursor="pointer"
             />
         </svg>
     )

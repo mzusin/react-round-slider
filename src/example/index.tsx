@@ -6,7 +6,7 @@ const App = () => {
     return (
         <RoundSlider
             rx={ 150 }
-            ry={ 100 }
+            ry={ 150 }
             startAngle={ 90 }
             endAngle={ 270 }
             strokeWidth={ 15 }
