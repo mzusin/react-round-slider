@@ -1,0 +1,67 @@
+{
+  "name": "react-round-slider",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/mz-react-round-slider.min.js",
+  "exports": {
+    "import": "./dist/mz-react-round-slider.esm.js",
+    "default": "./dist/mz-react-round-slider.min.js"
+  },
+  "scripts": {
+    "build:all": "npm run browser:build & npm run esm:build",
+    "watch:all": "npm run browser:watch & npm run esm:watch",
+    "browser:build": "node run/browser.js",
+    "browser:watch": "node run/browser.js -- watch",
+    "esm:build": "node run/esm.js",
+    "esm:watch": "node run/esm.js -- watch",
+    "eslint": "eslint ./src/**",
+    "typescript-declarations": "tsc --emitDeclarationOnly --noEmit false"
+  },
+  "keywords": [],
+  "author": "Miriam Zusin <miriam.zusin@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mzusin/react-round-slider"
+  },
+  "license": "MIT",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-react": "^7.18.6",
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "^29.5.1",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-test-renderer": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "babel-jest": "^29.5.0",
+    "esbuild": "^0.17.17",
+    "eslint": "^8.38.0",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "highlight.js": "^11.7.0",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "markdown-documentation-maker": "^1.0.18",
+    "mz-math": "^3.0.4",
+    "mz-particles": "^1.0.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-test-renderer": "^18.2.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.4"
+  }
+}
