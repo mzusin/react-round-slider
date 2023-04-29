@@ -1,6 +1,8 @@
 export interface IRoundSlider {
-    width: number; // pixels
-    height: number; // pixels
+    rx: number; // pixels
+    ry: number; // pixels
     startAngle: number; // TODO: optional? - degrees
     endAngle: number; // TODO: optional? - degrees
+    strokeWidth: number; // TODO: optional?
+    stroke: string; // TODO: optional?
 }

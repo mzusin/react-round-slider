@@ -5,10 +5,12 @@ import { RoundSlider } from '../core/ui/RoundSlider';
 const App = () => {
     return (
         <RoundSlider
-            width={ 300 }
-            height={ 200 }
-            startAngle={ 0 }
-            endAngle={ 360 }
+            rx={ 150 }
+            ry={ 100 }
+            startAngle={ 90 }
+            endAngle={ 270 }
+            strokeWidth={ 15 }
+            stroke="#285f68"
         />
     );
 };
