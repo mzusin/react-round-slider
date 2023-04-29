@@ -4,9 +4,12 @@ import { RoundSlider } from '../core/ui/RoundSlider';
 
 const App = () => {
     return (
-        <RoundSlider>
-
-        </RoundSlider>
+        <RoundSlider
+            width={ 300 }
+            height={ 200 }
+            startAngle={ 0 }
+            endAngle={ 360 }
+        />
     );
 };
 
