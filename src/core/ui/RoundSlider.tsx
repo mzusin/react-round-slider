@@ -1,6 +1,9 @@
 import { IRoundSlider } from '../interfaces';
 import { circleMovementAfterMouse } from 'mz-math';
-import { useEffect, useRef, MouseEvent } from 'react';
+import { useEffect, useRef } from 'react';
+
+// TODO: make handle any svg shape
+// TODO: provide option to gradient colors
 
 const polarToCartesian = (cx: number, cy: number, rx: number, ry: number, angleInDegrees: number) : [number, number] => {
     const angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
@@ -15,7 +18,12 @@ export const RoundSlider = (props: IRoundSlider) => {
 
     const handleRef = useRef(null);
 
-    let { rx, ry, startAngle, endAngle, strokeWidth, stroke } = props; // TODO: make const except endAngle
+    let {
+        rx, ry,
+        startAngle, endAngle,
+        strokeWidth, stroke,
+        rxHandle, ryHandle
+    } = props; // TODO: make const except endAngle
 
     const width = rx * 2;
     const height = ry * 2;
@@ -28,8 +36,14 @@ export const RoundSlider = (props: IRoundSlider) => {
         endAngle -= 0.00001;
     }
 
-    const cx = rx + strokeWidth / 2;
-    const cy = ry + strokeWidth / 2;
+    const diffX = Math.max(0, rxHandle * 2 - strokeWidth);
+    const diffY = Math.max(0, ryHandle * 2 - strokeWidth);
+
+    const svgWidth = width + strokeWidth + diffX;
+    const svgHeight = height + strokeWidth + diffY;
+
+    const cx = rx + strokeWidth / 2 + diffX / 2;
+    const cy = ry + strokeWidth / 2 + diffY / 2;
 
     const startPos = polarToCartesian(cx, cy, rx, ry, startAngle);
     const endPos = polarToCartesian(cx, cy, rx, ry, endAngle);
@@ -59,8 +73,8 @@ export const RoundSlider = (props: IRoundSlider) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width={ width + strokeWidth }
-            height={ height + strokeWidth }>
+            width={ svgWidth }
+            height={ svgHeight }>
 
             <path
                 d={ `M ${ startPos[0] } ${ startPos[1] } A ${ rx } ${ ry } ${ angle } ${ largeArcFlag } ${ sweepFlag } ${ endPos[0] } ${ endPos[1] }` }
@@ -72,12 +86,14 @@ export const RoundSlider = (props: IRoundSlider) => {
                 cursor="pointer"
             />
 
-            <circle
+            <ellipse
                 ref={ handleRef }
                 cx={ startPos[0] }
                 cy={ startPos[1] }
-                r="20"
+                rx={ rxHandle }
+                ry={ ryHandle }
                 cursor="pointer"
+                fill="#000"
             />
         </svg>
     )
