@@ -7,7 +7,19 @@ import {
     v2Sub,
     Vector2
 } from 'mz-math';
-import { ISettings } from './settings-provider';
+
+export const getSVGCenter = (svgRadii: Vector2, pointerRadii: Vector2, strokeWidth: number) : Vector2 => {
+    const [rx, ry] = svgRadii;
+    const [rxPointer, ryPointer] = pointerRadii;
+
+    const diffX = Math.max(0, rxPointer * 2 - strokeWidth);
+    const diffY = Math.max(0, ryPointer * 2 - strokeWidth);
+
+    return [
+        rx + strokeWidth / 2 + diffX / 2,
+        ry + strokeWidth / 2 + diffY / 2
+    ];
+};
 
 export const getSVGSize = (svgRadii: Vector2, pointerRadii: Vector2, strokeWidth: number) => {
 
@@ -35,16 +47,7 @@ export const getSliderProps = (startAngleDegrees: number, endAngleDegrees: numbe
         _endAngleDegrees += 360;
     }
 
-    const [rx, ry] = svgRadii;
-    const [rxPointer, ryPointer] = pointerRadii;
-
-    const diffX = Math.max(0, rxPointer * 2 - strokeWidth);
-    const diffY = Math.max(0, ryPointer * 2 - strokeWidth);
-
-    const center: Vector2 = [
-        rx + strokeWidth / 2 + diffX / 2,
-        ry + strokeWidth / 2 + diffY / 2
-    ];
+    const center = getSVGCenter(svgRadii, pointerRadii, strokeWidth);
 
     const sliderStartPoint = polarToCartesian(center, svgRadii, degreesToRadians(startAngleDegrees));
     const sliderEndPoint = polarToCartesian(center, svgRadii, degreesToRadians(_endAngleDegrees));
@@ -58,11 +61,13 @@ export const getSliderProps = (startAngleDegrees: number, endAngleDegrees: numbe
 };
 
 export const getPointerPosition = (
-    settings: ISettings,
     $svg: SVGSVGElement,
     mouse: Vector2,
     center: Vector2,
-    initialPosition: Vector2
+    svgRadii: Vector2,
+    initialPosition: Vector2,
+    startAngleDegrees: number,
+    endAngleDegrees: number
 ) : Vector2 => {
     const bounds = $svg.getBoundingClientRect();
     const [clientX, clientY] = mouse;
@@ -79,12 +84,12 @@ export const getPointerPosition = (
 
     const degrees = radiansToDegrees(angle);
 
-    const isInArc = degrees >= settings.startAngleDegrees && degrees <= settings.endAngleDegrees;
+    const isInArc = degrees >= startAngleDegrees && degrees <= endAngleDegrees;
     if(!isInArc) return initialPosition;
 
     // convert the angle from the range [0, Math.PI*2] to the range [0, Math.PI]
     angle = convertRange(angle, 0, Math.PI*2, 0, Math.PI);
-    return ellipseMovement(center, angle, settings.svgRadii[0], settings.svgRadii[1]);
+    return ellipseMovement(center, angle, svgRadii[0], svgRadii[1]);
 
     // handleRef.current.setAttribute('cx', `${ position[0] }px`);
     // handleRef.current.setAttribute('cy', `${ position[1] }px`);

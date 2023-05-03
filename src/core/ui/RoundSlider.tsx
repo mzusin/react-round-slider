@@ -1,4 +1,4 @@
-import { SVG } from './SVG';
+import { Slider } from './Slider';
 import { formatSettings, SettingsContext } from '../domain/settings-provider';
 
 export interface IRoundSlider {
@@ -16,7 +16,7 @@ export const RoundSlider = (props: IRoundSlider) => {
 
     return (
         <SettingsContext.Provider value={ formatSettings(props) }>
-           <SVG />
+           <Slider />
         </SettingsContext.Provider>
     )
 };

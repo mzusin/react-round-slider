@@ -1,7 +1,7 @@
 import { IRoundSlider } from '../ui/RoundSlider';
 import { isNumber, Vector2 } from 'mz-math';
 import { createContext } from 'react';
-import { getSliderProps, getSVGSize } from './svg-provider';
+import { getSliderProps, getSVGCenter, getSVGSize } from './svg-provider';
 
 // ----------------  DEFAULTS -------------------
 const DEFAULT_STROKE_WIDTH = 5;
@@ -27,6 +27,7 @@ export interface ISettings {
     // calculated properties ----------------------------
     svgWidth: number;
     svgHeight: number;
+    svgCenter: Vector2;
 
     sliderStartPoint: Vector2;
     sliderEndPoint: Vector2;
@@ -58,6 +59,8 @@ export const formatSettings = (props: IRoundSlider) : ISettings => {
 
     const { sliderStartPoint, sliderEndPoint, largeArcFlag } = getSliderProps(startAngleDegrees, endAngleDegrees, svgRadii, pointerRadii, strokeWidth);
 
+    const svgCenter = getSVGCenter(svgRadii, pointerRadii, strokeWidth);
+
     return {
         svgRadii,
         pointerRadii,
@@ -70,6 +73,7 @@ export const formatSettings = (props: IRoundSlider) : ISettings => {
 
         svgWidth,
         svgHeight,
+        svgCenter,
 
         sliderStartPoint,
         sliderEndPoint,
@@ -93,4 +97,6 @@ export const SettingsContext = createContext<ISettings>({
         [DEFAULT_SVG_RX, DEFAULT_SVG_RY], [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY],
         DEFAULT_STROKE_WIDTH
     ),
+
+    svgCenter: getSVGCenter([DEFAULT_SVG_RX, DEFAULT_SVG_RY], [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY], DEFAULT_STROKE_WIDTH),
 });
