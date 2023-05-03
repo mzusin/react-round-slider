@@ -33,9 +33,10 @@ export const Slider = () => {
             [mouseX, mouseY],
             svgCenter,
             svgRadii,
-            pointerPosition,
             startAngleDegrees,
-            endAngleDegrees
+            endAngleDegrees,
+            sliderStartPoint,
+            sliderEndPoint,
         );
 
         setPointerPosition(pointerPos);
@@ -62,7 +63,11 @@ export const Slider = () => {
             xmlns="http://www.w3.org/2000/svg"
             ref={ svgRef }
             width={ svgWidth }
-            height={ svgHeight }>
+            height={ svgHeight }
+            onMouseDown={ onMouseDown }
+            onMouseUp={ onMouseUp }
+            onTouchMove={ onValueChange }
+            onTouchStart={ onValueChange }>
 
             <path
                 ref={ sliderRef }
@@ -73,10 +78,6 @@ export const Slider = () => {
                 shapeRendering="geometricPrecision"
                 strokeLinecap="round"
                 cursor="pointer"
-                onMouseDown={ onMouseDown }
-                onMouseUp={ onMouseUp }
-                onTouchMove={ onValueChange }
-                onTouchStart={ onValueChange }
             />
             <Pointer center={ pointerPosition } />
         </svg>
