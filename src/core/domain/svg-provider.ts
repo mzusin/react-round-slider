@@ -1,4 +1,3 @@
-import { ISettings } from './settings-provider';
 import {
     convertRange,
     degreesToRadians, ellipseMovement,
@@ -8,10 +7,9 @@ import {
     v2Sub,
     Vector2
 } from 'mz-math';
+import { ISettings } from './settings-provider';
 
-export const getSVGSize = (settings: ISettings) => {
-
-    const { svgRadii, pointerRadii, strokeWidth } = settings;
+export const getSVGSize = (svgRadii: Vector2, pointerRadii: Vector2, strokeWidth: number) => {
 
     const [ rxSvg, rySvg ] = svgRadii;
     const [ rxPointer, ryPointer ] = pointerRadii;

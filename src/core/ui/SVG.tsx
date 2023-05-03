@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef } from 'react';
-import { getSVGSize } from '../domain/svg-provider';
 import { Slider } from './Slider';
 import { SettingsContext } from '../domain/settings-provider';
 
@@ -8,8 +7,8 @@ export const SVG = () => {
     const svgRef = useRef<SVGSVGElement>(null);
 
     const settings = useContext(SettingsContext);
-    console.log(settings)
-    const { svgWidth, svgHeight } = getSVGSize(settings);
+
+    const { svgWidth, svgHeight } = settings;
 
     useEffect(() => {
         if(!svgRef || !svgRef.current) return;

@@ -1,6 +1,7 @@
 import { IRoundSlider } from '../ui/RoundSlider';
 import { isNumber, Vector2 } from 'mz-math';
 import { createContext } from 'react';
+import { getSVGSize } from './svg-provider';
 
 // ----------------  DEFAULTS -------------------
 const DEFAULT_STROKE_WIDTH = 5;
@@ -21,6 +22,9 @@ export interface ISettings {
 
     strokeWidth: number;
     bgColor: string;
+
+    svgWidth: number;
+    svgHeight: number;
 }
 
 // ---------------- HELPERS -------------------------
@@ -44,6 +48,8 @@ export const formatSettings = (props: IRoundSlider) : ISettings => {
     const strokeWidth = getNumber(props.strokeWidth, DEFAULT_STROKE_WIDTH);
     const bgColor = getString(props.bgColor, DEFAULT_BG_COLOR);
 
+    const { svgWidth, svgHeight } = getSVGSize(svgRadii, pointerRadii, strokeWidth);
+
     return {
         svgRadii,
         pointerRadii,
@@ -53,6 +59,9 @@ export const formatSettings = (props: IRoundSlider) : ISettings => {
 
         strokeWidth,
         bgColor,
+
+        svgWidth,
+        svgHeight,
     };
 };
 
@@ -65,4 +74,6 @@ export const SettingsContext = createContext<ISettings>({
 
     strokeWidth: DEFAULT_STROKE_WIDTH,
     bgColor: DEFAULT_BG_COLOR,
+
+    ...getSVGSize([DEFAULT_SVG_RX, DEFAULT_SVG_RY], [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY], DEFAULT_STROKE_WIDTH),
 });
