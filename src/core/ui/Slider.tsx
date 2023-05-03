@@ -43,6 +43,13 @@ export const Slider = () => {
     }
 
     const onMouseDown = (evt: MouseEvent | ReactMouseEvent) => {
+
+        const $target = evt.target as SVGElement;
+        if(!$target) return;
+
+        const isAllowedTarget = $target === sliderRef.current || $target.getAttribute('data-type') === 'pointer';
+        if(!isAllowedTarget) return;
+
         if (evt.preventDefault) {
             evt.preventDefault();
         }

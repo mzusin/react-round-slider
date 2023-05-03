@@ -17,6 +17,7 @@ export const Pointer = (props: IPointer) => {
 
     return (
         <ellipse
+            data-type="pointer"
             ref={ pointerRef }
             cx={ cx }
             cy={ cy}
