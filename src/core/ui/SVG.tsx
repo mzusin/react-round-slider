@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef } from 'react';
 import { Slider } from './Slider';
 import { SettingsContext } from '../domain/settings-provider';
+import { Pointer } from './Pointer';
 
 export const SVG = () => {
 
@@ -23,6 +24,7 @@ export const SVG = () => {
             height={ svgHeight }>
 
             <Slider />
+            <Pointer center={ settings.sliderStartPoint } />
         </svg>
     )
 };
