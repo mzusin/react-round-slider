@@ -94,7 +94,8 @@ export const getPointerPosition = (
 
     const degrees = radiansToDegrees(angle);
 
-    const isInArc = degrees >= startAngleDegrees && degrees <= endAngleDegrees;
+    const isInArc = degrees >= startAngleDegrees && degrees <= (endAngleDegrees < startAngleDegrees ? endAngleDegrees + 360 : endAngleDegrees);
+
     if(!isInArc){
         return getSmallerAngle(degrees, startAngleDegrees) <= getSmallerAngle(degrees, endAngleDegrees) ? sliderStartPoint : sliderEndPoint;
     }

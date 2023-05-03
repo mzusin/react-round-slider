@@ -74,6 +74,62 @@ const App = () => {
                 rxPointer={ 20 }
                 ryPointer={ 10 }
             />
+
+            <RoundSlider
+                rx={ 150 }
+                ry={ 150 }
+
+                startAngleDegrees={ 180 }
+                endAngleDegrees={ 360 }
+
+                strokeWidth={ 15 }
+                bgColor="#285f68"
+
+                rxPointer={ 20 }
+                ryPointer={ 10 }
+            />
+
+            <RoundSlider
+                rx={ 150 }
+                ry={ 150 }
+
+                startAngleDegrees={ 0 }
+                endAngleDegrees={ 360 }
+
+                strokeWidth={ 15 }
+                bgColor="#285f68"
+
+                rxPointer={ 20 }
+                ryPointer={ 10 }
+            />
+
+            <RoundSlider
+                rx={ 150 }
+                ry={ 150 }
+
+                startAngleDegrees={ 200 }
+                endAngleDegrees={ 40 }
+
+                strokeWidth={ 15 }
+                bgColor="#285f68"
+
+                rxPointer={ 20 }
+                ryPointer={ 10 }
+            />
+
+            <RoundSlider
+                rx={ 150 }
+                ry={ 150 }
+
+                startAngleDegrees={ -80 }
+                endAngleDegrees={ 0 }
+
+                strokeWidth={ 15 }
+                bgColor="#285f68"
+
+                rxPointer={ 20 }
+                ryPointer={ 10 }
+            />
         </>
     );
 };
