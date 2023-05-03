@@ -1,7 +1,7 @@
 import { IRoundSlider } from '../ui/RoundSlider';
 import { isNumber, Vector2 } from 'mz-math';
 import { createContext } from 'react';
-import { getSVGSize } from './svg-provider';
+import { getSliderProps, getSVGSize } from './svg-provider';
 
 // ----------------  DEFAULTS -------------------
 const DEFAULT_STROKE_WIDTH = 5;
@@ -14,6 +14,7 @@ const DEFAULT_START_ANGLE = 0;
 const DEFAULT_END_ANGLE = 180;
 
 export interface ISettings {
+    // user provided properties (or defaults) ----------
     svgRadii: Vector2;
     pointerRadii: Vector2;
 
@@ -23,8 +24,13 @@ export interface ISettings {
     strokeWidth: number;
     bgColor: string;
 
+    // calculated properties ----------------------------
     svgWidth: number;
     svgHeight: number;
+
+    sliderStartPoint: Vector2;
+    sliderEndPoint: Vector2;
+    largeArcFlag: number;
 }
 
 // ---------------- HELPERS -------------------------
@@ -50,6 +56,8 @@ export const formatSettings = (props: IRoundSlider) : ISettings => {
 
     const { svgWidth, svgHeight } = getSVGSize(svgRadii, pointerRadii, strokeWidth);
 
+    const { sliderStartPoint, sliderEndPoint, largeArcFlag } = getSliderProps(startAngleDegrees, endAngleDegrees, svgRadii, pointerRadii, strokeWidth);
+
     return {
         svgRadii,
         pointerRadii,
@@ -62,6 +70,10 @@ export const formatSettings = (props: IRoundSlider) : ISettings => {
 
         svgWidth,
         svgHeight,
+
+        sliderStartPoint,
+        sliderEndPoint,
+        largeArcFlag,
     };
 };
 
@@ -76,4 +88,9 @@ export const SettingsContext = createContext<ISettings>({
     bgColor: DEFAULT_BG_COLOR,
 
     ...getSVGSize([DEFAULT_SVG_RX, DEFAULT_SVG_RY], [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY], DEFAULT_STROKE_WIDTH),
+    ...getSliderProps(
+        DEFAULT_START_ANGLE, DEFAULT_END_ANGLE,
+        [DEFAULT_SVG_RX, DEFAULT_SVG_RY], [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY],
+        DEFAULT_STROKE_WIDTH
+    ),
 });

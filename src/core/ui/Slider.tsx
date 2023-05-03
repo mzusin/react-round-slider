@@ -1,20 +1,19 @@
-import { ISettings } from '../domain/settings-provider';
-import { getSliderState } from '../domain/svg-provider';
-import { MouseEvent as  ReactMouseEvent } from 'react';
+import { MouseEvent as ReactMouseEvent, useContext, TouchEvent as ReactTouchEvent } from 'react';
+import { SettingsContext } from '../domain/settings-provider';
 
-export interface ISlider {
-    settings: ISettings
-}
+export const Slider = () => {
 
-export const Slider = (props: ISlider) => {
+    const settings = useContext(SettingsContext);
 
-    const { settings } = props;
+    const {
+        sliderStartPoint, sliderEndPoint,
+        largeArcFlag, svgRadii,
+        bgColor, strokeWidth
+    } = settings;
 
-    const sliderState = getSliderState(settings);
+    const onValueChange = (evt: MouseEvent | ReactMouseEvent | TouchEvent | ReactTouchEvent) => {
 
-    const { start, end, angle, largeArcFlag, sweepFlag } = sliderState;
-
-    const onValueChange = (evt: MouseEvent | ReactMouseEvent | TouchEvent) => {
+        console.log(evt);
 
         //if(!svgRef || !svgRef.current || !handleRef || !handleRef.current) return;
 
@@ -45,9 +44,9 @@ export const Slider = (props: ISlider) => {
 
     return (
         <path
-            d={ `M ${ start[0] } ${ start[1] } A ${ settings.svgRadii[0] } ${ settings.svgRadii[0] } ${ angle } ${ largeArcFlag } ${ sweepFlag } ${ end[0] } ${ end[1] }` }
-            stroke={ settings.bgColor }
-            strokeWidth={ settings.strokeWidth }
+            d={ `M ${ sliderStartPoint[0] } ${ sliderStartPoint[1] } A ${ svgRadii[0] } ${ svgRadii[0] } 0 ${ largeArcFlag } 1 ${ sliderEndPoint[0] } ${ sliderEndPoint[1] }` }
+            stroke={ bgColor }
+            strokeWidth={ strokeWidth }
             fill="none"
             shapeRendering="geometricPrecision"
             strokeLinecap="round"

@@ -22,7 +22,7 @@ export const SVG = () => {
             width={ svgWidth }
             height={ svgHeight }>
 
-            <Slider settings={ settings } />
+            <Slider />
         </svg>
     )
 };
