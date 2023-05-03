@@ -1,12 +1,20 @@
 import { ISettings } from './settings-provider';
-import { degreesToRadians, polarToCartesian, Vector2 } from 'mz-math';
+import {
+    convertRange,
+    degreesToRadians, ellipseMovement,
+    getV2Angle,
+    polarToCartesian,
+    radiansToDegrees,
+    v2Sub,
+    Vector2
+} from 'mz-math';
 
 export const getSVGSize = (settings: ISettings) => {
 
     const { svgRadii, pointerRadii, strokeWidth } = settings;
 
-    const [rxSvg, rySvg] = svgRadii;
-    const [rxPointer, ryPointer] = pointerRadii;
+    const [ rxSvg, rySvg ] = svgRadii;
+    const [ rxPointer, ryPointer ] = pointerRadii;
 
     // If pointer size >
     const diffX = Math.max(0, rxPointer * 2 - strokeWidth);
@@ -53,4 +61,37 @@ export const getSliderState = (settings: ISettings) => {
         sweepFlag: 1,
         largeArcFlag,
     }
+};
+
+export const getPointerPosition = (
+    settings: ISettings,
+    $svg: SVGSVGElement,
+    mouse: Vector2,
+    center: Vector2,
+    initialPosition: Vector2
+) : Vector2 => {
+    const bounds = $svg.getBoundingClientRect();
+    const [clientX, clientY] = mouse;
+
+    const x = clientX - bounds.left;
+    const y = clientY - bounds.top;
+
+    const vector = v2Sub([x, y], center);
+
+    let angle = getV2Angle(vector);
+    if(angle < 0){
+        angle += 2 * Math.PI;
+    }
+
+    const degrees = radiansToDegrees(angle);
+
+    const isInArc = degrees >= settings.startAngleDegrees && degrees <= settings.endAngleDegrees;
+    if(!isInArc) return initialPosition;
+
+    // convert the angle from the range [0, Math.PI*2] to the range [0, Math.PI]
+    angle = convertRange(angle, 0, Math.PI*2, 0, Math.PI);
+    return ellipseMovement(center, angle, settings.svgRadii[0], settings.svgRadii[1]);
+
+    // handleRef.current.setAttribute('cx', `${ position[0] }px`);
+    // handleRef.current.setAttribute('cy', `${ position[1] }px`);
 };

@@ -37,6 +37,7 @@
 - onMouseDown
 - onMouseUp
 - mouse wheel event
+- touch events
 
 ## Slider
 - Click on any place on slider path ---> jump there
