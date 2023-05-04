@@ -1,12 +1,13 @@
 import {
     convertRange,
     degreesToRadians, ellipseMovement,
-    getV2Angle, mod,
+    getV2Angle, getAnglesSub,
     polarToCartesian,
     radiansToDegrees,
     v2Sub,
-    Vector2
+    Vector2,
 } from 'mz-math';
+import { isAngleInArc } from './math-provider';
 
 export const getSVGCenter = (svgRadii: Vector2, pointerRadii: Vector2, strokeWidth: number) : Vector2 => {
     const [rx, ry] = svgRadii;
@@ -60,15 +61,6 @@ export const getSliderProps = (startAngleDegrees: number, endAngleDegrees: numbe
     }
 };
 
-/**
- * Shortest distance (angular) between two angles.
- * It will be in range [0, 180].
- */
-export const getSmallerAngle = (angle1: number, angle2: number) => {
-    const phi = mod(Math.abs(angle2 - angle1), 360);
-    return phi > 180 ? 360 - phi : phi;
-};
-
 export const getPointerPosition = (
     $svg: SVGSVGElement,
     mouse: Vector2,
@@ -93,17 +85,15 @@ export const getPointerPosition = (
     }
 
     const degrees = radiansToDegrees(angle);
+    const angleSub1 = getAnglesSub(degrees, startAngleDegrees);
+    const angleSub2 = getAnglesSub(degrees, endAngleDegrees);
 
-    const isInArc = degrees >= startAngleDegrees && degrees <= (endAngleDegrees < startAngleDegrees ? endAngleDegrees + 360 : endAngleDegrees);
-
+    let isInArc = isAngleInArc(startAngleDegrees, endAngleDegrees, degrees);
     if(!isInArc){
-        return getSmallerAngle(degrees, startAngleDegrees) <= getSmallerAngle(degrees, endAngleDegrees) ? sliderStartPoint : sliderEndPoint;
+        return angleSub1 <= angleSub2 ? sliderStartPoint : sliderEndPoint;
     }
 
     // convert the angle from the range [0, Math.PI*2] to the range [0, Math.PI]
     angle = convertRange(angle, 0, Math.PI*2, 0, Math.PI);
     return ellipseMovement(center, angle, svgRadii[0], svgRadii[1]);
-
-    // handleRef.current.setAttribute('cx', `${ position[0] }px`);
-    // handleRef.current.setAttribute('cy', `${ position[1] }px`);
 };

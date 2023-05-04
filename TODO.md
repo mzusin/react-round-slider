@@ -12,6 +12,8 @@
 - pointersMaxDistance: number;
 - rangeDragging: boolean;
 
+- provide initial pointers position (values) - optional
+
 ## Bug
 - start angle, 0, end angle 360 ---> slider is wrong
 
