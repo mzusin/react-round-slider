@@ -5,7 +5,7 @@ import {
     polarToCartesian,
     radiansToDegrees,
     v2Sub,
-    Vector2,
+    Vector2, setDecimalPlaces,
 } from 'mz-math';
 import { isAngleInArc } from './math-provider';
 
@@ -17,8 +17,8 @@ export const getSVGCenter = (svgRadii: Vector2, pointerRadii: Vector2, strokeWid
     const diffY = Math.max(0, ryPointer * 2 - strokeWidth);
 
     return [
-        rx + strokeWidth / 2 + diffX / 2,
-        ry + strokeWidth / 2 + diffY / 2
+        setDecimalPlaces(rx + strokeWidth / 2 + diffX / 2, 2),
+        setDecimalPlaces(ry + strokeWidth / 2 + diffY / 2, 2)
     ];
 };
 

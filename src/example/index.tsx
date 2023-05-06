@@ -15,8 +15,8 @@ const App = () => {
                 strokeWidth={ 15 }
                 bgColor="#285f68"
 
-                rxPointer={ 20 }
-                ryPointer={ 10 }
+                rxPointer={ 25 }
+                ryPointer={ 15 }
             />
 
             <RoundSlider
