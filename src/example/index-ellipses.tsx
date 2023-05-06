@@ -7,7 +7,7 @@ const App = () => {
         <>
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ 0 }
                 endAngleDegrees={ 180 }
@@ -21,7 +21,7 @@ const App = () => {
 
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ 180 }
                 endAngleDegrees={ 0 }
@@ -35,7 +35,7 @@ const App = () => {
 
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ 180 }
                 endAngleDegrees={ 360 }
@@ -49,7 +49,7 @@ const App = () => {
 
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ 0 }
                 endAngleDegrees={ 90 }
@@ -63,7 +63,7 @@ const App = () => {
 
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ 90 }
                 endAngleDegrees={ 270 }
@@ -77,7 +77,7 @@ const App = () => {
 
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ 180 }
                 endAngleDegrees={ 270 }
@@ -91,7 +91,7 @@ const App = () => {
 
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ 270 }
                 endAngleDegrees={ 0 }
@@ -105,7 +105,7 @@ const App = () => {
 
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ 180 }
                 endAngleDegrees={ 360 }
@@ -119,7 +119,7 @@ const App = () => {
 
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ 0 }
                 endAngleDegrees={ 360 }
@@ -133,7 +133,7 @@ const App = () => {
 
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ 200 }
                 endAngleDegrees={ 40 }
@@ -147,7 +147,7 @@ const App = () => {
 
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ -80 }
                 endAngleDegrees={ 0 }
@@ -161,7 +161,7 @@ const App = () => {
 
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ 270 }
                 endAngleDegrees={ 360 }
@@ -175,7 +175,7 @@ const App = () => {
 
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ 270 }
                 endAngleDegrees={ 270 }
@@ -189,7 +189,7 @@ const App = () => {
 
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ 270 }
                 endAngleDegrees={ 200 }
@@ -203,7 +203,7 @@ const App = () => {
 
             <RoundSlider
                 rx={ 150 }
-                ry={ 150 }
+                ry={ 200 }
 
                 startAngleDegrees={ 630 }
                 endAngleDegrees={ 560 }

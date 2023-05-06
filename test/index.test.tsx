@@ -6,6 +6,429 @@ afterEach(cleanup);
 
 describe('Round Slider', () => {
 
+    describe('Basic Rendering: Circle Slider', () => {
+
+        test('Circle slider 0 ----> 180 degrees', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 200 }
+
+                    startAngleDegrees={ 0 }
+                    endAngleDegrees={ 180 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 25 }
+                    ryPointer={ 15 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('350');
+            expect($svg.getAttribute('height')).toStrictEqual('430');
+            expect($path.getAttribute('d')).toStrictEqual('M 325 215 A 150 200 0 0 1 25 215.00000000000003');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('325');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('215');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('25');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('15');
+        });
+
+        test('Circle slider 180 ----> 0 degrees', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 200 }
+
+                    startAngleDegrees={ 180 }
+                    endAngleDegrees={ 0 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 20 }
+                    ryPointer={ 10 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('340');
+            expect($svg.getAttribute('height')).toStrictEqual('420');
+            expect($path.getAttribute('d')).toStrictEqual('M 20 210.00000000000003 A 150 200 0 0 1 320 209.99999999999994');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('210.00000000000003');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('10');
+        });
+
+        test('Circle slider 180 ----> 360 degrees', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 200 }
+
+                    startAngleDegrees={ 180 }
+                    endAngleDegrees={ 360 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 20 }
+                    ryPointer={ 10 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('340');
+            expect($svg.getAttribute('height')).toStrictEqual('420');
+            expect($path.getAttribute('d')).toStrictEqual('M 20 210.00000000000003 A 150 200 0 0 1 320 209.99999999999994');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('210.00000000000003');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('10');
+        });
+
+        test('Circle slider 0 ----> 90 degrees', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 200 }
+
+                    startAngleDegrees={ 0 }
+                    endAngleDegrees={ 90 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 20 }
+                    ryPointer={ 10 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('340');
+            expect($svg.getAttribute('height')).toStrictEqual('420');
+            expect($path.getAttribute('d')).toStrictEqual('M 320 210 A 150 200 0 0 1 170 410');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('320');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('210');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('10');
+        });
+
+        test('Circle slider 90 ----> 270 degrees', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 200 }
+
+                    startAngleDegrees={ 90 }
+                    endAngleDegrees={ 270 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 20 }
+                    ryPointer={ 10 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('340');
+            expect($svg.getAttribute('height')).toStrictEqual('420');
+            expect($path.getAttribute('d')).toStrictEqual('M 170 410 A 150 200 0 0 1 169.99999999999997 10');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('170');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('410');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('10');
+        });
+
+        test('Circle slider 180 ----> 270 degrees', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 200 }
+
+                    startAngleDegrees={ 180 }
+                    endAngleDegrees={ 270 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 20 }
+                    ryPointer={ 10 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('340');
+            expect($svg.getAttribute('height')).toStrictEqual('420');
+            expect($path.getAttribute('d')).toStrictEqual('M 20 210.00000000000003 A 150 200 0 0 1 169.99999999999997 10');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('210.00000000000003');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('10');
+        });
+
+        test('Circle slider 270 ----> 0 degrees', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 200 }
+
+                    startAngleDegrees={ 270 }
+                    endAngleDegrees={ 0 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 20 }
+                    ryPointer={ 10 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('340');
+            expect($svg.getAttribute('height')).toStrictEqual('420');
+            expect($path.getAttribute('d')).toStrictEqual('M 169.99999999999997 10 A 150 200 0 0 1 320 209.99999999999994');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('169.99999999999997');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('10');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('10');
+        });
+
+        test('Circle slider 0 ---> 360 degrees', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 200 }
+
+                    startAngleDegrees={ 0 }
+                    endAngleDegrees={ 360 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 20 }
+                    ryPointer={ 10 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('340');
+            expect($svg.getAttribute('height')).toStrictEqual('420');
+            expect($path.getAttribute('d')).toStrictEqual('M 320 210 A 150 200 0 1 1 319.9999999771537 209.9965093414962');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('320');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('210');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('10');
+        });
+
+        test('Circle slider 200 ---> 40 degrees', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 200 }
+
+                    startAngleDegrees={ 200 }
+                    endAngleDegrees={ 40 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 20 }
+                    ryPointer={ 10 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('340');
+            expect($svg.getAttribute('height')).toStrictEqual('420');
+            expect($path.getAttribute('d')).toStrictEqual('M 29.046106882113747 141.59597133486625 A 150 200 0 1 1 284.9066664678467 338.5575219373078');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('29.046106882113747');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('141.59597133486625');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('10');
+        });
+
+        test('Circle slider -80 ---> 0 degrees', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 200 }
+
+                    startAngleDegrees={ -80 }
+                    endAngleDegrees={ 0 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 20 }
+                    ryPointer={ 10 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('340');
+            expect($svg.getAttribute('height')).toStrictEqual('420');
+            expect($path.getAttribute('d')).toStrictEqual('M 196.0472266500395 13.038449397558367 A 150 200 0 0 1 320 209.99999999999994');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('196.0472266500395');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('13.038449397558367');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('10');
+        });
+
+        test('Circle slider 270 ---> 360 degrees', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 200 }
+
+                    startAngleDegrees={ 270 }
+                    endAngleDegrees={ 360 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 20 }
+                    ryPointer={ 10 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('340');
+            expect($svg.getAttribute('height')).toStrictEqual('420');
+            expect($path.getAttribute('d')).toStrictEqual('M 169.99999999999997 10 A 150 200 0 0 1 320 209.99999999999994');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('169.99999999999997');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('10');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('10');
+        });
+
+        test('Circle slider 270 ---> 270 degrees', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 200 }
+
+                    startAngleDegrees={ 270 }
+                    endAngleDegrees={ 270 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 20 }
+                    ryPointer={ 10 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('340');
+            expect($svg.getAttribute('height')).toStrictEqual('420');
+            expect($path.getAttribute('d')).toStrictEqual('M 169.99999999999997 10 A 150 200 0 1 1 169.9973820061221 10.000000030461734');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('169.99999999999997');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('10');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('10');
+        });
+
+        test('Circle slider 270 ---> 200 degrees', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 200 }
+
+                    startAngleDegrees={ 270 }
+                    endAngleDegrees={ 200 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 20 }
+                    ryPointer={ 10 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('340');
+            expect($svg.getAttribute('height')).toStrictEqual('420');
+            expect($path.getAttribute('d')).toStrictEqual('M 169.99999999999997 10 A 150 200 0 1 1 29.04610688211369 141.59597133486642');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('169.99999999999997');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('10');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('10');
+        });
+
+        test('Circle slider 630 ---> 560 degrees', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 200 }
+
+                    startAngleDegrees={ 630 }
+                    endAngleDegrees={ 560 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 20 }
+                    ryPointer={ 10 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('340');
+            expect($svg.getAttribute('height')).toStrictEqual('420');
+            expect($path.getAttribute('d')).toStrictEqual('M 169.99999999999997 10 A 150 200 0 1 1 29.04610688211369 141.59597133486642');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('169.99999999999997');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('10');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('20');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('10');
+        });
+    });
+
     describe('Basic Rendering: Ellipse Slider', () => {
 
         test('Ellipse slider 0 ----> 180 degrees', () => {
