@@ -8,6 +8,36 @@ describe('Round Slider', () => {
 
     describe('Basic Rendering: Circle Slider', () => {
 
+        test('Circle slider 0 ----> 360 degrees with round pointer', () => {
+
+            const { container} = render(
+                <RoundSlider
+                    rx={ 150 }
+                    ry={ 150 }
+
+                    startAngleDegrees={ 0 }
+                    endAngleDegrees={ 360 }
+
+                    strokeWidth={ 15 }
+                    bgColor="#285f68"
+
+                    rxPointer={ 25 }
+                    ryPointer={ 25 }
+                />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('350');
+            expect($svg.getAttribute('height')).toStrictEqual('350');
+            expect($path.getAttribute('d')).toStrictEqual('M 325 175 A 150 150 0 1 1 324.9999999771537 174.99738200612214');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('325');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('175');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('25');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('25');
+        });
+
         test('Circle slider 0 ----> 180 degrees', () => {
 
             const { container} = render(

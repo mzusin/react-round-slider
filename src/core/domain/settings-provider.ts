@@ -1,4 +1,4 @@
-import { IRoundSlider } from '../ui/RoundSlider';
+import { IRoundSlider, IRoundSliderPointer } from '../ui/RoundSlider';
 import { isNumber, Vector2 } from 'mz-math';
 import { createContext } from 'react';
 import { getSliderProps, getSVGCenter, getSVGSize } from './svg-provider';
@@ -14,16 +14,23 @@ export const DEFAULT_BG_COLOR = '#efefef';
 export const DEFAULT_START_ANGLE = 0;
 export const DEFAULT_END_ANGLE = 180;
 
+export interface ISettingsPointer {
+
+    // user provided properties (or defaults) ----------
+    pointerRadii: Vector2;
+}
+
 export interface ISettings {
+
     // user provided properties (or defaults) ----------
     svgRadii: Vector2;
-    pointerRadii: Vector2;
-
     startAngleDegrees: number;
     endAngleDegrees: number;
 
     strokeWidth: number;
     bgColor: string;
+
+    pointers: ISettingsPointer[],
 
     // calculated properties ----------------------------
     svgWidth: number;
@@ -44,26 +51,73 @@ export const getString = (value: string|undefined|null, defaultValue: string) : 
     return value === undefined || value === null ? defaultValue : value;
 };
 
+export const getInitialPointers = (propsPointers?: IRoundSliderPointer[]): ISettingsPointer[] => {
+
+    if(!propsPointers || propsPointers.length <= 0){
+        return [{
+            pointerRadii: [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY],
+        }]
+    }
+    const pointers: ISettingsPointer[] = [];
+
+    for(const propsPointer of propsPointers){
+
+        const pointerRadii: Vector2 = [
+            getNumber(propsPointer.rx, DEFAULT_POINTER_RX),
+            getNumber(propsPointer.ry, DEFAULT_POINTER_RY),
+        ];
+
+        pointers.push({
+            pointerRadii,
+        });
+    }
+
+    return pointers;
+};
+
+const getMaxPointerRadii = (pointers: ISettingsPointer[]) : Vector2 => {
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+
+    for(const pointer of pointers){
+        maxX = Math.max(maxX, pointer.pointerRadii[0]);
+        maxY = Math.max(maxY, pointer.pointerRadii[1]);
+    }
+
+    return [
+        maxX,
+        maxY,
+    ];
+};
 
 // ---------------- SETTINGS -------------------------
 export const formatSettings = (props: IRoundSlider) : ISettings => {
 
-    const svgRadii: Vector2 = [getNumber(props.rx, DEFAULT_SVG_RX), getNumber(props.ry, DEFAULT_SVG_RY)];
-    const pointerRadii: Vector2 = [getNumber(props.rxPointer, DEFAULT_POINTER_RX), getNumber(props.ryPointer, DEFAULT_POINTER_RY)];
+    const pointers: ISettingsPointer[] = getInitialPointers(props.pointers);
 
+    const svgRadii: Vector2 = [getNumber(props.rx, DEFAULT_SVG_RX), getNumber(props.ry, DEFAULT_SVG_RY)];
     const [startAngleDegrees, endAngleDegrees] = normalizeAngles(props.startAngleDegrees, props.endAngleDegrees);
+
     const strokeWidth = getNumber(props.strokeWidth, DEFAULT_STROKE_WIDTH);
     const bgColor = getString(props.bgColor, DEFAULT_BG_COLOR);
 
-    const { svgWidth, svgHeight } = getSVGSize(svgRadii, pointerRadii, strokeWidth);
+    const maxPointer = getMaxPointerRadii(pointers);
 
-    const { sliderStartPoint, sliderEndPoint, largeArcFlag } = getSliderProps(startAngleDegrees, endAngleDegrees, svgRadii, pointerRadii, strokeWidth);
+    const { svgWidth, svgHeight } = getSVGSize(svgRadii, maxPointer, strokeWidth);
 
-    const svgCenter = getSVGCenter(svgRadii, pointerRadii, strokeWidth);
+    const { sliderStartPoint, sliderEndPoint, largeArcFlag } = getSliderProps(
+        startAngleDegrees,
+        endAngleDegrees,
+        svgRadii,
+        maxPointer,
+        strokeWidth
+    );
+
+    const svgCenter = getSVGCenter(svgRadii, maxPointer, strokeWidth);
 
     return {
+        pointers,
         svgRadii,
-        pointerRadii,
 
         startAngleDegrees,
         endAngleDegrees,
@@ -82,8 +136,9 @@ export const formatSettings = (props: IRoundSlider) : ISettings => {
 };
 
 export const SettingsContext = createContext<ISettings>({
+    pointers: getInitialPointers(),
     svgRadii: [DEFAULT_SVG_RX, DEFAULT_SVG_RY],
-    pointerRadii: [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY],
+    // pointerRadii: [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY],
 
     startAngleDegrees: DEFAULT_START_ANGLE,
     endAngleDegrees: DEFAULT_END_ANGLE,

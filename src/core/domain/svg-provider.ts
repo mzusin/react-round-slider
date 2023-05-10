@@ -39,7 +39,13 @@ export const getSVGSize = (svgRadii: Vector2, pointerRadii: Vector2, strokeWidth
     }
 };
 
-export const getSliderProps = (startAngleDegrees: number, endAngleDegrees: number, svgRadii: Vector2, pointerRadii: Vector2, strokeWidth: number) => {
+export const getSliderProps = (
+    startAngleDegrees: number,
+    endAngleDegrees: number,
+    svgRadii: Vector2,
+    pointerRadii: Vector2,
+    strokeWidth: number
+) => {
 
     let _endAngleDegrees = endAngleDegrees;
     const largeArcFlag = _endAngleDegrees - startAngleDegrees <= 180 ? 0 : 1;

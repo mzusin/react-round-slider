@@ -18,7 +18,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "strictNullChecks": true,
     "strictBindCallApply": true,
     "jsx": "react-jsx",
     "lib": [
@@ -28,7 +27,6 @@
     ],
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
     "resolveJsonModule": true,
     "noEmit": true
   },

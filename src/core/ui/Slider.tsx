@@ -1,4 +1,10 @@
-import { MouseEvent as ReactMouseEvent, TouchEvent as ReactTouchEvent, useContext, useRef, useState } from 'react';
+import {
+    MouseEvent as ReactMouseEvent,
+    TouchEvent as ReactTouchEvent,
+    useContext,
+    useRef,
+    useState,
+} from 'react';
 import { SettingsContext } from '../domain/settings-provider';
 import { Pointer } from './Pointer';
 import { getPointerPosition } from '../domain/svg-provider';
@@ -19,7 +25,9 @@ export const Slider = () => {
         startAngleDegrees, endAngleDegrees
     } = settings;
 
-    const [pointerPosition, setPointerPosition] = useState<Vector2>(sliderStartPoint);
+    const [pointerPositions, setPointerPositions] = useState<Vector2[]>(
+        settings.pointers.map(pointer => sliderStartPoint)
+    );
 
     const onValueChange = (evt: MouseEvent | ReactMouseEvent | TouchEvent | ReactTouchEvent) => {
 
@@ -29,7 +37,7 @@ export const Slider = () => {
         const mouseY = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientY : (evt as TouchEvent).touches[0].clientY;
 
         const pointerPos = getPointerPosition(
-            svgRef.current,
+            svgRef.current as SVGSVGElement,
             [mouseX, mouseY],
             svgCenter,
             svgRadii,
@@ -39,7 +47,10 @@ export const Slider = () => {
             sliderEndPoint,
         );
 
-        setPointerPosition(pointerPos);
+        const copy = [...pointerPositions];
+        copy[0] = pointerPos;
+
+        setPointerPositions(copy);
     }
 
     const onMouseDown = (evt: MouseEvent | ReactMouseEvent) => {
@@ -86,7 +97,14 @@ export const Slider = () => {
                 strokeLinecap="round"
                 cursor="pointer"
             />
-            <Pointer center={ pointerPosition } />
+
+            {
+                pointerPositions.map((pointerPosition, i) => {
+                    return (
+                        <Pointer key={ i } center={ pointerPosition } pointerRadii={ settings.pointers[i].pointerRadii } />
+                    )
+                })
+            }
         </svg>
     )
 };

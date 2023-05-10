@@ -1,19 +1,20 @@
-import { useContext, useRef } from 'react';
+import { useRef } from 'react';
 import { Vector2 } from 'mz-math';
-import { SettingsContext } from '../domain/settings-provider';
+// import { SettingsContext } from '../domain/settings-provider';
 
 export interface IPointer {
     center: Vector2;
+    pointerRadii: Vector2;
 }
 
 export const Pointer = (props: IPointer) => {
 
     const pointerRef = useRef<SVGEllipseElement>(null);
 
-    const settings = useContext(SettingsContext);
+    // const settings = useContext(SettingsContext);
 
     const [cx, cy] = props.center;
-    const [rx, ry] = settings.pointerRadii;
+    const [rx, ry] = props.pointerRadii;
 
     return (
         <ellipse
