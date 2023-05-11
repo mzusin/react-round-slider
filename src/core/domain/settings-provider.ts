@@ -2,7 +2,7 @@ import { IRoundSlider, IRoundSliderPointer } from '../ui/RoundSlider';
 import { isNumber, Vector2 } from 'mz-math';
 import { createContext } from 'react';
 import { getSliderProps, getSVGCenter, getSVGSize } from './svg-provider';
-import { normalizeAngles } from './math-provider';
+import { normalizeAngles } from './angles-provider';
 
 // ----------------  DEFAULTS -------------------
 export const DEFAULT_STROKE_WIDTH = 5;

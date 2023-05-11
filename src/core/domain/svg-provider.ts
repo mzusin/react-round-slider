@@ -7,7 +7,7 @@ import {
     v2Sub,
     Vector2, setDecimalPlaces,
 } from 'mz-math';
-import { isAngleInArc } from './math-provider';
+import { isAngleInArc } from './angles-provider';
 
 export const getSVGCenter = (svgRadii: Vector2, pointerRadii: Vector2, strokeWidth: number) : Vector2 => {
     const [rx, ry] = svgRadii;
@@ -94,7 +94,7 @@ export const getPointerPosition = (
     const angleSub1 = getAnglesSub(degrees, startAngleDegrees);
     const angleSub2 = getAnglesSub(degrees, endAngleDegrees);
 
-    let isInArc = isAngleInArc(startAngleDegrees, endAngleDegrees, degrees);
+    const isInArc = isAngleInArc(startAngleDegrees, endAngleDegrees, degrees);
     if(!isInArc){
         return angleSub1 <= angleSub2 ? sliderStartPoint : sliderEndPoint;
     }
