@@ -1,18 +1,18 @@
 import { IRoundSlider, IRoundSliderPointer } from '../ui/RoundSlider';
-import { isNumber, Vector2 } from 'mz-math';
+import { Vector2 } from 'mz-math';
 import { createContext } from 'react';
 import { getSliderProps, getSVGCenter, getSVGSize } from './svg-provider';
 import { normalizeAngles } from './angles-provider';
+import {
+    DEFAULT_SVG_RX,
+    DEFAULT_SVG_RY,
+    DEFAULT_STROKE_WIDTH,
+    DEFAULT_POINTER_RX,
+    DEFAULT_POINTER_RY, DEFAULT_BG_COLOR, DEFAULT_END_ANGLE, DEFAULT_START_ANGLE, // DEFAULT_START_ANGLE, DEFAULT_END_ANGLE
+} from './defaults';
+import { getNumber, getString } from './common';
 
-// ----------------  DEFAULTS -------------------
-export const DEFAULT_STROKE_WIDTH = 5;
-export const DEFAULT_SVG_RX = 200;
-export const DEFAULT_SVG_RY = 200;
-export const DEFAULT_POINTER_RX = 10;
-export const DEFAULT_POINTER_RY = 10;
-export const DEFAULT_BG_COLOR = '#efefef';
-export const DEFAULT_START_ANGLE = 0;
-export const DEFAULT_END_ANGLE = 180;
+console.log('getSVGCenter', getSVGCenter)
 
 export interface ISettingsPointer {
 
@@ -41,15 +41,6 @@ export interface ISettings {
     sliderEndPoint: Vector2;
     largeArcFlag: number;
 }
-
-// ---------------- HELPERS -------------------------
-export const getNumber = (value: number|undefined|null, defaultValue: number) : number => {
-    return isNumber(value) ? Number(value) : defaultValue;
-};
-
-export const getString = (value: string|undefined|null, defaultValue: string) : string => {
-    return value === undefined || value === null ? defaultValue : value;
-};
 
 export const getInitialPointers = (propsPointers?: IRoundSliderPointer[]): ISettingsPointer[] => {
 

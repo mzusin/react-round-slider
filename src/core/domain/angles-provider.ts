@@ -1,5 +1,6 @@
 import { mod, Vector2 } from 'mz-math';
-import { DEFAULT_END_ANGLE, DEFAULT_START_ANGLE, getNumber } from './settings-provider';
+import { DEFAULT_START_ANGLE, DEFAULT_END_ANGLE } from './defaults';
+import { getNumber } from './common';
 
 /**
  * Defines if the current angle is in the provided range [startAngle, endAngle].

@@ -1,5 +1,5 @@
 import { normalizeAngles, isAngleInArc } from '../src/core/domain/angles-provider';
-import { DEFAULT_START_ANGLE, DEFAULT_END_ANGLE } from '../src/core/domain/settings-provider';
+import { DEFAULT_START_ANGLE, DEFAULT_END_ANGLE } from '../src/core/domain/defaults';
 
 describe('Math', () => {
 

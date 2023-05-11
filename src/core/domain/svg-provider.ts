@@ -9,23 +9,13 @@ import {
 } from 'mz-math';
 import { isAngleInArc } from './angles-provider';
 
-export const getSVGCenter = (svgRadii: Vector2, pointerRadii: Vector2, strokeWidth: number) : Vector2 => {
-    const [rx, ry] = svgRadii;
-    const [rxPointer, ryPointer] = pointerRadii;
-
-    const diffX = Math.max(0, rxPointer * 2 - strokeWidth);
-    const diffY = Math.max(0, ryPointer * 2 - strokeWidth);
-
-    return [
-        setDecimalPlaces(rx + strokeWidth / 2 + diffX / 2, 2),
-        setDecimalPlaces(ry + strokeWidth / 2 + diffY / 2, 2)
-    ];
-};
-
-export const getSVGSize = (svgRadii: Vector2, pointerRadii: Vector2, strokeWidth: number) => {
+/**
+ * Calculate SVG size depending on ellipse radii and max pointer size.
+ */
+export const getSVGSize = (svgRadii: Vector2, maxPointerRadii: Vector2, strokeWidth: number) => {
 
     const [ rxSvg, rySvg ] = svgRadii;
-    const [ rxPointer, ryPointer ] = pointerRadii;
+    const [ rxPointer, ryPointer ] = maxPointerRadii;
 
     const diffX = Math.max(0, rxPointer * 2 - strokeWidth);
     const diffY = Math.max(0, ryPointer * 2 - strokeWidth);
@@ -37,6 +27,19 @@ export const getSVGSize = (svgRadii: Vector2, pointerRadii: Vector2, strokeWidth
         svgWidth,
         svgHeight,
     }
+};
+
+export const getSVGCenter = (svgRadii: Vector2, pointerRadii: Vector2, strokeWidth: number) : Vector2 => {
+    const [rx, ry] = svgRadii;
+    const [rxPointer, ryPointer] = pointerRadii;
+
+    const diffX = Math.max(0, rxPointer * 2 - strokeWidth);
+    const diffY = Math.max(0, ryPointer * 2 - strokeWidth);
+
+    return [
+        setDecimalPlaces(rx + strokeWidth / 2 + diffX / 2, 2),
+        setDecimalPlaces(ry + strokeWidth / 2 + diffY / 2, 2)
+    ];
 };
 
 export const getSliderProps = (
