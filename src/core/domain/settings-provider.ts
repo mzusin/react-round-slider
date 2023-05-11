@@ -12,8 +12,6 @@ import {
 } from './defaults';
 import { getNumber, getString } from './common';
 
-console.log('getSVGCenter', getSVGCenter)
-
 export interface ISettingsPointer {
 
     // user provided properties (or defaults) ----------
