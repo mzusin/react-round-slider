@@ -10,16 +10,16 @@ import {
     DEFAULT_POINTER_RY, DEFAULT_BG_COLOR, DEFAULT_END_ANGLE, DEFAULT_START_ANGLE, // DEFAULT_START_ANGLE, DEFAULT_END_ANGLE
 } from './defaults';
 import { getNumber, getString } from './common';
-import { IUserSettings, IRoundSliderPointer, IState, IUserSettingsPointer } from '../interfaces';
+import { IUserSettings, IStatePointer, IState, IUserSettingsPointer } from '../interfaces';
 
-export const getInitialPointers = (propsPointers?: IUserSettingsPointer[]): IRoundSliderPointer[] => {
+export const getInitialPointers = (propsPointers?: IUserSettingsPointer[]): IStatePointer[] => {
 
     if(!propsPointers || propsPointers.length <= 0){
         return [{
             pointerRadii: [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY],
         }]
     }
-    const pointers: IRoundSliderPointer[] = [];
+    const pointers: IStatePointer[] = [];
 
     for(const propsPointer of propsPointers){
 
@@ -36,7 +36,7 @@ export const getInitialPointers = (propsPointers?: IUserSettingsPointer[]): IRou
     return pointers;
 };
 
-const getMaxPointerRadii = (pointers: IRoundSliderPointer[]) : Vector2 => {
+const getMaxPointerRadii = (pointers: IStatePointer[]) : Vector2 => {
     let maxX = -Infinity;
     let maxY = -Infinity;
 
@@ -54,7 +54,7 @@ const getMaxPointerRadii = (pointers: IRoundSliderPointer[]) : Vector2 => {
 // ---------------- SETTINGS -------------------------
 export const formatSettings = (props: IUserSettings) : IState => {
 
-    const pointers: IRoundSliderPointer[] = getInitialPointers(props.pointers);
+    const pointers: IStatePointer[] = getInitialPointers(props.pointers);
 
     const svgRadii: Vector2 = [getNumber(props.rx, DEFAULT_SVG_RX), getNumber(props.ry, DEFAULT_SVG_RY)];
     const [startAngleDegrees, endAngleDegrees] = normalizeAngles(props.startAngleDegrees, props.endAngleDegrees);

@@ -31,6 +31,10 @@ export interface IUserSettings {
 
 // --------------------------- STATE ------------------------------------
 
+export interface IStatePointer {
+    pointerRadii: Vector2;
+}
+
 export interface IState {
 
     // svg look & feel properties ---------
@@ -39,7 +43,7 @@ export interface IState {
     strokeWidth: number;
     bgColor: string;
 
-    pointers: IRoundSliderPointer[],
+    pointers: IStatePointer[],
 
     // calculated properties ----------------------------
     svgSize:  Vector2;
@@ -52,19 +56,15 @@ export interface IState {
 
 // --------------------------- COMPONENTS ------------------------------------
 
-export interface IPanelFill {
-
-}
-
 export interface IPointer {
     center: Vector2;
     pointerRadii: Vector2;
 }
 
-export interface IRoundSliderPointer {
+export interface IPanelFill {
 
-    // user provided properties (or defaults) ----------
-    pointerRadii: Vector2;
 }
+
+
 
 
