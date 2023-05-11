@@ -29,9 +29,12 @@ export const getSVGSize = (svgRadii: Vector2, maxPointerRadii: Vector2, strokeWi
     }
 };
 
-export const getSVGCenter = (svgRadii: Vector2, pointerRadii: Vector2, strokeWidth: number) : Vector2 => {
+/**
+ * Calculate the center point of the SVG.
+ */
+export const getSVGCenter = (svgRadii: Vector2, maxPointerRadii: Vector2, strokeWidth: number) : Vector2 => {
     const [rx, ry] = svgRadii;
-    const [rxPointer, ryPointer] = pointerRadii;
+    const [rxPointer, ryPointer] = maxPointerRadii;
 
     const diffX = Math.max(0, rxPointer * 2 - strokeWidth);
     const diffY = Math.max(0, ryPointer * 2 - strokeWidth);
