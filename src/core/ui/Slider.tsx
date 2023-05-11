@@ -21,9 +21,12 @@ export const Slider = () => {
         sliderStartPoint, sliderEndPoint,
         largeArcFlag, svgRadii,
         bgColor, strokeWidth,
-        svgWidth, svgHeight, svgCenter,
-        startAngleDegrees, endAngleDegrees
+        svgSize, svgCenter,
+        angles
     } = settings;
+
+    const [ startAngleDegrees, endAngleDegrees ] = angles;
+    const [ svgWidth, svgHeight ] = svgSize;
 
     const [pointerPositions, setPointerPositions] = useState<Vector2[]>(
         settings.pointers.map(() => sliderStartPoint)

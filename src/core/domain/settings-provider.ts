@@ -10,7 +10,7 @@ import {
     DEFAULT_POINTER_RY, DEFAULT_BG_COLOR, DEFAULT_END_ANGLE, DEFAULT_START_ANGLE, // DEFAULT_START_ANGLE, DEFAULT_END_ANGLE
 } from './defaults';
 import { getNumber, getString } from './common';
-import { IUserSettings, IRoundSliderPointer, ISettings, IUserSettingsPointer } from '../interfaces';
+import { IUserSettings, IRoundSliderPointer, IState, IUserSettingsPointer } from '../interfaces';
 
 export const getInitialPointers = (propsPointers?: IUserSettingsPointer[]): IRoundSliderPointer[] => {
 
@@ -52,7 +52,7 @@ const getMaxPointerRadii = (pointers: IRoundSliderPointer[]) : Vector2 => {
 };
 
 // ---------------- SETTINGS -------------------------
-export const formatSettings = (props: IUserSettings) : ISettings => {
+export const formatSettings = (props: IUserSettings) : IState => {
 
     const pointers: IRoundSliderPointer[] = getInitialPointers(props.pointers);
 
@@ -75,19 +75,18 @@ export const formatSettings = (props: IUserSettings) : ISettings => {
     );
 
     const svgCenter = getSVGCenter(svgRadii, maxPointer, strokeWidth);
+    const angles: Vector2 = [startAngleDegrees, endAngleDegrees];
+    const svgSize: Vector2 = [svgWidth, svgHeight];
 
     return {
         pointers,
         svgRadii,
-
-        startAngleDegrees,
-        endAngleDegrees,
+        angles,
 
         strokeWidth,
         bgColor,
 
-        svgWidth,
-        svgHeight,
+        svgSize,
         svgCenter,
 
         sliderStartPoint,
@@ -96,18 +95,17 @@ export const formatSettings = (props: IUserSettings) : ISettings => {
     };
 };
 
-export const SettingsContext = createContext<ISettings>({
+
+const svgSize = getSVGSize([DEFAULT_SVG_RX, DEFAULT_SVG_RY], [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY], DEFAULT_STROKE_WIDTH);
+export const SettingsContext = createContext<IState>({
     pointers: getInitialPointers(),
     svgRadii: [DEFAULT_SVG_RX, DEFAULT_SVG_RY],
-    // pointerRadii: [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY],
-
-    startAngleDegrees: DEFAULT_START_ANGLE,
-    endAngleDegrees: DEFAULT_END_ANGLE,
+    angles: [DEFAULT_START_ANGLE, DEFAULT_END_ANGLE],
 
     strokeWidth: DEFAULT_STROKE_WIDTH,
     bgColor: DEFAULT_BG_COLOR,
 
-    ...getSVGSize([DEFAULT_SVG_RX, DEFAULT_SVG_RY], [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY], DEFAULT_STROKE_WIDTH),
+    svgSize: [svgSize.svgWidth, svgSize.svgHeight],
     ...getSliderProps(
         DEFAULT_START_ANGLE, DEFAULT_END_ANGLE,
         [DEFAULT_SVG_RX, DEFAULT_SVG_RY], [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY],

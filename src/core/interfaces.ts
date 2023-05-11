@@ -1,5 +1,7 @@
 import { Vector2 } from 'mz-math';
 
+// --------------------------- USER PROVIDED SETTINGS ------------------------------------
+
 export type TStep = ((value: number | string, percent: number) => number) | number | undefined | null;
 export type TData = (string | number)[] | undefined;
 
@@ -10,8 +12,6 @@ export interface IUserSettingsPointer {
 }
 
 export interface IUserSettings {
-    rx?: number;
-    ry?: number;
 
     min?: number | string;
     max?: number | string;
@@ -20,34 +20,37 @@ export interface IUserSettings {
 
     pointers?: IUserSettingsPointer[];
 
+    // svg look & feel properties ----------
+    rx?: number;
+    ry?: number;
     strokeWidth?: number;
     bgColor?: string;
-
     startAngleDegrees?: number;
     endAngleDegrees?: number;
 }
 
-export interface ISettings {
+// --------------------------- STATE ------------------------------------
 
-    // user provided properties (or defaults) ----------
+export interface IState {
+
+    // svg look & feel properties ---------
     svgRadii: Vector2;
-    startAngleDegrees: number;
-    endAngleDegrees: number;
-
+    angles: Vector2; // start and end angle of the SVG ellipse / circle
     strokeWidth: number;
     bgColor: string;
 
     pointers: IRoundSliderPointer[],
 
     // calculated properties ----------------------------
-    svgWidth: number;
-    svgHeight: number;
+    svgSize:  Vector2;
     svgCenter: Vector2;
 
     sliderStartPoint: Vector2;
     sliderEndPoint: Vector2;
     largeArcFlag: number;
 }
+
+// --------------------------- COMPONENTS ------------------------------------
 
 export interface IPanelFill {
 
