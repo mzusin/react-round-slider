@@ -1,6 +1,10 @@
 import { mod, Vector2 } from 'mz-math';
 import { DEFAULT_END_ANGLE, DEFAULT_START_ANGLE, getNumber } from './settings-provider';
 
+/**
+ * Defines if the current angle is in the provided range [startAngle, endAngle].
+ * It should work with the SVG path elliptic arc segment.
+ */
 export const isAngleInArc = (startAngleDegrees: number, endAngleDegrees: number, currentDegrees: number) : boolean => {
     return currentDegrees >= startAngleDegrees && currentDegrees <= endAngleDegrees ||
         (currentDegrees + 360) >= startAngleDegrees && (currentDegrees + 360) <= endAngleDegrees;
@@ -30,8 +34,10 @@ export const normalizeAngles = (startAngleDegrees?: number, endAngleDegrees?: nu
         _endAngleDegrees += 360;
     }
 
+    // If start angle equals to the end angle, svg arc will draw a dot instead of circle / ellipse path.
+    // To avoid this behaviour, subtract small amount of the end angle (0.001).
     if(_startAngleDegrees === _endAngleDegrees){
-        _endAngleDegrees += 360 - 0.001;
+        _endAngleDegrees += 359.999; // 360 - 0.001;
     }
 
     return [
