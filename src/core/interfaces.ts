@@ -1,10 +1,30 @@
 import { Vector2 } from 'mz-math';
-import { TData, TStep } from './ui/RoundSlider';
 
-export interface ISettingsPointer {
+export type TStep = ((value: number | string, percent: number) => number) | number | undefined | null;
+export type TData = (string | number)[] | undefined;
 
-    // user provided properties (or defaults) ----------
-    pointerRadii: Vector2;
+export interface IUserSettingsPointer {
+    rx?: number;
+    ry?: number;
+    value?: number | string;
+}
+
+export interface IUserSettings {
+    rx?: number;
+    ry?: number;
+
+    min?: number | string;
+    max?: number | string;
+    step?: TStep;
+    data?: TData;
+
+    pointers?: IUserSettingsPointer[];
+
+    strokeWidth?: number;
+    bgColor?: string;
+
+    startAngleDegrees?: number;
+    endAngleDegrees?: number;
 }
 
 export interface ISettings {
@@ -17,7 +37,7 @@ export interface ISettings {
     strokeWidth: number;
     bgColor: string;
 
-    pointers: ISettingsPointer[],
+    pointers: IRoundSliderPointer[],
 
     // calculated properties ----------------------------
     svgWidth: number;
@@ -39,25 +59,9 @@ export interface IPointer {
 }
 
 export interface IRoundSliderPointer {
-    rx?: number;
-    ry?: number;
-    value?: number | string;
+
+    // user provided properties (or defaults) ----------
+    pointerRadii: Vector2;
 }
 
-export interface IRoundSlider {
-    rx?: number;
-    ry?: number;
 
-    min?: number | string;
-    max?: number | string;
-    step?: TStep;
-    data?: TData;
-
-    pointers?: IRoundSliderPointer[];
-
-    strokeWidth?: number;
-    bgColor?: string;
-
-    startAngleDegrees?: number;
-    endAngleDegrees?: number;
-}

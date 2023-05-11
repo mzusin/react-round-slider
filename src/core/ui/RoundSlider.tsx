@@ -1,11 +1,8 @@
 import { Slider } from './Slider';
 import { formatSettings, SettingsContext } from '../domain/settings-provider';
-import { IRoundSlider } from '../interfaces';
+import { IUserSettings } from '../interfaces';
 
-export type TStep = ((value: number | string, percent: number) => number) | number | undefined | null;
-export type TData = (string | number)[] | undefined;
-
-export const RoundSlider = (props: IRoundSlider) => {
+export const RoundSlider = (props: IUserSettings) => {
 
     return (
         <SettingsContext.Provider value={ formatSettings(props) }>
