@@ -26,7 +26,7 @@ export const Slider = () => {
     } = settings;
 
     const [pointerPositions, setPointerPositions] = useState<Vector2[]>(
-        settings.pointers.map(pointer => sliderStartPoint)
+        settings.pointers.map(() => sliderStartPoint)
     );
 
     const onValueChange = (evt: MouseEvent | ReactMouseEvent | TouchEvent | ReactTouchEvent) => {

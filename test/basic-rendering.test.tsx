@@ -4,7 +4,7 @@ import { RoundSlider } from '../src/core';
 
 afterEach(cleanup);
 
-describe('Round Slider', () => {
+describe('Basic Rendering', () => {
 
     describe('Basic Rendering: Circle Slider', () => {
 
@@ -21,8 +21,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 25 }
-                    ryPointer={ 25 }
+                    pointers={[
+                        {
+                            rx: 25,
+                            ry: 25,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -51,8 +55,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 25 }
-                    ryPointer={ 15 }
+                    pointers={[
+                        {
+                            rx: 25,
+                            ry: 15,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -81,8 +89,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -111,8 +123,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -141,8 +157,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -171,8 +191,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -201,8 +225,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -231,8 +259,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -261,8 +293,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -291,8 +327,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -321,8 +361,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -351,8 +395,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -381,8 +429,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -411,8 +463,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -441,8 +497,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -474,8 +534,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 25 }
-                    ryPointer={ 15 }
+                    pointers={[
+                        {
+                            rx: 25,
+                            ry: 15,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -514,8 +578,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -554,8 +622,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -594,8 +666,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -634,8 +710,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -674,8 +754,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -714,8 +798,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -754,8 +842,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -794,8 +886,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -834,8 +930,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -874,8 +974,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -914,8 +1018,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -954,8 +1062,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
@@ -994,8 +1106,12 @@ describe('Round Slider', () => {
                     strokeWidth={ 15 }
                     bgColor="#285f68"
 
-                    rxPointer={ 20 }
-                    ryPointer={ 10 }
+                    pointers={[
+                        {
+                            rx: 20,
+                            ry: 10,
+                        }
+                    ]}
                 />
             );
             const $svg = container.querySelector('svg') as SVGSVGElement;
