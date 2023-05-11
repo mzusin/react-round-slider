@@ -1,4 +1,3 @@
-import { IRoundSlider, IRoundSliderPointer } from '../ui/RoundSlider';
 import { Vector2 } from 'mz-math';
 import { createContext } from 'react';
 import { getSliderProps, getSVGCenter, getSVGSize } from './svg-provider';
@@ -11,34 +10,7 @@ import {
     DEFAULT_POINTER_RY, DEFAULT_BG_COLOR, DEFAULT_END_ANGLE, DEFAULT_START_ANGLE, // DEFAULT_START_ANGLE, DEFAULT_END_ANGLE
 } from './defaults';
 import { getNumber, getString } from './common';
-
-export interface ISettingsPointer {
-
-    // user provided properties (or defaults) ----------
-    pointerRadii: Vector2;
-}
-
-export interface ISettings {
-
-    // user provided properties (or defaults) ----------
-    svgRadii: Vector2;
-    startAngleDegrees: number;
-    endAngleDegrees: number;
-
-    strokeWidth: number;
-    bgColor: string;
-
-    pointers: ISettingsPointer[],
-
-    // calculated properties ----------------------------
-    svgWidth: number;
-    svgHeight: number;
-    svgCenter: Vector2;
-
-    sliderStartPoint: Vector2;
-    sliderEndPoint: Vector2;
-    largeArcFlag: number;
-}
+import { IRoundSlider, IRoundSliderPointer, ISettings, ISettingsPointer } from '../interfaces';
 
 export const getInitialPointers = (propsPointers?: IRoundSliderPointer[]): ISettingsPointer[] => {
 

@@ -1,11 +1,6 @@
 import { useRef } from 'react';
-import { Vector2 } from 'mz-math';
+import { IPointer } from '../interfaces';
 // import { SettingsContext } from '../domain/settings-provider';
-
-export interface IPointer {
-    center: Vector2;
-    pointerRadii: Vector2;
-}
 
 export const Pointer = (props: IPointer) => {
 
