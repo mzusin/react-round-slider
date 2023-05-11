@@ -12,7 +12,6 @@ export interface IUserSettingsPointer {
 }
 
 export interface IUserSettings {
-
     min?: number | string;
     max?: number | string;
     step?: TStep;
