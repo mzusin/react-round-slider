@@ -42,9 +42,11 @@ export interface IState {
     strokeWidth: number;
     bgColor: string;
 
-    pointers: IStatePointer[],
+    // pointers ---------------------------
+    pointers: IStatePointer[];
+    pointerPositions: Vector2[];
 
-    // calculated properties ----------------------------
+    // calculated properties --------------
     svgSize:  Vector2;
     svgCenter: Vector2;
 

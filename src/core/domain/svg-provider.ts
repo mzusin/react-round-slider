@@ -74,9 +74,12 @@ export const getEllipseSegment = (
     }
 };
 
+/**
+ * Define pointer position according to the current user settings and mouse/touch position.
+ */
 export const getPointerPosition = (
     $svg: SVGSVGElement,
-    mouse: Vector2,
+    absoluteMouse: Vector2,
     center: Vector2,
     svgRadii: Vector2,
     startAngleDegrees: number,
@@ -84,13 +87,16 @@ export const getPointerPosition = (
     sliderStartPoint: Vector2,
     sliderEndPoint: Vector2,
 ) : Vector2 => {
-    const bounds = $svg.getBoundingClientRect();
-    const [clientX, clientY] = mouse;
+    const [clientX, clientY] = absoluteMouse;
 
-    const x = clientX - bounds.left;
-    const y = clientY - bounds.top;
+    const { left, top } = $svg.getBoundingClientRect();
 
-    const vector = v2Sub([x, y], center);
+    const relativeMouse: Vector2 = [
+        clientX - left,
+        clientY - top,
+    ];
+
+    const vector = v2Sub(relativeMouse, center);
 
     let angle = getV2Angle(vector);
     if(angle < 0){
@@ -106,7 +112,7 @@ export const getPointerPosition = (
         return angleSub1 <= angleSub2 ? sliderStartPoint : sliderEndPoint;
     }
 
-    // convert the angle from the range [0, Math.PI*2] to the range [0, Math.PI]
+    // Convert the angle from the range [0, Math.PI*2] to the range [0, Math.PI].
     angle = convertRange(angle, 0, Math.PI*2, 0, Math.PI);
     return ellipseMovement(center, angle, svgRadii[0], svgRadii[1]);
 };

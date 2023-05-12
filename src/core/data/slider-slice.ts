@@ -37,6 +37,12 @@ const {
     DEFAULT_STROKE_WIDTH
 );
 
+const pointers =  [{
+    pointerRadii: defaultMaxPointerRadii,
+}];
+
+const pointerPositions = [sliderStartPoint];
+
 const initialState: IState = {
     // Main SVG ellipse/circle rx/ry.
     svgRadii: defaultSvgRadii,
@@ -47,11 +53,11 @@ const initialState: IState = {
     strokeWidth: DEFAULT_STROKE_WIDTH,
     bgColor: DEFAULT_BG_COLOR,
 
-    pointers: [{
-        pointerRadii: defaultMaxPointerRadii,
-    }],
+    // Pointers -------------------------
+    pointers,
+    pointerPositions,
 
-    // calculated properties ----------------------------
+    // calculated properties ------------
     svgSize,
     svgCenter,
     sliderStartPoint,
@@ -63,29 +69,38 @@ export const sliderSlice = createSlice({
     name: 'slider',
     initialState,
     reducers: {
-        increment: (_state: IState) => {
+        initUserSettings(state, action) {
+            return {
+                ...state,
+                ...action.payload,
+            };
+        },
+        updatePointersPosition(state, action) {
+            return {
+                ...state,
+                pointerPositions: action.payload,
+            };
+        },
+        /*
+          increment: (_state: IState) => {
             // state.value += 1;
         },
-        /*decrement: state => {
+        decrement: state => {
             state.value -= 1;
         },
         // Use the PayloadAction type to declare the contents of `action.payload`
         incrementByAmount: (state, action: PayloadAction<number>) => {
             state.value += action.payload;
         },
-        main(state, action) {
-            return {
-                ...state,
-                ...action.payload,
-            };
-        },*/
+        */
     }
 });
 
-export const { increment } = sliderSlice.actions;
-// export const { increment, decrement, incrementByAmount } = sliderSlice.actions;
+//export const { increment } = sliderSlice.actions;
+//export const { initUserSettings } = sliderSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectValue = (state: RootState) => state.slider.value;
 
+export const sliderActions = sliderSlice.actions;
 export default sliderSlice.reducer;

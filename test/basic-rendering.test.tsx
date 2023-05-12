@@ -8,6 +8,34 @@ describe('Basic Rendering', () => {
 
     describe('Basic Rendering: Circle Slider', () => {
 
+        test('Slider without parameters', () => {
+
+            const { container} = render(
+                <RoundSlider />
+            );
+            const $svg = container.querySelector('svg') as SVGSVGElement;
+            const $path = container.querySelector('path') as SVGPathElement;
+            const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
+
+            expect($svg.getAttribute('width')).toStrictEqual('150');
+            expect($svg.getAttribute('height')).toStrictEqual('150');
+
+            expect($path.getAttribute('d')).toStrictEqual('M 325 215 A 150 200 0 0 1 25 215.00000000000003');
+            expect($path.getAttribute('stroke')).toStrictEqual('#efefef');
+            expect($path.getAttribute('stroke-width')).toStrictEqual('5');
+            expect($path.getAttribute('fill')).toStrictEqual('none');
+            expect($path.getAttribute('shape-rendering')).toStrictEqual('geometricPrecision');
+            expect($path.getAttribute('stroke-linecap')).toStrictEqual('round');
+            expect($path.getAttribute('cursor')).toStrictEqual('pointer');
+
+            expect($ellipse.getAttribute('cx')).toStrictEqual('75');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('75');
+            expect($ellipse.getAttribute('rx')).toStrictEqual('10');
+            expect($ellipse.getAttribute('ry')).toStrictEqual('10');
+            expect($ellipse.getAttribute('fill')).toStrictEqual('#000');
+            expect($ellipse.getAttribute('cursor')).toStrictEqual('pointer');
+        });
+
         test('Circle slider 0 ----> 360 degrees with round pointer', () => {
 
             const { container} = render(
