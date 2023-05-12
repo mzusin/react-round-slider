@@ -17,10 +17,10 @@ describe('Basic Rendering', () => {
             const $path = container.querySelector('path') as SVGPathElement;
             const $ellipse = container.querySelector('ellipse') as SVGEllipseElement;
 
-            expect($svg.getAttribute('width')).toStrictEqual('150');
-            expect($svg.getAttribute('height')).toStrictEqual('150');
+            expect($svg.getAttribute('width')).toStrictEqual('320');
+            expect($svg.getAttribute('height')).toStrictEqual('320');
 
-            expect($path.getAttribute('d')).toStrictEqual('M 325 215 A 150 200 0 0 1 25 215.00000000000003');
+            expect($path.getAttribute('d')).toStrictEqual('M 310 160 A 150 150 0 1 1 309.9999999771537 159.99738200612214');
             expect($path.getAttribute('stroke')).toStrictEqual('#efefef');
             expect($path.getAttribute('stroke-width')).toStrictEqual('5');
             expect($path.getAttribute('fill')).toStrictEqual('none');
@@ -28,8 +28,8 @@ describe('Basic Rendering', () => {
             expect($path.getAttribute('stroke-linecap')).toStrictEqual('round');
             expect($path.getAttribute('cursor')).toStrictEqual('pointer');
 
-            expect($ellipse.getAttribute('cx')).toStrictEqual('75');
-            expect($ellipse.getAttribute('cy')).toStrictEqual('75');
+            expect($ellipse.getAttribute('cx')).toStrictEqual('310');
+            expect($ellipse.getAttribute('cy')).toStrictEqual('160');
             expect($ellipse.getAttribute('rx')).toStrictEqual('10');
             expect($ellipse.getAttribute('ry')).toStrictEqual('10');
             expect($ellipse.getAttribute('fill')).toStrictEqual('#000');

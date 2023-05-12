@@ -10,10 +10,7 @@ describe('SVG', () => {
             const maxPointerRadii: Vector2 = [50, 40];
             const strokeWidth = 10;
 
-            expect(getSVGSize(svgRadii, maxPointerRadii, strokeWidth)).toStrictEqual({
-                svgWidth: 300,
-                svgHeight: 240,
-            });
+            expect(getSVGSize(svgRadii, maxPointerRadii, strokeWidth)).toStrictEqual([300, 240]);
         });
 
         test('svg = [100, 80], max pointer = [200, 160], stroke = 10', () => {
@@ -21,10 +18,7 @@ describe('SVG', () => {
             const maxPointerRadii: Vector2 = [200, 160];
             const strokeWidth = 10;
 
-            expect(getSVGSize(svgRadii, maxPointerRadii, strokeWidth)).toStrictEqual({
-                svgWidth: 600,
-                svgHeight: 480,
-            });
+            expect(getSVGSize(svgRadii, maxPointerRadii, strokeWidth)).toStrictEqual([600, 480]);
         });
 
         test('svg = [100, 80], max pointer = [50, 40], stroke = 60', () => {
@@ -32,10 +26,7 @@ describe('SVG', () => {
             const maxPointerRadii: Vector2 = [50, 40];
             const strokeWidth = 60;
 
-            expect(getSVGSize(svgRadii, maxPointerRadii, strokeWidth)).toStrictEqual({
-                svgWidth: 300,
-                svgHeight: 240,
-            });
+            expect(getSVGSize(svgRadii, maxPointerRadii, strokeWidth)).toStrictEqual([300, 240]);
         });
 
         test('svg = [100, 80], max pointer = [50, 40], stroke = 100', () => {
@@ -43,10 +34,7 @@ describe('SVG', () => {
             const maxPointerRadii: Vector2 = [50, 40];
             const strokeWidth = 100;
 
-            expect(getSVGSize(svgRadii, maxPointerRadii, strokeWidth)).toStrictEqual({
-                svgWidth: 300,
-                svgHeight: 260,
-            });
+            expect(getSVGSize(svgRadii, maxPointerRadii, strokeWidth)).toStrictEqual([300, 260]);
         });
 
     });

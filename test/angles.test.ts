@@ -17,7 +17,7 @@ describe('Math', () => {
 
         test('normalizeAngles(270)', () => {
             const result = normalizeAngles(270);
-            expect(result).toEqual([270, 540]);
+            expect(result).toEqual([270, 359.999]);
         });
 
         test('normalizeAngles(100, 450)', () => {
