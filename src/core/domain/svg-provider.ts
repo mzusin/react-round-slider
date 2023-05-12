@@ -12,7 +12,7 @@ import { isAngleInArc } from './angles-provider';
 /**
  * Calculate SVG size depending on ellipse radii and max pointer size.
  */
-export const getSVGSize = (svgRadii: Vector2, maxPointerRadii: Vector2, strokeWidth: number) => {
+export const getSVGSize = (svgRadii: Vector2, maxPointerRadii: Vector2, strokeWidth: number) : Vector2 => {
 
     const [ rxSvg, rySvg ] = svgRadii;
     const [ rxPointer, ryPointer ] = maxPointerRadii;
@@ -23,10 +23,10 @@ export const getSVGSize = (svgRadii: Vector2, maxPointerRadii: Vector2, strokeWi
     const svgWidth = rxSvg * 2 + strokeWidth + diffX;
     const svgHeight = rySvg * 2 + strokeWidth + diffY;
 
-    return {
+    return [
         svgWidth,
         svgHeight,
-    }
+    ];
 };
 
 /**
@@ -34,7 +34,7 @@ export const getSVGSize = (svgRadii: Vector2, maxPointerRadii: Vector2, strokeWi
  */
 export const getSVGCenter = (svgRadii: Vector2, maxPointerRadii: Vector2, strokeWidth: number) : Vector2 => {
 
-    const { svgWidth, svgHeight } = getSVGSize(svgRadii, maxPointerRadii, strokeWidth);
+    const [ svgWidth, svgHeight ] = getSVGSize(svgRadii, maxPointerRadii, strokeWidth);
 
     return [
         setDecimalPlaces(svgWidth / 2, 2),
@@ -42,7 +42,12 @@ export const getSVGCenter = (svgRadii: Vector2, maxPointerRadii: Vector2, stroke
     ];
 };
 
-export const getSliderProps = (
+/**
+ * Get start & end points of SVG ellipse/circle segment.
+ * Also define the 'large-arc-flag' property of svg path data elliptical arc.
+ * Elliptical arc: rx ry angle large-arc-flag sweep-flag x y.
+ */
+export const getEllipseSegment = (
     startAngleDegrees: number,
     endAngleDegrees: number,
     svgRadii: Vector2,
@@ -63,7 +68,6 @@ export const getSliderProps = (
     const sliderEndPoint = polarToCartesian(center, svgRadii, degreesToRadians(_endAngleDegrees));
 
     return {
-        // rx ry angle large-arc-flag sweep-flag x y
         sliderStartPoint,
         sliderEndPoint,
         largeArcFlag,

@@ -1,35 +1,35 @@
 import {
     MouseEvent as ReactMouseEvent,
     TouchEvent as ReactTouchEvent,
-    useContext,
     useRef,
     useState,
 } from 'react';
-import { SettingsContext } from '../domain/settings-provider';
 import { Pointer } from './Pointer';
 import { getPointerPosition } from '../domain/svg-provider';
 import { Vector2 } from 'mz-math';
+import { useAppSelector } from '../data/store';
 
 export const Slider = () => {
 
     const svgRef = useRef<SVGSVGElement>(null);
     const sliderRef = useRef<SVGPathElement>(null);
 
-    const settings = useContext(SettingsContext);
-
-    const {
-        sliderStartPoint, sliderEndPoint,
-        largeArcFlag, svgRadii,
-        bgColor, strokeWidth,
-        svgSize, svgCenter,
-        angles
-    } = settings;
+    const sliderStartPoint = useAppSelector(store => store.slider.sliderStartPoint);
+    const sliderEndPoint = useAppSelector(store => store.slider.sliderEndPoint);
+    const largeArcFlag = useAppSelector(store => store.slider.largeArcFlag);
+    const svgRadii = useAppSelector(store => store.slider.svgRadii);
+    const bgColor = useAppSelector(store => store.slider.bgColor);
+    const strokeWidth = useAppSelector(store => store.slider.strokeWidth);
+    const svgSize = useAppSelector(store => store.slider.svgSize);
+    const svgCenter = useAppSelector(store => store.slider.svgCenter);
+    const angles = useAppSelector(store => store.slider.angles);
+    const pointers = useAppSelector(store => store.slider.pointers);
 
     const [ startAngleDegrees, endAngleDegrees ] = angles;
     const [ svgWidth, svgHeight ] = svgSize;
 
     const [pointerPositions, setPointerPositions] = useState<Vector2[]>(
-        settings.pointers.map(() => sliderStartPoint)
+        pointers.map(() => sliderStartPoint)
     );
 
     const onValueChange = (evt: MouseEvent | ReactMouseEvent | TouchEvent | ReactTouchEvent) => {
@@ -104,7 +104,7 @@ export const Slider = () => {
             {
                 pointerPositions.map((pointerPosition, i) => {
                     return (
-                        <Pointer key={ i } center={ pointerPosition } pointerRadii={ settings.pointers[i].pointerRadii } />
+                        <Pointer key={ i } center={ pointerPosition } pointerRadii={ pointers[i].pointerRadii } />
                     )
                 })
             }

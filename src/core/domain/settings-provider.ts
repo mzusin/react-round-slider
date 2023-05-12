@@ -1,13 +1,13 @@
 import { Vector2 } from 'mz-math';
-import { createContext } from 'react';
-import { getSliderProps, getSVGCenter, getSVGSize } from './svg-provider';
+import { getEllipseSegment, getSVGCenter, getSVGSize } from './svg-provider';
 import { normalizeAngles } from './angles-provider';
 import {
     DEFAULT_SVG_RX,
     DEFAULT_SVG_RY,
     DEFAULT_STROKE_WIDTH,
     DEFAULT_POINTER_RX,
-    DEFAULT_POINTER_RY, DEFAULT_BG_COLOR, DEFAULT_END_ANGLE, DEFAULT_START_ANGLE, // DEFAULT_START_ANGLE, DEFAULT_END_ANGLE
+    DEFAULT_POINTER_RY,
+    DEFAULT_BG_COLOR,
 } from './defaults';
 import { getNumber, getString } from './common';
 import { IUserSettings, IStatePointer, IState, IUserSettingsPointer } from '../interfaces';
@@ -64,9 +64,9 @@ export const formatSettings = (props: IUserSettings) : IState => {
 
     const maxPointer = getMaxPointerRadii(pointers);
 
-    const { svgWidth, svgHeight } = getSVGSize(svgRadii, maxPointer, strokeWidth);
+    const [ svgWidth, svgHeight ] = getSVGSize(svgRadii, maxPointer, strokeWidth);
 
-    const { sliderStartPoint, sliderEndPoint, largeArcFlag } = getSliderProps(
+    const { sliderStartPoint, sliderEndPoint, largeArcFlag } = getEllipseSegment(
         startAngleDegrees,
         endAngleDegrees,
         svgRadii,
@@ -94,23 +94,3 @@ export const formatSettings = (props: IUserSettings) : IState => {
         largeArcFlag,
     };
 };
-
-
-const svgSize = getSVGSize([DEFAULT_SVG_RX, DEFAULT_SVG_RY], [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY], DEFAULT_STROKE_WIDTH);
-export const SettingsContext = createContext<IState>({
-    pointers: getInitialPointers(),
-    svgRadii: [DEFAULT_SVG_RX, DEFAULT_SVG_RY],
-    angles: [DEFAULT_START_ANGLE, DEFAULT_END_ANGLE],
-
-    strokeWidth: DEFAULT_STROKE_WIDTH,
-    bgColor: DEFAULT_BG_COLOR,
-
-    svgSize: [svgSize.svgWidth, svgSize.svgHeight],
-    ...getSliderProps(
-        DEFAULT_START_ANGLE, DEFAULT_END_ANGLE,
-        [DEFAULT_SVG_RX, DEFAULT_SVG_RY], [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY],
-        DEFAULT_STROKE_WIDTH
-    ),
-
-    svgCenter: getSVGCenter([DEFAULT_SVG_RX, DEFAULT_SVG_RY], [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY], DEFAULT_STROKE_WIDTH),
-});
