@@ -1,12 +1,19 @@
 import { Slider } from './Slider';
-import { formatSettings, SettingsContext } from '../domain/settings-provider';
+// import { formatSettings } from '../domain/settings-provider';
 import { IUserSettings } from '../interfaces';
+import { store } from '../data/store';
+import { Provider } from 'react-redux';
 
-export const RoundSlider = (props: IUserSettings) => {
+export const RoundSlider = (_props: IUserSettings) => {
 
-    return (
-        <SettingsContext.Provider value={ formatSettings(props) }>
+    /*
+    <SettingsContext.Provider value={ formatSettings(props) }>
            <Slider />
         </SettingsContext.Provider>
+     */
+    return (
+        <Provider store={ store }>
+           <Slider />
+        </Provider>
     )
 };
