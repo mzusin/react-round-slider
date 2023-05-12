@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RoundSlider } from '../core/ui/RoundSlider';
+import { RoundSlider } from '../core';
 
 const App = () => {
     return (

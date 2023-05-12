@@ -10,7 +10,7 @@ try {
 } catch (ex) {}
 
 export const settings = {
-    entryPoints: ['./src/core/index.ts'],
+    entryPoints: ['./src/core/index.tsx'],
     bundle: true,
     sourcemap: 'linked', // external
     define: { 'process.env.NODE_ENV': `'production'` }, // dev, production

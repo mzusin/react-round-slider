@@ -4,7 +4,7 @@ import {
     useRef,
 } from 'react';
 import { Pointer } from './Pointer';
-import { getPointerPosition } from '../domain/svg-provider';
+import { getPointerPosition } from '../domain/slider-provider';
 import { useAppDispatch, useAppSelector } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
 

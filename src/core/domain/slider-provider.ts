@@ -8,6 +8,7 @@ import {
     Vector2, setDecimalPlaces,
 } from 'mz-math';
 import { isAngleInArc } from './angles-provider';
+import { IStatePointer } from '../interfaces';
 
 /**
  * Calculate SVG size depending on ellipse radii and max pointer size.
@@ -115,4 +116,24 @@ export const getPointerPosition = (
     // Convert the angle from the range [0, Math.PI*2] to the range [0, Math.PI].
     angle = convertRange(angle, 0, Math.PI*2, 0, Math.PI);
     return ellipseMovement(center, angle, svgRadii[0], svgRadii[1]);
+};
+
+/**
+ * Max pointer [rx, ry] is used to define svg size, svg center position,
+ * and also ellipse/circle properties.
+ */
+export const getMaxPointer = (pointers: IStatePointer[]) : Vector2 => {
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+
+    for(const pointer of pointers){
+        const [rx, ry] =  pointer.pointerRadii;
+        maxX = Math.max(maxX, rx);
+        maxY = Math.max(maxY, ry);
+    }
+
+    return [
+        maxX,
+        maxY,
+    ];
 };

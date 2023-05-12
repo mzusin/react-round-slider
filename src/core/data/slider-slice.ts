@@ -6,7 +6,7 @@ import {
     DEFAULT_START_ANGLE, DEFAULT_STROKE_WIDTH,
     DEFAULT_SVG_RX, DEFAULT_SVG_RY
 } from '../domain/defaults';
-import { getEllipseSegment, getSVGCenter, getSVGSize } from '../domain/svg-provider';
+import { getEllipseSegment, getSVGCenter, getSVGSize } from '../domain/slider-provider';
 import { Vector2 } from 'mz-math';
 // import type { RootState } from './store';
 

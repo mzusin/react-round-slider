@@ -1,13 +1,13 @@
-import { IUserSettings } from '../interfaces';
-import { store } from '../data/store';
+import { IUserSettings } from './interfaces';
 import { Provider } from 'react-redux';
-import { SVG } from './SVG';
+import { store } from './data/store';
+import { Wrapper } from './ui/Wrapper';
 
 export const RoundSlider = (props: IUserSettings) => {
 
     return (
         <Provider store={ store }>
-           <SVG {...props} />
+            <Wrapper {...props} />
         </Provider>
     )
 };

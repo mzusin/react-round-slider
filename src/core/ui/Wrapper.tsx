@@ -1,8 +1,5 @@
 import { useEffect } from 'react';
-import { getEllipseSegment, getSVGCenter, getSVGSize } from '../domain/svg-provider';
 import { Vector2 } from 'mz-math';
-import { useAppDispatch, useAppSelector } from '../data/store';
-import { getNumber, getString } from '../domain/common';
 import {
     DEFAULT_BG_COLOR,
     DEFAULT_POINTER_RX, DEFAULT_POINTER_RY,
@@ -10,31 +7,17 @@ import {
     DEFAULT_SVG_RX,
     DEFAULT_SVG_RY
 } from '../domain/defaults';
-import { normalizeAngles } from '../domain/angles-provider';
 import { IStatePointer, IUserSettings } from '../interfaces';
+import { useAppDispatch, useAppSelector } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
+import { getNumber, getString } from '../domain/common';
+import { getEllipseSegment, getSVGCenter, getSVGSize, getMaxPointer } from '../domain/slider-provider';
+import { normalizeAngles } from '../domain/angles-provider';
 import { Slider } from './Slider';
 
-const getMaxPointer = (pointers: IStatePointer[]) : Vector2 => {
-    let maxX = -Infinity;
-    let maxY = -Infinity;
+export const Wrapper = (props: IUserSettings) => {
 
-    for(const pointer of pointers){
-        const [rx, ry] =  pointer.pointerRadii;
-        maxX = Math.max(maxX, rx);
-        maxY = Math.max(maxY, ry);
-    }
-
-    return [
-        maxX,
-        maxY,
-    ];
-};
-
-export const SVG = (props: IUserSettings) => {
-
-  const pointers = useAppSelector(store => store.slider.pointers);
-
+    const pointers = useAppSelector(store => store.slider.pointers);
     const dispatch = useAppDispatch();
 
     /**
