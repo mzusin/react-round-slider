@@ -15,6 +15,10 @@ import { getEllipseSegment, getSVGCenter, getSVGSize, getMaxPointer } from '../d
 import { normalizeAngles } from '../domain/angles-provider';
 import { Slider } from './Slider';
 
+/**
+ * Wrapper is used to combine user settings with the defaults,
+ * and add them to the redux store.
+ */
 export const Wrapper = (props: IUserSettings) => {
 
     const pointers = useAppSelector(store => store.slider.pointers);

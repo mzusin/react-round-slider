@@ -1,5 +1,10 @@
 # TODO
 
+## Redux
+- prevent redux issue with other libraries when round slider installed via npm in app with another redux version
+- esm compilation with settings.external = ['react', 'react-redux', '@reduxjs/toolkit'] - should that be fixed?
+- redux proper usage of actions?
+
 ## Pointer
 - any number of pointers
 - any SVG shape, not only circle or ellipse
