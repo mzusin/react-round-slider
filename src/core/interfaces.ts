@@ -45,6 +45,7 @@ export interface IState {
     // data -------------------------------
     min: number | string;
     max: number | string;
+    step: TStep; // step is defined in absolute units (not percent!)
 
     // pointers ---------------------------
     pointers: IStatePointer[];

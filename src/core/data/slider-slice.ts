@@ -56,6 +56,7 @@ const initialState: IState = {
     // Data -----------------------------
     min: MIN_VALUE_DEFAULT,
     max: MAX_VALUE_DEFAULT,
+    step: undefined, // step is defined in absolute units (not percent!)
 
     // Pointers -------------------------
     pointers,

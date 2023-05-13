@@ -11,7 +11,14 @@ import { IState, IStatePointer, IUserSettings } from '../interfaces';
 import { useAppDispatch, useAppSelector } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
 import { getNumber, getString } from '../domain/common';
-import { getEllipseSegment, getSVGCenter, getSVGSize, getMaxPointer } from '../domain/slider-provider';
+import {
+    getEllipseSegment,
+    getSVGCenter,
+    getSVGSize,
+    getMaxPointer,
+    getMinMax,
+    getStep
+} from '../domain/slider-provider';
 import { normalizeAngles } from '../domain/angles-provider';
 import { Slider } from './Slider';
 
@@ -68,6 +75,9 @@ export const Wrapper = (props: IUserSettings) => {
             return sliderStartPoint
         });
 
+        const [min, max] = getMinMax(props.min, props.max, props.data);
+        const step = getStep(props.step, min, max);
+
         const settings : IState = {
             // svg look & feel properties ---------
             svgRadii,
@@ -76,8 +86,9 @@ export const Wrapper = (props: IUserSettings) => {
             bgColor,
 
             // data --------------------------------
-            min: 0,
-            max: 0,
+            min,
+            max,
+            step,
 
             // pointers ----------------------------
             pointers: _pointers,

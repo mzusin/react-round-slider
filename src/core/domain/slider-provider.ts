@@ -5,10 +5,10 @@ import {
     polarToCartesian,
     radiansToDegrees,
     v2Sub,
-    Vector2, setDecimalPlaces,
+    Vector2, setDecimalPlaces, isNumber,
 } from 'mz-math';
 import { isAngleInArc } from './angles-provider';
-import { IStatePointer, TData } from '../interfaces';
+import { IStatePointer, TData, TStep } from '../interfaces';
 import { MAX_VALUE_DEFAULT, MIN_VALUE_DEFAULT } from './defaults';
 import { getNumber } from './common';
 
@@ -172,4 +172,32 @@ export const getMinMax = (
     }
 
     return [_min, _max];
+};
+
+/**
+ * Step is defined in absolute units (not percent!)
+ * This function should validate step provided by the user,
+ * for example the case when step > all the data range.
+ */
+export const getStep = (userStep: TStep, min: number, max: number) : TStep => {
+    if(userStep === null || userStep === undefined){
+        return undefined;
+    }
+
+    if (typeof userStep === 'function') {
+        return userStep;
+    }
+
+    if(isNumber(userStep)){
+        let step = getNumber(userStep, 1);
+
+        const diff = Math.abs(max - min);
+        if (step > diff) {
+            step = undefined;
+        }
+
+        return step;
+    }
+
+    return undefined;
 };
