@@ -1,14 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { IState } from '../interfaces';
 import {
     DEFAULT_BG_COLOR, DEFAULT_END_ANGLE,
     DEFAULT_POINTER_RX, DEFAULT_POINTER_RY,
     DEFAULT_START_ANGLE, DEFAULT_STROKE_WIDTH,
-    DEFAULT_SVG_RX, DEFAULT_SVG_RY
+    DEFAULT_SVG_RX, DEFAULT_SVG_RY,
+    MIN_VALUE_DEFAULT, MAX_VALUE_DEFAULT,
 } from '../domain/defaults';
+import { createSlice } from '@reduxjs/toolkit';
+import { IState } from '../interfaces';
 import { getEllipseSegment, getSVGCenter, getSVGSize } from '../domain/slider-provider';
 import { Vector2 } from 'mz-math';
-// import type { RootState } from './store';
 
 const defaultSvgRadii: Vector2 = [DEFAULT_SVG_RX, DEFAULT_SVG_RY];
 const defaultMaxPointerRadii: Vector2 = [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY];
@@ -53,6 +53,10 @@ const initialState: IState = {
     strokeWidth: DEFAULT_STROKE_WIDTH,
     bgColor: DEFAULT_BG_COLOR,
 
+    // Data -----------------------------
+    min: MIN_VALUE_DEFAULT,
+    max: MAX_VALUE_DEFAULT,
+
     // Pointers -------------------------
     pointers,
     pointerPositions,
@@ -81,26 +85,8 @@ export const sliderSlice = createSlice({
                 pointerPositions: action.payload,
             };
         },
-        /*
-          increment: (_state: IState) => {
-            // state.value += 1;
-        },
-        decrement: state => {
-            state.value -= 1;
-        },
-        // Use the PayloadAction type to declare the contents of `action.payload`
-        incrementByAmount: (state, action: PayloadAction<number>) => {
-            state.value += action.payload;
-        },
-        */
     }
 });
-
-//export const { increment } = sliderSlice.actions;
-//export const { initUserSettings } = sliderSlice.actions;
-
-// Other code such as selectors can use the imported `RootState` type
-// export const selectValue = (state: RootState) => state.slider.value;
 
 export const sliderActions = sliderSlice.actions;
 export default sliderSlice.reducer;

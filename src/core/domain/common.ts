@@ -1,6 +1,6 @@
 import { isNumber } from 'mz-math';
 
-export const getNumber = (value: number|undefined|null, defaultValue: number) : number => {
+export const getNumber = (value: number|string|undefined|null, defaultValue: number) : number => {
     return isNumber(value) ? Number(value) : defaultValue;
 };
 

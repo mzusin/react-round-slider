@@ -7,7 +7,7 @@ import {
     DEFAULT_SVG_RX,
     DEFAULT_SVG_RY
 } from '../domain/defaults';
-import { IStatePointer, IUserSettings } from '../interfaces';
+import { IState, IStatePointer, IUserSettings } from '../interfaces';
 import { useAppDispatch, useAppSelector } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
 import { getNumber, getString } from '../domain/common';
@@ -68,25 +68,31 @@ export const Wrapper = (props: IUserSettings) => {
             return sliderStartPoint
         });
 
+        const settings : IState = {
+            // svg look & feel properties ---------
+            svgRadii,
+            angles,
+            strokeWidth,
+            bgColor,
+
+            // data --------------------------------
+            min: 0,
+            max: 0,
+
+            // pointers ----------------------------
+            pointers: _pointers,
+            pointerPositions,
+
+            // calculated properties ---------------
+            svgSize,
+            svgCenter,
+            sliderStartPoint,
+            sliderEndPoint,
+            largeArcFlag,
+        };
+
         dispatch(
-            sliderActions.initUserSettings({
-                // svg look & feel properties ---------
-                svgRadii,
-                angles,
-                strokeWidth,
-                bgColor,
-
-                // pointers ----------------------------
-                pointers: _pointers,
-                pointerPositions,
-
-                // calculated properties ---------------
-                svgSize,
-                svgCenter,
-                sliderStartPoint,
-                sliderEndPoint,
-                largeArcFlag,
-            })
+            sliderActions.initUserSettings(settings)
         );
     }, []);
 

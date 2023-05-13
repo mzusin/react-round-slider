@@ -8,7 +8,9 @@ import {
     Vector2, setDecimalPlaces,
 } from 'mz-math';
 import { isAngleInArc } from './angles-provider';
-import { IStatePointer } from '../interfaces';
+import { IStatePointer, TData } from '../interfaces';
+import { MAX_VALUE_DEFAULT, MIN_VALUE_DEFAULT } from './defaults';
+import { getNumber } from './common';
 
 /**
  * Calculate SVG size depending on ellipse radii and max pointer size.
@@ -136,4 +138,38 @@ export const getMaxPointer = (pointers: IStatePointer[]) : Vector2 => {
         maxX,
         maxY,
     ];
+};
+
+/**
+ * On component init, min and max should be initialized together,
+ * because their validations depend on each other.
+ * In case when the data is provided, min & max represent index in the data array.
+ */
+export const getMinMax = (
+    min: number | string | undefined | null,
+    max: number | string | undefined | null,
+    data?: TData
+): Vector2 => {
+    if(data !== undefined){
+
+        const minIndex = data.findIndex(item => item === min);
+        const maxIndex = data.findIndex(item => item === max);
+
+        let _min = minIndex === -1 ? 0 : minIndex;
+        let _max = maxIndex === -1 ? data.length - 1 : maxIndex;
+        return [_min, _max];
+    }
+
+    let _min = getNumber(min, MIN_VALUE_DEFAULT);
+    let _max = getNumber(max, MAX_VALUE_DEFAULT);
+
+    if(_min > _max){
+        _max = _min + MAX_VALUE_DEFAULT;
+    }
+
+    if(_max < _min){
+        _max = _min + MAX_VALUE_DEFAULT;
+    }
+
+    return [_min, _max];
 };

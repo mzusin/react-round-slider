@@ -42,6 +42,10 @@ export interface IState {
     strokeWidth: number;
     bgColor: string;
 
+    // data -------------------------------
+    min: number | string;
+    max: number | string;
+
     // pointers ---------------------------
     pointers: IStatePointer[];
     pointerPositions: Vector2[];

@@ -5,10 +5,10 @@ import esbuildWatchPlugin from './esbuild-plugins/esbuild-watch-plugin.js';
 const args = process.argv.slice(2);
 const watch = args.length > 1 && args[1].trim().toLowerCase() === 'watch';
 
-settings.platform = 'neutral';
+// settings.platform = 'neutral';
 settings.format = 'esm';
 settings.outfile = './dist/mz-react-round-slider.esm.js';
-settings.external = ['react', 'react-redux', '@reduxjs/toolkit'];
+settings.external = ['react']; // , 'react-redux', '@reduxjs/toolkit'
 
 if(watch){
     // ------------- watch ---------------
