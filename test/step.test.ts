@@ -6,10 +6,6 @@ describe('Step', () => {
     const min = 0;
     const max = 100;
 
-    /*test('getMinMax(undefined, undefined)', () => {
-        expect(getMinMax(undefined, undefined)).toStrictEqual([MIN_VALUE_DEFAULT, MAX_VALUE_DEFAULT]);
-    });*/
-
     test('getStep(null, 0, 100)', () => {
         expect(getStep(null, min, max)).toBeUndefined();
     });

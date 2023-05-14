@@ -8,8 +8,8 @@ import {
     Vector2, setDecimalPlaces, isNumber,
 } from 'mz-math';
 import { isAngleInArc } from './angles-provider';
-import { IStatePointer, TData, TStep } from '../interfaces';
-import { MAX_VALUE_DEFAULT, MIN_VALUE_DEFAULT } from './defaults';
+import { IStatePointer, IUserSettingsPointer, TData, TStep } from '../interfaces';
+import { DEFAULT_POINTER_RX, DEFAULT_POINTER_RY, MAX_VALUE_DEFAULT, MIN_VALUE_DEFAULT } from './defaults';
 import { getNumber } from './common';
 
 /**
@@ -150,7 +150,7 @@ export const getMinMax = (
     max: number | string | undefined | null,
     data?: TData
 ): Vector2 => {
-    if(data !== undefined){
+    if(!!data && data.length > 0){
 
         const minIndex = data.findIndex(item => item === min);
         const maxIndex = data.findIndex(item => item === max);
@@ -200,4 +200,75 @@ export const getStep = (userStep: TStep, min: number, max: number) : TStep => {
     }
 
     return undefined;
+};
+
+/**
+ * This function will validate the pointer value provided by the user.
+ * If data is provided, it will return and index of the data array.
+ * Otherwise, it will return the actual value.
+ * It will also will check if the value is in the [min, max] range.
+ */
+export const getValue = (
+    value: string | number,
+    min: number,
+    max: number,
+    data?: TData
+) : number => {
+
+    if(data && data.length > 0){
+        const index = data.findIndex(item => item === value);
+
+        // the provided value doesn't exist in the data array --->
+        // just return the first index.
+        if(index === -1) return 0;
+
+        // Index of data array represents its value.
+        return index;
+    }
+
+    let _value = getNumber(value, min);
+
+    if(_value < min){
+        _value = min;
+    }
+
+    if(_value > max){
+        _value = max;
+    }
+
+    return _value;
+};
+
+/**
+ * Convert user provided pointers settings to the actual state pointers' definition.
+ */
+export const getInitialPointers = (
+    userSettingsPointers: IUserSettingsPointer[],
+    min: number,
+    max: number,
+    data?: TData
+) : IStatePointer[] => {
+
+    const pointers: IStatePointer[] = [];
+
+    for(let i=0; i<userSettingsPointers.length; i++){
+        const userSettingsPointer = userSettingsPointers[i];
+
+        const value = getValue(userSettingsPointer.value, min, max, data);
+
+        // scale a range [min,max] to [a,b]
+        const percent = convertRange(min, max, 0, 100, value);
+
+        const pointer: IStatePointer = {
+            pointerRadii: [
+                getNumber(userSettingsPointer.rx, DEFAULT_POINTER_RX),
+                getNumber(userSettingsPointer.ry, DEFAULT_POINTER_RY),
+            ],
+            percent,
+        };
+
+        pointers.push(pointer);
+    }
+
+    return pointers;
 };

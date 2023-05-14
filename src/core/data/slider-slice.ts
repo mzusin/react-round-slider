@@ -39,6 +39,7 @@ const {
 
 const pointers =  [{
     pointerRadii: defaultMaxPointerRadii,
+    percent: 0,
 }];
 
 const pointerPositions = [sliderStartPoint];

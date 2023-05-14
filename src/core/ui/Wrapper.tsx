@@ -17,7 +17,7 @@ import {
     getSVGSize,
     getMaxPointer,
     getMinMax,
-    getStep
+    getStep, getInitialPointers
 } from '../domain/slider-provider';
 import { normalizeAngles } from '../domain/angles-provider';
 import { Slider } from './Slider';
@@ -49,15 +49,11 @@ export const Wrapper = (props: IUserSettings) => {
         const strokeWidth = getNumber(props.strokeWidth, DEFAULT_STROKE_WIDTH);
         const bgColor = getString(props.bgColor, DEFAULT_BG_COLOR);
 
+        const [min, max] = getMinMax(props.min, props.max, props.data);
+        const step = getStep(props.step, min, max);
+
         // Convert user provided pointers settings to the actual state pointers' definition.
-        const _pointers = props.pointers ? props.pointers.map(pointer => {
-            return {
-                pointerRadii: [
-                    getNumber(pointer.rx, DEFAULT_POINTER_RX),
-                    getNumber(pointer.ry, DEFAULT_POINTER_RY),
-                ]
-            } as IStatePointer;
-        }) : pointers;
+        const _pointers = props.pointers ? getInitialPointers(props.pointers, min, max, props.data) : pointers;
 
         const maxPointer: Vector2 = getMaxPointer(_pointers);
         const svgSize: Vector2 = getSVGSize(svgRadii, maxPointer, strokeWidth);
@@ -74,9 +70,6 @@ export const Wrapper = (props: IUserSettings) => {
         const pointerPositions: Vector2[] = _pointers.map(_pointer => {
             return sliderStartPoint
         });
-
-        const [min, max] = getMinMax(props.min, props.max, props.data);
-        const step = getStep(props.step, min, max);
 
         const settings : IState = {
             // svg look & feel properties ---------

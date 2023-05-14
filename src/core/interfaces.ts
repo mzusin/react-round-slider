@@ -32,6 +32,7 @@ export interface IUserSettings {
 
 export interface IStatePointer {
     pointerRadii: Vector2;
+    percent: number;
 }
 
 export interface IState {
