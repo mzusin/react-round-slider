@@ -43,6 +43,7 @@ export const Slider = () => {
             svgRef.current as SVGSVGElement,
             [mouseX, mouseY],
             svgCenter,
+            svgRadii,
             startAngleDegrees,
             endAngleDegrees,
             min,
@@ -56,18 +57,6 @@ export const Slider = () => {
         copy[0] = pointer;
 
         dispatch(sliderActions.updatePointers(copy));
-
-        /*const pointerPos = getPointerPosition(
-            svgRef.current as SVGSVGElement,
-            [mouseX, mouseY],
-            svgCenter,
-            svgRadii,
-            startAngleDegrees,
-            endAngleDegrees,
-            sliderStartPoint,
-            sliderEndPoint,
-        );
-        */
     }
 
     const onMouseDown = (evt: MouseEvent | ReactMouseEvent) => {

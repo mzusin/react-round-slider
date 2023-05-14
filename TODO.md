@@ -1,5 +1,9 @@
 # TODO
 
+
+## Bug
+- in ellipse, click on the path ---> pointer jumps to the wrong point
+
 ## Redux
 - prevent redux issue with other libraries when round slider installed via npm in app with another redux version
 - esm compilation with settings.external = ['react', 'react-redux', '@reduxjs/toolkit'] - should that be fixed?
@@ -18,9 +22,6 @@
 - rangeDragging: boolean;
 
 - provide initial pointers position (values) - optional
-
-## Bug
-- start angle, 0, end angle 360 ---> slider is wrong
 
 ## Data
 - min

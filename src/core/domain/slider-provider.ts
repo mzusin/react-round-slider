@@ -109,6 +109,7 @@ export const getPointerPercentByMouse = (
     $svg: SVGSVGElement,
     absoluteMouse: Vector2,
     center: Vector2,
+    svgRadii: Vector2,
     startAngleDegrees: number,
     endAngleDegrees: number,
     min: number,
@@ -125,21 +126,24 @@ export const getPointerPercentByMouse = (
 
     const vector = v2Sub(relativeMouse, center);
 
-    let angleRad = getV2Angle(vector);
+    const [rx, ry] = svgRadii;
+
+    let angleRad = Math.atan2(vector[1] / ry, vector[0] / rx);
     if(angleRad < 0){
         angleRad += 2 * Math.PI;
     }
 
     const degrees = radiansToDegrees(angleRad);
-    const angleSub1 = getAnglesSub(degrees, startAngleDegrees);
-    const angleSub2 = getAnglesSub(degrees, endAngleDegrees);
 
     const isInArc = isAngleInArc(startAngleDegrees, endAngleDegrees, degrees);
     if(!isInArc){
+        const angleSub1 = getAnglesSub(degrees, startAngleDegrees);
+        const angleSub2 = getAnglesSub(degrees, endAngleDegrees);
         return angleSub1 <= angleSub2 ? min : max;
     }
 
     const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
+
     return degrees * 100 / angleDiff;
 };
 

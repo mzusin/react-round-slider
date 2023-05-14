@@ -9,7 +9,7 @@ const App = () => {
                 min={ 0 }
                 max={ 100 }
 
-                rx={ 150 }
+                rx={ 250 }
                 ry={ 150 }
 
                 startAngleDegrees={ 0 }
@@ -25,11 +25,11 @@ const App = () => {
                         value: 0,
                     },
 
-                    {
+                    /*{
                         rx: 25,
                         ry: 25,
                         value: 50,
-                    }
+                    }*/
                 ]}
             />
         </>
