@@ -4,7 +4,7 @@ import {
     useRef,
 } from 'react';
 import { Pointer } from './Pointer';
-import { getPointerPercentByMouse } from '../domain/slider-provider';
+import { getActivePointerIndex, getPointerPercentByMouse } from '../domain/slider-provider';
 import { useAppDispatch, useAppSelector } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
 
@@ -26,6 +26,7 @@ export const Slider = () => {
     const max = useAppSelector(store => store.slider.max);
 
     const pointers = useAppSelector(store => store.slider.pointers);
+    const selectedPointerIndex = useAppSelector(store => store.slider.selectedPointerIndex);
 
     const [ startAngleDegrees, endAngleDegrees ] = angles;
     const [ svgWidth, svgHeight ] = svgSize;
@@ -50,13 +51,17 @@ export const Slider = () => {
             max,
         );
 
-        const pointer = {...pointers[0]};
+        const activePointerIndex = getActivePointerIndex(evt.target as HTMLElement, pointers, updatedPercent, selectedPointerIndex);
+        if(activePointerIndex === -1) return;
+
+        const pointer = {...pointers[activePointerIndex]};
         pointer.percent = updatedPercent;
 
         const copy = [...pointers];
-        copy[0] = pointer;
+        copy[activePointerIndex] = pointer;
 
         dispatch(sliderActions.updatePointers(copy));
+        dispatch(sliderActions.updateSelectedPointerIndex(activePointerIndex));
     }
 
     const onMouseDown = (evt: MouseEvent | ReactMouseEvent) => {
@@ -94,6 +99,7 @@ export const Slider = () => {
             onTouchStart={ onValueChange }>
 
             <path
+                data-type="panel"
                 ref={ sliderRef }
                 d={ `M ${ sliderStartPoint[0] } ${ sliderStartPoint[1] } A ${ svgRadii[0] } ${ svgRadii[1] } 0 ${ largeArcFlag } 1 ${ sliderEndPoint[0] } ${ sliderEndPoint[1] }` }
                 stroke={ bgColor }
@@ -107,7 +113,7 @@ export const Slider = () => {
             {
                 pointers.map((pointer, i) => {
                     return (
-                        <Pointer key={ i } pointer={ pointer } />
+                        <Pointer key={ i } pointer={ pointer } index={ i } />
                     )
                 })
             }

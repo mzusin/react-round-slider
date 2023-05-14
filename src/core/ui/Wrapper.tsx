@@ -80,6 +80,7 @@ export const Wrapper = (props: IUserSettings) => {
 
             // pointers ----------------------------
             pointers: _pointers,
+            selectedPointerIndex: -1,
 
             // calculated properties ---------------
             svgSize,

@@ -50,6 +50,7 @@ export interface IState {
 
     // pointers ---------------------------
     pointers: IStatePointer[];
+    selectedPointerIndex: number;
 
     // calculated properties --------------
     svgSize:  Vector2;
@@ -63,6 +64,7 @@ export interface IState {
 // --------------------------- COMPONENTS ------------------------------------
 
 export interface IPointer {
+    index: number;
     pointer: IStatePointer;
 }
 

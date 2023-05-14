@@ -342,3 +342,63 @@ export const getInitialPointers = (
 
     return pointers;
 };
+
+/**
+ * There can be multiple pointers, part of them can be disabled.
+ * This function returns the current active pointer.
+ */
+export const getActivePointerIndex = (
+    $target: HTMLElement,
+    pointers: IStatePointer[],
+    currentPercent: number,
+    selectedPointerIndex: number
+) : number => {
+    if(pointers.length <= 0) return -1;
+
+    // if only 1 pointer exists --> return it
+    if(pointers.length === 1){
+        return 0;
+    }
+
+    if(!isPanelClicked($target)){
+        // if clicked directly on 1 of the pointers ---> return it
+        for(let i=0; i<pointers.length; i++) {
+            // const pointer = pointers[i];
+            if(!isPointerClicked($target, i)) continue;
+            return i;
+        }
+
+        // if already selected pointer ---> return it
+        for(let i=0; i<pointers.length; i++) {
+            // const pointer = pointers[i];
+            if(selectedPointerIndex === i) return i;
+        }
+    }
+
+    // find the closest pointer and return it
+    let minDistance = Infinity;
+    let minDistancePointerIndex = -1;
+
+    for(let i=0; i<pointers.length; i++){
+        const pointer = pointers[i];
+        const distance = Math.abs(currentPercent - pointer.percent);
+        if(distance < minDistance){
+            minDistance = distance;
+            minDistancePointerIndex = i;
+        }
+    }
+
+    return minDistancePointerIndex;
+};
+
+const isPanelClicked = ($target: HTMLElement) => {
+    return $target.getAttribute('data-type') === 'panel';
+};
+
+const isPointerClicked = ($target: HTMLElement, index: number) => {
+    return $target.getAttribute('data-type') === 'pointer' &&
+           $target.getAttribute('data-index') === index.toString() ||
+            $target.querySelector(`[data-type="pointer"][data-index="${ index }"]`);
+    //  return $target === $pointer || $pointer.contains($target);
+};
+
