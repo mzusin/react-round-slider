@@ -1,11 +1,12 @@
 import {
     convertRange,
-    degreesToRadians, ellipseMovement,
+    degreesToRadians,
+    ellipseMovement,
     getV2Angle, getAnglesSub,
     polarToCartesian,
     radiansToDegrees,
     v2Sub,
-    Vector2, setDecimalPlaces, isNumber,
+    Vector2, setDecimalPlaces, isNumber, mod,
 } from 'mz-math';
 import { isAngleInArc } from './angles-provider';
 import { IStatePointer, IUserSettingsPointer, TData, TStep } from '../interfaces';
@@ -75,6 +76,29 @@ export const getEllipseSegment = (
         sliderEndPoint,
         largeArcFlag,
     }
+};
+
+/**
+ * On initialization, user provides pointer values that are transformed to percents.
+ * These percents should be transformed to the positions on the SVG arc.
+ */
+export const getPointerPositionByPercent = (
+    percent: number,
+    startAngleDegrees: number,
+    endAngleDegrees: number,
+    svgRadii: Vector2,
+    center: Vector2,
+) : Vector2 => {
+    const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
+    const percentAngle = percent * angleDiff / 100;
+    const angleDegrees = mod(startAngleDegrees + percentAngle, 360);
+
+    let angleRad = degreesToRadians(angleDegrees);
+
+    // Convert the angle from the range [0, Math.PI*2] to the range [0, Math.PI].
+    angleRad = convertRange(angleRad, 0, Math.PI*2, 0, Math.PI);
+
+    return ellipseMovement(center, angleRad, svgRadii[0], svgRadii[1]);
 };
 
 /**
@@ -256,7 +280,7 @@ export const getInitialPointers = (
 
         const value = getValue(userSettingsPointer.value, min, max, data);
 
-        // scale a range [min,max] to [a,b]
+        // scale a range [min, max] to [a, b]
         const percent = convertRange(min, max, 0, 100, value);
 
         const pointer: IStatePointer = {

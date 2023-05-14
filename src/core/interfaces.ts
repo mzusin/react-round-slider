@@ -50,7 +50,6 @@ export interface IState {
 
     // pointers ---------------------------
     pointers: IStatePointer[];
-    pointerPositions: Vector2[];
 
     // calculated properties --------------
     svgSize:  Vector2;
@@ -64,8 +63,7 @@ export interface IState {
 // --------------------------- COMPONENTS ------------------------------------
 
 export interface IPointer {
-    center: Vector2;
-    pointerRadii: Vector2;
+    pointer: IStatePointer;
 }
 
 export interface IPanelFill {

@@ -6,6 +6,9 @@ const App = () => {
     return (
         <>
             <RoundSlider
+                min={ 0 }
+                max={ 100 }
+
                 rx={ 150 }
                 ry={ 150 }
 
@@ -19,11 +22,13 @@ const App = () => {
                     {
                         rx: 25,
                         ry: 25,
+                        value: 0,
                     },
 
                     {
                         rx: 25,
                         ry: 25,
+                        value: 50,
                     }
                 ]}
             />

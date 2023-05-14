@@ -2,12 +2,11 @@ import { useEffect } from 'react';
 import { Vector2 } from 'mz-math';
 import {
     DEFAULT_BG_COLOR,
-    DEFAULT_POINTER_RX, DEFAULT_POINTER_RY,
     DEFAULT_STROKE_WIDTH,
     DEFAULT_SVG_RX,
     DEFAULT_SVG_RY
 } from '../domain/defaults';
-import { IState, IStatePointer, IUserSettings } from '../interfaces';
+import { IState, IUserSettings } from '../interfaces';
 import { useAppDispatch, useAppSelector } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
 import { getNumber, getString } from '../domain/common';
@@ -67,10 +66,6 @@ export const Wrapper = (props: IUserSettings) => {
             strokeWidth
         );
 
-        const pointerPositions: Vector2[] = _pointers.map(_pointer => {
-            return sliderStartPoint
-        });
-
         const settings : IState = {
             // svg look & feel properties ---------
             svgRadii,
@@ -85,7 +80,6 @@ export const Wrapper = (props: IUserSettings) => {
 
             // pointers ----------------------------
             pointers: _pointers,
-            pointerPositions,
 
             // calculated properties ---------------
             svgSize,

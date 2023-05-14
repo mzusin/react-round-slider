@@ -24,7 +24,6 @@ export const Slider = () => {
     const angles = useAppSelector(store => store.slider.angles);
 
     const pointers = useAppSelector(store => store.slider.pointers);
-    const pointerPositions = useAppSelector(store => store.slider.pointerPositions);
 
     const [ startAngleDegrees, endAngleDegrees ] = angles;
     const [ svgWidth, svgHeight ] = svgSize;
@@ -38,7 +37,7 @@ export const Slider = () => {
         const mouseX = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientX : (evt as TouchEvent).touches[0].clientX;
         const mouseY = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientY : (evt as TouchEvent).touches[0].clientY;
 
-        const pointerPos = getPointerPosition(
+        /*const pointerPos = getPointerPosition(
             svgRef.current as SVGSVGElement,
             [mouseX, mouseY],
             svgCenter,
@@ -52,7 +51,7 @@ export const Slider = () => {
         const copy = [...pointerPositions];
         copy[0] = pointerPos;
 
-        dispatch(sliderActions.updatePointersPosition(copy));
+        dispatch(sliderActions.updatePointersPosition(copy));*/
     }
 
     const onMouseDown = (evt: MouseEvent | ReactMouseEvent) => {
@@ -101,9 +100,9 @@ export const Slider = () => {
             />
 
             {
-                pointerPositions.map((pointerPosition, i) => {
+                pointers.map((pointer, i) => {
                     return (
-                        <Pointer key={ i } center={ pointerPosition } pointerRadii={ pointers[i].pointerRadii } />
+                        <Pointer key={ i } pointer={ pointer } />
                     )
                 })
             }

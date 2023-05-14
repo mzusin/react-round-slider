@@ -42,8 +42,6 @@ const pointers =  [{
     percent: 0,
 }];
 
-const pointerPositions = [sliderStartPoint];
-
 const initialState: IState = {
     // Main SVG ellipse/circle rx/ry.
     svgRadii: defaultSvgRadii,
@@ -61,7 +59,6 @@ const initialState: IState = {
 
     // Pointers -------------------------
     pointers,
-    pointerPositions,
 
     // calculated properties ------------
     svgSize,
