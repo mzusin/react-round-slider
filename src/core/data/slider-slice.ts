@@ -8,8 +8,7 @@ import {
 import { createSlice } from '@reduxjs/toolkit';
 import { IState } from '../interfaces';
 import { getEllipseSegment, getSVGCenter, getSVGSize } from '../domain/slider-provider';
-import { Vector2 } from 'mz-math';
-import { getNumber } from '../domain/common';
+import { newId, Vector2 } from 'mz-math';
 
 const defaultSvgRadii: Vector2 = [DEFAULT_SVG_RX, DEFAULT_SVG_RY];
 const defaultMaxPointerRadii: Vector2 = [DEFAULT_POINTER_RX, DEFAULT_POINTER_RY];
@@ -41,6 +40,7 @@ const {
 const pointers =  [{
     pointerRadii: defaultMaxPointerRadii,
     percent: 0,
+    id: newId(),
 }];
 
 const initialState: IState = {
@@ -60,7 +60,7 @@ const initialState: IState = {
 
     // Pointers -------------------------
     pointers,
-    selectedPointerIndex: -1,
+    selectedPointerId: null,
 
     // calculated properties ------------
     svgSize,
@@ -86,10 +86,38 @@ export const sliderSlice = createSlice({
                 pointers: action.payload,
             };
         },
-        updateSelectedPointerIndex(state, action) {
+        updateSelectedPointerId(state, action) {
+
+            const selectedPointerId = action.payload;
+            if(selectedPointerId === null || state.pointers.length <= 1){
+                return {
+                    ...state,
+                    selectedPointerId,
+                };
+            }
+
+            const foundIndex = state.pointers.findIndex(pointer => pointer.id === selectedPointerId);
+            if(foundIndex === -1){
+                return {
+                    ...state,
+                    selectedPointerId,
+                };
+            }
+
+            /**
+             * SVG doesn't have normal z-index.
+             * To place active pointer on top of other pointers,
+             * we need to reorder them.
+             */
+            const pointers = [...state.pointers];
+            const pointer = pointers[foundIndex];
+            pointers.splice(foundIndex, 1);
+            pointers.push(pointer);
+
             return {
                 ...state,
-                selectedPointerIndex: getNumber(action.payload, -1),
+                selectedPointerId,
+                pointers,
             };
         },
     }

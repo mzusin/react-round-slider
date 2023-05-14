@@ -4,7 +4,7 @@ import {
     useRef,
 } from 'react';
 import { Pointer } from './Pointer';
-import { getActivePointerIndex, getPointerPercentByMouse } from '../domain/slider-provider';
+import { getActivePointerId, getPointerPercentByMouse } from '../domain/slider-provider';
 import { useAppDispatch, useAppSelector } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
 
@@ -26,7 +26,7 @@ export const Slider = () => {
     const max = useAppSelector(store => store.slider.max);
 
     const pointers = useAppSelector(store => store.slider.pointers);
-    const selectedPointerIndex = useAppSelector(store => store.slider.selectedPointerIndex);
+    const selectedPointerId = useAppSelector(store => store.slider.selectedPointerId);
 
     const [ startAngleDegrees, endAngleDegrees ] = angles;
     const [ svgWidth, svgHeight ] = svgSize;
@@ -51,17 +51,19 @@ export const Slider = () => {
             max,
         );
 
-        const activePointerIndex = getActivePointerIndex(evt.target as HTMLElement, pointers, updatedPercent, selectedPointerIndex);
-        if(activePointerIndex === -1) return;
+        const activePointerId = getActivePointerId(evt.target as HTMLElement, pointers, updatedPercent, selectedPointerId);
+        if(activePointerId === null) return;
 
-        const pointer = {...pointers[activePointerIndex]};
-        pointer.percent = updatedPercent;
+        const pointerIndex = pointers.findIndex(p => p.id === activePointerId);
+        if(pointerIndex === -1) return;
 
         const copy = [...pointers];
-        copy[activePointerIndex] = pointer;
+        const pointer = {...copy[pointerIndex]};
+        pointer.percent = updatedPercent;
+        copy[pointerIndex] = pointer;
 
         dispatch(sliderActions.updatePointers(copy));
-        dispatch(sliderActions.updateSelectedPointerIndex(activePointerIndex));
+        dispatch(sliderActions.updateSelectedPointerId(activePointerId));
     }
 
     const onMouseDown = (evt: MouseEvent | ReactMouseEvent) => {
@@ -89,6 +91,7 @@ export const Slider = () => {
 
     return (
         <svg
+            data-type="bg"
             xmlns="http://www.w3.org/2000/svg"
             ref={ svgRef }
             width={ svgWidth }
@@ -111,9 +114,9 @@ export const Slider = () => {
             />
 
             {
-                pointers.map((pointer, i) => {
+                pointers.map(pointer => {
                     return (
-                        <Pointer key={ i } pointer={ pointer } index={ i } />
+                        <Pointer key={ pointer.id } pointer={ pointer } id={ pointer.id } />
                     )
                 })
             }

@@ -33,6 +33,7 @@ export interface IUserSettings {
 export interface IStatePointer {
     pointerRadii: Vector2;
     percent: number;
+    id: string;
 }
 
 export interface IState {
@@ -50,7 +51,7 @@ export interface IState {
 
     // pointers ---------------------------
     pointers: IStatePointer[];
-    selectedPointerIndex: number;
+    selectedPointerId: string|null;
 
     // calculated properties --------------
     svgSize:  Vector2;
@@ -64,7 +65,7 @@ export interface IState {
 // --------------------------- COMPONENTS ------------------------------------
 
 export interface IPointer {
-    index: number;
+    id: string;
     pointer: IStatePointer;
 }
 

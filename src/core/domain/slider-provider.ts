@@ -6,7 +6,7 @@ import {
     polarToCartesian,
     radiansToDegrees,
     v2Sub,
-    Vector2, setDecimalPlaces, isNumber, mod,
+    Vector2, setDecimalPlaces, isNumber, mod, newId,
 } from 'mz-math';
 import { isAngleInArc } from './angles-provider';
 import { IStatePointer, IUserSettingsPointer, TData, TStep } from '../interfaces';
@@ -335,6 +335,7 @@ export const getInitialPointers = (
                 getNumber(userSettingsPointer.ry, DEFAULT_POINTER_RY),
             ],
             percent,
+            id: newId(),
         };
 
         pointers.push(pointer);
@@ -347,58 +348,67 @@ export const getInitialPointers = (
  * There can be multiple pointers, part of them can be disabled.
  * This function returns the current active pointer.
  */
-export const getActivePointerIndex = (
+export const getActivePointerId = (
     $target: HTMLElement,
     pointers: IStatePointer[],
     currentPercent: number,
-    selectedPointerIndex: number
-) : number => {
-    if(pointers.length <= 0) return -1;
+    selectedPointerId: string|null
+) : string|null => {
+    if(pointers.length <= 0) return null;
 
     // if only 1 pointer exists --> return it
     if(pointers.length === 1){
-        return 0;
+        return pointers[0].id;
     }
 
-    if(!isPanelClicked($target)){
+    if(!isPanelClicked($target) && !isBgClicked($target)){
+
         // if clicked directly on 1 of the pointers ---> return it
         for(let i=0; i<pointers.length; i++) {
-            // const pointer = pointers[i];
-            if(!isPointerClicked($target, i)) continue;
-            return i;
+            const pointer = pointers[i];
+            if(isPointerClicked($target, pointer.id)){
+                console.log(`Pointer is clicked on ${ pointer.id }`)
+                return pointer.id;
+            }
         }
 
         // if already selected pointer ---> return it
         for(let i=0; i<pointers.length; i++) {
-            // const pointer = pointers[i];
-            if(selectedPointerIndex === i) return i;
+            const pointer = pointers[i];
+            if(selectedPointerId === pointer.id){
+                console.log(`Selected pointer ${ i }`)
+                return pointer.id;
+            }
         }
     }
 
     // find the closest pointer and return it
     let minDistance = Infinity;
-    let minDistancePointerIndex = -1;
+    let minDistancePointerId = null;
 
     for(let i=0; i<pointers.length; i++){
         const pointer = pointers[i];
         const distance = Math.abs(currentPercent - pointer.percent);
         if(distance < minDistance){
             minDistance = distance;
-            minDistancePointerIndex = i;
+            minDistancePointerId = pointer.id;
         }
     }
 
-    return minDistancePointerIndex;
+    return minDistancePointerId;
 };
 
 const isPanelClicked = ($target: HTMLElement) => {
     return $target.getAttribute('data-type') === 'panel';
 };
 
-const isPointerClicked = ($target: HTMLElement, index: number) => {
+const isBgClicked = ($target: HTMLElement) => {
+    return $target.getAttribute('data-type') === 'bg';
+};
+
+const isPointerClicked = ($target: HTMLElement, id: string) => {
     return $target.getAttribute('data-type') === 'pointer' &&
-           $target.getAttribute('data-index') === index.toString() ||
-            $target.querySelector(`[data-type="pointer"][data-index="${ index }"]`);
-    //  return $target === $pointer || $pointer.contains($target);
+           $target.getAttribute('data-id') === id ||
+           $target.querySelector(`[data-type="pointer"][data-index="${ id }"]`) !== null;
 };
 

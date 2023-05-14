@@ -6,7 +6,7 @@ import { useAppSelector } from '../data/store';
 
 export const Pointer = (props: IPointer) => {
 
-    const { pointer, index } = props;
+    const { pointer, id } = props;
     const { percent } = pointer;
     const [ rx, ry ] = pointer.pointerRadii;
 
@@ -40,7 +40,7 @@ export const Pointer = (props: IPointer) => {
         center ?
             <ellipse
                 data-type="pointer"
-                data-index={ index }
+                data-id={ id }
                 cx={ center[0] }
                 cy={ center[1]}
                 rx={ rx }
