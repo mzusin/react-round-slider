@@ -4,7 +4,7 @@ import {
     useRef,
 } from 'react';
 import { Pointer } from './Pointer';
-import { getPointerPosition } from '../domain/slider-provider';
+import { getPointerPercentByMouse } from '../domain/slider-provider';
 import { useAppDispatch, useAppSelector } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
 
@@ -22,6 +22,8 @@ export const Slider = () => {
     const svgSize = useAppSelector(store => store.slider.svgSize);
     const svgCenter = useAppSelector(store => store.slider.svgCenter);
     const angles = useAppSelector(store => store.slider.angles);
+    const min = useAppSelector(store => store.slider.min);
+    const max = useAppSelector(store => store.slider.max);
 
     const pointers = useAppSelector(store => store.slider.pointers);
 
@@ -37,6 +39,24 @@ export const Slider = () => {
         const mouseX = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientX : (evt as TouchEvent).touches[0].clientX;
         const mouseY = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientY : (evt as TouchEvent).touches[0].clientY;
 
+        const updatedPercent = getPointerPercentByMouse(
+            svgRef.current as SVGSVGElement,
+            [mouseX, mouseY],
+            svgCenter,
+            startAngleDegrees,
+            endAngleDegrees,
+            min,
+            max,
+        );
+
+        const pointer = {...pointers[0]};
+        pointer.percent = updatedPercent;
+
+        const copy = [...pointers];
+        copy[0] = pointer;
+
+        dispatch(sliderActions.updatePointers(copy));
+
         /*const pointerPos = getPointerPosition(
             svgRef.current as SVGSVGElement,
             [mouseX, mouseY],
@@ -47,11 +67,7 @@ export const Slider = () => {
             sliderStartPoint,
             sliderEndPoint,
         );
-
-        const copy = [...pointerPositions];
-        copy[0] = pointerPos;
-
-        dispatch(sliderActions.updatePointersPosition(copy));*/
+        */
     }
 
     const onMouseDown = (evt: MouseEvent | ReactMouseEvent) => {

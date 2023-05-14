@@ -102,6 +102,48 @@ export const getPointerPositionByPercent = (
 };
 
 /**
+ * Once user drags the pointer, get updated pointer percent
+ * depending on the new mouse position.
+ */
+export const getPointerPercentByMouse = (
+    $svg: SVGSVGElement,
+    absoluteMouse: Vector2,
+    center: Vector2,
+    startAngleDegrees: number,
+    endAngleDegrees: number,
+    min: number,
+    max: number
+) : number => {
+    const [clientX, clientY] = absoluteMouse;
+
+    const { left, top } = $svg.getBoundingClientRect();
+
+    const relativeMouse: Vector2 = [
+        clientX - left,
+        clientY - top,
+    ];
+
+    const vector = v2Sub(relativeMouse, center);
+
+    let angleRad = getV2Angle(vector);
+    if(angleRad < 0){
+        angleRad += 2 * Math.PI;
+    }
+
+    const degrees = radiansToDegrees(angleRad);
+    const angleSub1 = getAnglesSub(degrees, startAngleDegrees);
+    const angleSub2 = getAnglesSub(degrees, endAngleDegrees);
+
+    const isInArc = isAngleInArc(startAngleDegrees, endAngleDegrees, degrees);
+    if(!isInArc){
+        return angleSub1 <= angleSub2 ? min : max;
+    }
+
+    const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
+    return degrees * 100 / angleDiff;
+};
+
+/**
  * Define pointer position according to the current user settings and mouse/touch position.
  */
 export const getPointerPosition = (

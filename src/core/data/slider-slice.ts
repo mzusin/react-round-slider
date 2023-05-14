@@ -78,10 +78,10 @@ export const sliderSlice = createSlice({
                 ...action.payload,
             };
         },
-        updatePointersPosition(state, action) {
+        updatePointers(state, action) {
             return {
                 ...state,
-                pointerPositions: action.payload,
+                pointers: action.payload,
             };
         },
     }

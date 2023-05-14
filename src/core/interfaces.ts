@@ -44,8 +44,8 @@ export interface IState {
     bgColor: string;
 
     // data -------------------------------
-    min: number | string;
-    max: number | string;
+    min: number;
+    max: number;
     step: TStep; // step is defined in absolute units (not percent!)
 
     // pointers ---------------------------
