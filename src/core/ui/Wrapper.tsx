@@ -91,7 +91,7 @@ export const Wrapper = (props: IUserSettings) => {
         };
 
         dispatch(
-            sliderActions.initUserSettings(settings)
+            sliderActions.onSettingsInit(settings)
         );
     }, []);
 

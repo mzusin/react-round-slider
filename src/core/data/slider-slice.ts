@@ -74,19 +74,23 @@ export const sliderSlice = createSlice({
     name: 'slider',
     initialState,
     reducers: {
-        initUserSettings(state, action) {
+        /**
+         * When wrapper component is initialized,
+         * we need to combine user provided settings with the slider defaults.
+         */
+        onSettingsInit(state, action) {
             return {
                 ...state,
                 ...action.payload,
             };
         },
-        updatePointers(state, action) {
+        onPointerChange(state, action) {
             return {
                 ...state,
                 pointers: action.payload,
             };
         },
-        updateSelectedPointerId(state, action) {
+        onSelectedPinterChange(state, action) {
 
             const selectedPointerId = action.payload;
             if(selectedPointerId === null || state.pointers.length <= 1){

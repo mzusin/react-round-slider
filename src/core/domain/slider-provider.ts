@@ -356,7 +356,7 @@ export const getActivePointerId = (
     startAngleDegrees: number,
     endAngleDegrees: number,
 ) : string|null => {
-    console.log(`selectedPointerId = ${ selectedPointerId }`)
+    // console.log(`selectedPointerId = ${ selectedPointerId }`)
 
     if(pointers.length <= 0) return null;
 
@@ -384,7 +384,7 @@ export const getActivePointerId = (
             }
         }
 
-        console.log(`Clicked on panel. Th closest pointer id is ${ minDistancePointerId }`)
+        // console.log(`Clicked on panel. Th closest pointer id is ${ minDistancePointerId }`)
         return minDistancePointerId;
     }
 
@@ -392,74 +392,17 @@ export const getActivePointerId = (
     for(let i=0; i<pointers.length; i++) {
         const pointer = pointers[i];
         if(isPointerClicked($target, pointer.id)){
-            console.log(`Pointer is clicked on ${ pointer.id }`)
+            // console.log(`Pointer is clicked on ${ pointer.id }`)
             return pointer.id;
         }
     }
 
-    console.log(`Returned selectedPointerId ${ selectedPointerId }`);
+    // console.log(`Returned selectedPointerId ${ selectedPointerId }`);
     return selectedPointerId;
-    /**
-     * Multi pointers flows
-     * - Click on panel ---> the closest pointer should jump.
-     * - Click directly on pointer and drag it ---> this pointer should move, no matter what is the target.
-     * - Click outside ----> all pointers deselect.
-     */
-
-    /*if(!isPanelClicked($target) && !isBgClicked($target)){
-
-        // if clicked directly on 1 of the pointers ---> return it
-        for(let i=0; i<pointers.length; i++) {
-            const pointer = pointers[i];
-            if(isPointerClicked($target, pointer.id)){
-                console.log(`Pointer is clicked on ${ pointer.id }`)
-                return pointer.id;
-            }
-        }
-
-        // if already selected pointer ---> return it
-        for(let i=0; i<pointers.length; i++) {
-            const pointer = pointers[i];
-            if(selectedPointerId === pointer.id){
-                console.log(`Selected pointer ${ i }`)
-                return pointer.id;
-            }
-        }
-    }
-
-    // find the closest pointer and return it
-    let minDistance = Infinity;
-    let minDistancePointerId = null;
-
-    const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
-    const currentAngle = mod(startAngleDegrees + currentPercent * angleDiff / 100, 360);
-
-    for(let i=0; i<pointers.length; i++){
-        const pointer = pointers[i];
-        if(pointer.id === selectedPointerId) continue;
-        console.log(pointer.id, 'selectedPointerId', selectedPointerId)
-
-        // get pointer angle ------------------------
-        const percentAngle = mod(startAngleDegrees + pointer.percent * angleDiff / 100, 360);
-
-        const distance = Math.abs(currentAngle - percentAngle);
-
-        if(distance < minDistance){
-            console.log('distance', distance)
-            minDistance = distance;
-            minDistancePointerId = pointer.id;
-        }
-    }
-
-    return minDistancePointerId;*/
 };
 
 const isPanelClicked = ($target: HTMLElement) => {
     return $target.getAttribute('data-type') === 'panel';
-};
-
-const isBgClicked = ($target: HTMLElement) => {
-    return $target.getAttribute('data-type') === 'bg';
 };
 
 const isPointerClicked = ($target: HTMLElement, id: string) => {
