@@ -352,7 +352,9 @@ export const getActivePointerId = (
     $target: HTMLElement,
     pointers: IStatePointer[],
     currentPercent: number,
-    selectedPointerId: string|null
+    selectedPointerId: string|null,
+    startAngleDegrees: number,
+    endAngleDegrees: number,
 ) : string|null => {
     if(pointers.length <= 0) return null;
 
@@ -361,7 +363,36 @@ export const getActivePointerId = (
         return pointers[0].id;
     }
 
-    if(!isPanelClicked($target) && !isBgClicked($target)){
+    if(isPanelClicked($target)){
+        const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
+        const currentValueAngle = currentPercent * angleDiff / 100;
+
+        let minAngle = Infinity;
+        let minDistancePointerId = null;
+
+        // The closest pointer should jump.
+        for(let i=0; i<pointers.length; i++){
+            const pointer = pointers[i];
+            const pointerAngle = pointer.percent * angleDiff / 100;
+            const angleSub = getAnglesSub(pointerAngle, currentValueAngle);
+
+            if(angleSub < minAngle){
+                minAngle = angleSub;
+                minDistancePointerId = pointer.id;
+            }
+        }
+
+        return minDistancePointerId;
+    }
+
+    /**
+     * Multi pointers flows
+     * - Click on panel ---> the closest pointer should jump.
+     * - Click directly on pointer and drag it ---> this pointer should move, no matter what is the target.
+     * - Click outside ----> all pointers deselect.
+     */
+
+    /*if(!isPanelClicked($target) && !isBgClicked($target)){
 
         // if clicked directly on 1 of the pointers ---> return it
         for(let i=0; i<pointers.length; i++) {
@@ -386,16 +417,27 @@ export const getActivePointerId = (
     let minDistance = Infinity;
     let minDistancePointerId = null;
 
+    const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
+    const currentAngle = mod(startAngleDegrees + currentPercent * angleDiff / 100, 360);
+
     for(let i=0; i<pointers.length; i++){
         const pointer = pointers[i];
-        const distance = Math.abs(currentPercent - pointer.percent);
+        if(pointer.id === selectedPointerId) continue;
+        console.log(pointer.id, 'selectedPointerId', selectedPointerId)
+
+        // get pointer angle ------------------------
+        const percentAngle = mod(startAngleDegrees + pointer.percent * angleDiff / 100, 360);
+
+        const distance = Math.abs(currentAngle - percentAngle);
+
         if(distance < minDistance){
+            console.log('distance', distance)
             minDistance = distance;
             minDistancePointerId = pointer.id;
         }
     }
 
-    return minDistancePointerId;
+    return minDistancePointerId;*/
 };
 
 const isPanelClicked = ($target: HTMLElement) => {

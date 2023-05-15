@@ -51,7 +51,14 @@ export const Slider = () => {
             max,
         );
 
-        const activePointerId = getActivePointerId(evt.target as HTMLElement, pointers, updatedPercent, selectedPointerId);
+        const activePointerId = getActivePointerId(
+            evt.target as HTMLElement,
+            pointers,
+            updatedPercent,
+            selectedPointerId,
+            startAngleDegrees,
+            endAngleDegrees
+        );
         if(activePointerId === null) return;
 
         const pointerIndex = pointers.findIndex(p => p.id === activePointerId);
