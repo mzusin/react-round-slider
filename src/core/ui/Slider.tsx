@@ -1,7 +1,7 @@
 import {
     MouseEvent as ReactMouseEvent,
-    TouchEvent as ReactTouchEvent,
-    useRef,
+    TouchEvent as ReactTouchEvent, useEffect,
+    useRef, useState,
 } from 'react';
 import { Pointer } from './Pointer';
 import { getActivePointerId, getPointerPercentByMouse } from '../domain/slider-provider';
@@ -30,6 +30,11 @@ export const Slider = () => {
 
     const [ startAngleDegrees, endAngleDegrees ] = angles;
     const [ svgWidth, svgHeight ] = svgSize;
+    const spId = useRef('');
+
+    useEffect(() => {
+        spId.current = selectedPointerId;
+    }, [selectedPointerId]);
 
     const dispatch = useAppDispatch();
 
@@ -55,10 +60,14 @@ export const Slider = () => {
             evt.target as HTMLElement,
             pointers,
             updatedPercent,
-            selectedPointerId,
+            spId.current,
             startAngleDegrees,
             endAngleDegrees
         );
+        spId.current = activePointerId;
+        console.log(`The result: activePointerId = ${ activePointerId }`)
+        dispatch(sliderActions.updateSelectedPointerId(activePointerId));
+
         if(activePointerId === null) return;
 
         const pointerIndex = pointers.findIndex(p => p.id === activePointerId);

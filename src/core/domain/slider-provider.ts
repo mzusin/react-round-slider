@@ -356,6 +356,8 @@ export const getActivePointerId = (
     startAngleDegrees: number,
     endAngleDegrees: number,
 ) : string|null => {
+    console.log(`selectedPointerId = ${ selectedPointerId }`)
+
     if(pointers.length <= 0) return null;
 
     // if only 1 pointer exists --> return it
@@ -382,9 +384,21 @@ export const getActivePointerId = (
             }
         }
 
+        console.log(`Clicked on panel. Th closest pointer id is ${ minDistancePointerId }`)
         return minDistancePointerId;
     }
 
+    // If clicked directly on pointer ----
+    for(let i=0; i<pointers.length; i++) {
+        const pointer = pointers[i];
+        if(isPointerClicked($target, pointer.id)){
+            console.log(`Pointer is clicked on ${ pointer.id }`)
+            return pointer.id;
+        }
+    }
+
+    console.log(`Returned selectedPointerId ${ selectedPointerId }`);
+    return selectedPointerId;
     /**
      * Multi pointers flows
      * - Click on panel ---> the closest pointer should jump.
