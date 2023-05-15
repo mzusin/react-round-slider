@@ -4,8 +4,8 @@ import {
     useRef,
 } from 'react';
 import { Pointer } from './Pointer';
-import { getActivePointerId, getPointerPercentByMouse } from '../domain/slider-provider';
-import { useAppDispatch, useAppSelector } from '../data/store';
+import { getActivePointerId, getPointerPercentByMouse, handlePointerZIndex } from '../domain/slider-provider';
+import { store, useAppDispatch, useAppSelector } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
 
 export const Slider = () => {
@@ -65,14 +65,20 @@ export const Slider = () => {
             endAngleDegrees
         );
         spId.current = activePointerId;
-        dispatch(sliderActions.onSelectedPinterChange(activePointerId));
+
+        const _pointers = handlePointerZIndex(activePointerId, pointers);
+
+        dispatch(sliderActions.onSelectedPointerChange({
+            activePointerId,
+            pointers: _pointers,
+        }));
 
         if(activePointerId === null) return;
 
-        const pointerIndex = pointers.findIndex(p => p.id === activePointerId);
+        const pointerIndex = _pointers.findIndex(p => p.id === activePointerId);
         if(pointerIndex === -1) return;
 
-        const copy = [...pointers];
+        const copy = [..._pointers];
         const pointer = {...copy[pointerIndex]};
         pointer.percent = updatedPercent;
         copy[pointerIndex] = pointer;

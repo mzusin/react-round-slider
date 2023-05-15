@@ -90,33 +90,9 @@ export const sliderSlice = createSlice({
                 pointers: action.payload,
             };
         },
-        onSelectedPinterChange(state, action) {
-
-            const selectedPointerId = action.payload;
-            if(selectedPointerId === null || state.pointers.length <= 1){
-                return {
-                    ...state,
-                    selectedPointerId,
-                };
-            }
-
-            const foundIndex = state.pointers.findIndex(pointer => pointer.id === selectedPointerId);
-            if(foundIndex === -1){
-                return {
-                    ...state,
-                    selectedPointerId,
-                };
-            }
-
-            /**
-             * SVG doesn't have normal z-index.
-             * To place active pointer on top of other pointers,
-             * we need to reorder them.
-             */
-            const pointers = [...state.pointers];
-            const pointer = pointers[foundIndex];
-            pointers.splice(foundIndex, 1);
-            pointers.push(pointer);
+        onSelectedPointerChange(state, action) {
+            const selectedPointerId = action.payload.activePointerId;
+            const pointers = action.payload.pointers;
 
             return {
                 ...state,

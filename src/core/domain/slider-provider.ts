@@ -356,7 +356,7 @@ export const getActivePointerId = (
     startAngleDegrees: number,
     endAngleDegrees: number,
 ) : string|null => {
-    // console.log(`selectedPointerId = ${ selectedPointerId }`)
+    //console.log(`selectedPointerId = ${ selectedPointerId }`)
 
     if(pointers.length <= 0) return null;
 
@@ -384,7 +384,7 @@ export const getActivePointerId = (
             }
         }
 
-        // console.log(`Clicked on panel. Th closest pointer id is ${ minDistancePointerId }`)
+        //console.log(`Clicked on panel. Th closest pointer id is ${ minDistancePointerId }`)
         return minDistancePointerId;
     }
 
@@ -397,7 +397,7 @@ export const getActivePointerId = (
         }
     }
 
-    // console.log(`Returned selectedPointerId ${ selectedPointerId }`);
+    //console.log(`Returned selectedPointerId ${ selectedPointerId }`);
     return selectedPointerId;
 };
 
@@ -411,3 +411,26 @@ const isPointerClicked = ($target: HTMLElement, id: string) => {
            $target.querySelector(`[data-type="pointer"][data-index="${ id }"]`) !== null;
 };
 
+export const handlePointerZIndex = (activePointerId: string|null, pointers: IStatePointer[]) : IStatePointer[] => {
+    const _pointers = [...pointers];
+
+    if(activePointerId === null || _pointers.length <= 1){
+        return _pointers;
+    }
+
+    const foundIndex = _pointers.findIndex(pointer => pointer.id === activePointerId);
+    if(foundIndex === -1){
+        return _pointers;
+    }
+
+    /**
+     * SVG doesn't have normal z-index.
+     * To place active pointer on top of other pointers,
+     * we need to reorder them.
+     */
+    const pointer = _pointers[foundIndex];
+    _pointers.splice(foundIndex, 1);
+    _pointers.push(pointer);
+
+    return _pointers;
+};
