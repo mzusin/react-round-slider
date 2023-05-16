@@ -22,14 +22,14 @@ const App = () => {
                     {
                         rx: 25,
                         ry: 25,
-                        value: 0,
+                        value: 10,
                     },
 
-                    {
+                    /*{
                         rx: 15,
                         ry: 15,
                         value: 50,
-                    },
+                    },*/
 
                     /*{
                         rx: 0,
