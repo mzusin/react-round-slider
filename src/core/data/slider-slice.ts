@@ -91,13 +91,10 @@ export const sliderSlice = createSlice({
             };
         },
         onSelectedPointerChange(state, action) {
-            const selectedPointerId = action.payload.activePointerId;
-            const pointers = action.payload.pointers;
-
             return {
                 ...state,
-                selectedPointerId,
-                pointers,
+                selectedPointerId : action.payload.activePointerId,
+                pointers: action.payload.pointers,
             };
         },
     }
