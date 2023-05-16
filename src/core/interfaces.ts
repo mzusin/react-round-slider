@@ -69,6 +69,10 @@ export interface IPointer {
     pointer: IStatePointer;
 }
 
+export interface IPanel {
+
+}
+
 export interface IPanelFill {
 
 }

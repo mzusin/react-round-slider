@@ -1,4 +1,4 @@
-import { getSVGSize, getSVGCenter } from '../src/core/domain/svg-provider';
+import { getSVGSize, getSVGCenter } from '../src/core/domain/slider-provider';
 import { Vector2 } from 'mz-math';
 
 describe('SVG', () => {

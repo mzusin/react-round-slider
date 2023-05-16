@@ -3,24 +3,20 @@ import {
     TouchEvent as ReactTouchEvent, useEffect,
     useRef,
 } from 'react';
-import { Pointer } from './Pointer';
 import { getActivePointerId, getPointerPercentByMouse, handlePointerZIndex } from '../domain/slider-provider';
 import { useAppDispatch, useAppSelector } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
+import Panel from './Panel';
+import Pointers from './Pointers';
 
 export const Slider = () => {
 
-    const svgRef = useRef<SVGSVGElement>(null);
     const sliderRef = useRef<SVGPathElement>(null);
+    const svgRef = useRef<SVGSVGElement>(null);
     const spId = useRef(''); // selected pointer id
     const isClickOrDrag = useRef<'click'|'drag'>('click');
 
-    const sliderStartPoint = useAppSelector(store => store.slider.sliderStartPoint);
-    const sliderEndPoint = useAppSelector(store => store.slider.sliderEndPoint);
-    const largeArcFlag = useAppSelector(store => store.slider.largeArcFlag);
     const svgRadii = useAppSelector(store => store.slider.svgRadii);
-    const bgColor = useAppSelector(store => store.slider.bgColor);
-    const strokeWidth = useAppSelector(store => store.slider.strokeWidth);
     const svgSize = useAppSelector(store => store.slider.svgSize);
     const svgCenter = useAppSelector(store => store.slider.svgCenter);
     const angles = useAppSelector(store => store.slider.angles);
@@ -41,7 +37,7 @@ export const Slider = () => {
 
     const onValueChange = (evt: MouseEvent | ReactMouseEvent | TouchEvent | ReactTouchEvent) => {
 
-        if(!svgRef || !svgRef.current || !sliderRef || !sliderRef.current) return;
+        if(!svgRef || !svgRef.current) return;
 
         const mouseX = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientX : (evt as TouchEvent).touches[0].clientX;
         const mouseY = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientY : (evt as TouchEvent).touches[0].clientY;
@@ -66,6 +62,7 @@ export const Slider = () => {
             endAngleDegrees,
             isClickOrDrag.current
         );
+
         spId.current = activePointerId;
 
         const _pointers = handlePointerZIndex(activePointerId, pointers);
@@ -125,25 +122,8 @@ export const Slider = () => {
             onTouchMove={ onValueChange }
             onTouchStart={ onValueChange }>
 
-            <path
-                data-type="panel"
-                ref={ sliderRef }
-                d={ `M ${ sliderStartPoint[0] } ${ sliderStartPoint[1] } A ${ svgRadii[0] } ${ svgRadii[1] } 0 ${ largeArcFlag } 1 ${ sliderEndPoint[0] } ${ sliderEndPoint[1] }` }
-                stroke={ bgColor }
-                strokeWidth={ strokeWidth }
-                fill="none"
-                shapeRendering="geometricPrecision"
-                strokeLinecap="round"
-                cursor="pointer"
-            />
-
-            {
-                pointers.map(pointer => {
-                    return (
-                        <Pointer key={ pointer.id } pointer={ pointer } id={ pointer.id } />
-                    )
-                })
-            }
+            <Panel ref={ sliderRef } />
+            <Pointers />
         </svg>
     )
 };

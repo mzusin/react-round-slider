@@ -225,19 +225,15 @@ export const getMinMax = (
         const minIndex = data.findIndex(item => item === min);
         const maxIndex = data.findIndex(item => item === max);
 
-        let _min = minIndex === -1 ? 0 : minIndex;
-        let _max = maxIndex === -1 ? data.length - 1 : maxIndex;
+        const _min = minIndex === -1 ? 0 : minIndex;
+        const _max = maxIndex === -1 ? data.length - 1 : maxIndex;
         return [_min, _max];
     }
 
-    let _min = getNumber(min, MIN_VALUE_DEFAULT);
+    const _min = getNumber(min, MIN_VALUE_DEFAULT);
     let _max = getNumber(max, MAX_VALUE_DEFAULT);
 
     if(_min > _max){
-        _max = _min + MAX_VALUE_DEFAULT;
-    }
-
-    if(_max < _min){
         _max = _min + MAX_VALUE_DEFAULT;
     }
 
