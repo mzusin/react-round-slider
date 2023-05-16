@@ -5,13 +5,15 @@ import {
 } from 'react';
 import { Pointer } from './Pointer';
 import { getActivePointerId, getPointerPercentByMouse, handlePointerZIndex } from '../domain/slider-provider';
-import { store, useAppDispatch, useAppSelector } from '../data/store';
+import { useAppDispatch, useAppSelector } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
 
 export const Slider = () => {
 
     const svgRef = useRef<SVGSVGElement>(null);
     const sliderRef = useRef<SVGPathElement>(null);
+    const spId = useRef(''); // selected pointer id
+    const isClickOrDrag = useRef<'click'|'drag'>('click');
 
     const sliderStartPoint = useAppSelector(store => store.slider.sliderStartPoint);
     const sliderEndPoint = useAppSelector(store => store.slider.sliderEndPoint);
@@ -30,7 +32,6 @@ export const Slider = () => {
 
     const [ startAngleDegrees, endAngleDegrees ] = angles;
     const [ svgWidth, svgHeight ] = svgSize;
-    const spId = useRef('');
 
     useEffect(() => {
         spId.current = selectedPointerId;
@@ -62,7 +63,8 @@ export const Slider = () => {
             updatedPercent,
             spId.current,
             startAngleDegrees,
-            endAngleDegrees
+            endAngleDegrees,
+            isClickOrDrag.current
         );
         spId.current = activePointerId;
 
@@ -102,11 +104,13 @@ export const Slider = () => {
 
         window.addEventListener('mousemove', onValueChange);
         window.addEventListener('mouseup', onMouseUp);
+        isClickOrDrag.current = 'drag';
     };
 
     const onMouseUp = (_evt: MouseEvent | ReactMouseEvent) => {
         window.removeEventListener('mousemove', onValueChange);
         window.removeEventListener('mouseup', onValueChange);
+        isClickOrDrag.current = 'click';
     };
 
     return (

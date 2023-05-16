@@ -355,6 +355,7 @@ export const getActivePointerId = (
     selectedPointerId: string|null,
     startAngleDegrees: number,
     endAngleDegrees: number,
+    isClickOrDrag: 'click' | 'drag'
 ) : string|null => {
     //console.log(`selectedPointerId = ${ selectedPointerId }`)
 
@@ -364,6 +365,8 @@ export const getActivePointerId = (
     if(pointers.length === 1){
         return pointers[0].id;
     }
+
+    if(isClickOrDrag === 'drag') return selectedPointerId;
 
     if(isPanelClicked($target)){
         const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
