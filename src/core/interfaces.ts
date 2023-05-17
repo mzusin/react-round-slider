@@ -23,7 +23,10 @@ export interface IUserSettings {
     rx?: number;
     ry?: number;
     strokeWidth?: number;
+
     bgColor?: string;
+    connectionBgColor?: string;
+
     startAngleDegrees?: number;
     endAngleDegrees?: number;
 }
@@ -43,6 +46,7 @@ export interface IState {
     angles: Vector2; // start and end angle of the SVG ellipse / circle
     strokeWidth: number;
     bgColor: string;
+    connectionBgColor: string;
 
     // data -------------------------------
     min: number;

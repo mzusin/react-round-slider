@@ -12,10 +12,8 @@ export const PanelFill = (_props: IPanelFill) => {
     const svgRadii = useAppSelector(store => store.slider.svgRadii);
     const svgCenter = useAppSelector(store => store.slider.svgCenter);
     const strokeWidth = useAppSelector(store => store.slider.strokeWidth);
-
+    const connectionBgColor = useAppSelector(store => store.slider.connectionBgColor);
     const sliderStartPoint = useAppSelector(store => store.slider.sliderStartPoint);
-
-    const bgColor = 'red'; // TODO
 
     const pointers = useAppSelector(store => store.slider.pointers);
 
@@ -49,7 +47,7 @@ export const PanelFill = (_props: IPanelFill) => {
         <path
             data-type="panel-fill"
             d={ `M ${ sliderStartPoint[0] } ${ sliderStartPoint[1] } A ${ svgRadii[0] } ${ svgRadii[1] } 0 ${ largeArcFlag } 1 ${ panelFillEndPoint[0] } ${ panelFillEndPoint[1] }` }
-            stroke={ bgColor }
+            stroke={ connectionBgColor }
             strokeWidth={ strokeWidth }
             fill="none"
             shapeRendering="geometricPrecision"

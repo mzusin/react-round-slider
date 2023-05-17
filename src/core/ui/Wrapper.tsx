@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Vector2 } from 'mz-math';
 import {
-    DEFAULT_BG_COLOR,
+    DEFAULT_BG_COLOR, DEFAULT_CONNECTION_BG_COLOR,
     DEFAULT_STROKE_WIDTH,
     DEFAULT_SVG_RX,
     DEFAULT_SVG_RY
@@ -47,6 +47,7 @@ export const Wrapper = (props: IUserSettings) => {
 
         const strokeWidth = getNumber(props.strokeWidth, DEFAULT_STROKE_WIDTH);
         const bgColor = getString(props.bgColor, DEFAULT_BG_COLOR);
+        const connectionBgColor = getString(props.connectionBgColor, DEFAULT_CONNECTION_BG_COLOR);
 
         const [min, max] = getMinMax(props.min, props.max, props.data);
         const step = getStep(props.step, min, max);
@@ -72,6 +73,7 @@ export const Wrapper = (props: IUserSettings) => {
             angles,
             strokeWidth,
             bgColor,
+            connectionBgColor,
 
             // data --------------------------------
             min,
