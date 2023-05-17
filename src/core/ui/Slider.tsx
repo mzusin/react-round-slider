@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
 import Panel from './Panel';
 import Pointers from './Pointers';
-import { PanelFill } from './PanelFill';
+import { Connection } from './Connection';
 
 export const Slider = () => {
 
@@ -124,7 +124,7 @@ export const Slider = () => {
             onTouchStart={ onValueChange }>
 
             <Panel ref={ sliderRef } />
-            <PanelFill />
+            <Connection />
             <Pointers />
         </svg>
     )

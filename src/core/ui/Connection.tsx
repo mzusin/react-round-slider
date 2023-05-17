@@ -1,10 +1,10 @@
-import { IPanelFill, IStatePointer } from '../interfaces';
+import { IConnection, IStatePointer } from '../interfaces';
 import { useAppSelector } from '../data/store';
 import { useEffect, useState } from 'react';
 import { getMinMaxPointer, getPointerPositionByPercent } from '../domain/slider-provider';
 import { Vector2 } from 'mz-math';
 
-export const PanelFill = (_props: IPanelFill) => {
+export const Connection = (_props: IConnection) => {
 
     const angles = useAppSelector(store => store.slider.angles);
     const [ startAngleDegrees, endAngleDegrees ] = angles;
@@ -17,8 +17,8 @@ export const PanelFill = (_props: IPanelFill) => {
 
     const pointers = useAppSelector(store => store.slider.pointers);
 
-    const [panelFillStartPoint, setPanelFillStartPoint] = useState<Vector2|null>(null);
-    const [panelFillEndPoint, setPanelFillEndPoint] = useState<Vector2|null>(null);
+    const [connectionStartPoint, setConnectionStartPoint] = useState<Vector2|null>(null);
+    const [connectionEndPoint, setConnectionEndPoint] = useState<Vector2|null>(null);
     const [largeArcFlag, setLargeArcFlag] = useState(0);
 
     useEffect(() => {
@@ -36,8 +36,8 @@ export const PanelFill = (_props: IPanelFill) => {
                 svgCenter
             );
 
-            setPanelFillStartPoint(sliderStartPoint);
-            setPanelFillEndPoint(center);
+            setConnectionStartPoint(sliderStartPoint);
+            setConnectionEndPoint(center);
             setLargeArcFlag(Math.abs(angleDegrees - startAngleDegrees) <= 180 ? 0 : 1);
         }
         else{
@@ -63,8 +63,8 @@ export const PanelFill = (_props: IPanelFill) => {
                 svgCenter
             );
 
-            setPanelFillStartPoint(centerStart);
-            setPanelFillEndPoint(centerEnd);
+            setConnectionStartPoint(centerStart);
+            setConnectionEndPoint(centerEnd);
             setLargeArcFlag(Math.abs(angleDegreesEnd - angleDegreesStart) <= 180 ? 0 : 1);
         }
 
@@ -77,10 +77,10 @@ export const PanelFill = (_props: IPanelFill) => {
     return (
        <>
            {
-               panelFillStartPoint !== null && panelFillEndPoint !== null &&
+               connectionStartPoint !== null && connectionEndPoint !== null &&
                <path
                    data-type="panel-fill"
-                   d={ `M ${ panelFillStartPoint[0] } ${ panelFillStartPoint[1] } A ${ svgRadii[0] } ${ svgRadii[1] } 0 ${ largeArcFlag } 1 ${ panelFillEndPoint[0] } ${ panelFillEndPoint[1] }` }
+                   d={ `M ${ connectionStartPoint[0] } ${ connectionStartPoint[1] } A ${ svgRadii[0] } ${ svgRadii[1] } 0 ${ largeArcFlag } 1 ${ connectionEndPoint[0] } ${ connectionEndPoint[1] }` }
                    stroke={ connectionBgColor }
                    strokeWidth={ strokeWidth + 1 }
                    fill="none"

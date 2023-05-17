@@ -32,6 +32,12 @@ const App = () => {
                         value: 50,
                     },
 
+                    {
+                        rx: 20,
+                        ry: 20,
+                        value: 25,
+                    },
+
                     /*{
                         rx: 0,
                         ry: 2,

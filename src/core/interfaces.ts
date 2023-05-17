@@ -77,7 +77,7 @@ export interface IPanel {
 
 }
 
-export interface IPanelFill {
+export interface IConnection {
 
 }
 
