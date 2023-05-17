@@ -2,9 +2,9 @@ import { IPanelFill } from '../interfaces';
 import { useAppSelector } from '../data/store';
 import { useEffect, useState } from 'react';
 import { getPointerPositionByPercent } from '../domain/slider-provider';
-import { mod, Vector2 } from 'mz-math';
+import { Vector2 } from 'mz-math';
 
-export const PanelFill = (props: IPanelFill) => {
+export const PanelFill = (_props: IPanelFill) => {
 
     const angles = useAppSelector(store => store.slider.angles);
     const [ startAngleDegrees, endAngleDegrees ] = angles;
@@ -28,7 +28,7 @@ export const PanelFill = (props: IPanelFill) => {
 
         const pointer = pointers[0];
 
-        const center = getPointerPositionByPercent(
+        const { position: center, angleDegrees } = getPointerPositionByPercent(
             pointer.percent,
             startAngleDegrees,
             endAngleDegrees,
@@ -37,10 +37,6 @@ export const PanelFill = (props: IPanelFill) => {
         );
 
         setPanelFillEndPoint(center);
-
-        const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
-        const percentAngle = pointer.percent * angleDiff / 100;
-        const angleDegrees = mod(startAngleDegrees + percentAngle, 360);
         setLargeArcFlag(angleDegrees - startAngleDegrees <= 180 ? 0 : 1);
 
     }, [

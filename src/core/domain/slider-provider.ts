@@ -88,7 +88,10 @@ export const getPointerPositionByPercent = (
     endAngleDegrees: number,
     svgRadii: Vector2,
     center: Vector2,
-) : Vector2 => {
+) : {
+    position: Vector2,
+    angleDegrees: number,
+} => {
     const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
     const percentAngle = percent * angleDiff / 100;
     const angleDegrees = mod(startAngleDegrees + percentAngle, 360);
@@ -98,7 +101,10 @@ export const getPointerPositionByPercent = (
     // Convert the angle from the range [0, Math.PI*2] to the range [0, Math.PI].
     angleRad = convertRange(angleRad, 0, Math.PI*2, 0, Math.PI);
 
-    return ellipseMovement(center, angleRad, svgRadii[0], svgRadii[1]);
+    return {
+        position: ellipseMovement(center, angleRad, svgRadii[0], svgRadii[1]),
+        angleDegrees,
+    };
 };
 
 /**

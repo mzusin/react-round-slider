@@ -20,7 +20,7 @@ export const Pointer = (props: IPointer) => {
 
     useEffect(() => {
 
-        const center = getPointerPositionByPercent(
+        const { position: center } = getPointerPositionByPercent(
             percent,
             startAngleDegrees,
             endAngleDegrees,
