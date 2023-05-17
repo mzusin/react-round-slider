@@ -439,3 +439,31 @@ export const handlePointerZIndex = (activePointerId: string|null, pointers: ISta
 
     return _pointers;
 };
+
+export const getMinMaxPointer = (pointers: IStatePointer[]) : [IStatePointer, IStatePointer] | null => {
+    if(!pointers || pointers.length < 2) return null;
+
+    let minPercent = Infinity;
+    let minPointer: IStatePointer|null = null;
+
+    let maxPercent = -Infinity;
+    let maxPointer: IStatePointer|null = null;
+
+    for(let i=0; i<pointers.length; i++){
+        const pointer = pointers[i];
+
+        if(pointer.percent < minPercent){
+            minPercent = pointer.percent;
+            minPointer = pointer;
+        }
+
+        if(pointer.percent > maxPercent){
+            maxPercent = pointer.percent;
+            maxPointer = pointer;
+        }
+    }
+
+    if(minPointer === null || maxPointer === null) return null;
+
+    return [minPointer, maxPointer];
+};

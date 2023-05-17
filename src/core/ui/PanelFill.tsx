@@ -1,7 +1,7 @@
-import { IPanelFill } from '../interfaces';
+import { IPanelFill, IStatePointer } from '../interfaces';
 import { useAppSelector } from '../data/store';
 import { useEffect, useState } from 'react';
-import { getPointerPositionByPercent } from '../domain/slider-provider';
+import { getMinMaxPointer, getPointerPositionByPercent } from '../domain/slider-provider';
 import { Vector2 } from 'mz-math';
 
 export const PanelFill = (_props: IPanelFill) => {
@@ -17,25 +17,56 @@ export const PanelFill = (_props: IPanelFill) => {
 
     const pointers = useAppSelector(store => store.slider.pointers);
 
-    const [panelFillEndPoint, setPanelFillEndPoint] = useState<Vector2>(sliderStartPoint);
+    const [panelFillStartPoint, setPanelFillStartPoint] = useState<Vector2|null>(null);
+    const [panelFillEndPoint, setPanelFillEndPoint] = useState<Vector2|null>(null);
     const [largeArcFlag, setLargeArcFlag] = useState(0);
 
     useEffect(() => {
 
         if(!pointers || pointers.length <= 0) return;
 
-        const pointer = pointers[0];
+        if(pointers.length <= 1){
+            const pointer = pointers[0];
 
-        const { position: center, angleDegrees } = getPointerPositionByPercent(
-            pointer.percent,
-            startAngleDegrees,
-            endAngleDegrees,
-            svgRadii,
-            svgCenter
-        );
+            const { position: center, angleDegrees } = getPointerPositionByPercent(
+                pointer.percent,
+                startAngleDegrees,
+                endAngleDegrees,
+                svgRadii,
+                svgCenter
+            );
 
-        setPanelFillEndPoint(center);
-        setLargeArcFlag(angleDegrees - startAngleDegrees <= 180 ? 0 : 1);
+            setPanelFillStartPoint(sliderStartPoint);
+            setPanelFillEndPoint(center);
+            setLargeArcFlag(Math.abs(angleDegrees - startAngleDegrees) <= 180 ? 0 : 1);
+        }
+        else{
+            const minMax = getMinMaxPointer(pointers);
+            if(minMax === null) return;
+
+            const minPointer: IStatePointer = minMax[0];
+            const maxPointer: IStatePointer = minMax[1];
+
+            const { position: centerStart, angleDegrees: angleDegreesStart } = getPointerPositionByPercent(
+                minPointer.percent,
+                startAngleDegrees,
+                endAngleDegrees,
+                svgRadii,
+                svgCenter
+            );
+
+            const { position: centerEnd, angleDegrees: angleDegreesEnd } = getPointerPositionByPercent(
+                maxPointer.percent,
+                startAngleDegrees,
+                endAngleDegrees,
+                svgRadii,
+                svgCenter
+            );
+
+            setPanelFillStartPoint(centerStart);
+            setPanelFillEndPoint(centerEnd);
+            setLargeArcFlag(Math.abs(angleDegreesEnd - angleDegreesStart) <= 180 ? 0 : 1);
+        }
 
     }, [
         pointers,
@@ -44,15 +75,20 @@ export const PanelFill = (_props: IPanelFill) => {
     ]);
 
     return (
-        <path
-            data-type="panel-fill"
-            d={ `M ${ sliderStartPoint[0] } ${ sliderStartPoint[1] } A ${ svgRadii[0] } ${ svgRadii[1] } 0 ${ largeArcFlag } 1 ${ panelFillEndPoint[0] } ${ panelFillEndPoint[1] }` }
-            stroke={ connectionBgColor }
-            strokeWidth={ strokeWidth }
-            fill="none"
-            shapeRendering="geometricPrecision"
-            strokeLinecap="round"
-            cursor="pointer"
-        />
+       <>
+           {
+               panelFillStartPoint !== null && panelFillEndPoint !== null &&
+               <path
+                   data-type="panel-fill"
+                   d={ `M ${ panelFillStartPoint[0] } ${ panelFillStartPoint[1] } A ${ svgRadii[0] } ${ svgRadii[1] } 0 ${ largeArcFlag } 1 ${ panelFillEndPoint[0] } ${ panelFillEndPoint[1] }` }
+                   stroke={ connectionBgColor }
+                   strokeWidth={ strokeWidth + 1 }
+                   fill="none"
+                   shapeRendering="geometricPrecision"
+                   strokeLinecap="round"
+                   cursor="pointer"
+               />
+           }
+       </>
     )
 };
