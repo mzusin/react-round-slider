@@ -13,3 +13,5 @@ export const DEFAULT_END_ANGLE = 360 - 0.001;
 
 export const MIN_VALUE_DEFAULT = 0;
 export const MAX_VALUE_DEFAULT = 100;
+
+export const POINTER_OVERLAP_DEFAULT = false;

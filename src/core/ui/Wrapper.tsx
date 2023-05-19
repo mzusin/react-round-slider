@@ -4,12 +4,12 @@ import {
     DEFAULT_BG_COLOR, DEFAULT_CONNECTION_BG_COLOR,
     DEFAULT_STROKE_WIDTH,
     DEFAULT_SVG_RX,
-    DEFAULT_SVG_RY
+    DEFAULT_SVG_RY, POINTER_OVERLAP_DEFAULT
 } from '../domain/defaults';
 import { IState, IUserSettings } from '../interfaces';
 import { useAppDispatch, useAppSelector } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
-import { getNumber, getString } from '../domain/common';
+import { getBoolean, getNumber, getString } from '../domain/common';
 import {
     getEllipseSegment,
     getSVGCenter,
@@ -83,6 +83,9 @@ export const Wrapper = (props: IUserSettings) => {
             // pointers ----------------------------
             pointers: _pointers,
             selectedPointerId: null,
+            pointersOverlap: getBoolean(props.pointersOverlap, POINTER_OVERLAP_DEFAULT),
+            pointersMinDistance: getNumber(props.pointersMinDistance, 0),
+            pointersMaxDistance: getNumber(props.pointersMaxDistance, Infinity),
 
             // calculated properties ---------------
             svgSize,

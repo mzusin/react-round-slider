@@ -343,6 +343,11 @@ export const getInitialPointers = (
         pointers.push(pointer);
     }
 
+    // sort pointers by percent ---------------
+    pointers.sort((pointer1, pointer2) => {
+        return pointer1.percent - pointer2.percent;
+    })
+
     return pointers;
 };
 
@@ -416,6 +421,10 @@ const isPointerClicked = ($target: HTMLElement, id: string) => {
            $target.querySelector(`[data-type="pointer"][data-index="${ id }"]`) !== null;
 };
 
+/**
+ * When pointer is selected, it should move to be above all other pointers,
+ * as SVG doesn't support normal z-index.
+ */
 export const handlePointerZIndex = (activePointerId: string|null, pointers: IStatePointer[]) : IStatePointer[] => {
     const _pointers = [...pointers];
 
@@ -466,4 +475,59 @@ export const getMinMaxPointer = (pointers: IStatePointer[]) : [IStatePointer, IS
     if(minPointer === null || maxPointer === null) return null;
 
     return [minPointer, maxPointer];
+};
+
+export const getPointerLeftWall = (
+    pointers: IStatePointer[],
+    pointerId: string,
+    pointersOverlap: boolean,
+    min: number,
+    max: number,
+    pointersMinDistance: number,
+    pointersMaxDistance: number
+) : number|undefined => {
+    if(pointersOverlap || pointers.length <= 1 || max === min) return undefined;
+
+    const pointerIndex = pointers.findIndex(pointer => pointer.id === pointerId);
+    if(pointerIndex === -1) return undefined;
+
+    if(pointerIndex === 0){
+        // by default 0, but if min distance between pointers is defined --->
+        // then the distance to the next pointer
+        const converted = pointersMaxDistance * 100 / (max - min);
+        return Math.max(0, pointers[pointerIndex + 1].percent - converted);
+    }
+    else{
+        // by default previous pointer, but if min distance between pointers is defined --->
+        // then the distance to the next pointer
+        const converted = pointersMinDistance * 100 / (max - min);
+        return Math.min(pointers[pointerIndex - 1].percent + converted, 100);
+    }
+};
+
+export const getPointerRightWall = (
+    pointers: IStatePointer[],
+    pointerId: string,
+    pointersOverlap: boolean,
+    min: number,
+    max: number,
+    pointersMinDistance: number,
+    pointersMaxDistance: number
+) : number|undefined => {
+    if(pointersOverlap || pointers.length <= 1 || max === min) return undefined;
+
+    const pointerIndex = pointers.findIndex(pointer => pointer.id === pointerId);
+    if(pointerIndex === -1) return undefined;
+
+    if(pointerIndex === pointers.length - 1){
+        // by default 100, but if min distance between pointers is defined --->
+        // then the distance to the previous pointer
+        const converted = pointersMaxDistance * 100 / (max - min);
+        return Math.min(pointers[pointerIndex - 1].percent + converted, 100);
+    }
+    else{
+        // distance to the next pointer
+        const converted = pointersMinDistance * 100 / (max - min);
+        return Math.max(0, pointers[pointerIndex + 1].percent - converted);
+    }
 };

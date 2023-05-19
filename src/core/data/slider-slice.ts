@@ -62,6 +62,9 @@ const initialState: IState = {
     // Pointers -------------------------
     pointers,
     selectedPointerId: null,
+    pointersOverlap: false,
+    pointersMinDistance: 0,
+    pointersMaxDistance: Infinity,
 
     // calculated properties ------------
     svgSize,

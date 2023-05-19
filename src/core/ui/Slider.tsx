@@ -3,7 +3,12 @@ import {
     TouchEvent as ReactTouchEvent, useEffect,
     useRef,
 } from 'react';
-import { getActivePointerId, getPointerPercentByMouse, handlePointerZIndex } from '../domain/slider-provider';
+import {
+    getActivePointerId,
+    getPointerLeftWall,
+    getPointerPercentByMouse, getPointerRightWall,
+    handlePointerZIndex
+} from '../domain/slider-provider';
 import { useAppDispatch, useAppSelector } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
 import Panel from './Panel';
@@ -23,6 +28,9 @@ export const Slider = () => {
     const angles = useAppSelector(store => store.slider.angles);
     const min = useAppSelector(store => store.slider.min);
     const max = useAppSelector(store => store.slider.max);
+    const pointersOverlap = useAppSelector(store => store.slider.pointersOverlap);
+    const pointersMinDistance = useAppSelector(store => store.slider.pointersMinDistance);
+    const pointersMaxDistance = useAppSelector(store => store.slider.pointersMaxDistance);
 
     const pointers = useAppSelector(store => store.slider.pointers);
     const selectedPointerId = useAppSelector(store => store.slider.selectedPointerId);
@@ -43,7 +51,7 @@ export const Slider = () => {
         const mouseX = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientX : (evt as TouchEvent).touches[0].clientX;
         const mouseY = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientY : (evt as TouchEvent).touches[0].clientY;
 
-        const updatedPercent = getPointerPercentByMouse(
+        let updatedPercent = getPointerPercentByMouse(
             svgRef.current as SVGSVGElement,
             [mouseX, mouseY],
             svgCenter,
@@ -53,6 +61,34 @@ export const Slider = () => {
             min,
             max,
         );
+
+        const leftWall = getPointerLeftWall(
+            pointers,
+            spId.current,
+            pointersOverlap,
+            min,
+            max,
+            pointersMinDistance,
+            pointersMaxDistance
+        );
+
+        const rightWall = getPointerRightWall(
+            pointers,
+            spId.current,
+            pointersOverlap,
+            min,
+            max,
+            pointersMinDistance,
+            pointersMaxDistance
+        );
+
+        if(leftWall !== undefined && updatedPercent < leftWall){
+            updatedPercent = leftWall;
+        }
+
+        if(rightWall !== undefined && updatedPercent > rightWall){
+            updatedPercent = rightWall;
+        }
 
         const activePointerId = getActivePointerId(
             evt.target as HTMLElement,
