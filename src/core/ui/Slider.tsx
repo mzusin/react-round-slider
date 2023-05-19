@@ -62,34 +62,6 @@ export const Slider = () => {
             max,
         );
 
-        const leftWall = getPointerLeftWall(
-            pointers,
-            spId.current,
-            pointersOverlap,
-            min,
-            max,
-            pointersMinDistance,
-            pointersMaxDistance
-        );
-
-        const rightWall = getPointerRightWall(
-            pointers,
-            spId.current,
-            pointersOverlap,
-            min,
-            max,
-            pointersMinDistance,
-            pointersMaxDistance
-        );
-
-        if(leftWall !== undefined && updatedPercent < leftWall){
-            updatedPercent = leftWall;
-        }
-
-        if(rightWall !== undefined && updatedPercent > rightWall){
-            updatedPercent = rightWall;
-        }
-
         const activePointerId = getActivePointerId(
             evt.target as HTMLElement,
             pointers,
@@ -100,9 +72,46 @@ export const Slider = () => {
             isClickOrDrag.current
         );
 
+        const _pointers = handlePointerZIndex(activePointerId, pointers);
+
         spId.current = activePointerId;
 
-        const _pointers = handlePointerZIndex(activePointerId, pointers);
+        const sortedPointers = [...pointers];
+        sortedPointers.sort((pointer1, pointer2) => {
+            return pointer1.percent - pointer2.percent;
+        });
+
+        const leftWall = getPointerLeftWall(
+            sortedPointers,
+            spId.current,
+            pointersOverlap,
+            min,
+            max,
+            pointersMinDistance,
+            pointersMaxDistance
+        );
+
+        const rightWall = getPointerRightWall(
+            sortedPointers,
+            spId.current,
+            pointersOverlap,
+            min,
+            max,
+            pointersMinDistance,
+            pointersMaxDistance
+        );
+
+        console.log('leftWall', leftWall, 'rightWall', rightWall, 'updatedPercent', updatedPercent, 'spId.current', spId.current)
+
+        if(leftWall !== undefined && updatedPercent < leftWall){
+            updatedPercent = leftWall;
+        }
+
+        if(rightWall !== undefined && updatedPercent > rightWall){
+            updatedPercent = rightWall;
+        }
+
+
 
         dispatch(sliderActions.onSelectedPointerChange({
             activePointerId,
