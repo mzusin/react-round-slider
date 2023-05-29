@@ -68,10 +68,12 @@ export const Connection = (_props: IConnection) => {
             setLargeArcFlag(Math.abs(angleDegreesEnd - angleDegreesStart) <= 180 ? 0 : 1);
         }
 
-    }, [
+    },
+    [
         pointers,
         svgRadii, svgCenter,
         startAngleDegrees, endAngleDegrees,
+        sliderStartPoint,
     ]);
 
     return (

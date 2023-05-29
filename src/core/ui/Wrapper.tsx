@@ -98,7 +98,16 @@ export const Wrapper = (props: IUserSettings) => {
         dispatch(
             sliderActions.onSettingsInit(settings)
         );
-    }, []);
+    },
+        // Including pointers to the deps array causes an infinite loop.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+        dispatch, props.bgColor,
+        props.connectionBgColor, props.data, props.endAngleDegrees,
+        props.max, props.min, props.pointers, props.pointersMaxDistance,
+        props.pointersMinDistance, props.pointersOverlap, props.rx, props.ry,
+        props.startAngleDegrees, props.step, props.strokeWidth,
+    ]);
 
     return (
         <Slider />

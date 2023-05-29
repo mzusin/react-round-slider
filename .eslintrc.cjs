@@ -8,7 +8,8 @@ module.exports = {
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended"
     ],
 
     "parser": "@typescript-eslint/parser",
@@ -18,7 +19,8 @@ module.exports = {
     },
     "plugins": [
         "@typescript-eslint",
-        "react"
+        "react",
+        "react-hooks",
     ],
     "rules": {
         "@typescript-eslint/ban-ts-comment": "off",

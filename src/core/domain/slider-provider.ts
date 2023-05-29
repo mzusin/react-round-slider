@@ -492,6 +492,7 @@ export const getPointerLeftWall = (
         //const converted = pointersMaxDistance * 100 / (max - min);
         //return Math.max(0, pointers[pointerIndex + 1].percent - converted);
         return 0;
+        // return pointers[pointers.length - 1].percent;
     }
     else{
         // by default previous pointer, but if min distance between pointers is defined --->
@@ -522,6 +523,7 @@ export const getPointerRightWall = (
         const converted = pointersMaxDistance * 100 / (max - min);
         return Math.min(pointers[pointerIndex - 1].percent + converted, 100);*/
         return 100;
+       //  return pointers[0].percent;
     }
     else{
         // distance to the next pointer
