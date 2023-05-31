@@ -40,6 +40,7 @@ export interface IStatePointer {
     pointerRadii: Vector2;
     percent: number;
     id: string;
+    index: number;
 }
 
 export interface IState {

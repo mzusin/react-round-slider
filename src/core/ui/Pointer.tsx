@@ -40,6 +40,7 @@ export const Pointer = (props: IPointer) => {
         center ?
             <ellipse
                 data-type="pointer"
+                data-index={ pointer.index }
                 data-id={ id }
                 cx={ center[0] }
                 cy={ center[1]}

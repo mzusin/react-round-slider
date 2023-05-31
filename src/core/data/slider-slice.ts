@@ -41,6 +41,7 @@ const pointers =  [{
     pointerRadii: defaultMaxPointerRadii,
     percent: 0,
     id: newId(),
+    index: 0,
 }];
 
 const initialState: IState = {

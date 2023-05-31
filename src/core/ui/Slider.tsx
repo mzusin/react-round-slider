@@ -4,12 +4,11 @@ import {
     useRef,
 } from 'react';
 import {
-    getActivePointerId,
-    getPointerLeftWall,
-    getPointerPercentByMouse, getPointerRightWall,
+    getActivePointerId, getNextPrevPointer,
+    getPointerPercentByMouse,
     handlePointerZIndex
 } from '../domain/slider-provider';
-import { useAppDispatch, useAppSelector } from '../data/store';
+import { useAppDispatch, useAppSelector, useAppStore } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
 import Panel from './Panel';
 import Pointers from './Pointers';
@@ -29,10 +28,11 @@ export const Slider = () => {
     const min = useAppSelector(store => store.slider.min);
     const max = useAppSelector(store => store.slider.max);
     const pointersOverlap = useAppSelector(store => store.slider.pointersOverlap);
-    const pointersMinDistance = useAppSelector(store => store.slider.pointersMinDistance);
-    const pointersMaxDistance = useAppSelector(store => store.slider.pointersMaxDistance);
+    // const pointersMinDistance = useAppSelector(store => store.slider.pointersMinDistance);
+    // const pointersMaxDistance = useAppSelector(store => store.slider.pointersMaxDistance);
 
     const pointers = useAppSelector(store => store.slider.pointers);
+    const store = useAppStore();
     const selectedPointerId = useAppSelector(store => store.slider.selectedPointerId);
 
     const [ startAngleDegrees, endAngleDegrees ] = angles;
@@ -76,42 +76,26 @@ export const Slider = () => {
 
         spId.current = activePointerId;
 
-        const sortedPointers = [...pointers];
-        sortedPointers.sort((pointer1, pointer2) => {
-            return pointer1.percent - pointer2.percent;
-        });
+        const skipOverlapCheck = pointersOverlap || pointers.length <= 1 || max === min;
+        if(!skipOverlapCheck) {
+            /** Pointers non-overlap cases: ------------------------------------ */
+            const [currentPointer, nextPointer, prevPointer] = getNextPrevPointer(store.getState().slider.pointers, spId.current);
+            const diff = (updatedPercent - currentPointer.percent);
 
-        const leftWall = getPointerLeftWall(
-            sortedPointers,
-            spId.current,
-            pointersOverlap,
-            min,
-            max,
-            pointersMinDistance,
-            pointersMaxDistance
-        );
+            const range = Math.abs(max - min) / 2;
 
-        const rightWall = getPointerRightWall(
-            sortedPointers,
-            spId.current,
-            pointersOverlap,
-            min,
-            max,
-            pointersMinDistance,
-            pointersMaxDistance
-        );
+            if(diff !== 0 && currentPointer.percent !== 0 && updatedPercent !== 0){
+                const isClockwise = Math.abs(diff) > range ? diff < 0 : diff >= 0;
 
-        console.log('leftWall', leftWall, 'rightWall', rightWall, 'updatedPercent', updatedPercent, 'spId.current', spId.current)
+                if(isClockwise && nextPointer.percent >= currentPointer.percent) {
+                    updatedPercent = Math.min(updatedPercent, nextPointer.percent);
+                }
 
-        if(leftWall !== undefined && updatedPercent < leftWall){
-            updatedPercent = leftWall;
+                if(!isClockwise && prevPointer.percent <= currentPointer.percent) {
+                    updatedPercent = Math.max(updatedPercent, prevPointer.percent);
+                }
+            }
         }
-
-        if(rightWall !== undefined && updatedPercent > rightWall){
-            updatedPercent = rightWall;
-        }
-
-
 
         dispatch(sliderActions.onSelectedPointerChange({
             activePointerId,

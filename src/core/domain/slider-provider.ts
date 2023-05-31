@@ -338,9 +338,23 @@ export const getInitialPointers = (
             ],
             percent,
             id: newId(),
+            index: 0,
         };
 
         pointers.push(pointer);
+    }
+
+    if(pointers.length > 1) {
+
+        // It is possible that the user defines pointers in unsorted order.
+        pointers.sort((pointer1, pointer2) => {
+            return pointer1.percent - pointer2.percent;
+        });
+
+        // The index is used in multiple pointers overlap feature.
+        for(let i=0; i < pointers.length; i++){
+            pointers[i].index = i;
+        }
     }
 
     return pointers;
@@ -472,63 +486,21 @@ export const getMinMaxPointer = (pointers: IStatePointer[]) : [IStatePointer, IS
     return [minPointer, maxPointer];
 };
 
-export const getPointerLeftWall = (
-    pointers: IStatePointer[],
-    pointerId: string,
-    pointersOverlap: boolean,
-    min: number,
-    max: number,
-    pointersMinDistance: number,
-    pointersMaxDistance: number
-) : number|undefined => {
-    if(pointersOverlap || pointers.length <= 1 || max === min) return undefined;
+/**
+ * In case of multiple pointers, get the pointer, that its value is "next".
+ */
+export const getNextPrevPointer = (pointers: IStatePointer[], currentPointerId: string) : [IStatePointer, IStatePointer, IStatePointer]|null => {
+    const currentPointer = pointers.find(pointer => pointer.id === currentPointerId);
+    if(!currentPointer) return null;
 
-    const pointerIndex = pointers.findIndex(pointer => pointer.id === pointerId);
-    if(pointerIndex === -1) return undefined;
+    const nextIndex = mod(currentPointer.index + 1, pointers.length);
+    const nextPointer = pointers.find(pointer => pointer.index === nextIndex);
+    if(!nextPointer) return null;
 
-    if(pointerIndex === 0){
-        // by default 0, but if min distance between pointers is defined --->
-        // then the distance to the next pointer
-        //const converted = pointersMaxDistance * 100 / (max - min);
-        //return Math.max(0, pointers[pointerIndex + 1].percent - converted);
-        return 0;
-        // return pointers[pointers.length - 1].percent;
-    }
-    else{
-        // by default previous pointer, but if min distance between pointers is defined --->
-        // then the distance to the next pointer
-        //const converted = pointersMinDistance * 100 / (max - min);
-        //return Math.min(pointers[pointerIndex - 1].percent + converted, 100);
-        return pointers[pointerIndex - 1].percent;
-    }
+    const prevIndex = mod(currentPointer.index - 1, pointers.length);
+    const prevPointer = pointers.find(pointer => pointer.index === prevIndex);
+
+    return [currentPointer, nextPointer, prevPointer];
 };
 
-export const getPointerRightWall = (
-    pointers: IStatePointer[],
-    pointerId: string,
-    pointersOverlap: boolean,
-    min: number,
-    max: number,
-    pointersMinDistance: number,
-    pointersMaxDistance: number
-) : number|undefined => {
-    if(pointersOverlap || pointers.length <= 1 || max === min) return undefined;
 
-    const pointerIndex = pointers.findIndex(pointer => pointer.id === pointerId);
-    if(pointerIndex === -1) return undefined;
-
-    if(pointerIndex === pointers.length - 1){
-        /*// by default 100, but if min distance between pointers is defined --->
-        // then the distance to the previous pointer
-        const converted = pointersMaxDistance * 100 / (max - min);
-        return Math.min(pointers[pointerIndex - 1].percent + converted, 100);*/
-        return 100;
-       //  return pointers[0].percent;
-    }
-    else{
-        // distance to the next pointer
-        /*const converted = pointersMinDistance * 100 / (max - min);
-        return Math.max(0, pointers[pointerIndex + 1].percent - converted);*/
-        return pointers[pointerIndex + 1].percent;
-    }
-};
