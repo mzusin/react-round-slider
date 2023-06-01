@@ -373,7 +373,6 @@ export const getActivePointerId = (
     endAngleDegrees: number,
     isClickOrDrag: 'click' | 'drag'
 ) : string|null => {
-    //console.log(`selectedPointerId = ${ selectedPointerId }`)
 
     if(pointers.length <= 0) return null;
 
@@ -384,7 +383,7 @@ export const getActivePointerId = (
 
     if(isClickOrDrag === 'drag') return selectedPointerId;
 
-    if(isPanelClicked($target)){
+    if(isPanelClicked($target) || isConnectionClicked($target)){
         const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
         const currentValueAngle = currentPercent * angleDiff / 100;
 
@@ -422,6 +421,10 @@ export const getActivePointerId = (
 
 const isPanelClicked = ($target: HTMLElement) => {
     return $target.getAttribute('data-type') === 'panel';
+};
+
+const isConnectionClicked = ($target: HTMLElement) => {
+    return $target.getAttribute('data-type') === 'panel-fill';
 };
 
 const isPointerClicked = ($target: HTMLElement, id: string) => {

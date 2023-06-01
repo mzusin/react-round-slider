@@ -89,6 +89,7 @@ export const Connection = (_props: IConnection) => {
                    shapeRendering="geometricPrecision"
                    strokeLinecap="round"
                    cursor="pointer"
+                   pointerEvents="none"
                />
            }
        </>
