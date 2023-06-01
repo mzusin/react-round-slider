@@ -8,7 +8,7 @@ import {
     getPointerPercentByMouse,
     handlePointerZIndex
 } from '../domain/slider-provider';
-import { useAppDispatch, useAppSelector, useAppStore } from '../data/store';
+import { RootState, useAppDispatch, useAppSelector, useAppStore } from '../data/store';
 import { sliderActions } from '../data/slider-slice';
 import Panel from './Panel';
 import Pointers from './Pointers';
@@ -28,8 +28,6 @@ export const Slider = () => {
     const min = useAppSelector(store => store.slider.min);
     const max = useAppSelector(store => store.slider.max);
     const pointersOverlap = useAppSelector(store => store.slider.pointersOverlap);
-    // const pointersMinDistance = useAppSelector(store => store.slider.pointersMinDistance);
-    // const pointersMaxDistance = useAppSelector(store => store.slider.pointersMaxDistance);
 
     const pointers = useAppSelector(store => store.slider.pointers);
     const store = useAppStore();
@@ -79,7 +77,9 @@ export const Slider = () => {
         const skipOverlapCheck = pointersOverlap || pointers.length <= 1 || max === min;
         if(!skipOverlapCheck) {
             /** Pointers non-overlap cases: ------------------------------------ */
-            const [currentPointer, nextPointer, prevPointer] = getNextPrevPointer(store.getState().slider.pointers, spId.current);
+            // We need immediate access to the latest pointers version.
+            const latestPointers = (store.getState() as RootState).slider.pointers;
+            const [currentPointer, nextPointer, prevPointer] = getNextPrevPointer(latestPointers, spId.current);
             const diff = (updatedPercent - currentPointer.percent);
 
             const range = Math.abs(max - min) / 2;

@@ -19,8 +19,6 @@ export interface IUserSettings {
 
     pointers?: IUserSettingsPointer[];
     pointersOverlap?: boolean;
-    pointersMinDistance?: number;
-    pointersMaxDistance?: number;
 
     // svg look & feel properties ----------
     rx?: number;
@@ -61,8 +59,6 @@ export interface IState {
     pointers: IStatePointer[];
     selectedPointerId: string|null;
     pointersOverlap: boolean;
-    pointersMinDistance: number;
-    pointersMaxDistance: number;
 
     // calculated properties --------------
     svgSize:  Vector2;

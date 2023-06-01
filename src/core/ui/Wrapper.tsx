@@ -84,8 +84,6 @@ export const Wrapper = (props: IUserSettings) => {
             pointers: _pointers,
             selectedPointerId: null,
             pointersOverlap: getBoolean(props.pointersOverlap, POINTER_OVERLAP_DEFAULT),
-            pointersMinDistance: getNumber(props.pointersMinDistance, 0),
-            pointersMaxDistance: getNumber(props.pointersMaxDistance, Infinity),
 
             // calculated properties ---------------
             svgSize,
@@ -104,8 +102,8 @@ export const Wrapper = (props: IUserSettings) => {
     [
         dispatch, props.bgColor,
         props.connectionBgColor, props.data, props.endAngleDegrees,
-        props.max, props.min, props.pointers, props.pointersMaxDistance,
-        props.pointersMinDistance, props.pointersOverlap, props.rx, props.ry,
+        props.max, props.min, props.pointers,
+        props.pointersOverlap, props.rx, props.ry,
         props.startAngleDegrees, props.step, props.strokeWidth,
     ]);
 
