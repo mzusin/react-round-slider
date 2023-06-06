@@ -18,6 +18,21 @@ const App = () => {
                 strokeWidth={ 15 }
                 bgColor="#285f68"
                 connectionBgColor="#86e02c"
+            />
+
+            <RoundSlider
+                min={ 0 }
+                max={ 100 }
+
+                rx={ 250 }
+                ry={ 150 }
+
+                startAngleDegrees={ 0 }
+                endAngleDegrees={ 360 }
+
+                strokeWidth={ 15 }
+                bgColor="#285f68"
+                connectionBgColor="#86e02c"
 
                 pointers={[
                     {
@@ -38,11 +53,11 @@ const App = () => {
                         value: 25,
                     },
 
-                    /*{
+                    {
                         rx: 0,
                         ry: 2,
                         value: 25,
-                    }*/
+                    }
                 ]}
             />
         </>

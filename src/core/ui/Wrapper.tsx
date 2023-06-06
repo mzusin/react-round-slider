@@ -53,7 +53,10 @@ export const Wrapper = (props: IUserSettings) => {
         const step = getStep(props.step, min, max);
 
         // Convert user provided pointers settings to the actual state pointers' definition.
-        const _pointers = props.pointers ? getInitialPointers(props.pointers, min, max, props.data) : pointers;
+        let _pointers = props.pointers ? getInitialPointers(props.pointers, min, max, props.data) : pointers;
+        if(_pointers.length <= 0) {
+            _pointers = pointers;
+        }
 
         const maxPointer: Vector2 = getMaxPointer(_pointers);
         const svgSize: Vector2 = getSVGSize(svgRadii, maxPointer, strokeWidth);
