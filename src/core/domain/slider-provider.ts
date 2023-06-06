@@ -325,6 +325,7 @@ export const getInitialPointers = (
 
     for(let i=0; i<userSettingsPointers.length; i++){
         const userSettingsPointer = userSettingsPointers[i];
+        if(userSettingsPointer.rx <= 0 || userSettingsPointer.ry <= 0) continue;
 
         const value = getValue(userSettingsPointer.value, min, max, data);
 
@@ -355,6 +356,10 @@ export const getInitialPointers = (
         for(let i=0; i < pointers.length; i++){
             pointers[i].index = i;
         }
+    }
+
+    if(pointers.length <= 0) {
+        // TODO
     }
 
     return pointers;
