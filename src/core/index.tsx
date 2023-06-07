@@ -7,13 +7,12 @@ import {
 import { Vector2 } from 'mz-math';
 import {
     getActivePointerId,
-    getEllipseSegment,
     getInitialPointers,
     getMaxPointer,
     getMinMax, getNextPrevPointer, getPointerPercentByMouse,
-    getSVGCenter,
-    getSVGSize, handlePointerZIndex
+    handlePointerZIndex
 } from './domain/slider-provider';
+import { getEllipseSegment, getSVGCenter, getSVGSize } from './domain/svg-provider';
 import { getBoolean, getNumber, getString } from './domain/common';
 import {
     DEFAULT_BG_COLOR,

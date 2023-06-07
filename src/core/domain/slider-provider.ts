@@ -4,34 +4,14 @@ import {
     ellipseMovement, getAnglesSub,
     mod,
     newId,
-    polarToCartesian, radiansToDegrees,
-    setDecimalPlaces, v2Sub,
+    radiansToDegrees,
+    v2Sub,
     Vector2
 } from 'mz-math';
-import { IEllipse, IStatePointer, IUserSettingsPointer, TData } from '../interfaces';
+import { IStatePointer, IUserSettingsPointer, TData } from '../interfaces';
 import { getNumber } from './common';
 import { DEFAULT_POINTER_RX, DEFAULT_POINTER_RY, MAX_VALUE_DEFAULT, MIN_VALUE_DEFAULT } from './defaults';
 import { isAngleInArc } from './angles-provider';
-
-/**
- * Calculate SVG size depending on ellipse radii and max pointer size.
- */
-export const getSVGSize = (svgRadii: Vector2, maxPointerRadii: Vector2, strokeWidth: number) : Vector2 => {
-
-    const [ rxSvg, rySvg ] = svgRadii;
-    const [ rxPointer, ryPointer ] = maxPointerRadii;
-
-    const diffX = Math.max(0, rxPointer * 2 - strokeWidth);
-    const diffY = Math.max(0, ryPointer * 2 - strokeWidth);
-
-    const svgWidth = rxSvg * 2 + strokeWidth + diffX;
-    const svgHeight = rySvg * 2 + strokeWidth + diffY;
-
-    return [
-        svgWidth,
-        svgHeight,
-    ];
-};
 
 /**
  * Max pointer [rx, ry] is used to define svg size, svg center position,
@@ -183,50 +163,6 @@ export const getInitialPointers = (
     return pointers;
 };
 
-/**
- * Calculate the center point of the SVG.
- */
-export const getSVGCenter = (svgRadii: Vector2, maxPointerRadii: Vector2, strokeWidth: number) : Vector2 => {
-
-    const [ svgWidth, svgHeight ] = getSVGSize(svgRadii, maxPointerRadii, strokeWidth);
-
-    return [
-        setDecimalPlaces(svgWidth / 2, 2),
-        setDecimalPlaces(svgHeight / 2, 2)
-    ];
-};
-
-/**
- * Get start & end points of SVG ellipse/circle segment.
- * Also define the 'large-arc-flag' property of svg path data elliptical arc.
- * Elliptical arc: rx ry angle large-arc-flag sweep-flag x y.
- */
-export const getEllipseSegment = (
-    startAngleDegrees: number,
-    endAngleDegrees: number,
-    svgRadii: Vector2,
-    pointerRadii: Vector2,
-    strokeWidth: number
-) : IEllipse => {
-
-    let _endAngleDegrees = endAngleDegrees;
-    const largeArcFlag = _endAngleDegrees - startAngleDegrees <= 180 ? 0 : 1;
-
-    if(startAngleDegrees > _endAngleDegrees){
-        _endAngleDegrees += 360;
-    }
-
-    const center = getSVGCenter(svgRadii, pointerRadii, strokeWidth);
-
-    const sliderStartPoint = polarToCartesian(center, svgRadii, degreesToRadians(startAngleDegrees));
-    const sliderEndPoint = polarToCartesian(center, svgRadii, degreesToRadians(_endAngleDegrees));
-
-    return {
-        start: sliderStartPoint,
-        end: sliderEndPoint,
-        largeArcFlag,
-    }
-};
 
 /**
  * User provides pointer values that are transformed to percents.
@@ -431,7 +367,6 @@ export const handlePointerZIndex = (activePointerId: string|null, pointers: ISta
 
     return _pointers;
 };
-
 
 /**
  * In case of multiple pointers, get the pointer, that its value is "next".

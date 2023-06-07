@@ -1,6 +1,6 @@
 import { IEllipse } from '../src/core/interfaces';
 import { Vector2 } from 'mz-math';
-import { getEllipseSegment } from '../src/core/domain/slider-provider';
+import { getEllipseSegment } from '../src/core/domain/svg-provider';
 
 describe('Ellipse Segment', () => {
     test('returns correct ellipse segment for start angle 0 and end angle 90', () => {
