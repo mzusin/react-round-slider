@@ -10,7 +10,7 @@ import {
     getInitialPointers,
     getMaxPointer,
     getMinMax, getPointerPercentByMouse, handleOverlap,
-    handleValueChange, updateMultiplePointersValue, updateSinglePointerValue
+    updateMultiplePointersValue, updateSinglePointerValue
 } from './domain/slider-provider';
 import { getEllipseSegment, getSVGCenter, getSVGSize } from './domain/svg-provider';
 import { getBoolean, getNumber, getString } from './domain/common';
