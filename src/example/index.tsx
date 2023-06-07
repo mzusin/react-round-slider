@@ -9,15 +9,15 @@ const App = () => {
                 min={ 0 }
                 max={ 100 }
 
-                rx={ 250 }
+                rx={ 150 }
                 ry={ 150 }
 
                 startAngleDegrees={ 0 }
                 endAngleDegrees={ 360 }
 
                 strokeWidth={ 15 }
-                bgColor="#285f68"
-                connectionBgColor="#86e02c"
+                bgColor="red"
+                connectionBgColor="blue"
             />
 
             <RoundSlider

@@ -1,23 +1,24 @@
 import { IPointer } from '../interfaces';
 import { useEffect, useState } from 'react';
-import { getPointerPositionByPercent } from '../domain/slider-provider';
 import { Vector2 } from 'mz-math';
-import { useAppSelector } from '../data/store';
+import { getPointerPositionByPercent } from '../domain/slider-provider';
 
-export const Pointer = (props: IPointer) => {
+const Pointer = (props: IPointer) => {
 
-    const { pointer, id } = props;
-    const { percent } = pointer;
-    const [ rx, ry ] = pointer.pointerRadii;
+    const {
+        id, pointer, startEndAngle,
+        svgRadii, svgCenter,
+    } = props;
+    const { percent, pointerRadii } = pointer;
+    const [ rx, ry ] = pointerRadii;
+    const [ startAngleDegrees, endAngleDegrees ] = startEndAngle;
 
-    const [center, setCenter] = useState<Vector2|null>(null);
+    const [ center, setCenter ] = useState<Vector2|null>(null);
 
-    const angles = useAppSelector(store => store.slider.angles);
-    const [ startAngleDegrees, endAngleDegrees ] = angles;
-
-    const svgRadii = useAppSelector(store => store.slider.svgRadii);
-    const svgCenter = useAppSelector(store => store.slider.svgCenter);
-
+    /**
+     * User provides pointer values that are transformed to percents.
+     * These percents should be transformed to the positions on the SVG arc.
+     */
     useEffect(() => {
 
         const { position: center } = getPointerPositionByPercent(
@@ -51,3 +52,5 @@ export const Pointer = (props: IPointer) => {
             /> : <></>
     )
 };
+
+export default Pointer;

@@ -31,7 +31,7 @@ describe('Initial Pointers', () => {
 
         const result = getInitialPointers(invalidUserSettingsPointers, min, max);
 
-        expect(result.length).toBe(0);
+        expect(result.length).toBe(1);
     });
 
     it('should sort pointers by percent', () => {
@@ -63,7 +63,11 @@ describe('Initial Pointers', () => {
 
         const result = getInitialPointers(invalidUserSettingsPointers, min, max);
 
-        expect(result).toEqual([]);
+        expect(result.length).toBe(1);
+        expect(result[0].id).toBeDefined();
+        expect(result[0].index).toBe(0);
+        expect(result[0].percent).toBe(0);
+        expect(result[0].pointerRadii).toStrictEqual([ 10, 10 ]);
     });
 
 });

@@ -1,11 +1,11 @@
-import { mod, Vector2 } from 'mz-math';
-import { DEFAULT_START_ANGLE, DEFAULT_END_ANGLE } from './defaults';
-import { getNumber } from './common';
-
 /**
  * Defines if the current angle is in the provided range [startAngle, endAngle].
  * It should work with the SVG path elliptic arc segment.
  */
+import { getNumber } from './common';
+import { mod, Vector2 } from 'mz-math';
+import { DEFAULT_END_ANGLE, DEFAULT_START_ANGLE } from './defaults';
+
 export const isAngleInArc = (startAngleDegrees: number, endAngleDegrees: number, currentDegrees: number) : boolean => {
     return currentDegrees >= startAngleDegrees && currentDegrees <= endAngleDegrees ||
         (currentDegrees + 360) >= startAngleDegrees && (currentDegrees + 360) <= endAngleDegrees;

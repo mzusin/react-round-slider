@@ -1,17 +1,17 @@
 import {
     convertRange,
     degreesToRadians,
-    ellipseMovement,
-    getV2Angle, getAnglesSub,
-    polarToCartesian,
-    radiansToDegrees,
-    v2Sub,
-    Vector2, setDecimalPlaces, isNumber, mod, newId,
+    ellipseMovement, getAnglesSub,
+    mod,
+    newId,
+    polarToCartesian, radiansToDegrees,
+    setDecimalPlaces, v2Sub,
+    Vector2
 } from 'mz-math';
-import { isAngleInArc } from './angles-provider';
-import { IStatePointer, IUserSettingsPointer, TData, TStep } from '../interfaces';
-import { DEFAULT_POINTER_RX, DEFAULT_POINTER_RY, MAX_VALUE_DEFAULT, MIN_VALUE_DEFAULT } from './defaults';
+import { IEllipse, IStatePointer, IUserSettingsPointer, TData } from '../interfaces';
 import { getNumber } from './common';
+import { DEFAULT_POINTER_RX, DEFAULT_POINTER_RY, MAX_VALUE_DEFAULT, MIN_VALUE_DEFAULT } from './defaults';
+import { isAngleInArc } from './angles-provider';
 
 /**
  * Calculate SVG size depending on ellipse radii and max pointer size.
@@ -34,180 +34,20 @@ export const getSVGSize = (svgRadii: Vector2, maxPointerRadii: Vector2, strokeWi
 };
 
 /**
- * Calculate the center point of the SVG.
- */
-export const getSVGCenter = (svgRadii: Vector2, maxPointerRadii: Vector2, strokeWidth: number) : Vector2 => {
-
-    const [ svgWidth, svgHeight ] = getSVGSize(svgRadii, maxPointerRadii, strokeWidth);
-
-    return [
-        setDecimalPlaces(svgWidth / 2, 2),
-        setDecimalPlaces(svgHeight / 2, 2)
-    ];
-};
-
-/**
- * Get start & end points of SVG ellipse/circle segment.
- * Also define the 'large-arc-flag' property of svg path data elliptical arc.
- * Elliptical arc: rx ry angle large-arc-flag sweep-flag x y.
- */
-export const getEllipseSegment = (
-    startAngleDegrees: number,
-    endAngleDegrees: number,
-    svgRadii: Vector2,
-    pointerRadii: Vector2,
-    strokeWidth: number
-) => {
-
-    let _endAngleDegrees = endAngleDegrees;
-    const largeArcFlag = _endAngleDegrees - startAngleDegrees <= 180 ? 0 : 1;
-
-    if(startAngleDegrees > _endAngleDegrees){
-        _endAngleDegrees += 360;
-    }
-
-    const center = getSVGCenter(svgRadii, pointerRadii, strokeWidth);
-
-    const sliderStartPoint = polarToCartesian(center, svgRadii, degreesToRadians(startAngleDegrees));
-    const sliderEndPoint = polarToCartesian(center, svgRadii, degreesToRadians(_endAngleDegrees));
-
-    return {
-        sliderStartPoint,
-        sliderEndPoint,
-        largeArcFlag,
-    }
-};
-
-/**
- * On initialization, user provides pointer values that are transformed to percents.
- * These percents should be transformed to the positions on the SVG arc.
- */
-export const getPointerPositionByPercent = (
-    percent: number,
-    startAngleDegrees: number,
-    endAngleDegrees: number,
-    svgRadii: Vector2,
-    center: Vector2,
-) : {
-    position: Vector2,
-    angleDegrees: number,
-} => {
-    const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
-    const percentAngle = percent * angleDiff / 100;
-    const angleDegrees = mod(startAngleDegrees + percentAngle, 360);
-
-    let angleRad = degreesToRadians(angleDegrees);
-
-    // Convert the angle from the range [0, Math.PI*2] to the range [0, Math.PI].
-    angleRad = convertRange(angleRad, 0, Math.PI*2, 0, Math.PI);
-
-    return {
-        position: ellipseMovement(center, angleRad, svgRadii[0], svgRadii[1]),
-        angleDegrees,
-    };
-};
-
-/**
- * Once user drags the pointer, get updated pointer percent
- * depending on the new mouse position.
- */
-export const getPointerPercentByMouse = (
-    $svg: SVGSVGElement,
-    absoluteMouse: Vector2,
-    center: Vector2,
-    svgRadii: Vector2,
-    startAngleDegrees: number,
-    endAngleDegrees: number,
-    min: number,
-    max: number
-) : number => {
-    const [clientX, clientY] = absoluteMouse;
-
-    const { left, top } = $svg.getBoundingClientRect();
-
-    const relativeMouse: Vector2 = [
-        clientX - left,
-        clientY - top,
-    ];
-
-    const vector = v2Sub(relativeMouse, center);
-
-    const [rx, ry] = svgRadii;
-
-    let angleRad = Math.atan2(vector[1] / ry, vector[0] / rx);
-    if(angleRad < 0){
-        angleRad += 2 * Math.PI;
-    }
-
-    const degrees = radiansToDegrees(angleRad);
-
-    const isInArc = isAngleInArc(startAngleDegrees, endAngleDegrees, degrees);
-    if(!isInArc){
-        const angleSub1 = getAnglesSub(degrees, startAngleDegrees);
-        const angleSub2 = getAnglesSub(degrees, endAngleDegrees);
-        return angleSub1 <= angleSub2 ? min : max;
-    }
-
-    const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
-
-    return degrees * 100 / angleDiff;
-};
-
-/**
- * Define pointer position according to the current user settings and mouse/touch position.
- */
-export const getPointerPosition = (
-    $svg: SVGSVGElement,
-    absoluteMouse: Vector2,
-    center: Vector2,
-    svgRadii: Vector2,
-    startAngleDegrees: number,
-    endAngleDegrees: number,
-    sliderStartPoint: Vector2,
-    sliderEndPoint: Vector2,
-) : Vector2 => {
-    const [clientX, clientY] = absoluteMouse;
-
-    const { left, top } = $svg.getBoundingClientRect();
-
-    const relativeMouse: Vector2 = [
-        clientX - left,
-        clientY - top,
-    ];
-
-    const vector = v2Sub(relativeMouse, center);
-
-    let angle = getV2Angle(vector);
-    if(angle < 0){
-        angle += 2 * Math.PI;
-    }
-
-    const degrees = radiansToDegrees(angle);
-    const angleSub1 = getAnglesSub(degrees, startAngleDegrees);
-    const angleSub2 = getAnglesSub(degrees, endAngleDegrees);
-
-    const isInArc = isAngleInArc(startAngleDegrees, endAngleDegrees, degrees);
-    if(!isInArc){
-        return angleSub1 <= angleSub2 ? sliderStartPoint : sliderEndPoint;
-    }
-
-    // Convert the angle from the range [0, Math.PI*2] to the range [0, Math.PI].
-    angle = convertRange(angle, 0, Math.PI*2, 0, Math.PI);
-    return ellipseMovement(center, angle, svgRadii[0], svgRadii[1]);
-};
-
-/**
  * Max pointer [rx, ry] is used to define svg size, svg center position,
  * and also ellipse/circle properties.
  */
 export const getMaxPointer = (pointers: IStatePointer[]) : Vector2 => {
+    if(pointers.length <= 0) return [0, 0];
+
     let maxX = -Infinity;
     let maxY = -Infinity;
 
     for(const pointer of pointers){
-        const [rx, ry] =  pointer.pointerRadii;
-        maxX = Math.max(maxX, rx);
-        maxY = Math.max(maxY, ry);
+        const [rx, ry] = pointer.pointerRadii;
+
+        maxX = Math.max(maxX, Math.max(0, rx));
+        maxY = Math.max(maxY, Math.max(0, ry));
     }
 
     return [
@@ -244,34 +84,6 @@ export const getMinMax = (
     }
 
     return [_min, _max];
-};
-
-/**
- * Step is defined in absolute units (not percent!)
- * This function should validate step provided by the user,
- * for example the case when step > all the data range.
- */
-export const getStep = (userStep: TStep, min: number, max: number) : TStep => {
-    if(userStep === null || userStep === undefined){
-        return undefined;
-    }
-
-    if (typeof userStep === 'function') {
-        return userStep;
-    }
-
-    if(isNumber(userStep)){
-        let step = getNumber(userStep, 1);
-
-        const diff = Math.abs(max - min);
-        if (step > diff) {
-            step = undefined;
-        }
-
-        return step;
-    }
-
-    return undefined;
 };
 
 /**
@@ -322,9 +134,10 @@ export const getInitialPointers = (
 ) : IStatePointer[] => {
 
     const pointers: IStatePointer[] = [];
+    const _userSettingsPointers = userSettingsPointers || [];
 
-    for(let i=0; i<userSettingsPointers.length; i++){
-        const userSettingsPointer = userSettingsPointers[i];
+    for(let i=0; i<_userSettingsPointers.length; i++){
+        const userSettingsPointer = _userSettingsPointers[i];
         if(userSettingsPointer.rx <= 0 || userSettingsPointer.ry <= 0) continue;
 
         const value = getValue(userSettingsPointer.value, min, max, data);
@@ -358,11 +171,178 @@ export const getInitialPointers = (
         }
     }
 
-    if(pointers.length <= 0) {
-        // TODO
+    if(!pointers || pointers.length <= 0) {
+        return [{
+            pointerRadii: [ DEFAULT_POINTER_RX, DEFAULT_POINTER_RY ],
+            percent: 0,
+            id: newId(),
+            index: 0,
+        }];
     }
 
     return pointers;
+};
+
+/**
+ * Calculate the center point of the SVG.
+ */
+export const getSVGCenter = (svgRadii: Vector2, maxPointerRadii: Vector2, strokeWidth: number) : Vector2 => {
+
+    const [ svgWidth, svgHeight ] = getSVGSize(svgRadii, maxPointerRadii, strokeWidth);
+
+    return [
+        setDecimalPlaces(svgWidth / 2, 2),
+        setDecimalPlaces(svgHeight / 2, 2)
+    ];
+};
+
+/**
+ * Get start & end points of SVG ellipse/circle segment.
+ * Also define the 'large-arc-flag' property of svg path data elliptical arc.
+ * Elliptical arc: rx ry angle large-arc-flag sweep-flag x y.
+ */
+export const getEllipseSegment = (
+    startAngleDegrees: number,
+    endAngleDegrees: number,
+    svgRadii: Vector2,
+    pointerRadii: Vector2,
+    strokeWidth: number
+) : IEllipse => {
+
+    let _endAngleDegrees = endAngleDegrees;
+    const largeArcFlag = _endAngleDegrees - startAngleDegrees <= 180 ? 0 : 1;
+
+    if(startAngleDegrees > _endAngleDegrees){
+        _endAngleDegrees += 360;
+    }
+
+    const center = getSVGCenter(svgRadii, pointerRadii, strokeWidth);
+
+    const sliderStartPoint = polarToCartesian(center, svgRadii, degreesToRadians(startAngleDegrees));
+    const sliderEndPoint = polarToCartesian(center, svgRadii, degreesToRadians(_endAngleDegrees));
+
+    return {
+        start: sliderStartPoint,
+        end: sliderEndPoint,
+        largeArcFlag,
+    }
+};
+
+/**
+ * User provides pointer values that are transformed to percents.
+ * These percents should be transformed to the positions on the SVG arc.
+ */
+export const getPointerPositionByPercent = (
+    percent: number,
+    startAngleDegrees: number,
+    endAngleDegrees: number,
+    svgRadii: Vector2,
+    center: Vector2,
+) : {
+    position: Vector2,
+    angleDegrees: number,
+} => {
+    const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
+    const percentAngle = percent * angleDiff / 100;
+    const angleDegrees = mod(startAngleDegrees + percentAngle, 360);
+
+    let angleRad = degreesToRadians(angleDegrees);
+
+    // Convert the angle from the range [0, Math.PI*2] to the range [0, Math.PI].
+    angleRad = convertRange(angleRad, 0, Math.PI*2, 0, Math.PI);
+
+    return {
+        position: ellipseMovement(center, angleRad, svgRadii[0], svgRadii[1]),
+        angleDegrees,
+    };
+};
+
+export const getMinMaxPointer = (pointers: IStatePointer[]) : [IStatePointer, IStatePointer] | null => {
+    if(!pointers || pointers.length < 2) return null;
+
+    let minPercent = Infinity;
+    let minPointer: IStatePointer|null = null;
+
+    let maxPercent = -Infinity;
+    let maxPointer: IStatePointer|null = null;
+
+    for(let i=0; i<pointers.length; i++){
+        const pointer = pointers[i];
+
+        if(pointer.percent < minPercent){
+            minPercent = pointer.percent;
+            minPointer = pointer;
+        }
+
+        if(pointer.percent > maxPercent){
+            maxPercent = pointer.percent;
+            maxPointer = pointer;
+        }
+    }
+
+    if(minPointer === null || maxPointer === null) return null;
+
+    return [minPointer, maxPointer];
+};
+
+/**
+ * Once user drags the pointer, get updated pointer percent
+ * depending on the new mouse position.
+ */
+export const getPointerPercentByMouse = (
+    $svg: SVGSVGElement,
+    absoluteMouse: Vector2,
+    center: Vector2,
+    svgRadii: Vector2,
+    startAngleDegrees: number,
+    endAngleDegrees: number,
+    min: number,
+    max: number
+) : number => {
+    const [clientX, clientY] = absoluteMouse;
+
+    const { left, top } = $svg.getBoundingClientRect();
+
+    const relativeMouse: Vector2 = [
+        clientX - left,
+        clientY - top,
+    ];
+
+    const vector = v2Sub(relativeMouse, center);
+
+    const [rx, ry] = svgRadii;
+
+    let angleRad = Math.atan2(vector[1] / ry, vector[0] / rx);
+    if(angleRad < 0){
+        angleRad += 2 * Math.PI;
+    }
+
+    const degrees = radiansToDegrees(angleRad);
+
+    const isInArc = isAngleInArc(startAngleDegrees, endAngleDegrees, degrees);
+    if(!isInArc){
+        const angleSub1 = getAnglesSub(degrees, startAngleDegrees);
+        const angleSub2 = getAnglesSub(degrees, endAngleDegrees);
+        return angleSub1 <= angleSub2 ? min : max;
+    }
+
+    const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
+
+    return degrees * 100 / angleDiff;
+};
+
+const isPanelClicked = ($target: HTMLElement) => {
+    return $target.getAttribute('data-type') === 'panel';
+};
+
+const isConnectionClicked = ($target: HTMLElement) => {
+    return $target.getAttribute('data-type') === 'panel-fill';
+};
+
+const isPointerClicked = ($target: HTMLElement, id: string) => {
+    return $target.getAttribute('data-type') === 'pointer' &&
+        $target.getAttribute('data-id') === id ||
+        $target.querySelector(`[data-type="pointer"][data-index="${ id }"]`) !== null;
 };
 
 /**
@@ -407,7 +387,7 @@ export const getActivePointerId = (
             }
         }
 
-        //console.log(`Clicked on panel. Th closest pointer id is ${ minDistancePointerId }`)
+        // console.log(`Clicked on panel. The closest pointer id is ${ minDistancePointerId }`)
         return minDistancePointerId;
     }
 
@@ -422,20 +402,6 @@ export const getActivePointerId = (
 
     //console.log(`Returned selectedPointerId ${ selectedPointerId }`);
     return selectedPointerId;
-};
-
-const isPanelClicked = ($target: HTMLElement) => {
-    return $target.getAttribute('data-type') === 'panel';
-};
-
-const isConnectionClicked = ($target: HTMLElement) => {
-    return $target.getAttribute('data-type') === 'panel-fill';
-};
-
-const isPointerClicked = ($target: HTMLElement, id: string) => {
-    return $target.getAttribute('data-type') === 'pointer' &&
-           $target.getAttribute('data-id') === id ||
-           $target.querySelector(`[data-type="pointer"][data-index="${ id }"]`) !== null;
 };
 
 /**
@@ -466,33 +432,6 @@ export const handlePointerZIndex = (activePointerId: string|null, pointers: ISta
     return _pointers;
 };
 
-export const getMinMaxPointer = (pointers: IStatePointer[]) : [IStatePointer, IStatePointer] | null => {
-    if(!pointers || pointers.length < 2) return null;
-
-    let minPercent = Infinity;
-    let minPointer: IStatePointer|null = null;
-
-    let maxPercent = -Infinity;
-    let maxPointer: IStatePointer|null = null;
-
-    for(let i=0; i<pointers.length; i++){
-        const pointer = pointers[i];
-
-        if(pointer.percent < minPercent){
-            minPercent = pointer.percent;
-            minPointer = pointer;
-        }
-
-        if(pointer.percent > maxPercent){
-            maxPercent = pointer.percent;
-            maxPointer = pointer;
-        }
-    }
-
-    if(minPointer === null || maxPointer === null) return null;
-
-    return [minPointer, maxPointer];
-};
 
 /**
  * In case of multiple pointers, get the pointer, that its value is "next".
@@ -510,5 +449,3 @@ export const getNextPrevPointer = (pointers: IStatePointer[], currentPointerId: 
 
     return [currentPointer, nextPointer, prevPointer];
 };
-
-

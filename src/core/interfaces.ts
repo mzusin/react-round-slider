@@ -1,9 +1,9 @@
 import { Vector2 } from 'mz-math';
 
-// --------------------------- USER PROVIDED SETTINGS ------------------------------------
-
 export type TStep = ((value: number | string, percent: number) => number) | number | undefined | null;
 export type TData = (string | number)[] | undefined;
+
+// --------------------------- USER PROVIDED SETTINGS ------------------------------------
 
 export interface IUserSettingsPointer {
     rx?: number;
@@ -41,49 +41,36 @@ export interface IStatePointer {
     index: number;
 }
 
-export interface IState {
-
-    // svg look & feel properties ---------
-    svgRadii: Vector2;
-    angles: Vector2; // start and end angle of the SVG ellipse / circle
-    strokeWidth: number;
-    bgColor: string;
-    connectionBgColor: string;
-
-    // data -------------------------------
-    min: number;
-    max: number;
-    step: TStep; // step is defined in absolute units (not percent!)
-
-    // pointers ---------------------------
-    pointers: IStatePointer[];
-    selectedPointerId: string|null;
-    pointersOverlap: boolean;
-
-    // calculated properties --------------
-    svgSize:  Vector2;
-    svgCenter: Vector2;
-
-    sliderStartPoint: Vector2;
-    sliderEndPoint: Vector2;
+export interface IEllipse {
+    start: Vector2;
+    end: Vector2;
     largeArcFlag: number;
 }
+
 
 // --------------------------- COMPONENTS ------------------------------------
 
 export interface IPointer {
     id: string;
     pointer: IStatePointer;
+    startEndAngle: Vector2;
+    svgRadii: Vector2;
+    svgCenter: Vector2;
 }
 
 export interface IPanel {
-
+    ellipse: IEllipse;
+    strokeWidth: number;
+    svgRadii: Vector2;
+    bgColor: string;
 }
 
 export interface IConnection {
-
+    pointers: IStatePointer[];
+    ellipse: IEllipse;
+    strokeWidth: number;
+    svgRadii: Vector2;
+    connectionBgColor: string;
+    startEndAngle: Vector2;
+    svgCenter: Vector2;
 }
-
-
-
-
