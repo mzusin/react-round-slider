@@ -9,8 +9,8 @@ import {
     getActivePointerId,
     getInitialPointers,
     getMaxPointer,
-    getMinMax, getNextPrevPointer, getPointerPercentByMouse,
-    handlePointerZIndex
+    getMinMax, getPointerPercentByMouse, handleOverlap,
+    handleValueChange, updateMultiplePointersValue, updateSinglePointerValue
 } from './domain/slider-provider';
 import { getEllipseSegment, getSVGCenter, getSVGSize } from './domain/svg-provider';
 import { getBoolean, getNumber, getString } from './domain/common';
@@ -30,7 +30,6 @@ export const RoundSlider = (props: IUserSettings) => {
 
     const svgRef = useRef<SVGSVGElement>(null);
     const sliderRef = useRef<SVGPathElement>(null);
-    const spId = useRef(''); // selected pointer id
     const isClickOrDrag = useRef<'click'|'drag'>('click');
 
     const [ selectedPointerId, setSelectedPointerId ] = useState<string|null>(null);
@@ -185,10 +184,6 @@ export const RoundSlider = (props: IUserSettings) => {
         strokeWidth,
     ]);
 
-    useEffect(() => {
-        spId.current = selectedPointerId;
-    }, [selectedPointerId]);
-
     const onValueChange = (evt: MouseEvent | ReactMouseEvent | TouchEvent | ReactTouchEvent) => {
 
         if(!svgRef || !svgRef.current) return;
@@ -196,6 +191,10 @@ export const RoundSlider = (props: IUserSettings) => {
         const mouseX = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientX : (evt as TouchEvent).touches[0].clientX;
         const mouseY = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientY : (evt as TouchEvent).touches[0].clientY;
 
+        /**
+         * Once user drags the pointer, get updated pointer percent
+         * depending on the new mouse position.
+         */
         let updatedPercent = getPointerPercentByMouse(
             svgRef.current as SVGSVGElement,
             [mouseX, mouseY],
@@ -207,54 +206,51 @@ export const RoundSlider = (props: IUserSettings) => {
             max,
         );
 
-        const activePointerId = getActivePointerId(
-            evt.target as HTMLElement,
-            pointers,
-            updatedPercent,
-            spId.current,
-            startAngleDegrees,
-            endAngleDegrees,
-            isClickOrDrag.current
-        );
-
-        const _pointers = handlePointerZIndex(activePointerId, pointers);
-        spId.current = activePointerId;
-        const skipOverlapCheck = pointersOverlap || pointers.length <= 1 || max === min;
-
-        if(!skipOverlapCheck) {
-            // Pointers non-overlap cases: -----------------------------------
-            // We need immediate access to the latest pointers version.
-            // const latestPointers = (store.getState() as RootState).slider.pointers;
-            const [currentPointer, nextPointer, prevPointer] = getNextPrevPointer(pointers, spId.current); // latestPointers
-            const diff = (updatedPercent - currentPointer.percent);
-
-            const range = Math.abs(max - min) / 2;
-
-            if(diff !== 0 && currentPointer.percent !== 0 && updatedPercent !== 0){
-                const isClockwise = Math.abs(diff) > range ? diff < 0 : diff >= 0;
-
-                if(isClockwise && nextPointer.percent >= currentPointer.percent) {
-                    updatedPercent = Math.min(updatedPercent, nextPointer.percent);
-                }
-
-                if(!isClockwise && prevPointer.percent <= currentPointer.percent) {
-                    updatedPercent = Math.max(updatedPercent, prevPointer.percent);
-                }
-            }
+        // SINGLE POINTER -----------------------------------------
+        if(pointers.length <= 1) {
+            setPointers(currentPointers => {
+                return updateSinglePointerValue(currentPointers, updatedPercent);
+            });
+            return;
         }
 
-        setPointers(_pointers);
-        setSelectedPointerId(activePointerId);
-        if(activePointerId === null) return;
+        /**
+         * There can be multiple pointers, part of them can be disabled.
+         * This code defines the current active pointer.
+         */
+        let _selectedPointerId = selectedPointerId;
+        setSelectedPointerId(currentSelectedPointerId => {
+            _selectedPointerId = getActivePointerId(
+                evt.target as HTMLElement,
+                pointers,
+                updatedPercent,
+                currentSelectedPointerId,
+                startAngleDegrees,
+                endAngleDegrees,
+                isClickOrDrag.current
+            );
+            return _selectedPointerId;
+        });
 
-        const pointerIndex = _pointers.findIndex(p => p.id === activePointerId);
-        if(pointerIndex === -1) return;
+        // MULTIPLE POINTERS ---------------------------------------
+        if(_selectedPointerId === null) return;
 
-        const copy = [..._pointers];
-        const pointer = {...copy[pointerIndex]};
-        pointer.percent = updatedPercent;
-        copy[pointerIndex] = pointer;
-        setPointers(copy);
+        const skipOverlapCheck = pointersOverlap || max === min;
+        if(!skipOverlapCheck) {
+            updatedPercent = handleOverlap(
+                updatedPercent,
+                pointers,
+                _selectedPointerId,
+                min,
+                max
+            );
+        }
+
+        setPointers(currentPointers => {
+            return updateMultiplePointersValue(currentPointers, updatedPercent, _selectedPointerId);
+        });
+
+        // const updatedPointers = handlePointerZIndex(activePointerId, pointers);
     }
 
     const onMouseDown = (evt: MouseEvent | ReactMouseEvent) => {

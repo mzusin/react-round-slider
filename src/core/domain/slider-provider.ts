@@ -384,3 +384,69 @@ export const getNextPrevPointer = (pointers: IStatePointer[], currentPointerId: 
 
     return [currentPointer, nextPointer, prevPointer];
 };
+
+/**
+ * In case of single pointer, update its value.
+ */
+export const updateSinglePointerValue = (
+    pointers: IStatePointer[],
+    updatedPercent: number
+) => {
+    const copy = [...pointers];
+    const pointer = copy[0];
+    pointer.percent = updatedPercent;
+    copy[0] = pointer;
+
+    return copy;
+};
+
+/**
+ * In case of multiple pointers, find the active pointer,
+ * and update its value.
+ */
+export const updateMultiplePointersValue = (
+    pointers: IStatePointer[],
+    updatedPercent: number,
+    selectedPointerId: string
+) => {
+    if(!selectedPointerId) return pointers;
+
+    const pointerIndex = pointers.findIndex(p => p.id === selectedPointerId);
+    if(pointerIndex === -1) return pointers;
+
+    const copy = [...pointers];
+    const pointer = {...copy[pointerIndex]};
+    pointer.percent = updatedPercent;
+    copy[pointerIndex] = pointer;
+
+    return copy;
+};
+
+export const handleOverlap = (
+    updatedPercent: number,
+    pointers: IStatePointer[],
+    activePointerId: string,
+    min: number,
+    max: number,
+) => {
+    // Pointers non-overlap cases: -----------------------------------
+    // We need immediate access to the latest pointers version.
+    const [currentPointer, nextPointer, prevPointer] = getNextPrevPointer(pointers, activePointerId); // activePointerId selectedPointerId
+    const diff = (updatedPercent - currentPointer.percent);
+
+    const range = Math.abs(max - min) / 2;
+
+    if(diff !== 0 && currentPointer.percent !== 0 && updatedPercent !== 0){
+        const isClockwise = Math.abs(diff) > range ? diff < 0 : diff >= 0;
+
+        if(isClockwise && nextPointer.percent >= currentPointer.percent) {
+            updatedPercent = Math.min(updatedPercent, nextPointer.percent);
+        }
+
+        if(!isClockwise && prevPointer.percent <= currentPointer.percent) {
+            updatedPercent = Math.max(updatedPercent, prevPointer.percent);
+        }
+    }
+
+    return updatedPercent;
+};
