@@ -235,18 +235,19 @@ export const RoundSlider = (props: IUserSettings) => {
         // MULTIPLE POINTERS ---------------------------------------
         if(_selectedPointerId === null) return;
 
-        const skipOverlapCheck = pointersOverlap || max === min;
-        if(!skipOverlapCheck) {
-            updatedPercent = handleOverlap(
-                updatedPercent,
-                pointers,
-                _selectedPointerId,
-                min,
-                max
-            );
-        }
-
         setPointers(currentPointers => {
+            const skipOverlapCheck = pointersOverlap || max === min;
+
+            if(!skipOverlapCheck) {
+                updatedPercent = handleOverlap(
+                    updatedPercent,
+                    currentPointers,
+                    _selectedPointerId,
+                    min,
+                    max
+                );
+            }
+
             return updateMultiplePointersValue(currentPointers, updatedPercent, _selectedPointerId);
         });
 
