@@ -41,19 +41,34 @@ const Pointer = (props: IPointer) => {
     return (
         center ?
             <>
-                <ellipse
-                    data-type="pointer"
-                    data-index={ pointer.index }
-                    data-id={ id }
-                    cx={ center[0] }
-                    cy={ center[1]}
-                    rx={ rx }
-                    ry={ ry }
-                    cursor="pointer"
-                    fill={ pointerBgColor }
-                />
+                {
+                    !pointerSVG &&
+                    <ellipse
+                        data-type="pointer"
+                        data-index={ pointer.index }
+                        data-id={ id }
+                        cx={ center[0] }
+                        cy={ center[1]}
+                        rx={ rx }
+                        ry={ ry }
+                        cursor="pointer"
+                        fill={ pointerBgColor }
+                    />
+                }
 
-                { pointerSVG }
+                {
+                    pointerSVG &&
+                    <g
+                        data-type="pointer"
+                        data-index={ pointer.index }
+                        data-id={ id }
+                        cursor="pointer"
+                        transform={ `translate(${ center[0] - rx/2 }, ${ center[1] - ry/2 })` }>
+                        <g pointerEvents="none">
+                            { pointerSVG }
+                        </g>
+                    </g>
+                }
             </> : <></>
     )
 };

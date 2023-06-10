@@ -34,9 +34,6 @@ const App = () => {
                 bgColor="#285f68"
                 connectionBgColor="#86e02c"
                 pointerBgColor="red"
-                pointerSVG={
-                    <image href="settings-icon.png" height="25" width="25" />
-                }
 
                 pointers={[
                     {
@@ -44,18 +41,21 @@ const App = () => {
                         ry: 25,
                         value: 10,
                         bgColor: 'blue',
+                        pointerSVG: <image href="settings-icon.png" height="25" width="25" />
                     },
 
                     {
                         rx: 15,
                         ry: 15,
                         value: 50,
+                        pointerSVG: <image href="settings-icon.png" height="15" width="15" />
                     },
 
                     {
                         rx: 20,
                         ry: 20,
                         value: 25,
+                        pointerSVG: <image href="settings-icon.png" height="20" width="20" />
                     },
 
                     {
