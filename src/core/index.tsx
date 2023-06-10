@@ -16,7 +16,7 @@ import { getEllipseSegment, getSVGCenter, getSVGSize } from './domain/svg-provid
 import { getBoolean, getNumber, getString } from './domain/common';
 import {
     DEFAULT_BG_COLOR,
-    DEFAULT_CONNECTION_BG_COLOR,
+    DEFAULT_CONNECTION_BG_COLOR, DEFAULT_POINTER_BG_COLOR,
     DEFAULT_STROKE_WIDTH,
     DEFAULT_SVG_RX,
     DEFAULT_SVG_RY, POINTER_OVERLAP_DEFAULT
@@ -48,6 +48,7 @@ export const RoundSlider = (props: IUserSettings) => {
     });
     const [ bgColor, setBgColor ] = useState(DEFAULT_BG_COLOR);
     const [ connectionBgColor, setConnectionBgColor ] = useState(DEFAULT_CONNECTION_BG_COLOR);
+    const [ pointerBgColor, setPointerBgColor ] = useState(DEFAULT_POINTER_BG_COLOR);
     const [ pointersOverlap, setPointersOverlap ] = useState(false);
 
     const [ min, max ] = minMax;
@@ -56,15 +57,12 @@ export const RoundSlider = (props: IUserSettings) => {
 
     useEffect(() => {
         setBgColor(getString(props.bgColor, DEFAULT_BG_COLOR));
-    }, [
-        props.bgColor,
-    ]);
-
-    useEffect(() => {
         setConnectionBgColor(getString(props.connectionBgColor, DEFAULT_CONNECTION_BG_COLOR));
+        setPointerBgColor(getString(props.pointerBgColor, DEFAULT_POINTER_BG_COLOR));
     }, [
         props.bgColor,
         props.connectionBgColor,
+        props.pointerBgColor
     ]);
 
     useEffect(() => {
@@ -116,13 +114,15 @@ export const RoundSlider = (props: IUserSettings) => {
             props.pointers,
             min,
             max,
-            props.data
+            props.data,
+            pointerBgColor
         ));
     }, [
         props.pointers,
         props.data,
         min,
         max,
+        pointerBgColor,
     ]);
 
     /**
@@ -319,6 +319,7 @@ export const RoundSlider = (props: IUserSettings) => {
                             startEndAngle={ startEndAngle }
                             svgRadii={ svgRadii }
                             svgCenter={ svgCenter }
+                            pointerBgColor={ pointer.bgColor }
                         />
                     )
                 })

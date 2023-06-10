@@ -9,6 +9,7 @@ export interface IUserSettingsPointer {
     rx?: number;
     ry?: number;
     value?: number | string;
+    bgColor?: string;
 }
 
 export interface IUserSettings {
@@ -27,6 +28,7 @@ export interface IUserSettings {
 
     bgColor?: string;
     connectionBgColor?: string;
+    pointerBgColor?: string;
 
     startAngleDegrees?: number;
     endAngleDegrees?: number;
@@ -39,6 +41,7 @@ export interface IStatePointer {
     percent: number;
     id: string;
     index: number;
+    bgColor: string;
 }
 
 export interface IEllipse {
@@ -56,6 +59,7 @@ export interface IPointer {
     startEndAngle: Vector2;
     svgRadii: Vector2;
     svgCenter: Vector2;
+    pointerBgColor: string;
 }
 
 export interface IPanel {

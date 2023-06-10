@@ -7,7 +7,7 @@ const Pointer = (props: IPointer) => {
 
     const {
         id, pointer, startEndAngle,
-        svgRadii, svgCenter,
+        svgRadii, svgCenter, pointerBgColor,
     } = props;
     const { percent, pointerRadii } = pointer;
     const [ rx, ry ] = pointerRadii;
@@ -48,7 +48,7 @@ const Pointer = (props: IPointer) => {
                 rx={ rx }
                 ry={ ry }
                 cursor="pointer"
-                fill="#000"
+                fill={ pointerBgColor }
             /> : <></>
     )
 };

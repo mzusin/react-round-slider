@@ -33,12 +33,14 @@ const App = () => {
                 strokeWidth={ 15 }
                 bgColor="#285f68"
                 connectionBgColor="#86e02c"
+                pointerBgColor="red"
 
                 pointers={[
                     {
                         rx: 25,
                         ry: 25,
                         value: 10,
+                        bgColor: 'blue',
                     },
 
                     {

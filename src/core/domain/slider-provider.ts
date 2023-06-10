@@ -10,7 +10,13 @@ import {
 } from 'mz-math';
 import { IStatePointer, IUserSettingsPointer, TData } from '../interfaces';
 import { getNumber } from './common';
-import { DEFAULT_POINTER_RX, DEFAULT_POINTER_RY, MAX_VALUE_DEFAULT, MIN_VALUE_DEFAULT } from './defaults';
+import {
+    DEFAULT_POINTER_BG_COLOR,
+    DEFAULT_POINTER_RX,
+    DEFAULT_POINTER_RY,
+    MAX_VALUE_DEFAULT,
+    MIN_VALUE_DEFAULT
+} from './defaults';
 import { isAngleInArc } from './angles-provider';
 
 /**
@@ -110,7 +116,8 @@ export const getInitialPointers = (
     userSettingsPointers: IUserSettingsPointer[],
     min: number,
     max: number,
-    data?: TData
+    data?: TData,
+    pointerBgColor?: string,
 ) : IStatePointer[] => {
 
     const pointers: IStatePointer[] = [];
@@ -133,6 +140,7 @@ export const getInitialPointers = (
             percent,
             id: newId(),
             index: 0,
+            bgColor: userSettingsPointer.bgColor || pointerBgColor || DEFAULT_POINTER_BG_COLOR,
         };
 
         pointers.push(pointer);
@@ -157,6 +165,7 @@ export const getInitialPointers = (
             percent: 0,
             id: newId(),
             index: 0,
+            bgColor: DEFAULT_POINTER_BG_COLOR,
         }];
     }
 
