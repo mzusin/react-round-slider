@@ -18,6 +18,7 @@ import {
     MIN_VALUE_DEFAULT
 } from './defaults';
 import { isAngleInArc } from './angles-provider';
+import { ReactNode } from 'react';
 
 /**
  * Max pointer [rx, ry] is used to define svg size, svg center position,
@@ -118,6 +119,7 @@ export const getInitialPointers = (
     max: number,
     data?: TData,
     pointerBgColor?: string,
+    pointerSVG?: ReactNode,
 ) : IStatePointer[] => {
 
     const pointers: IStatePointer[] = [];
@@ -141,6 +143,7 @@ export const getInitialPointers = (
             id: newId(),
             index: 0,
             bgColor: userSettingsPointer.bgColor || pointerBgColor || DEFAULT_POINTER_BG_COLOR,
+            pointerSVG: pointerSVG || userSettingsPointer.pointerSVG,
         };
 
         pointers.push(pointer);

@@ -115,7 +115,8 @@ export const RoundSlider = (props: IUserSettings) => {
             min,
             max,
             props.data,
-            pointerBgColor
+            pointerBgColor,
+            props.pointerSVG
         ));
     }, [
         props.pointers,
@@ -123,6 +124,7 @@ export const RoundSlider = (props: IUserSettings) => {
         min,
         max,
         pointerBgColor,
+        props.pointerSVG,
     ]);
 
     /**
@@ -320,6 +322,7 @@ export const RoundSlider = (props: IUserSettings) => {
                             svgRadii={ svgRadii }
                             svgCenter={ svgCenter }
                             pointerBgColor={ pointer.bgColor }
+                            pointerSVG={ props.pointerSVG || pointer.pointerSVG }
                         />
                     )
                 })

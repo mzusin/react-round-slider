@@ -34,6 +34,9 @@ const App = () => {
                 bgColor="#285f68"
                 connectionBgColor="#86e02c"
                 pointerBgColor="red"
+                pointerSVG={
+                    <image href="settings-icon.png" height="25" width="25" />
+                }
 
                 pointers={[
                     {

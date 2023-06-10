@@ -7,7 +7,8 @@ const Pointer = (props: IPointer) => {
 
     const {
         id, pointer, startEndAngle,
-        svgRadii, svgCenter, pointerBgColor,
+        svgRadii, svgCenter,
+        pointerBgColor, pointerSVG,
     } = props;
     const { percent, pointerRadii } = pointer;
     const [ rx, ry ] = pointerRadii;
@@ -39,17 +40,21 @@ const Pointer = (props: IPointer) => {
 
     return (
         center ?
-            <ellipse
-                data-type="pointer"
-                data-index={ pointer.index }
-                data-id={ id }
-                cx={ center[0] }
-                cy={ center[1]}
-                rx={ rx }
-                ry={ ry }
-                cursor="pointer"
-                fill={ pointerBgColor }
-            /> : <></>
+            <>
+                <ellipse
+                    data-type="pointer"
+                    data-index={ pointer.index }
+                    data-id={ id }
+                    cx={ center[0] }
+                    cy={ center[1]}
+                    rx={ rx }
+                    ry={ ry }
+                    cursor="pointer"
+                    fill={ pointerBgColor }
+                />
+
+                { pointerSVG }
+            </> : <></>
     )
 };
 

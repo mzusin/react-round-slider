@@ -1,4 +1,5 @@
 import { Vector2 } from 'mz-math';
+import { ReactNode } from 'react';
 
 export type TStep = ((value: number | string, percent: number) => number) | number | undefined | null;
 export type TData = (string | number)[] | undefined;
@@ -10,6 +11,7 @@ export interface IUserSettingsPointer {
     ry?: number;
     value?: number | string;
     bgColor?: string;
+    pointerSVG?: ReactNode;
 }
 
 export interface IUserSettings {
@@ -29,6 +31,7 @@ export interface IUserSettings {
     bgColor?: string;
     connectionBgColor?: string;
     pointerBgColor?: string;
+    pointerSVG?: ReactNode;
 
     startAngleDegrees?: number;
     endAngleDegrees?: number;
@@ -42,6 +45,7 @@ export interface IStatePointer {
     id: string;
     index: number;
     bgColor: string;
+    pointerSVG?: ReactNode;
 }
 
 export interface IEllipse {
@@ -60,6 +64,7 @@ export interface IPointer {
     svgRadii: Vector2;
     svgCenter: Vector2;
     pointerBgColor: string;
+    pointerSVG?: ReactNode;
 }
 
 export interface IPanel {
