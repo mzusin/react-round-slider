@@ -72,7 +72,7 @@ const Connection = (props: IConnection) => {
         svgCenter,
         svgRadii,
     ]);
-    
+
     return (
         <>
             {

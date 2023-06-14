@@ -44,13 +44,19 @@ const Pointer = (props: IPointer) => {
                 {
                     !pointerSVG &&
                     <ellipse
+                        className={ pointer.disabled ? 'disabled' : undefined }
+                        aria-disabled={ pointer.disabled ? true : undefined }
+
                         data-type="pointer"
                         data-index={ pointer.index }
                         data-id={ id }
+                        data-percent={ pointer.percent }
+
                         cx={ center[0] }
                         cy={ center[1]}
                         rx={ rx }
                         ry={ ry }
+
                         cursor="pointer"
                         fill={ pointerBgColor }
                     />
@@ -59,9 +65,14 @@ const Pointer = (props: IPointer) => {
                 {
                     pointerSVG &&
                     <g
+                        className={ pointer.disabled ? 'disabled' : undefined }
+                        aria-disabled={ pointer.disabled ? true : undefined }
+
                         data-type="pointer"
                         data-index={ pointer.index }
                         data-id={ id }
+                        data-percent={ pointer.percent }
+
                         cursor="pointer"
                         transform={ `translate(${ center[0] - rx/2 }, ${ center[1] - ry/2 })` }>
                         <g pointerEvents="none">

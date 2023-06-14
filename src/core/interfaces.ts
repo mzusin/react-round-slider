@@ -12,6 +12,7 @@ export interface IUserSettingsPointer {
     value?: number | string;
     bgColor?: string;
     pointerSVG?: ReactNode;
+    disabled?: boolean;
 }
 
 export interface IUserSettings {
@@ -46,6 +47,7 @@ export interface IStatePointer {
     index: number;
     bgColor: string;
     pointerSVG?: ReactNode;
+    disabled: boolean;
 }
 
 export interface IEllipse {

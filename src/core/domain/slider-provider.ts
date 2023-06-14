@@ -132,7 +132,7 @@ export const getInitialPointers = (
         const value = getValue(userSettingsPointer.value, min, max, data);
 
         // scale a range [min, max] to [a, b]
-        const percent = convertRange(min, max, 0, 100, value);
+        const percent = (min === max) ? 0 : convertRange(min, max, 0, 100, value);
 
         const pointer: IStatePointer = {
             pointerRadii: [
@@ -144,6 +144,7 @@ export const getInitialPointers = (
             index: 0,
             bgColor: userSettingsPointer.bgColor || pointerBgColor || DEFAULT_POINTER_BG_COLOR,
             pointerSVG: pointerSVG || userSettingsPointer.pointerSVG,
+            disabled: userSettingsPointer.disabled === true,
         };
 
         pointers.push(pointer);
@@ -169,6 +170,7 @@ export const getInitialPointers = (
             id: newId(),
             index: 0,
             bgColor: DEFAULT_POINTER_BG_COLOR,
+            disabled: false,
         }];
     }
 
@@ -403,7 +405,9 @@ export const getNextPrevPointer = (pointers: IStatePointer[], currentPointerId: 
 export const updateSinglePointerValue = (
     pointers: IStatePointer[],
     updatedPercent: number
-) => {
+): IStatePointer[] => {
+    if(pointers[0].disabled) return pointers;
+
     const copy = [...pointers];
     const pointer = copy[0];
     pointer.percent = updatedPercent;
@@ -425,6 +429,8 @@ export const updateMultiplePointersValue = (
 
     const pointerIndex = pointers.findIndex(p => p.id === selectedPointerId);
     if(pointerIndex === -1) return pointers;
+
+    if(pointers[pointerIndex].disabled) return pointers;
 
     const copy = [...pointers];
     const pointer = {...copy[pointerIndex]};

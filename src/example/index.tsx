@@ -5,6 +5,8 @@ import { RoundSlider } from '../core';
 const App = () => {
     return (
         <>
+            <RoundSlider />
+
             <RoundSlider
                 min={ 0 }
                 max={ 100 }
@@ -18,6 +20,15 @@ const App = () => {
                 strokeWidth={ 15 }
                 bgColor="red"
                 connectionBgColor="blue"
+
+                pointers={[
+                    {
+                        rx: 10,
+                        ry: 10,
+                        value: 25,
+                        disabled: true
+                    }
+                ]}
             />
 
             <RoundSlider
@@ -41,6 +52,7 @@ const App = () => {
                         ry: 50,
                         value: 10,
                         bgColor: 'blue',
+                        disabled: true,
                         pointerSVG: (
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="50" height="50" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
