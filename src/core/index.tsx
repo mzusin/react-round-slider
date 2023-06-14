@@ -50,6 +50,7 @@ export const RoundSlider = (props: IUserSettings) => {
     const [ connectionBgColor, setConnectionBgColor ] = useState(DEFAULT_CONNECTION_BG_COLOR);
     const [ pointerBgColor, setPointerBgColor ] = useState(DEFAULT_POINTER_BG_COLOR);
     const [ pointersOverlap, setPointersOverlap ] = useState(false);
+    const [ disabled, setDisabled ] = useState(false);
 
     const [ min, max ] = minMax;
     const [ svgWidth, svgHeight ] = svgSize;
@@ -69,6 +70,12 @@ export const RoundSlider = (props: IUserSettings) => {
         setPointersOverlap(getBoolean(props.pointersOverlap, POINTER_OVERLAP_DEFAULT));
     }, [
         props.pointersOverlap,
+    ]);
+
+    useEffect(() => {
+        setDisabled(getBoolean(props.disabled, false));
+    }, [
+        props.disabled,
     ]);
 
     /**
@@ -188,7 +195,7 @@ export const RoundSlider = (props: IUserSettings) => {
 
     const onValueChange = (evt: MouseEvent | ReactMouseEvent | TouchEvent | ReactTouchEvent) => {
 
-        if(!svgRef || !svgRef.current) return;
+        if(disabled || !svgRef || !svgRef.current) return;
 
         const mouseX = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientX : (evt as TouchEvent).touches[0].clientX;
         const mouseY = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientY : (evt as TouchEvent).touches[0].clientY;
@@ -257,6 +264,7 @@ export const RoundSlider = (props: IUserSettings) => {
     }
 
     const onMouseDown = (evt: MouseEvent | ReactMouseEvent) => {
+        if(disabled) return;
 
         const $target = evt.target as SVGElement;
         if(!$target) return;

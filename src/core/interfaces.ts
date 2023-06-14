@@ -23,6 +23,7 @@ export interface IUserSettings {
 
     pointers?: IUserSettingsPointer[];
     pointersOverlap?: boolean;
+    disabled?: boolean;
 
     // svg look & feel properties ----------
     rx?: number;
