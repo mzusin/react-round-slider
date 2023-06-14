@@ -9,6 +9,7 @@ const Pointer = (props: IPointer) => {
         id, pointer, startEndAngle,
         svgRadii, svgCenter,
         pointerBgColor, pointerSVG,
+        disabledPointerStyle,
     } = props;
     const { percent, pointerRadii } = pointer;
     const [ rx, ry ] = pointerRadii;
@@ -46,6 +47,7 @@ const Pointer = (props: IPointer) => {
                     <ellipse
                         className={ pointer.disabled ? 'disabled' : undefined }
                         aria-disabled={ pointer.disabled ? true : undefined }
+                        style={ pointer.disabled ? disabledPointerStyle : undefined }
 
                         data-type="pointer"
                         data-index={ pointer.index }
@@ -67,6 +69,7 @@ const Pointer = (props: IPointer) => {
                     <g
                         className={ pointer.disabled ? 'disabled' : undefined }
                         aria-disabled={ pointer.disabled ? true : undefined }
+                        style={ pointer.disabled ? disabledPointerStyle : undefined }
 
                         data-type="pointer"
                         data-index={ pointer.index }

@@ -17,3 +17,7 @@ export const MIN_VALUE_DEFAULT = 0;
 export const MAX_VALUE_DEFAULT = 100;
 
 export const POINTER_OVERLAP_DEFAULT = false;
+
+export const DISABLED_POINTER_STYLE = {
+    filter: 'opacity(0.7) grayscale(100%)',
+};

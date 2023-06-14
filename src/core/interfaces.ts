@@ -1,5 +1,5 @@
 import { Vector2 } from 'mz-math';
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 
 export type TStep = ((value: number | string, percent: number) => number) | number | undefined | null;
 export type TData = (string | number)[] | undefined;
@@ -24,6 +24,7 @@ export interface IUserSettings {
     pointers?: IUserSettingsPointer[];
     pointersOverlap?: boolean;
     disabled?: boolean;
+    disabledPointerStyle?: CSSProperties;
 
     // svg look & feel properties ----------
     rx?: number;
@@ -68,6 +69,7 @@ export interface IPointer {
     svgCenter: Vector2;
     pointerBgColor: string;
     pointerSVG?: ReactNode;
+    disabledPointerStyle?: CSSProperties;
 }
 
 export interface IPanel {

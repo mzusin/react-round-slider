@@ -2,7 +2,7 @@ import { IEllipse, IStatePointer, IUserSettings } from './interfaces';
 import {
     useEffect, useRef, useState,
     MouseEvent as ReactMouseEvent,
-    TouchEvent as ReactTouchEvent,
+    TouchEvent as ReactTouchEvent, CSSProperties,
 } from 'react';
 import { Vector2 } from 'mz-math';
 import {
@@ -19,7 +19,7 @@ import {
     DEFAULT_CONNECTION_BG_COLOR, DEFAULT_POINTER_BG_COLOR,
     DEFAULT_STROKE_WIDTH,
     DEFAULT_SVG_RX,
-    DEFAULT_SVG_RY, POINTER_OVERLAP_DEFAULT
+    DEFAULT_SVG_RY, DISABLED_POINTER_STYLE, POINTER_OVERLAP_DEFAULT
 } from './domain/defaults';
 import Panel from './ui/Panel';
 import { normalizeAngles } from './domain/angles-provider';
@@ -51,6 +51,7 @@ export const RoundSlider = (props: IUserSettings) => {
     const [ pointerBgColor, setPointerBgColor ] = useState(DEFAULT_POINTER_BG_COLOR);
     const [ pointersOverlap, setPointersOverlap ] = useState(false);
     const [ disabled, setDisabled ] = useState(false);
+    const [ disabledPointerStyle , setDisabledPointerStyle ] = useState<CSSProperties|undefined>(undefined);
 
     const [ min, max ] = minMax;
     const [ svgWidth, svgHeight ] = svgSize;
@@ -74,8 +75,10 @@ export const RoundSlider = (props: IUserSettings) => {
 
     useEffect(() => {
         setDisabled(getBoolean(props.disabled, false));
+        setDisabledPointerStyle(props.disabledPointerStyle || DISABLED_POINTER_STYLE);
     }, [
         props.disabled,
+        props.disabledPointerStyle,
     ]);
 
     /**
@@ -331,6 +334,7 @@ export const RoundSlider = (props: IUserSettings) => {
                             svgCenter={ svgCenter }
                             pointerBgColor={ pointer.bgColor }
                             pointerSVG={ props.pointerSVG || pointer.pointerSVG }
+                            disabledPointerStyle={ disabledPointerStyle }
                         />
                     )
                 })
