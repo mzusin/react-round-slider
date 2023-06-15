@@ -145,6 +145,7 @@ export const getInitialPointers = (
             bgColor: userSettingsPointer.bgColor || pointerBgColor || DEFAULT_POINTER_BG_COLOR,
             pointerSVG: pointerSVG || userSettingsPointer.pointerSVG,
             disabled: userSettingsPointer.disabled === true,
+            keyboardDisabled: false,
         };
 
         pointers.push(pointer);
@@ -171,6 +172,7 @@ export const getInitialPointers = (
             index: 0,
             bgColor: DEFAULT_POINTER_BG_COLOR,
             disabled: false,
+            keyboardDisabled: false,
         }];
     }
 
@@ -279,6 +281,11 @@ export const getPointerPercentByMouse = (
     const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
 
     return degrees * 100 / angleDiff;
+};
+
+export const getPointerIndexById = (pointers: IStatePointer[], id: string) => {
+    if(!pointers || !id) return -1;
+    return pointers.findIndex(pointer => pointer.id === id);
 };
 
 const isPanelClicked = ($target: HTMLElement) => {

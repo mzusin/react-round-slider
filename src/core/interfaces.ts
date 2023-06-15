@@ -25,6 +25,7 @@ export interface IUserSettings {
     pointersOverlap?: boolean;
     disabled?: boolean;
     disabledPointerStyle?: CSSProperties;
+    keyboardDisabled?: boolean;
 
     // svg look & feel properties ----------
     rx?: number;
@@ -50,6 +51,7 @@ export interface IStatePointer {
     bgColor: string;
     pointerSVG?: ReactNode;
     disabled: boolean;
+    keyboardDisabled: boolean;
 }
 
 export interface IEllipse {

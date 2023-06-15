@@ -20,16 +20,16 @@ const App = () => {
                 strokeWidth={ 15 }
                 bgColor="red"
                 connectionBgColor="blue"
-                disabledPointerStyle={{
+                /*disabledPointerStyle={{
                     filter: 'invert(100%)',
-                }}
+                }}*/
 
                 pointers={[
                     {
                         rx: 10,
                         ry: 10,
                         value: 25,
-                        disabled: true
+                        // disabled: true
                     }
                 ]}
             />

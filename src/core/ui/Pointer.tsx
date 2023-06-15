@@ -1,7 +1,8 @@
 import { IPointer } from '../interfaces';
-import { useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 import { Vector2 } from 'mz-math';
 import { getPointerPositionByPercent } from '../domain/slider-provider';
+import { DEFAULT_POINTER_STYLE } from '../domain/defaults';
 
 const Pointer = (props: IPointer) => {
 
@@ -39,6 +40,14 @@ const Pointer = (props: IPointer) => {
         startAngleDegrees, endAngleDegrees,
     ]);
 
+    let pointerStyle: CSSProperties = {
+        ...DEFAULT_POINTER_STYLE,
+    };
+
+    if(pointer.disabled) {
+        pointerStyle = { ...pointerStyle, ...disabledPointerStyle };
+    }
+
     return (
         center ?
             <>
@@ -47,7 +56,7 @@ const Pointer = (props: IPointer) => {
                     <ellipse
                         className={ pointer.disabled ? 'disabled' : undefined }
                         aria-disabled={ pointer.disabled ? true : undefined }
-                        style={ pointer.disabled ? disabledPointerStyle : undefined }
+                        style={ pointerStyle }
 
                         data-type="pointer"
                         data-index={ pointer.index }
@@ -60,6 +69,8 @@ const Pointer = (props: IPointer) => {
                         ry={ ry }
 
                         cursor="pointer"
+                        tabIndex={ 0 }
+                        role="slider"
                         fill={ pointerBgColor }
                     />
                 }
@@ -69,7 +80,7 @@ const Pointer = (props: IPointer) => {
                     <g
                         className={ pointer.disabled ? 'disabled' : undefined }
                         aria-disabled={ pointer.disabled ? true : undefined }
-                        style={ pointer.disabled ? disabledPointerStyle : undefined }
+                        style={ pointerStyle }
 
                         data-type="pointer"
                         data-index={ pointer.index }
@@ -77,7 +88,9 @@ const Pointer = (props: IPointer) => {
                         data-percent={ pointer.percent }
 
                         cursor="pointer"
-                        transform={ `translate(${ center[0] - rx/2 }, ${ center[1] - ry/2 })` }>
+                        transform={ `translate(${ center[0] - rx/2 }, ${ center[1] - ry/2 })` }
+                        tabIndex={ 0 }
+                        role="slider">
                         <g pointerEvents="none">
                             { pointerSVG }
                         </g>

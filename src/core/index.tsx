@@ -2,14 +2,14 @@ import { IEllipse, IStatePointer, IUserSettings } from './interfaces';
 import {
     useEffect, useRef, useState,
     MouseEvent as ReactMouseEvent,
-    TouchEvent as ReactTouchEvent, CSSProperties,
+    TouchEvent as ReactTouchEvent, CSSProperties, KeyboardEvent,
 } from 'react';
-import { Vector2 } from 'mz-math';
+import { isNumber, Vector2 } from 'mz-math';
 import {
     getActivePointerId,
     getInitialPointers,
     getMaxPointer,
-    getMinMax, getPointerPercentByMouse, handleOverlap,
+    getMinMax, getPointerIndexById, getPointerPercentByMouse, handleOverlap,
     updateMultiplePointersValue, updateSinglePointerValue
 } from './domain/slider-provider';
 import { getEllipseSegment, getSVGCenter, getSVGSize } from './domain/svg-provider';
@@ -19,7 +19,7 @@ import {
     DEFAULT_CONNECTION_BG_COLOR, DEFAULT_POINTER_BG_COLOR,
     DEFAULT_STROKE_WIDTH,
     DEFAULT_SVG_RX,
-    DEFAULT_SVG_RY, DISABLED_POINTER_STYLE, POINTER_OVERLAP_DEFAULT
+    DEFAULT_SVG_RY, DEFAULT_SVG_STYLE, DISABLED_POINTER_STYLE, POINTER_OVERLAP_DEFAULT
 } from './domain/defaults';
 import Panel from './ui/Panel';
 import { normalizeAngles } from './domain/angles-provider';
@@ -52,10 +52,13 @@ export const RoundSlider = (props: IUserSettings) => {
     const [ pointersOverlap, setPointersOverlap ] = useState(false);
     const [ disabled, setDisabled ] = useState(false);
     const [ disabledPointerStyle , setDisabledPointerStyle ] = useState<CSSProperties|undefined>(undefined);
+    const [ keyboardDisabled, setKeyboardDisabled ] = useState(false);
 
     const [ min, max ] = minMax;
     const [ svgWidth, svgHeight ] = svgSize;
     const [ startAngleDegrees, endAngleDegrees ] = startEndAngle;
+
+    // ---------------- STATE ----------------------------
 
     useEffect(() => {
         setBgColor(getString(props.bgColor, DEFAULT_BG_COLOR));
@@ -76,9 +79,11 @@ export const RoundSlider = (props: IUserSettings) => {
     useEffect(() => {
         setDisabled(getBoolean(props.disabled, false));
         setDisabledPointerStyle(props.disabledPointerStyle || DISABLED_POINTER_STYLE);
+        setKeyboardDisabled(getBoolean(props.keyboardDisabled, false));
     }, [
         props.disabled,
         props.disabledPointerStyle,
+        props.keyboardDisabled,
     ]);
 
     /**
@@ -196,6 +201,8 @@ export const RoundSlider = (props: IUserSettings) => {
         strokeWidth,
     ]);
 
+    // ---------------- EVENTS ----------------------------
+
     const onValueChange = (evt: MouseEvent | ReactMouseEvent | TouchEvent | ReactTouchEvent) => {
 
         if(disabled || !svgRef || !svgRef.current) return;
@@ -220,6 +227,7 @@ export const RoundSlider = (props: IUserSettings) => {
 
         // SINGLE POINTER -----------------------------------------
         if(pointers.length <= 1) {
+            setSelectedPointerId(pointers[0]?.id || null);
             setPointers(currentPointers => {
                 return updateSinglePointerValue(currentPointers, updatedPercent);
             });
@@ -275,9 +283,10 @@ export const RoundSlider = (props: IUserSettings) => {
         const isAllowedTarget = $target === sliderRef.current || $target.getAttribute('data-type') === 'pointer';
         if(!isAllowedTarget) return;
 
+        /* Prevent default blocks keydown events:
         if (evt.preventDefault) {
             evt.preventDefault();
-        }
+        }*/
 
         onValueChange(evt);
 
@@ -292,6 +301,85 @@ export const RoundSlider = (props: IUserSettings) => {
         isClickOrDrag.current = 'click';
     };
 
+    // ---------------- HELPERS ----------------------------
+
+    const goPrevNext = (isNext: boolean) => {
+        const pointerIndex = getPointerIndexById(pointers, selectedPointerId);
+        if(pointerIndex === -1) return;
+
+        const pointer = { ...pointers[pointerIndex] };
+        let percent = pointer.percent;
+        if(!isNumber(percent)) return;
+
+        // TODO: fix this
+        if(isNext) {
+            percent--;
+        }
+        else{
+            percent++;
+        }
+
+        if(percent > 100){
+            percent = 100;
+        }
+
+        // rerender -----
+        pointer.percent = percent;
+        const copy = [...pointers];
+        copy[pointerIndex] = pointer;
+        setPointers(copy);
+    };
+
+    // ---------------- ARROWS ----------------------------
+
+    const arrowLeftUp = () => {
+        if(disabled || keyboardDisabled) return;
+
+        const pointerIndex = getPointerIndexById(pointers, selectedPointerId);
+        if(pointerIndex === -1 || pointers[pointerIndex].disabled) return;
+
+        goPrevNext(false);
+    };
+
+    const arrowRightDown = () => {
+        if(disabled || keyboardDisabled) return;
+
+        const pointerIndex = getPointerIndexById(pointers, selectedPointerId);
+        if(pointerIndex === -1 || pointers[pointerIndex].disabled) return;
+
+        goPrevNext(true);
+    };
+
+    const onKeyDown = (evt: KeyboardEvent) => {
+        switch (evt.key) {
+            case 'ArrowLeft': {
+                evt.preventDefault();
+                arrowLeftUp();
+                break;
+            }
+
+            case 'ArrowRight': {
+                evt.preventDefault();
+                arrowRightDown();
+                break;
+            }
+
+            case 'ArrowUp': {
+                evt.preventDefault();
+                arrowLeftUp();
+                break;
+            }
+
+            case 'ArrowDown': {
+                evt.preventDefault();
+                arrowRightDown();
+                break;
+            }
+        }
+    };
+
+    // ---------------- RENDERING -------------------------
+
     return (
         <svg
             data-type="bg"
@@ -303,8 +391,12 @@ export const RoundSlider = (props: IUserSettings) => {
             onMouseUp={ onMouseUp }
             onTouchMove={ onValueChange }
             onTouchStart={ onValueChange }
+            onKeyDown={ onKeyDown }
             className={ disabled ? 'disabled' : undefined }
-            aria-disabled={ disabled ? true : undefined }>
+            aria-disabled={ disabled ? true : undefined }
+            tabIndex={ 0 }
+            focusable={ true }
+            style={ DEFAULT_SVG_STYLE }>
 
             <Panel
                 ref={ sliderRef }
@@ -331,11 +423,14 @@ export const RoundSlider = (props: IUserSettings) => {
                             key={ pointer.id }
                             pointer={ pointer }
                             id={ pointer.id }
+
                             startEndAngle={ startEndAngle }
                             svgRadii={ svgRadii }
                             svgCenter={ svgCenter }
+
                             pointerBgColor={ pointer.bgColor }
                             pointerSVG={ props.pointerSVG || pointer.pointerSVG }
+
                             disabledPointerStyle={ disabledPointerStyle }
                         />
                     )
