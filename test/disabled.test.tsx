@@ -2,64 +2,80 @@ import { render } from '@testing-library/react';
 import { RoundSlider } from '../src/core';
 
 describe('Disabled', () => {
-    describe('Disabled Pointer', () => {
-        test('2 pointers of 4 should be disabled', () => {
-            const { container} = render(
-                <RoundSlider
-                    pointers={[
-                        {
-                            rx: 50,
-                            ry: 50,
-                            value: 5,
-                            bgColor: 'blue',
-                            disabled: true,
-                        },
+    test('Disabled Slider', () => {
+        const { container} = render(
+            <RoundSlider disabled={ true } />
+        );
+        const $svg = container.querySelector('svg') as SVGSVGElement;
+        expect($svg.classList.contains('disabled')).toStrictEqual(true);
+        expect($svg.getAttribute('aria-disabled')).toStrictEqual('true');
+    });
 
-                        {
-                            rx: 15,
-                            ry: 15,
-                            value: 10,
-                        },
+    test('Non Disabled Slider', () => {
+        const { container} = render(
+            <RoundSlider />
+        );
+        const $svg = container.querySelector('svg') as SVGSVGElement;
+        expect($svg.classList.contains('disabled')).toStrictEqual(false);
+        expect($svg.getAttribute('aria-disabled')).toStrictEqual(null);
+    });
 
-                        {
-                            rx: 55,
-                            ry: 55,
-                            value: 15,
-                            disabled: true,
-                            pointerSVG: <image href="settings-icon.png" height="20" width="20" />
-                        },
+    test('2 pointers of 4 should be disabled', () => {
+        const { container} = render(
+            <RoundSlider
+                pointers={[
+                    {
+                        rx: 50,
+                        ry: 50,
+                        value: 5,
+                        bgColor: 'blue',
+                        disabled: true,
+                    },
 
-                        {
-                            rx: 25,
-                            ry: 25,
-                            value: 20,
-                            pointerSVG: <image href="settings-icon.png" height="20" width="20" />
-                        },
+                    {
+                        rx: 15,
+                        ry: 15,
+                        value: 10,
+                    },
 
-                    ]}
-                />
-            );
-            const $svg = container.querySelector('svg') as SVGSVGElement;
-            const $firstPointer = $svg.querySelector('[data-type="pointer"][data-index="0"]') as SVGElement;
-            const $secondPointer = $svg.querySelector('[data-type="pointer"][data-index="1"]') as SVGElement;
-            const $thirdPointer = $svg.querySelector('[data-type="pointer"][data-index="2"]') as SVGElement;
-            const $fourthPointer = $svg.querySelector('[data-type="pointer"][data-index="3"]') as SVGElement;
+                    {
+                        rx: 55,
+                        ry: 55,
+                        value: 15,
+                        disabled: true,
+                        pointerSVG: <image href="settings-icon.png" height="20" width="20" />
+                    },
 
-            expect($firstPointer.classList.contains('disabled')).toStrictEqual(true);
-            expect($secondPointer.classList.contains('disabled')).toStrictEqual(false);
-            expect($thirdPointer.classList.contains('disabled')).toStrictEqual(true);
-            expect($fourthPointer.classList.contains('disabled')).toStrictEqual(false);
+                    {
+                        rx: 25,
+                        ry: 25,
+                        value: 20,
+                        pointerSVG: <image href="settings-icon.png" height="20" width="20" />
+                    },
 
-            expect($firstPointer.getAttribute('aria-disabled')).toStrictEqual('true');
-            expect($secondPointer.hasAttribute('aria-disabled')).toStrictEqual(false);
-            expect($thirdPointer.getAttribute('aria-disabled')).toStrictEqual('true');
-            expect($fourthPointer.hasAttribute('aria-disabled')).toStrictEqual(false);
+                ]}
+            />
+        );
+        const $svg = container.querySelector('svg') as SVGSVGElement;
+        const $firstPointer = $svg.querySelector('[data-type="pointer"][data-index="0"]') as SVGElement;
+        const $secondPointer = $svg.querySelector('[data-type="pointer"][data-index="1"]') as SVGElement;
+        const $thirdPointer = $svg.querySelector('[data-type="pointer"][data-index="2"]') as SVGElement;
+        const $fourthPointer = $svg.querySelector('[data-type="pointer"][data-index="3"]') as SVGElement;
 
-            expect($firstPointer.style.filter).toStrictEqual('opacity(0.7) grayscale(100%)');
-            expect($secondPointer.style.filter).toStrictEqual('');
-            expect($thirdPointer.style.filter).toStrictEqual('opacity(0.7) grayscale(100%)');
-            expect($fourthPointer.style.filter).toStrictEqual('');
-        });
+        expect($firstPointer.classList.contains('disabled')).toStrictEqual(true);
+        expect($secondPointer.classList.contains('disabled')).toStrictEqual(false);
+        expect($thirdPointer.classList.contains('disabled')).toStrictEqual(true);
+        expect($fourthPointer.classList.contains('disabled')).toStrictEqual(false);
+
+        expect($firstPointer.getAttribute('aria-disabled')).toStrictEqual('true');
+        expect($secondPointer.hasAttribute('aria-disabled')).toStrictEqual(false);
+        expect($thirdPointer.getAttribute('aria-disabled')).toStrictEqual('true');
+        expect($fourthPointer.hasAttribute('aria-disabled')).toStrictEqual(false);
+
+        expect($firstPointer.style.filter).toStrictEqual('opacity(0.7) grayscale(100%)');
+        expect($secondPointer.style.filter).toStrictEqual('');
+        expect($thirdPointer.style.filter).toStrictEqual('opacity(0.7) grayscale(100%)');
+        expect($fourthPointer.style.filter).toStrictEqual('');
     });
 
 

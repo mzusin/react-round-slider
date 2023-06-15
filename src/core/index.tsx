@@ -302,7 +302,9 @@ export const RoundSlider = (props: IUserSettings) => {
             onMouseDown={ onMouseDown }
             onMouseUp={ onMouseUp }
             onTouchMove={ onValueChange }
-            onTouchStart={ onValueChange }>
+            onTouchStart={ onValueChange }
+            className={ disabled ? 'disabled' : undefined }
+            aria-disabled={ disabled ? true : undefined }>
 
             <Panel
                 ref={ sliderRef }
