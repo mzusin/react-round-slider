@@ -26,6 +26,7 @@ export interface IUserSettings {
     disabled?: boolean;
     disabledPointerStyle?: CSSProperties;
     keyboardDisabled?: boolean;
+    mousewheelDisabled?: boolean;
 
     // svg look & feel properties ----------
     rx?: number;
@@ -52,6 +53,7 @@ export interface IStatePointer {
     pointerSVG?: ReactNode;
     disabled: boolean;
     keyboardDisabled: boolean;
+    mousewheelDisabled: boolean;
 }
 
 export interface IEllipse {

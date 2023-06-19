@@ -146,6 +146,7 @@ export const getInitialPointers = (
             pointerSVG: pointerSVG || userSettingsPointer.pointerSVG,
             disabled: userSettingsPointer.disabled === true,
             keyboardDisabled: false,
+            mousewheelDisabled: false,
         };
 
         pointers.push(pointer);
@@ -173,6 +174,7 @@ export const getInitialPointers = (
             bgColor: DEFAULT_POINTER_BG_COLOR,
             disabled: false,
             keyboardDisabled: false,
+            mousewheelDisabled: false,
         }];
     }
 

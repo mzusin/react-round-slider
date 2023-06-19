@@ -104,7 +104,7 @@ describe('Mim/Max', () => {
                     pointerRadii: [50, 50],
                     percent: 50,
                     id: 'pointer1',
-                    index: 0,
+                    index: 0, disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
             ];
 
@@ -119,19 +119,19 @@ describe('Mim/Max', () => {
                     pointerRadii: [50, 50],
                     percent: 25,
                     id: 'pointer1',
-                    index: 0,
+                    index: 0, disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
                 {
                     pointerRadii: [50, 50],
                     percent: 75,
                     id: 'pointer2',
-                    index: 1,
+                    index: 1, disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
                 {
                     pointerRadii: [50, 50],
                     percent: 50,
                     id: 'pointer3',
-                    index: 2,
+                    index: 2, disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
             ];
 
@@ -142,13 +142,13 @@ describe('Mim/Max', () => {
                     pointerRadii: [50, 50],
                     percent: 25,
                     id: 'pointer1',
-                    index: 0,
+                    index: 0, disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
                 {
                     pointerRadii: [50, 50],
                     percent: 75,
                     id: 'pointer2',
-                    index: 1,
+                    index: 1, disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
             ]);
         });
@@ -159,19 +159,19 @@ describe('Mim/Max', () => {
                     pointerRadii: [50, 50],
                     percent: 25,
                     id: 'pointer1',
-                    index: 0,
+                    index: 0, disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
                 {
                     pointerRadii: [50, 50],
                     percent: 75,
                     id: 'pointer2',
-                    index: 1,
+                    index: 1, disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
                 {
                     pointerRadii: [50, 50],
                     percent: 50,
                     id: 'pointer3',
-                    index: 2,
+                    index: 2, disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
             ];
 
@@ -182,13 +182,13 @@ describe('Mim/Max', () => {
                     pointerRadii: [50, 50],
                     percent: 25,
                     id: 'pointer1',
-                    index: 0,
+                    index: 0, disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
                 {
                     pointerRadii: [50, 50],
                     percent: 75,
                     id: 'pointer2',
-                    index: 1,
+                    index: 1, disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
             ]);
         });
@@ -200,12 +200,14 @@ describe('Mim/Max', () => {
                     percent: 50,
                     id: 'pointer1',
                     index: 0,
+                    disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
                 {
                     pointerRadii: [50, 50],
                     percent: 50,
                     id: 'pointer2',
                     index: 1,
+                    disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
             ];
 
@@ -216,13 +218,13 @@ describe('Mim/Max', () => {
                     pointerRadii: [50, 50],
                     percent: 50,
                     id: 'pointer1',
-                    index: 0,
+                    index: 0, disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
                 {
                     pointerRadii: [50, 50],
                     percent: 50,
                     id: 'pointer1',
-                    index: 0,
+                    index: 0, disabled: false, keyboardDisabled: false, mousewheelDisabled: false, bgColor: '#000'
                 },
             ]);
         });

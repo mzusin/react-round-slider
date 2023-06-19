@@ -2,7 +2,8 @@ import { IEllipse, IStatePointer, IUserSettings } from './interfaces';
 import {
     useEffect, useRef, useState,
     MouseEvent as ReactMouseEvent,
-    TouchEvent as ReactTouchEvent, CSSProperties, KeyboardEvent,
+    TouchEvent as ReactTouchEvent, CSSProperties,
+    KeyboardEvent, WheelEvent,
 } from 'react';
 import { isNumber, Vector2 } from 'mz-math';
 import {
@@ -53,6 +54,7 @@ export const RoundSlider = (props: IUserSettings) => {
     const [ disabled, setDisabled ] = useState(false);
     const [ disabledPointerStyle , setDisabledPointerStyle ] = useState<CSSProperties|undefined>(undefined);
     const [ keyboardDisabled, setKeyboardDisabled ] = useState(false);
+    const [ mousewheelDisabled, setMousewheelDisabled ] = useState(false);
 
     const [ min, max ] = minMax;
     const [ svgWidth, svgHeight ] = svgSize;
@@ -80,10 +82,12 @@ export const RoundSlider = (props: IUserSettings) => {
         setDisabled(getBoolean(props.disabled, false));
         setDisabledPointerStyle(props.disabledPointerStyle || DISABLED_POINTER_STYLE);
         setKeyboardDisabled(getBoolean(props.keyboardDisabled, false));
+        setMousewheelDisabled(getBoolean(props.mousewheelDisabled, false));
     }, [
         props.disabled,
         props.disabledPointerStyle,
         props.keyboardDisabled,
+        props.mousewheelDisabled,
     ]);
 
     /**
@@ -330,7 +334,7 @@ export const RoundSlider = (props: IUserSettings) => {
         setPointers(copy);
     };
 
-    // ---------------- ARROWS ----------------------------
+    // ---------------- ARROWS & MOUSE ----------------------------
 
     const arrowLeftUp = () => {
         if(disabled || keyboardDisabled) return;
@@ -378,6 +382,19 @@ export const RoundSlider = (props: IUserSettings) => {
         }
     };
 
+    const onWheel = (evt: WheelEvent) => {
+        if(disabled || mousewheelDisabled) return;
+
+        const pointerIndex = getPointerIndexById(pointers, selectedPointerId);
+        if(pointerIndex === -1 || pointers[pointerIndex].disabled) return;
+
+        evt.stopPropagation();
+        // evt.preventDefault();
+
+        const scrollTop = evt.deltaY < 0;
+        goPrevNext(!scrollTop);
+    };
+
     // ---------------- RENDERING -------------------------
 
     return (
@@ -396,6 +413,7 @@ export const RoundSlider = (props: IUserSettings) => {
             aria-disabled={ disabled ? true : undefined }
             tabIndex={ 0 }
             focusable={ true }
+            onWheel={ onWheel }
             style={ DEFAULT_SVG_STYLE }>
 
             <Panel
