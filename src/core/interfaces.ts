@@ -20,6 +20,7 @@ export interface IUserSettings {
     max?: number | string;
     step?: TStep;
     data?: TData;
+    round?: number;
 
     pointers?: IUserSettingsPointer[];
     pointersOverlap?: boolean;

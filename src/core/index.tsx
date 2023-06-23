@@ -20,7 +20,9 @@ import {
     DEFAULT_CONNECTION_BG_COLOR, DEFAULT_POINTER_BG_COLOR,
     DEFAULT_STROKE_WIDTH,
     DEFAULT_SVG_RX,
-    DEFAULT_SVG_RY, DEFAULT_SVG_STYLE, DISABLED_POINTER_STYLE, POINTER_OVERLAP_DEFAULT
+    DEFAULT_SVG_RY, DEFAULT_SVG_STYLE, 
+    DISABLED_POINTER_STYLE, POINTER_OVERLAP_DEFAULT,
+    ROUND_DEFAULT,
 } from './domain/defaults';
 import Panel from './ui/Panel';
 import { normalizeAngles } from './domain/angles-provider';
@@ -31,7 +33,7 @@ export const RoundSlider = (props: IUserSettings) => {
 
     const svgRef = useRef<SVGSVGElement>(null);
     const sliderRef = useRef<SVGPathElement>(null);
-    const isClickOrDrag = useRef<'click'|'drag'>('click');
+    const isClickOrDrag = useRef<'click'|'drag'>('click');``
 
     const [ selectedPointerId, setSelectedPointerId ] = useState<string|null>(null);
     const [ svgRadii, setSvgRadii ] = useState<Vector2>([0, 0]);
@@ -55,6 +57,7 @@ export const RoundSlider = (props: IUserSettings) => {
     const [ disabledPointerStyle , setDisabledPointerStyle ] = useState<CSSProperties|undefined>(undefined);
     const [ keyboardDisabled, setKeyboardDisabled ] = useState(false);
     const [ mousewheelDisabled, setMousewheelDisabled ] = useState(false);
+    const [ round, setRound ] = useState(ROUND_DEFAULT);
 
     const [ min, max ] = minMax;
     const [ svgWidth, svgHeight ] = svgSize;
@@ -204,6 +207,10 @@ export const RoundSlider = (props: IUserSettings) => {
         maxPointer,
         strokeWidth,
     ]);
+
+    useEffect(() => {
+        setRound(getNumber(props.round, ROUND_DEFAULT));
+    }, [props.round]);
 
     // ---------------- EVENTS ----------------------------
 

@@ -31,3 +31,5 @@ export const DEFAULT_SVG_STYLE: CSSProperties = {
 export const DEFAULT_POINTER_STYLE: CSSProperties = {
     outline: 'none',
 };
+
+export const ROUND_DEFAULT = 2;
