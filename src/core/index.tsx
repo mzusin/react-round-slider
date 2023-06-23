@@ -5,7 +5,7 @@ import {
     TouchEvent as ReactTouchEvent, CSSProperties,
     KeyboardEvent, WheelEvent,
 } from 'react';
-import { isNumber, Vector2 } from 'mz-math';
+import { isNumber, Vector2 } from 'mz-math'; 
 import {
     getActivePointerId,
     getInitialPointers,
