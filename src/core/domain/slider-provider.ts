@@ -4,7 +4,7 @@ import {
     ellipseMovement, getAnglesSub,
     mod,
     newId,
-    radiansToDegrees,
+    radiansToDegrees, setDecimalPlaces,
     v2Sub,
     Vector2
 } from 'mz-math';
@@ -108,6 +108,29 @@ export const getValue = (
     }
 
     return _value;
+};
+
+/**
+ * For the given pointer percent, return its value
+ * that can be printed somewhere or sent back to user
+ * via API or events.
+ */
+export const getValueByPercent = (
+    percent: number,
+    min: number,
+    max: number,
+    round: number,
+    data?: TData,
+) : string|number => {
+
+    if(data) {
+        return 0; // TODO
+    }
+
+    // scale a range [min, max] to [a, b]
+    const value = (min === max) ? 0 : convertRange(min, max, 0, 100, percent);
+
+    return setDecimalPlaces(value, round);
 };
 
 /**

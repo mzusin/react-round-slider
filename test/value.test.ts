@@ -1,4 +1,4 @@
-import { getValue } from '../src/core/domain/slider-provider';
+import { getValue, getValueByPercent } from '../src/core/domain/slider-provider';
 
 describe('Values', () => {
 
@@ -46,5 +46,32 @@ describe('Values', () => {
         test("getValue('cherry', 0, 10, ['apple', 'banana', 'cherry'])", () => {
             expect(getValue('cherry', 0, 2, ['apple', 'banana', 'cherry'])).toStrictEqual(2);
         });
-    })
+    });
+
+    describe('getValueByPercent()', () => {
+
+        test("getValueByPercent(50, 0, 100, 2)", () => {
+            expect(getValueByPercent(50, 0, 100, 2)).toStrictEqual(50);
+        });
+
+        test("getValueByPercent(0, 0, 100, 2)", () => {
+            expect(getValueByPercent(0, 0, 100, 2)).toStrictEqual(0);
+        });
+
+        test("getValueByPercent(100, 0, 100, 2)", () => {
+            expect(getValueByPercent(100, 0, 100, 2)).toStrictEqual(100);
+        });
+
+        test("getValueByPercent(50, -100, 100, 2)", () => {
+            expect(getValueByPercent(50, -100, 100, 2)).toStrictEqual(0);
+        });
+
+        test("getValueByPercent(0, -100, 100, 2)", () => {
+            expect(getValueByPercent(0, -100, 100, 2)).toStrictEqual(-100);
+        });
+
+        test("getValueByPercent(100, -100, 100, 2)", () => {
+            expect(getValueByPercent(100, -100, 100, 2)).toStrictEqual(100);
+        });
+    });
 });
