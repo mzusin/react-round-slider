@@ -73,5 +73,9 @@ describe('Values', () => {
         test("getValueByPercent(100, -100, 100, 2)", () => {
             expect(getValueByPercent(100, -100, 100, 2)).toStrictEqual(100);
         });
+
+        test("getValueByPercent(50, 0.1234, 100.1234, 2)", () => {
+            expect(getValueByPercent(50,  0.1234, 100.1234, 2)).toStrictEqual(50.06);
+        });
     });
 });
