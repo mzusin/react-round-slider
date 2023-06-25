@@ -111,6 +111,15 @@ export const getValue = (
 };
 
 /**
+ * Convert range [a, b] to [c, d].
+ * f(x) = (d - c) * (x - a) / (b - a) + c
+ */
+export const aaa = (x: number, a: number, b: number, c: number, d: number) => {
+    return (d - c) * (x - a) / (b - a) + c;
+};
+
+
+/**
  * For the given pointer percent, return its value
  * that can be printed somewhere or sent back to user
  * via API or events.
@@ -123,14 +132,22 @@ export const getValueByPercent = (
     data?: TData,
 ) : string|number => {
 
-    if(data) {
-        return 0; // TODO
+    // scale a range [min, max] to [a, b]
+    const value = (min === max) ? 0 : convertRange(percent, 0, 100, min, max);
+
+    if(data && data.length > 0) {
+        return data[Math.round(value)];
     }
 
-    // scale a range [min, max] to [a, b]
-    const value = (min === max) ? 0 : convertRange(min, max, 0, 100, percent);
-
     return setDecimalPlaces(value, round);
+};
+
+/**
+ * Round up to the next multiple of X,
+ * where X is the step provided by the user.
+ */
+export const roundToStep = (num: number, step: number) => {
+    return step === 0 ? 0 : Math.round(num / step) * step;
 };
 
 /**

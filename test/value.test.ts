@@ -66,6 +66,10 @@ describe('Values', () => {
             expect(getValueByPercent(50, -100, 100, 2)).toStrictEqual(0);
         });
 
+        test("getValueByPercent(50, 5, 10, 2)", () => {
+            expect(getValueByPercent(50, 5, 10, 2)).toStrictEqual(7.5);
+        });
+
         test("getValueByPercent(0, -100, 100, 2)", () => {
             expect(getValueByPercent(0, -100, 100, 2)).toStrictEqual(-100);
         });
@@ -75,7 +79,15 @@ describe('Values', () => {
         });
 
         test("getValueByPercent(50, 0.1234, 100.1234, 2)", () => {
-            expect(getValueByPercent(50,  0.1234, 100.1234, 2)).toStrictEqual(50.06);
+            expect(getValueByPercent(50,  0.1234, 100.1234, 2)).toStrictEqual(50.12);
+        });
+
+        test("getValueByPercent(50, 0, 100, 2, ['a', 'b', 'c', 'd', 'e'])", () => {
+            expect(getValueByPercent(50,  0, 4, 2, ['a', 'b', 'c', 'd', 'e'])).toStrictEqual('c');
+        });
+
+        test("getValueByPercent(50, 0, 100, 2, ['a', 'b', 'c', 'd'])", () => {
+            expect(getValueByPercent(50,  0, 4, 2, ['a', 'b', 'c', 'd'])).toStrictEqual('c');
         });
     });
 });
