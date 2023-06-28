@@ -41,6 +41,11 @@ export interface IUserSettings {
 
     startAngleDegrees?: number;
     endAngleDegrees?: number;
+
+    // text ------------------------
+    hideText?: boolean;
+    textPrefix?: string;
+    textSuffix?: string;
 }
 
 // --------------------------- STATE ------------------------------------
@@ -101,4 +106,6 @@ export interface IText {
     min: number;
     max: number;
     data?: TData;
+    textPrefix: string;
+    textSuffix: string;
 }

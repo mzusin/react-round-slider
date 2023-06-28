@@ -6,7 +6,7 @@ const Text = (props: IText) => {
 
     const { 
         svgCenter, round, min, max,
-        pointers, data,
+        pointers, data, textPrefix, textSuffix,
      } = props;
 
     const [ cx, cy ] = svgCenter;
@@ -24,13 +24,14 @@ const Text = (props: IText) => {
                 data
             );
 
-            values.push(_value);
+            values.push(`${ textPrefix || '' }${ _value }${ textSuffix || '' }`);
         }
 
         setValue(values.join(' '));
     }, [ 
         data, max, min, 
         pointers, round,
+        textPrefix, textSuffix,
     ]);
 
     return (

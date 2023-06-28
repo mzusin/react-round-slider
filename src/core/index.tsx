@@ -64,6 +64,10 @@ export const RoundSlider = (props: IUserSettings) => {
     const [ svgWidth, svgHeight ] = svgSize;
     const [ startAngleDegrees, endAngleDegrees ] = startEndAngle;
 
+    const [ hideText, setHideText ] = useState(false);
+    const [ textPrefix, setTextPrefix ] = useState('');
+    const [ textSuffix, setTextSuffix ] = useState('');
+
     // ---------------- STATE ----------------------------
 
     useEffect(() => {
@@ -211,7 +215,13 @@ export const RoundSlider = (props: IUserSettings) => {
 
     useEffect(() => {
         setRound(getNumber(props.round, ROUND_DEFAULT));
-    }, [props.round]);
+    }, [ props.round ]);
+
+    useEffect(() => {
+        setHideText(props.hideText);
+        setTextPrefix(props.textPrefix);
+        setTextSuffix(props.textSuffix);
+    }, [ props.hideText, props.textPrefix, props.textSuffix ]);
 
     // ---------------- EVENTS ----------------------------
 
@@ -463,14 +473,19 @@ export const RoundSlider = (props: IUserSettings) => {
                 })
             }
 
-            <Text 
-                svgCenter={ svgCenter } 
-                round={ round }
-                min={ min }
-                max={ max }
-                pointers={ pointers }
-                data={ props.data }
-            />
+            {
+                !hideText &&
+                <Text 
+                    svgCenter={ svgCenter } 
+                    round={ round }
+                    min={ min }
+                    max={ max }
+                    pointers={ pointers }
+                    data={ props.data }
+                    textPrefix={ textPrefix }
+                    textSuffix={ textSuffix }
+                />
+            }
         </svg>
     )
 };

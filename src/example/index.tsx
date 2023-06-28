@@ -13,7 +13,7 @@ const App = () => {
 
                 rx={ 150 }
                 ry={ 150 }
-
+                
                 startAngleDegrees={ 0 }
                 endAngleDegrees={ 360 }
 
