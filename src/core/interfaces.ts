@@ -93,3 +93,12 @@ export interface IConnection {
     startEndAngle: Vector2;
     svgCenter: Vector2;
 }
+
+export interface IText {
+    svgCenter: Vector2;
+    round: number;
+    pointers: IStatePointer[];
+    min: number;
+    max: number;
+    data?: TData;
+}

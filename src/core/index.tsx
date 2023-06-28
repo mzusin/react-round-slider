@@ -28,6 +28,7 @@ import Panel from './ui/Panel';
 import { normalizeAngles } from './domain/angles-provider';
 import Connection from './ui/Connection';
 import Pointer from './ui/Pointer';
+import Text from './ui/Text';
 
 export const RoundSlider = (props: IUserSettings) => {
 
@@ -461,6 +462,15 @@ export const RoundSlider = (props: IUserSettings) => {
                     )
                 })
             }
+
+            <Text 
+                svgCenter={ svgCenter } 
+                round={ round }
+                min={ min }
+                max={ max }
+                pointers={ pointers }
+                data={ props.data }
+            />
         </svg>
     )
 };
