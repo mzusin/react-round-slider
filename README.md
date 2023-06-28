@@ -1,4 +1,6 @@
-# React Round Slider
+# ミ☆ React Round Slider ミ☆
+
+SVG and TypeScript React round slider library.
 
 
 
