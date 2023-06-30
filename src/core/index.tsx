@@ -335,7 +335,10 @@ export const RoundSlider = (props: IUserSettings) => {
         let percent = pointer.percent;
         if(!isNumber(percent)) return;
 
-        const stepPercent = getStepPercent(min, max, props.data, props.step);
+        let stepPercent = getStepPercent(min, max, props.data, props.step);
+        if(stepPercent === undefined) {
+            stepPercent = 1;
+        }
 
         if(isNext) {
             percent -= stepPercent;
