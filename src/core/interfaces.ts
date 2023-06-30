@@ -1,7 +1,6 @@
 import { Vector2 } from 'mz-math';
 import { CSSProperties, ReactNode } from 'react';
 
-export type TStep = ((value: number | string, percent: number) => number) | number | undefined | null;
 export type TData = (string | number)[] | undefined;
 
 // --------------------------- USER PROVIDED SETTINGS ------------------------------------
@@ -18,7 +17,7 @@ export interface IUserSettingsPointer {
 export interface IUserSettings {
     min?: number | string;
     max?: number | string;
-    step?: TStep;
+    step?: number;
     data?: TData;
     round?: number;
 

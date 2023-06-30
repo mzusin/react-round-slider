@@ -10,7 +10,7 @@ import {
     getActivePointerId,
     getInitialPointers,
     getMaxPointer,
-    getMinMax, getPointerIndexById, getPointerPercentByMouse, handleOverlap,
+    getMinMax, getPointerIndexById, getPointerPercentByMouse, getStepPercent, handleOverlap,
     updateMultiplePointersValue, updateSinglePointerValue
 } from './domain/slider-provider';
 import { getEllipseSegment, getSVGCenter, getSVGSize } from './domain/svg-provider';
@@ -245,6 +245,8 @@ export const RoundSlider = (props: IUserSettings) => {
             endAngleDegrees,
             min,
             max,
+            props.data,
+            props.step
         );
 
         // SINGLE POINTER -----------------------------------------
@@ -333,12 +335,13 @@ export const RoundSlider = (props: IUserSettings) => {
         let percent = pointer.percent;
         if(!isNumber(percent)) return;
 
-        // TODO: fix this
+        const stepPercent = getStepPercent(min, max, props.data, props.step);
+
         if(isNext) {
-            percent--;
+            percent -= stepPercent;
         }
         else{
-            percent++;
+            percent += stepPercent;
         }
 
         if(percent > 100){

@@ -15,7 +15,7 @@ import {
     DEFAULT_POINTER_RX,
     DEFAULT_POINTER_RY,
     MAX_VALUE_DEFAULT,
-    MIN_VALUE_DEFAULT
+    MIN_VALUE_DEFAULT,
 } from './defaults';
 import { isAngleInArc } from './angles-provider';
 import { ReactNode } from 'react';
@@ -148,6 +148,33 @@ export const getValueByPercent = (
  */
 export const roundToStep = (num: number, step: number) => {
     return step === 0 ? 0 : Math.round(num / step) * step;
+};
+
+/**
+ * User step is defined in absolute values;
+ * this function return it as %
+ */
+export const getStepPercent = (min: number, max: number, data: TData, step?: number) : number|undefined => {
+    if(step === undefined && !!data) {
+        step = 1;
+    }
+
+    if(step === undefined) return undefined;
+
+    /*
+     min ......... max (step = 1)
+     0 ........... 100 (step = ?)
+
+     (max - min) ....... step (=1)
+     100 ............... ?
+
+     ? = 100 * step / (max - min)
+     */
+
+    const diff = max - min;
+    if(diff === 0) return 0;
+
+    return step * 100 / diff;
 };
 
 /**
@@ -291,7 +318,9 @@ export const getPointerPercentByMouse = (
     startAngleDegrees: number,
     endAngleDegrees: number,
     min: number,
-    max: number
+    max: number,
+    data: TData|undefined,
+    step: number|undefined
 ) : number => {
     const [clientX, clientY] = absoluteMouse;
 
@@ -322,7 +351,11 @@ export const getPointerPercentByMouse = (
 
     const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
 
-    return degrees * 100 / angleDiff;
+    const updatedPercent = degrees * 100 / angleDiff;
+
+    const stepPercent = getStepPercent(min, max, data, step);
+
+    return stepPercent === undefined ? updatedPercent : roundToStep(updatedPercent, stepPercent);
 };
 
 export const getPointerIndexById = (pointers: IStatePointer[], id: string) => {

@@ -25,7 +25,9 @@ describe('getPointerPercentByMouse()', () => {
             startAngleDegrees,
             endAngleDegrees,
             min,
-            max
+            max,
+            undefined,
+            undefined
         );
 
         expect(result).toBe(25);
@@ -54,7 +56,9 @@ describe('getPointerPercentByMouse()', () => {
             startAngleDegrees,
             endAngleDegrees,
             min,
-            max
+            max,
+            undefined,
+            undefined
         );
 
         expect(result).toBe(25);
@@ -83,7 +87,9 @@ describe('getPointerPercentByMouse()', () => {
             startAngleDegrees,
             endAngleDegrees,
             min,
-            max
+            max,
+            undefined,
+            undefined
         );
 
         expect(result).toBe(25);
