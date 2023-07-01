@@ -1,7 +1,7 @@
 import { IPointer } from '../interfaces';
 import { CSSProperties, useEffect, useState } from 'react';
 import { Vector2 } from 'mz-math';
-import { getPointerPositionByPercent } from '../domain/slider-provider';
+import { getPointerPositionByPercent, getValueByPercent } from '../domain/slider-provider';
 import { DEFAULT_POINTER_STYLE } from '../domain/defaults';
 
 const Pointer = (props: IPointer) => {
@@ -11,12 +11,14 @@ const Pointer = (props: IPointer) => {
         svgRadii, svgCenter,
         pointerBgColor, pointerSVG,
         disabledPointerStyle,
+        min, max, round, data,
     } = props;
     const { percent, pointerRadii } = pointer;
     const [ rx, ry ] = pointerRadii;
     const [ startAngleDegrees, endAngleDegrees ] = startEndAngle;
 
     const [ center, setCenter ] = useState<Vector2|null>(null);
+    const [ value, setValue ] = useState<number|string>('');
 
     /**
      * User provides pointer values that are transformed to percents.
@@ -40,6 +42,19 @@ const Pointer = (props: IPointer) => {
         startAngleDegrees, endAngleDegrees,
     ]);
 
+    useEffect(() => {
+        setValue(getValueByPercent(
+            percent,
+            min,
+            max,
+            round,
+            data
+        ));
+    }, [
+        min, max, round,
+        data, percent,
+    ]);
+
     let pointerStyle: CSSProperties = {
         ...DEFAULT_POINTER_STYLE,
     };
@@ -56,6 +71,8 @@ const Pointer = (props: IPointer) => {
                     <ellipse
                         className={ pointer.disabled ? 'disabled' : undefined }
                         aria-disabled={ pointer.disabled ? true : undefined }
+                        aria-valuenow={ value as number }
+                        aria-valuetext={ value.toString() }
                         style={ pointerStyle }
 
                         data-type="pointer"
@@ -81,6 +98,9 @@ const Pointer = (props: IPointer) => {
                         className={ pointer.disabled ? 'disabled' : undefined }
                         aria-disabled={ pointer.disabled ? true : undefined }
                         style={ pointerStyle }
+
+                        aria-valuenow={ value as number }
+                        aria-valuetext={ value.toString() }
 
                         data-type="pointer"
                         data-index={ pointer.index }

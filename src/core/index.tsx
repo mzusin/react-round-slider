@@ -474,6 +474,10 @@ export const RoundSlider = (props: IUserSettings) => {
                             pointerSVG={ props.pointerSVG || pointer.pointerSVG }
 
                             disabledPointerStyle={ disabledPointerStyle }
+                            min={ min }
+                            max={ max }
+                            round={ round }
+                            data={ props.data }
                         />
                     )
                 })

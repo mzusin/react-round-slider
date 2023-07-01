@@ -79,6 +79,10 @@ export interface IPointer {
     pointerBgColor: string;
     pointerSVG?: ReactNode;
     disabledPointerStyle?: CSSProperties;
+    min: number;
+    max: number;
+    round: number;
+    data?: TData;
 }
 
 export interface IPanel {
