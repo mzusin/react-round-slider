@@ -1,5 +1,3 @@
-import { CSSProperties } from 'react';
-
 export const DEFAULT_SVG_RX = 150;
 export const DEFAULT_SVG_RY = 150;
 
@@ -24,11 +22,11 @@ export const DISABLED_POINTER_STYLE = {
     filter: 'opacity(0.7) grayscale(100%)',
 };
 
-export const DEFAULT_SVG_STYLE: CSSProperties = {
+export const DEFAULT_SVG_STYLE = {
     outline: 'none',
 };
 
-export const DEFAULT_POINTER_STYLE: CSSProperties = {
+export const DEFAULT_POINTER_STYLE = {
     outline: 'none',
 };
 

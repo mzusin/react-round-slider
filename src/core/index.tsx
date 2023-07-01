@@ -2,8 +2,8 @@ import { IEllipse, IStatePointer, IUserSettings } from './interfaces';
 import {
     useEffect, useRef, useState,
     MouseEvent as ReactMouseEvent,
-    TouchEvent as ReactTouchEvent, CSSProperties,
-    KeyboardEvent, WheelEvent,
+    TouchEvent as ReactTouchEvent,
+    KeyboardEvent, WheelEvent, CSSProperties,
 } from 'react';
 import { isNumber, Vector2 } from 'mz-math'; 
 import {
