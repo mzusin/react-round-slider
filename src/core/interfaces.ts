@@ -49,7 +49,8 @@ export interface IUserSettings {
 
     // ticks -----------------------
     disableTicks?: boolean;
-    ticksSize?: number;
+    ticksWidth?: number;
+    ticksHeight?: number;
     ticsCount?: number;
 }
 
@@ -123,7 +124,8 @@ export interface IText {
 
 export interface ITicks {
     ticksColor: string;
-    ticksSize: number;
+    ticksWidth: number;
+    ticksHeight: number;
     ticsCount: number;
     totalLength: number;
     sliderRef: MutableRefObject<SVGPathElement>;

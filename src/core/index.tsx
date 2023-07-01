@@ -22,7 +22,7 @@ import {
     DEFAULT_SVG_RX,
     DEFAULT_SVG_RY, DEFAULT_SVG_STYLE,
     DISABLED_POINTER_STYLE, POINTER_OVERLAP_DEFAULT,
-    ROUND_DEFAULT, TICKS_SIZE_DEFAULT,
+    ROUND_DEFAULT, TICKS_HEIGHT_DEFAULT, TICKS_WIDTH_DEFAULT,
 } from './domain/defaults';
 import Panel from './ui/Panel';
 import { normalizeAngles } from './domain/angles-provider';
@@ -72,14 +72,16 @@ export const RoundSlider = (props: IUserSettings) => {
 
     // ticks -----------------------
     const [ disableTicks, setDisableTicks ] = useState(false);
-    const [ ticksSize, setTicksSize ] = useState(TICKS_SIZE_DEFAULT);
+    const [ ticksWidth, setTicksWidth ] = useState(TICKS_WIDTH_DEFAULT);
+    const [ ticksHeight, setTicksHeight ] = useState(TICKS_HEIGHT_DEFAULT);
     const [ ticsCount, setTicsCount ] = useState(0);
 
     // ---------------- STATE ----------------------------
 
     useEffect(() => {
         setDisableTicks(getBoolean(props.disableTicks, false));
-        setTicksSize(getNumber(props.ticksSize, TICKS_SIZE_DEFAULT));
+        setTicksWidth(getNumber(props.ticksWidth, TICKS_WIDTH_DEFAULT));
+        setTicksHeight(getNumber(props.ticksHeight, TICKS_HEIGHT_DEFAULT));
 
         let ticksCount = getNumber(props.ticsCount, 0);
         if(!ticksCount) {
@@ -95,7 +97,8 @@ export const RoundSlider = (props: IUserSettings) => {
         setTicsCount(ticksCount);
     }, [
         props.disableTicks,
-        props.ticksSize,
+        props.ticksWidth,
+        props.ticksHeight,
         props.ticsCount,
         max, min, props.data,
         startAngleDegrees, endAngleDegrees,
@@ -483,7 +486,8 @@ export const RoundSlider = (props: IUserSettings) => {
                 !disableTicks &&
                 <Ticks
                     sliderRef={ sliderRef }
-                    ticksSize={ ticksSize }
+                    ticksWidth={ ticksWidth }
+                    ticksHeight={ ticksHeight }
                     ticksColor={ bgColor }
                     ticsCount={ ticsCount }
                     totalLength={ sliderRef?.current?.getTotalLength() || 0 }

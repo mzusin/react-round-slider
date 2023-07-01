@@ -1,7 +1,7 @@
 import { ITick, ITicks } from '../interfaces';
 import { MutableRefObject, useEffect, useState } from 'react';
 import { v2MulScalar, v2Normalize } from 'mz-math';
-import { TICKS_SIZE_DEFAULT } from '../domain/defaults';
+import { TICKS_WIDTH_DEFAULT, TICKS_HEIGHT_DEFAULT } from '../domain/defaults';
 
 const getTicks = (
     ticsCount: number,
@@ -31,7 +31,7 @@ const getTicks = (
 export const Ticks = (props: ITicks) => {
 
     const {
-        ticksColor, ticksSize,
+        ticksColor, ticksWidth, ticksHeight,
         ticsCount, totalLength,
         sliderRef, svgCenter,
     } = props;
@@ -51,8 +51,7 @@ export const Ticks = (props: ITicks) => {
                 ticks.map((tick, i) => {
                     const { x, y } = tick;
 
-                    const distance = Math.sqrt(Math.pow(cx - x, 2) + Math.pow(cy - y, 2));
-                    const desiredDistance = distance * 0.1;
+                    const desiredDistance = ticksHeight || TICKS_HEIGHT_DEFAULT;
 
                     const normalizedDirectionVector = v2Normalize([cx - x, cy - y]);
                     const vectorFromP1ToP3 = v2MulScalar(normalizedDirectionVector, desiredDistance);
@@ -67,7 +66,7 @@ export const Ticks = (props: ITicks) => {
                             y1={ y }
                             x2={ x3 }
                             y2={ y3 }
-                            strokeWidth={ ticksSize || TICKS_SIZE_DEFAULT }
+                            strokeWidth={ ticksWidth || TICKS_WIDTH_DEFAULT }
                             stroke={ ticksColor }
                         />
                     );
