@@ -20,9 +20,9 @@ import {
     DEFAULT_CONNECTION_BG_COLOR, DEFAULT_POINTER_BG_COLOR,
     DEFAULT_STROKE_WIDTH,
     DEFAULT_SVG_RX,
-    DEFAULT_SVG_RY, DEFAULT_SVG_STYLE, 
+    DEFAULT_SVG_RY, DEFAULT_SVG_STYLE,
     DISABLED_POINTER_STYLE, POINTER_OVERLAP_DEFAULT,
-    ROUND_DEFAULT,
+    ROUND_DEFAULT, TICKS_SIZE_DEFAULT,
 } from './domain/defaults';
 import Panel from './ui/Panel';
 import { normalizeAngles } from './domain/angles-provider';
@@ -72,13 +72,33 @@ export const RoundSlider = (props: IUserSettings) => {
 
     // ticks -----------------------
     const [ disableTicks, setDisableTicks ] = useState(false);
+    const [ ticksSize, setTicksSize ] = useState(TICKS_SIZE_DEFAULT);
+    const [ ticsCount, setTicsCount ] = useState(0);
 
     // ---------------- STATE ----------------------------
 
     useEffect(() => {
         setDisableTicks(getBoolean(props.disableTicks, false));
+        setTicksSize(getNumber(props.ticksSize, TICKS_SIZE_DEFAULT));
+
+        let ticksCount = getNumber(props.ticsCount, 0);
+        if(!ticksCount) {
+            if(props.data && props.data.length > 0) {
+                ticksCount = props.data.length - 1;
+            }
+            else{
+                const diff = Math.abs(startAngleDegrees - endAngleDegrees) % 360;
+                ticksCount = diff * (max - min) / 360;
+            }
+        }
+
+        setTicsCount(ticksCount);
     }, [
         props.disableTicks,
+        props.ticksSize,
+        props.ticsCount,
+        max, min, props.data,
+        startAngleDegrees, endAngleDegrees,
     ]);
 
     useEffect(() => {
@@ -463,8 +483,9 @@ export const RoundSlider = (props: IUserSettings) => {
                 !disableTicks &&
                 <Ticks
                     sliderRef={ sliderRef }
+                    ticksSize={ ticksSize }
                     ticksColor={ bgColor }
-                    ticsCount={ 100 }
+                    ticsCount={ ticsCount }
                     totalLength={ sliderRef?.current?.getTotalLength() || 0 }
                     svgCenter={ svgCenter }
                 />

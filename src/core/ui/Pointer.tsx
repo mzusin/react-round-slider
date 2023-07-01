@@ -74,7 +74,7 @@ const Pointer = (props: IPointer) => {
 
                         aria-disabled={ pointer.disabled ? true : undefined }
                         aria-valuenow={ value as number }
-                        aria-valuetext={ value.toString() }
+                        aria-valuetext={ (value || '').toString() }
                         aria-label={ ariaLabel }
 
                         data-type="pointer"

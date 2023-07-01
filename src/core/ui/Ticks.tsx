@@ -1,6 +1,7 @@
 import { ITick, ITicks } from '../interfaces';
 import { MutableRefObject, useEffect, useState } from 'react';
 import { v2MulScalar, v2Normalize } from 'mz-math';
+import { TICKS_SIZE_DEFAULT } from '../domain/defaults';
 
 const getTicks = (
     ticsCount: number,
@@ -30,7 +31,8 @@ const getTicks = (
 export const Ticks = (props: ITicks) => {
 
     const {
-        ticksColor, ticsCount, totalLength,
+        ticksColor, ticksSize,
+        ticsCount, totalLength,
         sliderRef, svgCenter,
     } = props;
     const [ ticks, setTicks ] = useState<ITick[]>([]);
@@ -38,7 +40,7 @@ export const Ticks = (props: ITicks) => {
     useEffect(() => {
         setTicks(getTicks(ticsCount, totalLength, sliderRef));
     }, [
-        ticsCount, totalLength
+        ticsCount, totalLength, sliderRef,
     ]);
 
     const [ cx, cy ] = svgCenter;
@@ -65,29 +67,10 @@ export const Ticks = (props: ITicks) => {
                             y1={ y }
                             x2={ x3 }
                             y2={ y3 }
-                            strokeWidth={ 3 }
+                            strokeWidth={ ticksSize || TICKS_SIZE_DEFAULT }
                             stroke={ ticksColor }
                         />
                     );
-
-
-
-                    /*const dx = cx - x;
-                    const dy = cy - y;
-                    let angle = Math.atan2(cy, cx) * (180 / Math.PI);
-                    console.log(angle)
-
-                    return (
-                        <rect
-                            key={ i }
-                            x={ x }
-                            y={ y }
-                            width="3"
-                            height="10"
-                            fill={ ticksColor }
-                            transform={ `rotate(${ angle }, ${ x }, ${ y })` }
-                        />
-                    )*/
                 })
             }
         </g>

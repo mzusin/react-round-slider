@@ -16,12 +16,13 @@ const App = () => {
             <RoundSlider/>
 
             <RoundSlider
+
                 min={ 0 }
                 max={ 100 }
 
                 rx={ 150 }
                 ry={ 150 }
-                
+
                 startAngleDegrees={ 0 }
                 endAngleDegrees={ 360 }
 
