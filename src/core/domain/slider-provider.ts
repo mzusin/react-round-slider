@@ -214,6 +214,7 @@ export const getInitialPointers = (
             disabled: userSettingsPointer.disabled === true,
             keyboardDisabled: false,
             mousewheelDisabled: false,
+            ariaLabel: userSettingsPointer.ariaLabel,
         };
 
         pointers.push(pointer);

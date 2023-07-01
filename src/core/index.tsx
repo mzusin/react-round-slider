@@ -478,6 +478,7 @@ export const RoundSlider = (props: IUserSettings) => {
                             max={ max }
                             round={ round }
                             data={ props.data }
+                            ariaLabel={ pointer.ariaLabel }
                         />
                     )
                 })

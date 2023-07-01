@@ -12,6 +12,7 @@ export interface IUserSettingsPointer {
     bgColor?: string;
     pointerSVG?: ReactNode;
     disabled?: boolean;
+    ariaLabel?: string;
 }
 
 export interface IUserSettings {
@@ -59,6 +60,7 @@ export interface IStatePointer {
     disabled: boolean;
     keyboardDisabled: boolean;
     mousewheelDisabled: boolean;
+    ariaLabel?: string;
 }
 
 export interface IEllipse {
@@ -83,6 +85,7 @@ export interface IPointer {
     max: number;
     round: number;
     data?: TData;
+    ariaLabel?: string;
 }
 
 export interface IPanel {

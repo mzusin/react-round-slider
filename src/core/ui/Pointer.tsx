@@ -11,7 +11,7 @@ const Pointer = (props: IPointer) => {
         svgRadii, svgCenter,
         pointerBgColor, pointerSVG,
         disabledPointerStyle,
-        min, max, round, data,
+        min, max, round, data, ariaLabel,
     } = props;
     const { percent, pointerRadii } = pointer;
     const [ rx, ry ] = pointerRadii;
@@ -70,10 +70,12 @@ const Pointer = (props: IPointer) => {
                     !pointerSVG &&
                     <ellipse
                         className={ pointer.disabled ? 'disabled' : undefined }
+                        style={ pointerStyle }
+
                         aria-disabled={ pointer.disabled ? true : undefined }
                         aria-valuenow={ value as number }
                         aria-valuetext={ value.toString() }
-                        style={ pointerStyle }
+                        aria-label={ ariaLabel }
 
                         data-type="pointer"
                         data-index={ pointer.index }
@@ -96,11 +98,12 @@ const Pointer = (props: IPointer) => {
                     pointerSVG &&
                     <g
                         className={ pointer.disabled ? 'disabled' : undefined }
-                        aria-disabled={ pointer.disabled ? true : undefined }
                         style={ pointerStyle }
 
+                        aria-disabled={ pointer.disabled ? true : undefined }
                         aria-valuenow={ value as number }
                         aria-valuetext={ value.toString() }
+                        aria-label={ ariaLabel }
 
                         data-type="pointer"
                         data-index={ pointer.index }
