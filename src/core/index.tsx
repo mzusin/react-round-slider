@@ -29,6 +29,7 @@ import { normalizeAngles } from './domain/angles-provider';
 import Connection from './ui/Connection';
 import Pointer from './ui/Pointer';
 import Text from './ui/Text';
+import Ticks from './ui/Ticks';
 
 export const RoundSlider = (props: IUserSettings) => {
 
@@ -64,11 +65,21 @@ export const RoundSlider = (props: IUserSettings) => {
     const [ svgWidth, svgHeight ] = svgSize;
     const [ startAngleDegrees, endAngleDegrees ] = startEndAngle;
 
+    // text value ------------------
     const [ hideText, setHideText ] = useState(false);
     const [ textPrefix, setTextPrefix ] = useState('');
     const [ textSuffix, setTextSuffix ] = useState('');
 
+    // ticks -----------------------
+    const [ disableTicks, setDisableTicks ] = useState(false);
+
     // ---------------- STATE ----------------------------
+
+    useEffect(() => {
+        setDisableTicks(getBoolean(props.disableTicks, false));
+    }, [
+        props.disableTicks,
+    ]);
 
     useEffect(() => {
         setBgColor(getString(props.bgColor, DEFAULT_BG_COLOR));
@@ -495,6 +506,16 @@ export const RoundSlider = (props: IUserSettings) => {
                     data={ props.data }
                     textPrefix={ textPrefix }
                     textSuffix={ textSuffix }
+                />
+            }
+
+            {
+                !disableTicks &&
+                <Ticks
+                    sliderRef={ sliderRef }
+                    ticksColor={ bgColor }
+                    ticsCount={ 100 }
+                    totalLength={ sliderRef?.current?.getTotalLength() || 0 }
                 />
             }
         </svg>

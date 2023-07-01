@@ -1,5 +1,5 @@
 import { Vector2 } from 'mz-math';
-import { CSSProperties, ReactNode } from 'react';
+import { CSSProperties, MutableRefObject, ReactNode } from 'react';
 
 export type TData = (string | number)[] | undefined;
 
@@ -46,6 +46,9 @@ export interface IUserSettings {
     hideText?: boolean;
     textPrefix?: string;
     textSuffix?: string;
+
+    // ticks -----------------------
+    disableTicks?: boolean;
 }
 
 // --------------------------- STATE ------------------------------------
@@ -114,4 +117,17 @@ export interface IText {
     data?: TData;
     textPrefix: string;
     textSuffix: string;
+}
+
+export interface ITicks {
+    ticksColor: string;
+    ticsCount: number;
+    totalLength: number;
+    sliderRef: MutableRefObject<SVGPathElement>;
+}
+
+export interface ITick {
+    distance: number;
+    x: number;
+    y: number;
 }
