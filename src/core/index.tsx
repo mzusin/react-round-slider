@@ -459,6 +459,17 @@ export const RoundSlider = (props: IUserSettings) => {
                 bgColor={ bgColor }
             />
 
+            {
+                !disableTicks &&
+                <Ticks
+                    sliderRef={ sliderRef }
+                    ticksColor={ bgColor }
+                    ticsCount={ 100 }
+                    totalLength={ sliderRef?.current?.getTotalLength() || 0 }
+                    svgCenter={ svgCenter }
+                />
+            }
+
             <Connection
                 pointers={ pointers }
                 ellipse={ ellipse }
@@ -509,15 +520,6 @@ export const RoundSlider = (props: IUserSettings) => {
                 />
             }
 
-            {
-                !disableTicks &&
-                <Ticks
-                    sliderRef={ sliderRef }
-                    ticksColor={ bgColor }
-                    ticsCount={ 100 }
-                    totalLength={ sliderRef?.current?.getTotalLength() || 0 }
-                />
-            }
         </svg>
     )
 };

@@ -124,6 +124,7 @@ export interface ITicks {
     ticsCount: number;
     totalLength: number;
     sliderRef: MutableRefObject<SVGPathElement>;
+    svgCenter: Vector2;
 }
 
 export interface ITick {
