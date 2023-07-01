@@ -27,4 +27,27 @@ describe('Accessibility', () => {
         expect($pointer.getAttribute('aria-label')).toStrictEqual('label-1');
     });
 
+    test('aria-valuenow', () => {
+        const { container} = render(
+            <RoundSlider pointers={[
+                {
+                    value: 10,
+                }
+            ]} />
+        );
+        const $pointer = container.querySelector('svg [data-type="pointer"][data-index="0"]') as SVGElement;
+        expect($pointer.getAttribute('aria-valuenow')).toStrictEqual('10');
+    });
+
+    test('aria-valuetext', () => {
+        const { container} = render(
+            <RoundSlider pointers={[
+                {
+                    value: 10,
+                }
+            ]} />
+        );
+        const $pointer = container.querySelector('svg [data-type="pointer"][data-index="0"]') as SVGElement;
+        expect($pointer.getAttribute('aria-valuetext')).toStrictEqual('10');
+    });
 });
