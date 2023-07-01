@@ -64,6 +64,7 @@ const App = () => {
                         value: 10,
                         bgColor: 'blue',
                         disabled: true,
+                        ariaLabel: 'pointer-1',
                         pointerSVG: (
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="50" height="50" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
@@ -92,14 +93,15 @@ const App = () => {
                         rx: 15,
                         ry: 15,
                         value: 50,
-                        pointerSVG: <image href="settings-icon.png" height="15" width="15" />
+                        pointerSVG: <image href="settings-icon.png" height="15" width="15" />,
+                        ariaLabel: 'pointer-2',
                     },
 
                     {
                         rx: 20,
                         ry: 20,
                         value: 25,
-                        pointerSVG: <image href="settings-icon.png" height="20" width="20" />
+                        pointerSVG: <image href="settings-icon.png" height="20" width="20" />,
                     },
 
                     {
