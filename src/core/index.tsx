@@ -474,6 +474,13 @@ export const RoundSlider = (props: IUserSettings) => {
             onWheel={ onWheel }
             style={ DEFAULT_SVG_STYLE }>
 
+            {
+                props.connectionGradient &&
+                <defs>
+                    { props.connectionGradient }
+                </defs>
+            }
+
             <Panel
                 ref={ sliderRef }
                 ellipse={ ellipse }
@@ -484,6 +491,9 @@ export const RoundSlider = (props: IUserSettings) => {
 
             {
                 !disableTicks &&
+                sliderRef &&
+                sliderRef.current &&
+                typeof sliderRef?.current?.getTotalLength === 'function' &&
                 <Ticks
                     sliderRef={ sliderRef }
                     ticksWidth={ ticksWidth }
@@ -503,6 +513,7 @@ export const RoundSlider = (props: IUserSettings) => {
                 connectionBgColor={ connectionBgColor }
                 startEndAngle={ startEndAngle }
                 svgCenter={ svgCenter }
+                connectionGradient={ props.connectionGradient }
             />
 
             {
@@ -542,6 +553,9 @@ export const RoundSlider = (props: IUserSettings) => {
                     data={ props.data }
                     textPrefix={ textPrefix }
                     textSuffix={ textSuffix }
+                    textColor={ props.textColor }
+                    textFontSize={ props.textFontSize }
+                    textFontFamily={ props.textFontFamily }
                 />
             }
 

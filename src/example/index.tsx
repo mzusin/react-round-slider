@@ -5,13 +5,18 @@ import { RoundSlider } from '../core';
 const App = () => {
     return (
         <>
-            <RoundSlider data={[
-                'a', 'b', 'c', 'd', 'e', 'f',
-                'g', 'h', 'i', 'j', 'k', 'l',
-                'm', 'n', 'o', 'p', 'q', 'r',
-                's', 't', 'u', 'v', 'w', 'x',
-                'y', 'z',
-            ]} />
+            <RoundSlider
+                data={[
+                    'a', 'b', 'c', 'd', 'e', 'f',
+                    'g', 'h', 'i', 'j', 'k', 'l',
+                    'm', 'n', 'o', 'p', 'q', 'r',
+                    's', 't', 'u', 'v', 'w', 'x',
+                    'y', 'z',
+                ]}
+                textColor={ '#5DAED2' }
+                textFontSize={ 24 }
+                textFontFamily={ 'Helvetica,Arial,sans-serif' }
+            />
 
             <RoundSlider/>
 
@@ -29,6 +34,12 @@ const App = () => {
                 strokeWidth={ 15 }
                 bgColor="red"
                 connectionBgColor="blue"
+                connectionGradient={
+                    <linearGradient id="connection" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#00bc9b" />
+                        <stop offset="100%" stopColor="#5eaefd" />
+                    </linearGradient>
+                }
                 /*disabledPointerStyle={{
                     filter: 'invert(100%)',
                 }}*/

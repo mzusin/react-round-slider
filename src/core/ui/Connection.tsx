@@ -7,7 +7,8 @@ const Connection = (props: IConnection) => {
 
     const  {
         pointers, ellipse, strokeWidth, svgCenter,
-        svgRadii, connectionBgColor, startEndAngle,
+        svgRadii, connectionBgColor,
+        connectionGradient, startEndAngle,
     } = props;
     const { start } = ellipse;
 
@@ -78,9 +79,9 @@ const Connection = (props: IConnection) => {
             {
                 connectionStartPoint !== null && connectionEndPoint !== null &&
                 <path
-                    data-type="panel-fill"
+                    data-type="connection"
                     d={ `M ${ connectionStartPoint[0] } ${ connectionStartPoint[1] } A ${ svgRadii[0] } ${ svgRadii[1] } 0 ${ connectionLargeArcFlag } 1 ${ connectionEndPoint[0] } ${ connectionEndPoint[1] }` }
-                    stroke={ connectionBgColor }
+                    stroke={ connectionGradient ? `url(#connection)` : connectionBgColor }
                     strokeWidth={ strokeWidth + 1 }
                     fill="none"
                     shapeRendering="geometricPrecision"

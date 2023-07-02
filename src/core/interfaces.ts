@@ -29,23 +29,30 @@ export interface IUserSettings {
     keyboardDisabled?: boolean;
     mousewheelDisabled?: boolean;
 
-    // svg look & feel properties ----------
     rx?: number;
     ry?: number;
-    strokeWidth?: number;
+    startAngleDegrees?: number;
+    endAngleDegrees?: number;
 
+    // panel --------------------
+    strokeWidth?: number;
     bgColor?: string;
-    connectionBgColor?: string;
+
+    // pointer ------------------
     pointerBgColor?: string;
     pointerSVG?: ReactNode;
 
-    startAngleDegrees?: number;
-    endAngleDegrees?: number;
+    // connection ------------------
+    connectionBgColor?: string;
+    connectionGradient?: ReactNode;
 
     // text ------------------------
     hideText?: boolean;
     textPrefix?: string;
     textSuffix?: string;
+    textColor?: string;
+    textFontSize?: number;
+    textFontFamily?: string;
 
     // ticks -----------------------
     disableTicks?: boolean;
@@ -109,6 +116,7 @@ export interface IConnection {
     connectionBgColor: string;
     startEndAngle: Vector2;
     svgCenter: Vector2;
+    connectionGradient?: ReactNode;
 }
 
 export interface IText {
@@ -120,6 +128,9 @@ export interface IText {
     data?: TData;
     textPrefix: string;
     textSuffix: string;
+    textColor?: string;
+    textFontSize?: number;
+    textFontFamily?: string;
 }
 
 export interface ITicks {

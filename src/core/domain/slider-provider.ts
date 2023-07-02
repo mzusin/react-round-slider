@@ -369,7 +369,7 @@ const isPanelClicked = ($target: HTMLElement) => {
 };
 
 const isConnectionClicked = ($target: HTMLElement) => {
-    return $target.getAttribute('data-type') === 'panel-fill';
+    return $target.getAttribute('data-type') === 'connection';
 };
 
 const isPointerClicked = ($target: HTMLElement, id: string) => {
