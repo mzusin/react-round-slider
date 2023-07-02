@@ -55,13 +55,13 @@ describe('Mim/Max', () => {
         it('getMinMax(undefined, undefined, [1, 2, 3, 4, 5, 6, 7, 8, 9])', () => {
             const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
             const result = getMinMax(undefined, undefined, data);
-            expect(result).toStrictEqual([0, 8]);
+            expect(result).toStrictEqual([0, 9]);
         });
 
         it('getMinMax(5, 14, [1, 2, 3, 4, 5, 6, 7, 8, 9])', () => {
             const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
             const result = getMinMax(5, 14, data);
-            expect(result).toStrictEqual([4, 8]);
+            expect(result).toStrictEqual([4, 9]);
         });
 
         it('getMinMax(1, 9, [1, 2, 3, 4, 5, 6, 7, 8, 9])', () => {
@@ -73,7 +73,7 @@ describe('Mim/Max', () => {
         it('getMinMax(0, 10, [1, 2, 3, 4, 5, 6, 7, 8, 9])', () => {
             const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
             const result = getMinMax(0, 10, data);
-            expect(result).toEqual([0, 8]);
+            expect(result).toEqual([0, 9]);
         });
 
         it('getMinMax("b", "c", ["a", "b", "c", "d"])', () => {

@@ -11,7 +11,8 @@ const Pointer = (props: IPointer) => {
         svgRadii, svgCenter,
         pointerBgColor, pointerSVG,
         disabledPointerStyle,
-        min, max, round, data, ariaLabel,
+        min, max, round,
+        data, ariaLabel,
     } = props;
     const { percent, pointerRadii } = pointer;
     const [ rx, ry ] = pointerRadii;

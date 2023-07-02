@@ -59,7 +59,7 @@ export const getMinMax = (
         const maxIndex = data.findIndex(item => item === max);
 
         const _min = minIndex === -1 ? 0 : minIndex;
-        const _max = maxIndex === -1 ? data.length - 1 : maxIndex;
+        const _max = maxIndex === -1 ? data.length : maxIndex;
         return [_min, _max];
     }
 
@@ -355,8 +355,8 @@ export const getPointerPercentByMouse = (
     const updatedPercent = degrees * 100 / angleDiff;
 
     const stepPercent = getStepPercent(min, max, data, step);
-
-    return stepPercent === undefined ? updatedPercent : roundToStep(updatedPercent, stepPercent);
+    const result = stepPercent === undefined ? updatedPercent : roundToStep(updatedPercent, stepPercent);
+    return result === 100 ? 0 : result;
 };
 
 export const getPointerIndexById = (pointers: IStatePointer[], id: string) => {

@@ -5,7 +5,7 @@ import {
     TouchEvent as ReactTouchEvent,
     KeyboardEvent, WheelEvent, CSSProperties,
 } from 'react';
-import { isNumber, Vector2 } from 'mz-math'; 
+import { isNumber, mod, Vector2 } from 'mz-math';
 import {
     getActivePointerId,
     getInitialPointers,
@@ -60,6 +60,7 @@ export const RoundSlider = (props: IUserSettings) => {
     const [ keyboardDisabled, setKeyboardDisabled ] = useState(false);
     const [ mousewheelDisabled, setMousewheelDisabled ] = useState(false);
     const [ round, setRound ] = useState(ROUND_DEFAULT);
+    const [ stepPercent, setStepPercent ] = useState<number|undefined>(undefined);
 
     const [ min, max ] = minMax;
     const [ svgWidth, svgHeight ] = svgSize;
@@ -79,6 +80,12 @@ export const RoundSlider = (props: IUserSettings) => {
     // ---------------- STATE ----------------------------
 
     useEffect(() => {
+        setStepPercent(getStepPercent(min, max, props.data, props.step));
+    }, [
+        min, max, props.data, props.step
+    ]);
+
+    useEffect(() => {
         setDisableTicks(getBoolean(props.disableTicks, false));
         setTicksWidth(getNumber(props.ticksWidth, TICKS_WIDTH_DEFAULT));
         setTicksHeight(getNumber(props.ticksHeight, TICKS_HEIGHT_DEFAULT));
@@ -86,7 +93,7 @@ export const RoundSlider = (props: IUserSettings) => {
         let ticksCount = getNumber(props.ticsCount, 0);
         if(!ticksCount) {
             if(props.data && props.data.length > 0) {
-                ticksCount = props.data.length - 1;
+                ticksCount = props.data.length;
             }
             else{
                 const diff = Math.abs(startAngleDegrees - endAngleDegrees) % 360;
@@ -369,21 +376,19 @@ export const RoundSlider = (props: IUserSettings) => {
         let percent = pointer.percent;
         if(!isNumber(percent)) return;
 
-        let stepPercent = getStepPercent(min, max, props.data, props.step);
-        if(stepPercent === undefined) {
-            stepPercent = 1;
+        let _stepPercent = stepPercent;
+        if(_stepPercent === undefined) {
+            _stepPercent = 1;
         }
 
         if(isNext) {
-            percent -= stepPercent;
+            percent -= _stepPercent;
         }
         else{
-            percent += stepPercent;
+            percent += _stepPercent;
         }
 
-        if(percent > 100){
-            percent = 100;
-        }
+        percent = mod(percent, 100);
 
         // rerender -----
         pointer.percent = percent;
@@ -493,7 +498,7 @@ export const RoundSlider = (props: IUserSettings) => {
                 !disableTicks &&
                 sliderRef &&
                 sliderRef.current &&
-                typeof sliderRef?.current?.getTotalLength === 'function' &&
+                (typeof sliderRef.current.getTotalLength === 'function') &&
                 <Ticks
                     sliderRef={ sliderRef }
                     ticksWidth={ ticksWidth }
