@@ -35,8 +35,8 @@ export interface IUserSettings {
     endAngleDegrees?: number;
 
     // panel --------------------
-    strokeWidth?: number;
-    bgColor?: string;
+    panelStrokeWidth?: number;
+    panelBgColor?: string;
 
     // pointer ------------------
     pointerBgColor?: string;
@@ -61,6 +61,7 @@ export interface IUserSettings {
     longerTicksHeight?: number;
     ticsCount?: number;
     ticksGroupSize?: number;
+    ticksDistanceToPanel?: number;
 
     // events ----------------------
     onChange?: (values: (string|number)[], pointers: IStatePointer[]) => void;
@@ -148,6 +149,7 @@ export interface ITicks {
     sliderRef: MutableRefObject<SVGPathElement>;
     svgCenter: Vector2;
     ticksGroupSize?: number;
+    ticksDistanceToPanel?: number;
 }
 
 export interface ITick {

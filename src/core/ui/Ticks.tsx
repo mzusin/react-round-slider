@@ -38,7 +38,7 @@ export const Ticks = (props: ITicks) => {
         ticksColor, ticksWidth,
         ticksHeight, longerTicksHeight,
         ticsCount, ticksGroupSize, totalLength,
-        sliderRef, svgCenter,
+        sliderRef, svgCenter, ticksDistanceToPanel,
     } = props;
     const [ ticks, setTicks ] = useState<ITick[]>([]);
 
@@ -54,7 +54,7 @@ export const Ticks = (props: ITicks) => {
         <g>
             {
                 ticks.map((tick, i) => {
-                    const { x, y } = tick;
+                    let { x, y } = tick;
 
                     let desiredDistance = ticksHeight || TICKS_HEIGHT_DEFAULT;
 
@@ -63,10 +63,16 @@ export const Ticks = (props: ITicks) => {
                     }
 
                     const normalizedDirectionVector = v2Normalize([cx - x, cy - y]);
-                    const vectorFromP1ToP3 = v2MulScalar(normalizedDirectionVector, desiredDistance);
+                    const tickEndVector = v2MulScalar(normalizedDirectionVector, desiredDistance);
 
-                    const x3 = x + vectorFromP1ToP3[0];
-                    const y3 = y + vectorFromP1ToP3[1];
+                    if(ticksDistanceToPanel !== undefined) {
+                        const tickStartVector = v2MulScalar(normalizedDirectionVector, ticksDistanceToPanel);
+                        x += tickStartVector[0];
+                        y += tickStartVector[1];
+                    }
+
+                    const x3 = x + tickEndVector[0];
+                    const y3 = y + tickEndVector[1];
 
                     return (
                         <line

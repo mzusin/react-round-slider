@@ -12,8 +12,8 @@ const App = () => {
                 startAngleDegrees={ 0 }
                 endAngleDegrees={ 180 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {
@@ -30,8 +30,8 @@ const App = () => {
                 startAngleDegrees={ 180 }
                 endAngleDegrees={ 0 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {
@@ -48,8 +48,8 @@ const App = () => {
                 startAngleDegrees={ 180 }
                 endAngleDegrees={ 360 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {
@@ -66,8 +66,8 @@ const App = () => {
                 startAngleDegrees={ 0 }
                 endAngleDegrees={ 90 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {
@@ -84,8 +84,8 @@ const App = () => {
                 startAngleDegrees={ 90 }
                 endAngleDegrees={ 270 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {
@@ -102,8 +102,8 @@ const App = () => {
                 startAngleDegrees={ 180 }
                 endAngleDegrees={ 270 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {
@@ -120,8 +120,8 @@ const App = () => {
                 startAngleDegrees={ 270 }
                 endAngleDegrees={ 0 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {
@@ -138,8 +138,8 @@ const App = () => {
                 startAngleDegrees={ 180 }
                 endAngleDegrees={ 360 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {
@@ -156,8 +156,8 @@ const App = () => {
                 startAngleDegrees={ 0 }
                 endAngleDegrees={ 360 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {
@@ -174,8 +174,8 @@ const App = () => {
                 startAngleDegrees={ 200 }
                 endAngleDegrees={ 40 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {
@@ -192,8 +192,8 @@ const App = () => {
                 startAngleDegrees={ -80 }
                 endAngleDegrees={ 0 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {
@@ -210,8 +210,8 @@ const App = () => {
                 startAngleDegrees={ 270 }
                 endAngleDegrees={ 360 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {
@@ -228,8 +228,8 @@ const App = () => {
                 startAngleDegrees={ 270 }
                 endAngleDegrees={ 270 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {
@@ -246,8 +246,8 @@ const App = () => {
                 startAngleDegrees={ 270 }
                 endAngleDegrees={ 200 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {
@@ -264,8 +264,8 @@ const App = () => {
                 startAngleDegrees={ 630 }
                 endAngleDegrees={ 560 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
 
                 pointers={[
                     {

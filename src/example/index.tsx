@@ -21,7 +21,10 @@ const App = () => {
                 }}
             />
 
-            <RoundSlider ticksGroupSize={ 10 } />
+            <RoundSlider
+                ticksGroupSize={ 10 }
+                ticksDistanceToPanel={ 7 }
+            />
 
             <RoundSlider
 
@@ -34,8 +37,8 @@ const App = () => {
                 startAngleDegrees={ 0 }
                 endAngleDegrees={ 360 }
 
-                strokeWidth={ 15 }
-                bgColor="red"
+                panelStrokeWidth={ 15 }
+                panelBgColor="red"
                 connectionBgColor="blue"
                 connectionGradient={
                     <linearGradient id="connection" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -67,8 +70,8 @@ const App = () => {
                 startAngleDegrees={ 0 }
                 endAngleDegrees={ 360 }
 
-                strokeWidth={ 15 }
-                bgColor="#285f68"
+                panelStrokeWidth={ 15 }
+                panelBgColor="#285f68"
                 connectionBgColor="#86e02c"
                 pointerBgColor="red"
 

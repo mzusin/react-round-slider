@@ -39,7 +39,7 @@ export const RoundSlider = (props: IUserSettings) => {
 
     const [ selectedPointerId, setSelectedPointerId ] = useState<string|null>(null);
     const [ svgRadii, setSvgRadii ] = useState<Vector2>([0, 0]);
-    const [ strokeWidth, setStrokeWidth ] = useState(0);
+    const [ panelStrokeWidth, setPanelStrokeWidth ] = useState(0);
     const [ minMax, setMinMax ] = useState<Vector2>([0, 0]);
     const [ pointers, setPointers ] = useState<IStatePointer[]>([]);
     const [ maxPointer, setMaxPointer ] = useState<Vector2>([0, 0]);
@@ -51,7 +51,7 @@ export const RoundSlider = (props: IUserSettings) => {
         end: [ 0, 0 ],
         largeArcFlag: 0,
     });
-    const [ bgColor, setBgColor ] = useState(DEFAULT_BG_COLOR);
+    const [ panelBgColor, setPanelBgColor ] = useState(DEFAULT_BG_COLOR);
     const [ connectionBgColor, setConnectionBgColor ] = useState(DEFAULT_CONNECTION_BG_COLOR);
     const [ pointerBgColor, setPointerBgColor ] = useState(DEFAULT_POINTER_BG_COLOR);
     const [ pointersOverlap, setPointersOverlap ] = useState(false);
@@ -117,11 +117,11 @@ export const RoundSlider = (props: IUserSettings) => {
     ]);
 
     useEffect(() => {
-        setBgColor(getString(props.bgColor, DEFAULT_BG_COLOR));
+        setPanelBgColor(getString(props.panelBgColor, DEFAULT_BG_COLOR));
         setConnectionBgColor(getString(props.connectionBgColor, DEFAULT_CONNECTION_BG_COLOR));
         setPointerBgColor(getString(props.pointerBgColor, DEFAULT_POINTER_BG_COLOR));
     }, [
-        props.bgColor,
+        props.panelBgColor,
         props.connectionBgColor,
         props.pointerBgColor
     ]);
@@ -161,9 +161,9 @@ export const RoundSlider = (props: IUserSettings) => {
      * Define the initial slider stroke width.
      */
     useEffect(() => {
-        setStrokeWidth(getNumber(props.strokeWidth, DEFAULT_STROKE_WIDTH));
+        setPanelStrokeWidth(getNumber(props.panelStrokeWidth, DEFAULT_STROKE_WIDTH));
     }, [
-        props.strokeWidth,
+        props.panelStrokeWidth,
     ]);
 
     /**
@@ -214,22 +214,22 @@ export const RoundSlider = (props: IUserSettings) => {
      * Calculate SVG size depending on ellipse radii and max pointer size.
      */
     useEffect(() => {
-        setSvgSize(getSVGSize(svgRadii, maxPointer, strokeWidth));
+        setSvgSize(getSVGSize(svgRadii, maxPointer, panelStrokeWidth));
     }, [
         svgRadii,
         maxPointer,
-        strokeWidth,
+        panelStrokeWidth,
     ]);
 
     /**
      * Calculate the center point of the SVG.
      */
     useEffect(() => {
-        setSvgCenter(getSVGCenter(svgRadii, maxPointer, strokeWidth));
+        setSvgCenter(getSVGCenter(svgRadii, maxPointer, panelStrokeWidth));
     }, [
         svgRadii,
         maxPointer,
-        strokeWidth,
+        panelStrokeWidth,
     ]);
 
     useEffect(() => {
@@ -249,14 +249,14 @@ export const RoundSlider = (props: IUserSettings) => {
             endAngleDegrees,
             svgRadii,
             maxPointer,
-            strokeWidth
+            panelStrokeWidth
         ));
     }, [
         startAngleDegrees,
         endAngleDegrees,
         svgRadii,
         maxPointer,
-        strokeWidth,
+        panelStrokeWidth,
     ]);
 
     useEffect(() => {
@@ -521,9 +521,9 @@ export const RoundSlider = (props: IUserSettings) => {
             <Panel
                 ref={ sliderRef }
                 ellipse={ ellipse }
-                strokeWidth={ strokeWidth }
+                strokeWidth={ panelStrokeWidth }
                 svgRadii={ svgRadii }
-                bgColor={ bgColor }
+                bgColor={ panelBgColor }
             />
 
             {
@@ -536,11 +536,12 @@ export const RoundSlider = (props: IUserSettings) => {
                     ticksWidth={ ticksWidth }
                     ticksHeight={ ticksHeight }
                     longerTicksHeight={ longerTicksHeight }
-                    ticksColor={ bgColor }
+                    ticksColor={ panelBgColor }
                     ticsCount={ ticsCount }
                     ticksGroupSize={ props.ticksGroupSize }
                     totalLength={ sliderRef?.current?.getTotalLength() || 0 }
                     svgCenter={ svgCenter }
+                    ticksDistanceToPanel={ props.ticksDistanceToPanel }
                 />
             }
 
@@ -548,7 +549,7 @@ export const RoundSlider = (props: IUserSettings) => {
                 pointers={ pointers }
                 ellipse={ ellipse }
                 svgRadii={ svgRadii }
-                strokeWidth={ strokeWidth }
+                strokeWidth={ panelStrokeWidth }
                 connectionBgColor={ connectionBgColor }
                 startEndAngle={ startEndAngle }
                 svgCenter={ svgCenter }
