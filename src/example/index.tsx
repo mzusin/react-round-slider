@@ -16,9 +16,12 @@ const App = () => {
                 textColor={ '#5DAED2' }
                 textFontSize={ 24 }
                 textFontFamily={ 'Helvetica,Arial,sans-serif' }
+                onChange={ (values, pointers) => {
+                    console.log(values, pointers);
+                }}
             />
 
-            <RoundSlider/>
+            <RoundSlider />
 
             <RoundSlider
 
@@ -68,6 +71,10 @@ const App = () => {
                 bgColor="#285f68"
                 connectionBgColor="#86e02c"
                 pointerBgColor="red"
+
+                onChange={ (values, pointers) => {
+                    console.log(values, pointers);
+                }}
 
                 pointers={[
                     {

@@ -10,7 +10,7 @@ import {
     getActivePointerId,
     getInitialPointers,
     getMaxPointer,
-    getMinMax, getPointerIndexById, getPointerPercentByMouse, getStepPercent, handleOverlap,
+    getMinMax, getPointerIndexById, getPointerPercentByMouse, getStepPercent, getValueByPercent, handleOverlap,
     updateMultiplePointersValue, updateSinglePointerValue
 } from './domain/slider-provider';
 import { getEllipseSegment, getSVGCenter, getSVGSize } from './domain/svg-provider';
@@ -264,6 +264,25 @@ export const RoundSlider = (props: IUserSettings) => {
         setTextSuffix(props.textSuffix);
     }, [ props.hideText, props.textPrefix, props.textSuffix ]);
 
+    // ---------------- APIs ----------------------------
+
+    const sendChangeEvent = (_pointers: IStatePointer[]) => {
+        if(!props.onChange || typeof props.onChange !== 'function') return;
+
+        const _values: (string|number)[] = [];
+        for(const pointer of _pointers) {
+            _values.push(getValueByPercent(
+                pointer.percent,
+                min,
+                max,
+                round,
+                props.data
+            ));
+        }
+
+        props.onChange(_values, _pointers);
+    };
+
     // ---------------- EVENTS ----------------------------
 
     const onValueChange = (evt: MouseEvent | ReactMouseEvent | TouchEvent | ReactTouchEvent) => {
@@ -294,7 +313,9 @@ export const RoundSlider = (props: IUserSettings) => {
         if(pointers.length <= 1) {
             setSelectedPointerId(pointers[0]?.id || null);
             setPointers(currentPointers => {
-                return updateSinglePointerValue(currentPointers, updatedPercent);
+                const updatedPointers = updateSinglePointerValue(currentPointers, updatedPercent);
+                sendChangeEvent(updatedPointers);
+                return updatedPointers;
             });
             return;
         }
@@ -333,7 +354,11 @@ export const RoundSlider = (props: IUserSettings) => {
                 );
             }
 
-            return updateMultiplePointersValue(currentPointers, updatedPercent, _selectedPointerId);
+            const updatedPointers = updateMultiplePointersValue(currentPointers, updatedPercent, _selectedPointerId);
+
+            sendChangeEvent(updatedPointers);
+
+            return updatedPointers;
         });
 
         // const updatedPointers = handlePointerZIndex(activePointerId, pointers);
@@ -395,6 +420,8 @@ export const RoundSlider = (props: IUserSettings) => {
         const copy = [...pointers];
         copy[pointerIndex] = pointer;
         setPointers(copy);
+
+        sendChangeEvent(copy);
     };
 
     // ---------------- ARROWS & MOUSE ----------------------------

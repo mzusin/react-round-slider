@@ -59,6 +59,9 @@ export interface IUserSettings {
     ticksWidth?: number;
     ticksHeight?: number;
     ticsCount?: number;
+
+    // events ----------------------
+    onChange?: (values: (string|number)[], pointers: IStatePointer[]) => void;
 }
 
 // --------------------------- STATE ------------------------------------
