@@ -6,7 +6,8 @@ import { TICKS_WIDTH_DEFAULT, TICKS_HEIGHT_DEFAULT } from '../domain/defaults';
 const getTicks = (
     ticsCount: number,
     totalLength: number,
-    sliderRef: MutableRefObject<SVGPathElement>
+    sliderRef: MutableRefObject<SVGPathElement>,
+    ticksGroupSize?: number
 ) : ITick[] => {
     const ticks: ITick[] = [];
 
@@ -15,13 +16,16 @@ const getTicks = (
     for(let i=0; i<ticsCount; i++) {
         const distance = i * oneTickSize;
         const point = sliderRef?.current?.getPointAtLength(distance);
+
         const x = point ? point.x : 0;
         const y = point ? point.y : 0;
+        const isLonger = ticksGroupSize !== undefined && (i % ticksGroupSize === 0);
 
         ticks.push({
             distance,
             x,
             y,
+            isLonger,
         });
     }
 
@@ -31,16 +35,17 @@ const getTicks = (
 export const Ticks = (props: ITicks) => {
 
     const {
-        ticksColor, ticksWidth, ticksHeight,
-        ticsCount, totalLength,
+        ticksColor, ticksWidth,
+        ticksHeight, longerTicksHeight,
+        ticsCount, ticksGroupSize, totalLength,
         sliderRef, svgCenter,
     } = props;
     const [ ticks, setTicks ] = useState<ITick[]>([]);
 
     useEffect(() => {
-        setTicks(getTicks(ticsCount, totalLength, sliderRef));
+        setTicks(getTicks(ticsCount, totalLength, sliderRef, ticksGroupSize));
     }, [
-        ticsCount, totalLength, sliderRef,
+        ticsCount, totalLength, sliderRef, ticksGroupSize,
     ]);
 
     const [ cx, cy ] = svgCenter;
@@ -51,7 +56,11 @@ export const Ticks = (props: ITicks) => {
                 ticks.map((tick, i) => {
                     const { x, y } = tick;
 
-                    const desiredDistance = ticksHeight || TICKS_HEIGHT_DEFAULT;
+                    let desiredDistance = ticksHeight || TICKS_HEIGHT_DEFAULT;
+
+                    if(tick.isLonger) {
+                        desiredDistance = longerTicksHeight;
+                    }
 
                     const normalizedDirectionVector = v2Normalize([cx - x, cy - y]);
                     const vectorFromP1ToP3 = v2MulScalar(normalizedDirectionVector, desiredDistance);

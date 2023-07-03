@@ -58,7 +58,9 @@ export interface IUserSettings {
     disableTicks?: boolean;
     ticksWidth?: number;
     ticksHeight?: number;
+    longerTicksHeight?: number;
     ticsCount?: number;
+    ticksGroupSize?: number;
 
     // events ----------------------
     onChange?: (values: (string|number)[], pointers: IStatePointer[]) => void;
@@ -140,14 +142,17 @@ export interface ITicks {
     ticksColor: string;
     ticksWidth: number;
     ticksHeight: number;
+    longerTicksHeight: number;
     ticsCount: number;
     totalLength: number;
     sliderRef: MutableRefObject<SVGPathElement>;
     svgCenter: Vector2;
+    ticksGroupSize?: number;
 }
 
 export interface ITick {
     distance: number;
     x: number;
     y: number;
+    isLonger: boolean;
 }

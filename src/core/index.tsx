@@ -75,6 +75,7 @@ export const RoundSlider = (props: IUserSettings) => {
     const [ disableTicks, setDisableTicks ] = useState(false);
     const [ ticksWidth, setTicksWidth ] = useState(TICKS_WIDTH_DEFAULT);
     const [ ticksHeight, setTicksHeight ] = useState(TICKS_HEIGHT_DEFAULT);
+    const [ longerTicksHeight, setLongerTicksHeight ] = useState<number|undefined>(undefined);
     const [ ticsCount, setTicsCount ] = useState(0);
 
     // ---------------- STATE ----------------------------
@@ -88,7 +89,10 @@ export const RoundSlider = (props: IUserSettings) => {
     useEffect(() => {
         setDisableTicks(getBoolean(props.disableTicks, false));
         setTicksWidth(getNumber(props.ticksWidth, TICKS_WIDTH_DEFAULT));
-        setTicksHeight(getNumber(props.ticksHeight, TICKS_HEIGHT_DEFAULT));
+
+        const _ticksHeight = getNumber(props.ticksHeight, TICKS_HEIGHT_DEFAULT);
+        setTicksHeight(_ticksHeight);
+        setLongerTicksHeight(getNumber(props.longerTicksHeight, _ticksHeight * 2));
 
         let ticksCount = getNumber(props.ticsCount, 0);
         if(!ticksCount) {
@@ -106,6 +110,7 @@ export const RoundSlider = (props: IUserSettings) => {
         props.disableTicks,
         props.ticksWidth,
         props.ticksHeight,
+        props.longerTicksHeight,
         props.ticsCount,
         max, min, props.data,
         startAngleDegrees, endAngleDegrees,
@@ -530,8 +535,10 @@ export const RoundSlider = (props: IUserSettings) => {
                     sliderRef={ sliderRef }
                     ticksWidth={ ticksWidth }
                     ticksHeight={ ticksHeight }
+                    longerTicksHeight={ longerTicksHeight }
                     ticksColor={ bgColor }
                     ticsCount={ ticsCount }
+                    ticksGroupSize={ props.ticksGroupSize }
                     totalLength={ sliderRef?.current?.getTotalLength() || 0 }
                     svgCenter={ svgCenter }
                 />

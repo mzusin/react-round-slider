@@ -21,7 +21,7 @@ const App = () => {
                 }}
             />
 
-            <RoundSlider />
+            <RoundSlider ticksGroupSize={ 10 } />
 
             <RoundSlider
 
