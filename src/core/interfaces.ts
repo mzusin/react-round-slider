@@ -41,6 +41,7 @@ export interface IUserSettings {
     // pointer ------------------
     pointerBgColor?: string;
     pointerSVG?: ReactNode;
+    pointerGradient?: ReactNode;
 
     // connection ------------------
     connectionBgColor?: string;
@@ -107,6 +108,7 @@ export interface IPointer {
     svgCenter: Vector2;
     pointerBgColor: string;
     pointerSVG?: ReactNode;
+    pointerGradient?: ReactNode;
     disabledPointerStyle?: CSSProperties;
     min: number;
     max: number;

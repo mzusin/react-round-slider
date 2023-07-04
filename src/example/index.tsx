@@ -28,6 +28,12 @@ const App = () => {
                 longerTickValuesOnly={ true }
                 ticksGroupSize={ 10 }
                 ticksDistanceToPanel={ 7 }
+                pointerGradient={
+                    <linearGradient id="pointer" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#8e50c4" />
+                        <stop offset="100%" stopColor="#422563" />
+                    </linearGradient>
+                }
             />
 
             <RoundSlider

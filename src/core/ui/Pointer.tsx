@@ -12,7 +12,7 @@ const Pointer = (props: IPointer) => {
         pointerBgColor, pointerSVG,
         disabledPointerStyle,
         min, max, round,
-        data, ariaLabel,
+        data, ariaLabel, pointerGradient,
     } = props;
     const { percent, pointerRadii } = pointer;
     const [ rx, ry ] = pointerRadii;
@@ -91,7 +91,7 @@ const Pointer = (props: IPointer) => {
                         cursor="pointer"
                         tabIndex={ 0 }
                         role="slider"
-                        fill={ pointerBgColor }
+                        fill={ pointerGradient ? `url(#pointer)` : pointerBgColor }
                     />
                 }
 

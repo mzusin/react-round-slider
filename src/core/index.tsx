@@ -515,9 +515,10 @@ export const RoundSlider = (props: IUserSettings) => {
             style={ DEFAULT_SVG_STYLE }>
 
             {
-                props.connectionGradient &&
+                (props.connectionGradient || props.pointerGradient) &&
                 <defs>
                     { props.connectionGradient }
+                    { props.pointerGradient }
                 </defs>
             }
 
@@ -586,6 +587,7 @@ export const RoundSlider = (props: IUserSettings) => {
 
                             pointerBgColor={ pointer.bgColor }
                             pointerSVG={ props.pointerSVG || pointer.pointerSVG }
+                            pointerGradient={ props.pointerGradient }
 
                             disabledPointerStyle={ disabledPointerStyle }
                             min={ min }
