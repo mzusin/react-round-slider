@@ -145,6 +145,7 @@ export const Ticks = (props: ITicks) => {
                                     fill={ tickValuesColor || DEFAULT_TEXT_COLOR }
                                     fontSize={ tickValuesFontSize || DEFAULT_TEXT_FONT_SIZE }
                                     fontFamily={ tickValuesFontFamily }
+                                    style={{ userSelect: 'none' }}
                                 >{ tick.tickValue }</text>
                             }
                         </Fragment>
