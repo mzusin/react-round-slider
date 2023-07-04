@@ -1,13 +1,26 @@
-import { ITick, ITicks } from '../interfaces';
-import { MutableRefObject, useEffect, useState } from 'react';
+import { ITick, ITicks, TData } from '../interfaces';
+import { Fragment, MutableRefObject, useEffect, useState } from 'react';
 import { v2MulScalar, v2Normalize } from 'mz-math';
-import { TICKS_WIDTH_DEFAULT, TICKS_HEIGHT_DEFAULT } from '../domain/defaults';
+import {
+    TICKS_WIDTH_DEFAULT,
+    TICKS_HEIGHT_DEFAULT,
+    DEFAULT_TEXT_COLOR,
+    DEFAULT_TEXT_FONT_SIZE
+} from '../domain/defaults';
+import { getValueByPercent } from '../domain/slider-provider';
+import { getNumber } from '../domain/common';
 
 const getTicks = (
     ticsCount: number,
     totalLength: number,
     sliderRef: MutableRefObject<SVGPathElement>,
-    ticksGroupSize?: number
+    min: number,
+    max: number,
+    round: number,
+    data?: TData,
+    ticksGroupSize?: number,
+    showTickValues?: boolean,
+    longerTickValuesOnly?: boolean
 ) : ITick[] => {
     const ticks: ITick[] = [];
 
@@ -20,12 +33,24 @@ const getTicks = (
         const x = point ? point.x : 0;
         const y = point ? point.y : 0;
         const isLonger = ticksGroupSize !== undefined && (i % ticksGroupSize === 0);
+        let tickValue: string|undefined = undefined;
+
+        if(showTickValues && (!longerTickValuesOnly || longerTickValuesOnly && (isLonger || ticksGroupSize === undefined))) {
+            tickValue = (getValueByPercent(
+                distance * 100 / totalLength,
+                min,
+                max,
+                round,
+                data,
+            ) ?? '').toString();
+        }
 
         ticks.push({
             distance,
             x,
             y,
             isLonger,
+            tickValue,
         });
     }
 
@@ -39,13 +64,29 @@ export const Ticks = (props: ITicks) => {
         ticksHeight, longerTicksHeight,
         ticsCount, ticksGroupSize, totalLength,
         sliderRef, svgCenter, ticksDistanceToPanel,
+        min, max, round, data,
+        showTickValues, longerTickValuesOnly,
+        tickValuesColor, tickValuesFontSize,
+        tickValuesFontFamily, tickValuesDistance,
     } = props;
     const [ ticks, setTicks ] = useState<ITick[]>([]);
 
     useEffect(() => {
-        setTicks(getTicks(ticsCount, totalLength, sliderRef, ticksGroupSize));
+        setTicks(getTicks(
+            ticsCount,
+            totalLength,
+            sliderRef,
+            min,
+            max,
+            round,
+            data,
+            ticksGroupSize,
+            showTickValues,
+            longerTickValuesOnly
+        ));
     }, [
         ticsCount, totalLength, sliderRef, ticksGroupSize,
+        data, longerTickValuesOnly, min, max, round, showTickValues,
     ]);
 
     const [ cx, cy ] = svgCenter;
@@ -72,16 +113,41 @@ export const Ticks = (props: ITicks) => {
                     const x3 = x + tickEndVector[0];
                     const y3 = y + tickEndVector[1];
 
+                    let textX = 0;
+                    let textY = 0;
+                    const showText = tick.tickValue !== undefined;
+
+                    if(showText) {
+                        const _tickValuesDistance = getNumber(desiredDistance + tickValuesDistance, desiredDistance * 1.5);
+                        const tickTextVector = v2MulScalar(normalizedDirectionVector, _tickValuesDistance);
+                        textX = x + tickTextVector[0];
+                        textY = y + tickTextVector[1];
+                    }
+
                     return (
-                        <line
-                            key={ i }
-                            x1={ x }
-                            y1={ y }
-                            x2={ x3 }
-                            y2={ y3 }
-                            strokeWidth={ ticksWidth || TICKS_WIDTH_DEFAULT }
-                            stroke={ ticksColor }
-                        />
+                        <Fragment key={ i }>
+                            <line
+                                x1={ x }
+                                y1={ y }
+                                x2={ x3 }
+                                y2={ y3 }
+                                strokeWidth={ ticksWidth || TICKS_WIDTH_DEFAULT }
+                                stroke={ ticksColor }
+                            />
+
+                            {
+                                showText &&
+                                <text
+                                    x={ textX }
+                                    y={ textY }
+                                    textAnchor="middle"
+                                    dominantBaseline="middle"
+                                    fill={ tickValuesColor || DEFAULT_TEXT_COLOR }
+                                    fontSize={ tickValuesFontSize || DEFAULT_TEXT_FONT_SIZE }
+                                    fontFamily={ tickValuesFontFamily }
+                                >{ tick.tickValue }</text>
+                            }
+                        </Fragment>
                     );
                 })
             }

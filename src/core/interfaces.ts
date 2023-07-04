@@ -63,6 +63,14 @@ export interface IUserSettings {
     ticksGroupSize?: number;
     ticksDistanceToPanel?: number;
 
+    // tick values -----------------
+    showTickValues?: boolean;
+    longerTickValuesOnly?: boolean;
+    tickValuesColor?: string;
+    tickValuesFontSize?: number;
+    tickValuesFontFamily?: string;
+    tickValuesDistance?: number;
+
     // events ----------------------
     onChange?: (values: (string|number)[], pointers: IStatePointer[]) => void;
 }
@@ -144,12 +152,26 @@ export interface ITicks {
     ticksWidth: number;
     ticksHeight: number;
     longerTicksHeight: number;
-    ticsCount: number;
-    totalLength: number;
-    sliderRef: MutableRefObject<SVGPathElement>;
-    svgCenter: Vector2;
     ticksGroupSize?: number;
     ticksDistanceToPanel?: number;
+
+    ticsCount: number;
+    totalLength: number;
+
+    sliderRef: MutableRefObject<SVGPathElement>;
+    svgCenter: Vector2;
+
+    min: number;
+    max: number;
+    round: number;
+    data?: TData;
+
+    showTickValues?: boolean;
+    longerTickValuesOnly?: boolean;
+    tickValuesColor?: string;
+    tickValuesFontSize?: number;
+    tickValuesFontFamily?: string;
+    tickValuesDistance?: number;
 }
 
 export interface ITick {
@@ -157,4 +179,5 @@ export interface ITick {
     x: number;
     y: number;
     isLonger: boolean;
+    tickValue?: string;
 }

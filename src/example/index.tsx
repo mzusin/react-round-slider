@@ -19,14 +19,23 @@ const App = () => {
                 onChange={ (values, pointers) => {
                     console.log(values, pointers);
                 }}
+                showTickValues={ true }
+                longerTickValuesOnly={ true }
             />
 
             <RoundSlider
+                showTickValues={ true }
+                longerTickValuesOnly={ true }
                 ticksGroupSize={ 10 }
                 ticksDistanceToPanel={ 7 }
             />
 
             <RoundSlider
+                showTickValues={ true }
+                longerTickValuesOnly={ true }
+                tickValuesFontSize={ 10 }
+                ticksGroupSize={ 10 }
+                tickValuesDistance={ 10 }
 
                 min={ 0 }
                 max={ 100 }
@@ -61,6 +70,13 @@ const App = () => {
             />
 
             <RoundSlider
+                showTickValues={ true }
+                longerTickValuesOnly={ true }
+                tickValuesFontSize={ 10 }
+                ticksGroupSize={ 10 }
+                tickValuesDistance={ 10 }
+                ticksDistanceToPanel={ 20 }
+
                 min={ 0 }
                 max={ 100 }
 

@@ -536,6 +536,7 @@ export const RoundSlider = (props: IUserSettings) => {
                 (typeof sliderRef.current.getTotalLength === 'function') &&
                 <Ticks
                     sliderRef={ sliderRef }
+
                     ticksWidth={ ticksWidth }
                     ticksHeight={ ticksHeight }
                     longerTicksHeight={ longerTicksHeight }
@@ -545,6 +546,18 @@ export const RoundSlider = (props: IUserSettings) => {
                     totalLength={ sliderRef?.current?.getTotalLength() || 0 }
                     svgCenter={ svgCenter }
                     ticksDistanceToPanel={ ticksDistanceToPanel }
+
+                    min={ min }
+                    max={ max }
+                    round={ round }
+                    data={ props.data }
+
+                    showTickValues={ props.showTickValues }
+                    longerTickValuesOnly={ props.longerTickValuesOnly }
+                    tickValuesColor={ props.tickValuesColor }
+                    tickValuesFontSize={ props.tickValuesFontSize }
+                    tickValuesFontFamily={ props.tickValuesFontFamily }
+                    tickValuesDistance={ props.tickValuesDistance }
                 />
             }
 
