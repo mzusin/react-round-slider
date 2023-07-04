@@ -65,11 +65,9 @@ export const Ticks = (props: ITicks) => {
                     const normalizedDirectionVector = v2Normalize([cx - x, cy - y]);
                     const tickEndVector = v2MulScalar(normalizedDirectionVector, desiredDistance);
 
-                    if(ticksDistanceToPanel !== undefined) {
-                        const tickStartVector = v2MulScalar(normalizedDirectionVector, ticksDistanceToPanel);
-                        x += tickStartVector[0];
-                        y += tickStartVector[1];
-                    }
+                    const tickStartVector = v2MulScalar(normalizedDirectionVector, ticksDistanceToPanel);
+                    x += tickStartVector[0];
+                    y += tickStartVector[1];
 
                     const x3 = x + tickEndVector[0];
                     const y3 = y + tickEndVector[1];

@@ -31,6 +31,8 @@ export const DEFAULT_POINTER_STYLE = {
 };
 
 export const ROUND_DEFAULT = 2;
+
+// ticks ------------------------------
 export const TICKS_WIDTH_DEFAULT = 3;
 export const TICKS_HEIGHT_DEFAULT = 20;
 
