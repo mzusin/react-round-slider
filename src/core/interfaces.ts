@@ -40,6 +40,7 @@ export interface IUserSettings {
 
     // pointer ------------------
     pointerBgColor?: string;
+    disabledPointerBgColor?: string;
     pointerSVG?: ReactNode;
     pointerGradient?: ReactNode;
 
@@ -107,6 +108,7 @@ export interface IPointer {
     svgRadii: Vector2;
     svgCenter: Vector2;
     pointerBgColor: string;
+    disabledPointerBgColor: string;
     pointerSVG?: ReactNode;
     pointerGradient?: ReactNode;
     disabledPointerStyle?: CSSProperties;
@@ -115,6 +117,7 @@ export interface IPointer {
     round: number;
     data?: TData;
     ariaLabel?: string;
+    isSliderDisabled: boolean;
 }
 
 export interface IPanel {

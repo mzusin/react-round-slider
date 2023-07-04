@@ -6,6 +6,7 @@ const App = () => {
     return (
         <>
             <RoundSlider
+                // disabled={ true }
                 data={[
                     'a', 'b', 'c', 'd', 'e', 'f',
                     'g', 'h', 'i', 'j', 'k', 'l',

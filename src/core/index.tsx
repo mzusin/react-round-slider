@@ -17,11 +17,11 @@ import { getEllipseSegment, getSVGCenter, getSVGSize } from './domain/svg-provid
 import { getBoolean, getNumber, getString } from './domain/common';
 import {
     DEFAULT_BG_COLOR,
-    DEFAULT_CONNECTION_BG_COLOR, DEFAULT_POINTER_BG_COLOR,
+    DEFAULT_CONNECTION_BG_COLOR, DEFAULT_DISABLED_POINTER_BG_COLOR, DEFAULT_POINTER_BG_COLOR,
     DEFAULT_STROKE_WIDTH,
     DEFAULT_SVG_RX,
     DEFAULT_SVG_RY, DEFAULT_SVG_STYLE,
-    DISABLED_POINTER_STYLE, POINTER_OVERLAP_DEFAULT,
+    POINTER_OVERLAP_DEFAULT,
     ROUND_DEFAULT, TICKS_HEIGHT_DEFAULT, TICKS_WIDTH_DEFAULT,
 } from './domain/defaults';
 import Panel from './ui/Panel';
@@ -54,6 +54,7 @@ export const RoundSlider = (props: IUserSettings) => {
     const [ panelBgColor, setPanelBgColor ] = useState(DEFAULT_BG_COLOR);
     const [ connectionBgColor, setConnectionBgColor ] = useState(DEFAULT_CONNECTION_BG_COLOR);
     const [ pointerBgColor, setPointerBgColor ] = useState(DEFAULT_POINTER_BG_COLOR);
+    const [ disabledPointerBgColor, setDisabledPointerBgColor ] = useState(DEFAULT_DISABLED_POINTER_BG_COLOR);
     const [ pointersOverlap, setPointersOverlap ] = useState(false);
     const [ disabled, setDisabled ] = useState(false);
     const [ disabledPointerStyle , setDisabledPointerStyle ] = useState<CSSProperties|undefined>(undefined);
@@ -123,10 +124,12 @@ export const RoundSlider = (props: IUserSettings) => {
         setPanelBgColor(getString(props.panelBgColor, DEFAULT_BG_COLOR));
         setConnectionBgColor(getString(props.connectionBgColor, DEFAULT_CONNECTION_BG_COLOR));
         setPointerBgColor(getString(props.pointerBgColor, DEFAULT_POINTER_BG_COLOR));
+        setDisabledPointerBgColor(getString(props.disabledPointerBgColor, DEFAULT_DISABLED_POINTER_BG_COLOR))
     }, [
         props.panelBgColor,
         props.connectionBgColor,
-        props.pointerBgColor
+        props.pointerBgColor,
+        props.disabledPointerBgColor
     ]);
 
     useEffect(() => {
@@ -137,7 +140,7 @@ export const RoundSlider = (props: IUserSettings) => {
 
     useEffect(() => {
         setDisabled(getBoolean(props.disabled, false));
-        setDisabledPointerStyle(props.disabledPointerStyle || DISABLED_POINTER_STYLE);
+        setDisabledPointerStyle(props.disabledPointerStyle);
         setKeyboardDisabled(getBoolean(props.keyboardDisabled, false));
         setMousewheelDisabled(getBoolean(props.mousewheelDisabled, false));
     }, [
@@ -585,11 +588,13 @@ export const RoundSlider = (props: IUserSettings) => {
                             svgRadii={ svgRadii }
                             svgCenter={ svgCenter }
 
+                            isSliderDisabled={ disabled }
                             pointerBgColor={ pointer.bgColor }
+                            disabledPointerBgColor={ disabledPointerBgColor }
                             pointerSVG={ props.pointerSVG || pointer.pointerSVG }
                             pointerGradient={ props.pointerGradient }
-
                             disabledPointerStyle={ disabledPointerStyle }
+
                             min={ min }
                             max={ max }
                             round={ round }

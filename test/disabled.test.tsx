@@ -71,11 +71,6 @@ describe('Disabled', () => {
         expect($secondPointer.hasAttribute('aria-disabled')).toStrictEqual(false);
         expect($thirdPointer.getAttribute('aria-disabled')).toStrictEqual('true');
         expect($fourthPointer.hasAttribute('aria-disabled')).toStrictEqual(false);
-
-        expect($firstPointer.style.filter).toStrictEqual('opacity(0.7) grayscale(100%)');
-        expect($secondPointer.style.filter).toStrictEqual('');
-        expect($thirdPointer.style.filter).toStrictEqual('opacity(0.7) grayscale(100%)');
-        expect($fourthPointer.style.filter).toStrictEqual('');
     });
 
 
