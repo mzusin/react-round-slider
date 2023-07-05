@@ -24,6 +24,8 @@ export interface IUserSettings {
 
     pointers?: IUserSettingsPointer[];
     pointersOverlap?: boolean;
+    rangeDragging?: boolean;
+
     disabled?: boolean;
     disabledPointerStyle?: CSSProperties;
     keyboardDisabled?: boolean;
@@ -136,6 +138,7 @@ export interface IConnection {
     startEndAngle: Vector2;
     svgCenter: Vector2;
     connectionGradient?: ReactNode;
+    rangeDragging?: boolean;
 }
 
 export interface IText {

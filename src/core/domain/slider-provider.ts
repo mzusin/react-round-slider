@@ -342,7 +342,7 @@ export const getPointerPercentByMouse = (
     }
 
     const degrees = radiansToDegrees(angleRad);
-
+    console.log('degrees', degrees)
     const isInArc = isAngleInArc(startAngleDegrees, endAngleDegrees, degrees);
     if(!isInArc){
         const angleSub1 = getAnglesSub(degrees, startAngleDegrees);
@@ -351,11 +351,15 @@ export const getPointerPercentByMouse = (
     }
 
     const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
+    console.log('angleDiff', angleDiff)
 
     const updatedPercent = degrees * 100 / angleDiff;
+    console.log('updatedPercent', updatedPercent)
 
     const stepPercent = getStepPercent(min, max, data, step);
-    const result = stepPercent === undefined ? updatedPercent : roundToStep(updatedPercent, stepPercent);
+    const result = mod(stepPercent === undefined ? updatedPercent : roundToStep(updatedPercent, stepPercent), 100);
+    console.log('result', result)
+
     return result === 100 ? 0 : result;
 };
 
@@ -368,7 +372,7 @@ const isPanelClicked = ($target: HTMLElement) => {
     return $target.getAttribute('data-type') === 'panel';
 };
 
-const isConnectionClicked = ($target: HTMLElement) => {
+export const isConnectionClicked = ($target: HTMLElement) => {
     return $target.getAttribute('data-type') === 'connection';
 };
 

@@ -10,8 +10,15 @@ import {
     getActivePointerId,
     getInitialPointers,
     getMaxPointer,
-    getMinMax, getPointerIndexById, getPointerPercentByMouse, getStepPercent, getValueByPercent, handleOverlap,
-    updateMultiplePointersValue, updateSinglePointerValue
+    getMinMax,
+    getPointerIndexById,
+    getPointerPercentByMouse,
+    getStepPercent,
+    getValueByPercent,
+    handleOverlap,
+    isConnectionClicked,
+    updateMultiplePointersValue,
+    updateSinglePointerValue
 } from './domain/slider-provider';
 import { getEllipseSegment, getSVGCenter, getSVGSize } from './domain/svg-provider';
 import { getBoolean, getNumber, getString } from './domain/common';
@@ -80,6 +87,11 @@ export const RoundSlider = (props: IUserSettings) => {
     const [ ticsCount, setTicsCount ] = useState(0);
     const [ ticksDistanceToPanel, setTicksDistanceToPanel ] = useState<number>(0);
 
+    // range dragging ---------------
+    // const [ rangeDragging, setRangeDragging  ] = useState(false);
+    // const [ rangeDraggingStart, setRangeDraggingStart ] = useState<number|undefined>(undefined);
+    // const [ rangeDraggingDiff, setRangeDraggingDiff ] = useState<number|undefined>(undefined);
+
     // ---------------- STATE ----------------------------
 
     useEffect(() => {
@@ -87,6 +99,16 @@ export const RoundSlider = (props: IUserSettings) => {
     }, [
         min, max, props.data, props.step
     ]);
+
+    /*useEffect(() => {
+        const hasMultiPointers = pointers.length > 1;
+        setRangeDragging(hasMultiPointers ? getBoolean(props.rangeDragging, false) : false);
+        setRangeDraggingStart(undefined);
+        setRangeDraggingDiff(undefined);
+    }, [
+        pointers,
+        props.rangeDragging
+    ]);*/
 
     useEffect(() => {
         setDisableTicks(getBoolean(props.disableTicks, false));
@@ -336,6 +358,9 @@ export const RoundSlider = (props: IUserSettings) => {
          * This code defines the current active pointer.
          */
         let _selectedPointerId = selectedPointerId;
+        if(isConnectionClicked(evt.target as HTMLElement)) {
+            console.log('here')
+        }
         setSelectedPointerId(currentSelectedPointerId => {
             _selectedPointerId = getActivePointerId(
                 evt.target as HTMLElement,
@@ -351,6 +376,7 @@ export const RoundSlider = (props: IUserSettings) => {
 
         // MULTIPLE POINTERS ---------------------------------------
         if(_selectedPointerId === null) return;
+
 
         setPointers(currentPointers => {
             const skipOverlapCheck = pointersOverlap || max === min;
@@ -397,6 +423,9 @@ export const RoundSlider = (props: IUserSettings) => {
     };
 
     const onMouseUp = (_evt: MouseEvent | ReactMouseEvent) => {
+        // setRangeDraggingStart(undefined);
+        // setRangeDraggingDiff(undefined);
+
         window.removeEventListener('mousemove', onValueChange);
         window.removeEventListener('mouseup', onValueChange);
         isClickOrDrag.current = 'click';

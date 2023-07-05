@@ -9,6 +9,7 @@ const Connection = (props: IConnection) => {
         pointers, ellipse, strokeWidth, svgCenter,
         svgRadii, connectionBgColor,
         connectionGradient, startEndAngle,
+        rangeDragging,
     } = props;
     const { start } = ellipse;
 
@@ -86,8 +87,8 @@ const Connection = (props: IConnection) => {
                     fill="none"
                     shapeRendering="geometricPrecision"
                     strokeLinecap="round"
-                    cursor="pointer"
-                    pointerEvents="none"
+                    cursor={ rangeDragging ? 'move' : 'pointer' }
+                    pointerEvents={ rangeDragging ? '' : 'none' }
                 />
             }
         </>

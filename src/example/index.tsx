@@ -18,7 +18,7 @@ const App = () => {
                 textFontSize={ 24 }
                 textFontFamily={ 'Helvetica,Arial,sans-serif' }
                 onChange={ (values, pointers) => {
-                    console.log(values, pointers);
+                    // console.log(values, pointers);
                 }}
                 showTickValues={ true }
                 longerTickValuesOnly={ true }
@@ -36,6 +36,44 @@ const App = () => {
                     </linearGradient>
                 }
             />
+
+            <RoundSlider
+                startAngleDegrees={ 45 }
+                endAngleDegrees={ 180 }
+                showTickValues={ true }
+                longerTickValuesOnly={ true }
+                ticksGroupSize={ 10 }
+                ticksDistanceToPanel={ 7 }
+                pointerGradient={
+                    <linearGradient id="pointer" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#8e50c4" />
+                        <stop offset="100%" stopColor="#422563" />
+                    </linearGradient>
+                }
+            />
+
+            {/*<RoundSlider
+                startAngleDegrees={ 45 }
+                endAngleDegrees={ 270 }
+                showTickValues={ true }
+                longerTickValuesOnly={ true }
+                ticksGroupSize={ 10 }
+                ticksDistanceToPanel={ 7 }
+                pointerGradient={
+                    <linearGradient id="pointer" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#8e50c4" />
+                        <stop offset="100%" stopColor="#422563" />
+                    </linearGradient>
+                }
+                pointers={ [
+                    {
+                        value: 30,
+                    },
+                    {
+                        value: 40,
+                    }
+                ]}
+            />*/}
 
             <RoundSlider
                 showTickValues={ true }
@@ -62,9 +100,7 @@ const App = () => {
                         <stop offset="100%" stopColor="#5eaefd" />
                     </linearGradient>
                 }
-                /*disabledPointerStyle={{
-                    filter: 'invert(100%)',
-                }}*/
+
 
                 pointers={[
                     {
