@@ -38,23 +38,8 @@ const App = () => {
             />
 
             <RoundSlider
-                startAngleDegrees={ 45 }
-                endAngleDegrees={ 180 }
-                showTickValues={ true }
-                longerTickValuesOnly={ true }
-                ticksGroupSize={ 10 }
-                ticksDistanceToPanel={ 7 }
-                pointerGradient={
-                    <linearGradient id="pointer" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#8e50c4" />
-                        <stop offset="100%" stopColor="#422563" />
-                    </linearGradient>
-                }
-            />
-
-            {/*<RoundSlider
-                startAngleDegrees={ 45 }
-                endAngleDegrees={ 270 }
+                startAngleDegrees={ 270 }
+                endAngleDegrees={ 45 }
                 showTickValues={ true }
                 longerTickValuesOnly={ true }
                 ticksGroupSize={ 10 }
@@ -73,7 +58,22 @@ const App = () => {
                         value: 40,
                     }
                 ]}
-            />*/}
+            />
+
+            <RoundSlider
+                startAngleDegrees={ 45 }
+                endAngleDegrees={ 180 }
+                showTickValues={ true }
+                longerTickValuesOnly={ true }
+                ticksGroupSize={ 10 }
+                ticksDistanceToPanel={ 7 }
+                pointerGradient={
+                    <linearGradient id="pointer" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#8e50c4" />
+                        <stop offset="100%" stopColor="#422563" />
+                    </linearGradient>
+                }
+            />
 
             <RoundSlider
                 showTickValues={ true }

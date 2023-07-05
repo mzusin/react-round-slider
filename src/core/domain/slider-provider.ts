@@ -341,8 +341,8 @@ export const getPointerPercentByMouse = (
         angleRad += 2 * Math.PI;
     }
 
-    const degrees = radiansToDegrees(angleRad);
-    console.log('degrees', degrees)
+    let degrees = radiansToDegrees(angleRad);
+
     const isInArc = isAngleInArc(startAngleDegrees, endAngleDegrees, degrees);
     if(!isInArc){
         const angleSub1 = getAnglesSub(degrees, startAngleDegrees);
@@ -350,15 +350,12 @@ export const getPointerPercentByMouse = (
         return angleSub1 <= angleSub2 ? min : max;
     }
 
+    degrees -= startAngleDegrees;
+
     const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
-    console.log('angleDiff', angleDiff)
-
     const updatedPercent = degrees * 100 / angleDiff;
-    console.log('updatedPercent', updatedPercent)
-
     const stepPercent = getStepPercent(min, max, data, step);
     const result = mod(stepPercent === undefined ? updatedPercent : roundToStep(updatedPercent, stepPercent), 100);
-    console.log('result', result)
 
     return result === 100 ? 0 : result;
 };
