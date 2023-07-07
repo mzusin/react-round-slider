@@ -539,8 +539,6 @@ export const handleOverlap = (
     if(diff !== 0 && currentPointer.percent !== 0 && updatedPercent !== 0){
         const isClockwise = Math.abs(diff) > range ? diff < 0 : diff >= 0;
 
-        console.log('currentPointer', currentPointer.id)
-
         if(isClockwise && nextPointer.percent >= currentPointer.percent) {
             updatedPercent = Math.min(updatedPercent, nextPointer.percent);
         }
