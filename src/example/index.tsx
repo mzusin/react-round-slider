@@ -18,7 +18,7 @@ const App = () => {
                 textFontSize={ 24 }
                 textFontFamily={ 'Helvetica,Arial,sans-serif' }
                 onChange={ (values, pointers) => {
-                    // console.log(values, pointers);
+                    console.log(values, pointers);
                 }}
                 showTickValues={ true }
                 longerTickValuesOnly={ true }
@@ -55,7 +55,7 @@ const App = () => {
                         value: 30,
                     },
                     {
-                        value: 40,
+                        value: 70,
                     }
                 ]}
             />

@@ -111,15 +111,6 @@ export const getValue = (
 };
 
 /**
- * Convert range [a, b] to [c, d].
- * f(x) = (d - c) * (x - a) / (b - a) + c
- */
-export const aaa = (x: number, a: number, b: number, c: number, d: number) => {
-    return (d - c) * (x - a) / (b - a) + c;
-};
-
-
-/**
  * For the given pointer percent, return its value
  * that can be printed somewhere or sent back to user
  * via API or events.
@@ -249,7 +240,6 @@ export const getInitialPointers = (
     return pointers;
 };
 
-
 /**
  * User provides pointer values that are transformed to percents.
  * These percents should be transformed to the positions on the SVG arc.
@@ -353,7 +343,15 @@ export const getPointerPercentByMouse = (
     degrees -= startAngleDegrees;
 
     const angleDiff = Math.abs(endAngleDegrees - startAngleDegrees);
-    const updatedPercent = degrees * 100 / angleDiff;
+
+    let updatedPercent = degrees * 100 / angleDiff;
+
+    if(updatedPercent < 0) {
+        const temp = 360 - startAngleDegrees;
+        const temp2 = temp * 100 / angleDiff;
+        updatedPercent += temp2;
+    }
+
     const stepPercent = getStepPercent(min, max, data, step);
     const result = mod(stepPercent === undefined ? updatedPercent : roundToStep(updatedPercent, stepPercent), 100);
 

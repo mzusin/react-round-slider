@@ -36,7 +36,7 @@ const Connection = (props: IConnection) => {
 
             setConnectionStartPoint(start);
             setConnectionEndPoint(center);
-            setConnectionLargeArcFlag(Math.abs(angleDegrees - startAngleDegrees) <= 180 ? 0 : 1);
+            setConnectionLargeArcFlag(angleDegrees - startAngleDegrees <= 180 ? 0 : 1);
             return;
         }
 
@@ -65,7 +65,7 @@ const Connection = (props: IConnection) => {
 
         setConnectionStartPoint(centerStart);
         setConnectionEndPoint(centerEnd);
-        setConnectionLargeArcFlag(Math.abs(angleDegreesEnd - angleDegreesStart) <= 180 ? 0 : 1);
+        setConnectionLargeArcFlag(angleDegreesEnd - angleDegreesStart <= 180 ? 0 : 1);
     }, [
         endAngleDegrees,
         pointers,

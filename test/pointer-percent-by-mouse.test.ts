@@ -92,7 +92,7 @@ describe('getPointerPercentByMouse()', () => {
             undefined
         );
 
-        expect(result).toBe(25);
+        expect(result).toBe(75);
     });
 
 });
