@@ -411,8 +411,8 @@ export const getActivePointerId = (
         for(let i=0; i<pointers.length; i++){
             const pointer = pointers[i];
             const pointerAngle = pointer.percent * angleDiff / 100;
-            const angleSub = getAnglesSub(pointerAngle, currentValueAngle);
 
+            const angleSub = getAnglesSub(pointerAngle, currentValueAngle);
             if(angleSub < minAngle){
                 minAngle = angleSub;
                 minDistancePointerId = pointer.id;
@@ -538,6 +538,8 @@ export const handleOverlap = (
 
     if(diff !== 0 && currentPointer.percent !== 0 && updatedPercent !== 0){
         const isClockwise = Math.abs(diff) > range ? diff < 0 : diff >= 0;
+
+        console.log('currentPointer', currentPointer.id)
 
         if(isClockwise && nextPointer.percent >= currentPointer.percent) {
             updatedPercent = Math.min(updatedPercent, nextPointer.percent);

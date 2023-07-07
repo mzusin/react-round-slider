@@ -377,7 +377,6 @@ export const RoundSlider = (props: IUserSettings) => {
         // MULTIPLE POINTERS ---------------------------------------
         if(_selectedPointerId === null) return;
 
-
         setPointers(currentPointers => {
             const skipOverlapCheck = pointersOverlap || max === min;
 
