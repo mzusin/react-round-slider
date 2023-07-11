@@ -2,208 +2,1028 @@ import * as React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RoundSlider } from '../core';
 
-const App = () => {
+export const testCirclePathSegments = () => {
+    return (
+        <>
+            <RoundSlider />
+
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 90 }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 90 }
+                pathEndAngle={ 180 }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 270 }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 360 }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 360 }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 90 }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 180 }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 90 }
+                pathEndAngle={ 270 }
+            />
+
+        </>
+    )
+};
+
+export const testBorder = () => {
     return (
         <>
             <RoundSlider
-                // disabled={ true }
-                data={[
-                    'a', 'b', 'c', 'd', 'e', 'f',
-                    'g', 'h', 'i', 'j', 'k', 'l',
-                    'm', 'n', 'o', 'p', 'q', 'r',
-                    's', 't', 'u', 'v', 'w', 'x',
-                    'y', 'z',
+                pathRadius={ 150 }
+                pathBorder={ 10 }
+                pathBorderColor={ '#68da1c' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 90 }
+                pathRadius={ 150 }
+                pathBorder={ 10 }
+                pathBorderColor={ '#8e3da4' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+                pathRadius={ 150 }
+                pathBorder={ 1 }
+                pathBorderColor={ '#68da1c' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 90 }
+                pathEndAngle={ 180 }
+                pathRadius={ 150 }
+                pathBorder={ 2 }
+                pathBorderColor={ '#8e3da4' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 270 }
+                pathRadius={ 150 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 360 }
+                pathRadius={ 150 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 380 }
+                pathRadius={ 150 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 90 }
+                pathRadius={ 150 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 90 }
+                pathRadius={ 150 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 180 }
+                pathRadius={ 150 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathRadius={ 100 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 90 }
+                pathRadius={ 100 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+                pathRadius={ 100 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 90 }
+                pathEndAngle={ 180 }
+                pathRadius={ 100 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 270 }
+                pathRadius={ 100 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 360 }
+                pathRadius={ 100 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 380 }
+                pathRadius={ 100 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 90 }
+                pathRadius={ 100 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 90 }
+                pathRadius={ 100 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 180 }
+                pathRadius={ 100 }
+                pathBorder={ 3 }
+                pathBorderColor={ '#4bace2' }
+            />
+        </>
+    )
+};
+
+export const test2PointersOnCircle = () => {
+        return (
+            <>
+                    <RoundSlider
+                        pointers={[
+                                {
+                                        value: 30
+                                },
+                                {
+                                        value: 70
+                                }
+                        ]}
+                    />
+
+                    <RoundSlider
+                        pathStartAngle={ 0 }
+                        pathEndAngle={ 90 }
+                        pointers={[
+                                {
+                                        value: 30
+                                },
+                                {
+                                        value: 70
+                                }
+                        ]}
+                    />
+
+                    <RoundSlider
+                        pathStartAngle={ 0 }
+                        pathEndAngle={ 180 }
+                        pointers={[
+                                {
+                                        value: 30
+                                },
+                                {
+                                        value: 70
+                                }
+                        ]}
+                    />
+
+                    <RoundSlider
+                        pathStartAngle={ 90 }
+                        pathEndAngle={ 180 }
+                        pointers={[
+                                {
+                                        value: 30
+                                },
+                                {
+                                        value: 70
+                                }
+                        ]}
+                    />
+
+                    <RoundSlider
+                        pathStartAngle={ 180 }
+                        pathEndAngle={ 270 }
+                        pointers={[
+                                {
+                                        value: 30
+                                },
+                                {
+                                        value: 70
+                                }
+                        ]}
+                    />
+
+                    <RoundSlider
+                        pathStartAngle={ 180 }
+                        pathEndAngle={ 360 }
+                        pointers={[
+                                {
+                                        value: 30
+                                },
+                                {
+                                        value: 70
+                                }
+                        ]}
+                    />
+
+                    <RoundSlider
+                        pathStartAngle={ 270 }
+                        pathEndAngle={ 360 }
+                        pointers={[
+                                {
+                                        value: 30
+                                },
+                                {
+                                        value: 70
+                                }
+                        ]}
+                    />
+
+                    <RoundSlider
+                        pathStartAngle={ 270 }
+                        pathEndAngle={ 90 }
+                        pointers={[
+                                {
+                                        value: 30
+                                },
+                                {
+                                        value: 70
+                                }
+                        ]}
+                    />
+
+                    <RoundSlider
+                        pathStartAngle={ 270 }
+                        pathEndAngle={ 180 }
+                        pointers={[
+                                {
+                                        value: 30
+                                },
+                                {
+                                        value: 70
+                                }
+                        ]}
+                    />
+
+                    <RoundSlider
+                        pathStartAngle={ 90 }
+                        pathEndAngle={ 270 }
+                        pointers={[
+                                {
+                                        value: 30
+                                },
+                                {
+                                        value: 70
+                                }
+                        ]}
+                    />
+            </>
+        )
+};
+
+export const testMultiplePointers = () => {
+    return (
+        <>
+            <RoundSlider
+                pathRadius={ 150 }
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+                pointers={[
+                    {
+                        value: 0,
+                        bgColor: '#8e3da4'
+                    },
+                    {
+                        value: 25,
+                        bgColor: '#fffc00'
+                    },
+                    {
+                        value: 50,
+                        bgColor: '#b0fc7e'
+                    },
+                    {
+                        value: 75,
+                        bgColor: '#ff0000'
+                    },
+                    {
+                        value: 100,
+                        bgColor: '#ffb800'
+                    }
                 ]}
-                textColor={ '#5DAED2' }
-                textFontSize={ 24 }
-                textFontFamily={ 'Helvetica,Arial,sans-serif' }
-                onChange={ (values, pointers) => {
-                    console.log(values, pointers);
-                }}
-                showTickValues={ true }
-                longerTickValuesOnly={ true }
             />
 
             <RoundSlider
-                showTickValues={ true }
-                longerTickValuesOnly={ true }
-                ticksGroupSize={ 10 }
-                ticksDistanceToPanel={ 7 }
-                pointerGradient={
-                    <linearGradient id="pointer" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#8e50c4" />
-                        <stop offset="100%" stopColor="#422563" />
-                    </linearGradient>
-                }
-            />
-
-            <RoundSlider
-                startAngleDegrees={ 270 }
-                endAngleDegrees={ 45 }
-                showTickValues={ true }
-                longerTickValuesOnly={ true }
-                ticksGroupSize={ 10 }
-                ticksDistanceToPanel={ 7 }
-                pointerGradient={
-                    <linearGradient id="pointer" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#8e50c4" />
-                        <stop offset="100%" stopColor="#422563" />
-                    </linearGradient>
-                }
-                pointers={ [
+                pathRadius={ 150 }
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+                pointers={[
                     {
                         value: 30,
                     },
                     {
-                        value: 70,
-                    }
-                ]}
-            />
-
-            <RoundSlider
-                startAngleDegrees={ 45 }
-                endAngleDegrees={ 180 }
-                showTickValues={ true }
-                longerTickValuesOnly={ true }
-                ticksGroupSize={ 10 }
-                ticksDistanceToPanel={ 7 }
-                pointerGradient={
-                    <linearGradient id="pointer" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#8e50c4" />
-                        <stop offset="100%" stopColor="#422563" />
-                    </linearGradient>
-                }
-            />
-
-            <RoundSlider
-                showTickValues={ true }
-                longerTickValuesOnly={ true }
-                tickValuesFontSize={ 10 }
-                ticksGroupSize={ 10 }
-                tickValuesDistance={ 10 }
-
-                min={ 0 }
-                max={ 100 }
-
-                rx={ 150 }
-                ry={ 150 }
-
-                startAngleDegrees={ 0 }
-                endAngleDegrees={ 360 }
-
-                panelStrokeWidth={ 15 }
-                panelBgColor="red"
-                connectionBgColor="blue"
-                connectionGradient={
-                    <linearGradient id="connection" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#00bc9b" />
-                        <stop offset="100%" stopColor="#5eaefd" />
-                    </linearGradient>
-                }
-
-
-                pointers={[
-                    {
-                        rx: 10,
-                        ry: 10,
-                        value: 25,
-                        // disabled: true
-                    }
-                ]}
-            />
-
-            <RoundSlider
-                showTickValues={ true }
-                longerTickValuesOnly={ true }
-                tickValuesFontSize={ 10 }
-                ticksGroupSize={ 10 }
-                tickValuesDistance={ 10 }
-                ticksDistanceToPanel={ 20 }
-
-                min={ 0 }
-                max={ 100 }
-
-                rx={ 250 }
-                ry={ 150 }
-
-                startAngleDegrees={ 0 }
-                endAngleDegrees={ 360 }
-
-                panelStrokeWidth={ 15 }
-                panelBgColor="#285f68"
-                connectionBgColor="#86e02c"
-                pointerBgColor="red"
-
-                onChange={ (values, pointers) => {
-                    console.log(values, pointers);
-                }}
-
-                pointers={[
-                    {
-                        rx: 50,
-                        ry: 50,
-                        value: 10,
-                        bgColor: 'blue',
-                        disabled: true,
-                        ariaLabel: 'pointer-1',
-                        pointerSVG: (
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 width="50" height="50" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
-                                 fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path
-                                    d="M12 10c-1.32 0 -1.983 .421 -2.931 1.924l-.244 .398l-.395 .688a50.89 50.89 0 0 0 -.141 .254c-.24 .434 -.571 .753 -1.139 1.142l-.55 .365c-.94 .627 -1.432 1.118 -1.707 1.955c-.124 .338 -.196 .853 -.193 1.28c0 1.687 1.198 2.994 2.8 2.994l.242 -.006c.119 -.006 .234 -.017 .354 -.034l.248 -.043l.132 -.028l.291 -.073l.162 -.045l.57 -.17l.763 -.243l.455 -.136c.53 -.15 .94 -.222 1.283 -.222c.344 0 .753 .073 1.283 .222l.455 .136l.764 .242l.569 .171l.312 .084c.097 .024 .187 .045 .273 .062l.248 .043c.12 .017 .235 .028 .354 .034l.242 .006c1.602 0 2.8 -1.307 2.8 -3c0 -.427 -.073 -.939 -.207 -1.306c-.236 -.724 -.677 -1.223 -1.48 -1.83l-.257 -.19l-.528 -.38c-.642 -.47 -1.003 -.826 -1.253 -1.278l-.27 -.485l-.252 -.432c-1.011 -1.696 -1.618 -2.099 -3.053 -2.099z"
-                                    strokeWidth="0" fill="currentColor"></path>
-                                <path
-                                    d="M19.78 7h-.03c-1.219 .02 -2.35 1.066 -2.908 2.504c-.69 1.775 -.348 3.72 1.075 4.333c.256 .109 .527 .163 .801 .163c1.231 0 2.38 -1.053 2.943 -2.504c.686 -1.774 .34 -3.72 -1.076 -4.332a2.05 2.05 0 0 0 -.804 -.164z"
-                                    strokeWidth="0" fill="currentColor"></path>
-                                <path
-                                    d="M9.025 3c-.112 0 -.185 .002 -.27 .015l-.093 .016c-1.532 .206 -2.397 1.989 -2.108 3.855c.272 1.725 1.462 3.114 2.92 3.114l.187 -.005a1.26 1.26 0 0 0 .084 -.01l.092 -.016c1.533 -.206 2.397 -1.989 2.108 -3.855c-.27 -1.727 -1.46 -3.114 -2.92 -3.114z"
-                                    strokeWidth="0" fill="currentColor"></path>
-                                <path
-                                    d="M14.972 3c-1.459 0 -2.647 1.388 -2.916 3.113c-.29 1.867 .574 3.65 2.174 3.867c.103 .013 .2 .02 .296 .02c1.39 0 2.543 -1.265 2.877 -2.883l.041 -.23c.29 -1.867 -.574 -3.65 -2.174 -3.867a2.154 2.154 0 0 0 -.298 -.02z"
-                                    strokeWidth="0" fill="currentColor"></path>
-                                <path
-                                    d="M4.217 7c-.274 0 -.544 .054 -.797 .161c-1.426 .615 -1.767 2.562 -1.078 4.335c.563 1.451 1.71 2.504 2.941 2.504c.274 0 .544 -.054 .797 -.161c1.426 -.615 1.767 -2.562 1.078 -4.335c-.563 -1.451 -1.71 -2.504 -2.941 -2.504z"
-                                    strokeWidth="0" fill="currentColor"></path>
-                            </svg>
-                        )
+                        value: 60,
                     },
-
                     {
-                        rx: 15,
-                        ry: 15,
+                        value: 90,
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathRadius={ 150 }
+                pathStartAngle={ 0 }
+                pathEndAngle={ 360 }
+                pointers={[
+                    {
+                        value: 30,
+                    },
+                    {
+                        value: 60,
+                    },
+                    {
+                        value: 90,
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathRadius={ 150 }
+                pathStartAngle={ 0 }
+                pathEndAngle={ 360 }
+                pointers={[
+                    {
+                        value: 0,
+                    },
+                    {
+                        value: 25,
+                    },
+                    {
                         value: 50,
-                        pointerSVG: <image href="settings-icon.png" height="15" width="15" />,
-                        ariaLabel: 'pointer-2',
                     },
-
                     {
-                        rx: 20,
-                        ry: 20,
-                        value: 25,
-                        pointerSVG: <image href="settings-icon.png" height="20" width="20" />,
-                    },
-
-                    {
-                        rx: 0,
-                        ry: 2,
-                        value: 25,
+                        value: 75,
                     }
                 ]}
             />
+
+            <RoundSlider
+                pathRadius={ 150 }
+                pathStartAngle={ 270 }
+                pathEndAngle={ 90 }
+                pointers={[
+                    {
+                        value: 30,
+                    },
+                    {
+                        value: 60,
+                    },
+                    {
+                        value: 90,
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathRadius={ 150 }
+                pathStartAngle={ 270 }
+                pathEndAngle={ 180 }
+                pointers={[
+                    {
+                        value: 30,
+                    },
+                    {
+                        value: 60,
+                    },
+                    {
+                        value: 90,
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathRadius={ 150 }
+                pathStartAngle={ 270 }
+                pathEndAngle={ 0 }
+                pointers={[
+                    {
+                        value: 30,
+                    },
+                    {
+                        value: 60,
+                    },
+                    {
+                        value: 90,
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathRadius={ 150 }
+                pathStartAngle={ 0 }
+                pathEndAngle={ 90 }
+                pointers={[
+                    {
+                        value: 30,
+                    },
+                    {
+                        value: 60,
+                    },
+                    {
+                        value: 90,
+                    }
+                ]}
+            />
+        </>
+    )
+};
+
+export const testMinMax = () => {
+  return (
+      <>
+          <RoundSlider
+              min={ -100 }
+              max={ 100 }
+              pointerBorder={ 15 }
+          />
+
+          <RoundSlider
+              min={ 100 }
+              max={ 200 }
+          />
+      </>
+  )
+};
+
+export const testTicksProperties = () => {
+  return (
+      <>
+          <RoundSlider
+              pathStartAngle={ 90 }
+              pointerBgColor={ '#d3bbdc' }
+              pointerBorder={ 2 }
+              pointerBorderColor={ '#8e3da4' }
+              showTickValues={ true }
+              ticksGroupSize={ 10 }
+          />
+
+          <RoundSlider
+              pointers={[
+                  {
+                      radius: 3,
+                  }
+              ]}
+          />
+
+          <RoundSlider
+              pathThickness={ 10 }
+              pathBorder={ 2 }
+              pathBorderColor={ '#5daed2' }
+              pointers={[
+                  {
+                      radius: 3,
+                  }
+              ]}
+          />
+
+          <RoundSlider
+              pathStartAngle={ 0 }
+              pathEndAngle={ 90 }
+              pathBgColor={ '#163a86' }
+              pathThickness={ 15 }
+              pointers={[
+                  {
+                      radius: 3,
+                  }
+              ]}
+          />
+
+          <RoundSlider
+              pathStartAngle={ 0 }
+              pathEndAngle={ 45 }
+              pointers={[
+                  {
+                      radius: 3,
+                  }
+              ]}
+              ticsCount={ 5 }
+              ticksGroupSize={ 5 }
+              longerTickValuesOnly={ false }
+          />
+      </>
+  )
+};
+
+export const testTextProperties = () => {
+  return (
+      <>
+          <RoundSlider
+              pathRadius={ 150 }
+              pathStartAngle={ 270 }
+              pathEndAngle={ 45 }
+              pointers={[
+                  {
+                      value: 100,
+                  }
+              ]}
+              textColor={ '#366d8c' }
+              textFontSize={ 24 }
+              textPrefix={ 'Value: ' }
+              textSuffix={ '%' }
+          />
+
+          <RoundSlider
+              pathStartAngle={ 180 }
+              pathEndAngle={ 90 }
+              pathRadius={ 150 }
+              pointers={[
+                  {
+                      value: 10,
+                  },
+                  {
+                      value: 90,
+                  }
+              ]}
+              connectionBgColor={ '#bb9d9d' }
+              textSuffix={ 'px' }
+              textFontFamily={ 'Arial' }
+          />
+
+          <RoundSlider
+              pathStartAngle={ 180 }
+              pathEndAngle={ 90 }
+              pathRadius={ 150 }
+              pointers={[
+                  {
+                      value: 10.1234,
+                  },
+                  {
+                      value: 90.5678,
+                  }
+              ]}
+              connectionBgColor={ '#bb9d9d' }
+              textSuffix={ 'px' }
+              textFontFamily={ 'Arial' }
+              round={ 2 }
+          />
+      </>
+  )
+};
+
+export const testData = () => {
+  return (
+      <>
+          <RoundSlider
+              data={[
+                  'a', 'b', 'c', 'd', 'e', 'f',
+                  'g', 'h', 'i', 'j', 'k', 'l',
+                  'm', 'n', 'o', 'p', 'q', 'r',
+                  's', 't', 'u', 'v', 'w', 'x',
+                  'y', 'z',
+              ]}
+              textColor={ '#5DAED2' }
+              textFontSize={ 24 }
+              textFontFamily={ 'Helvetica,Arial,sans-serif' }
+              ticksGroupSize={ 0 }
+              longerTickValuesOnly={ false }
+          />
+
+          <RoundSlider
+              data={[
+                  'a', 'b', 'c', 'd', 'e', 'f',
+                  'g', 'h', 'i', 'j', 'k', 'l',
+                  'm', 'n', 'o', 'p', 'q', 'r',
+                  's', 't', 'u', 'v', 'w', 'x',
+                  'y', 'z',
+              ]}
+              textColor={ '#5DAED2' }
+              textFontSize={ 24 }
+              textFontFamily={ 'Helvetica,Arial,sans-serif' }
+              pointers={[
+                  {
+                      value: 'b'
+                  }
+              ]}
+              ticksGroupSize={ 0 }
+              longerTickValuesOnly={ false }
+          />
+
+          <RoundSlider
+              data={[
+                  'a', 'b', 'c', 'd', 'e', 'f',
+                  'g', 'h', 'i', 'j', 'k', 'l',
+                  'm', 'n', 'o', 'p', 'q', 'r',
+                  's', 't', 'u', 'v', 'w', 'x',
+                  'y', 'z',
+              ]}
+              textColor={ '#5DAED2' }
+              textFontSize={ 24 }
+              textFontFamily={ 'Helvetica,Arial,sans-serif' }
+              pointers={[
+                  {
+                      value: 't'
+                  }
+              ]}
+              ticksGroupSize={ 0 }
+              longerTickValuesOnly={ false }
+          />
+
+          <RoundSlider
+              data={[
+                  'a', 'b', 'c', 'd', 'e', 'f',
+                  'g', 'h', 'i', 'j', 'k', 'l',
+                  'm', 'n', 'o', 'p', 'q', 'r',
+                  's', 't', 'u', 'v', 'w', 'x',
+                  'y', 'z',
+              ]}
+              textColor={ '#5DAED2' }
+              textFontSize={ 24 }
+              textFontFamily={ 'Helvetica,Arial,sans-serif' }
+              pointers={[
+                  {
+                      value: 'y'
+                  }
+              ]}
+              ticksGroupSize={ 0 }
+              longerTickValuesOnly={ false }
+          />
+
+          <RoundSlider
+              data={[
+                  'a', 'b', 'c', 'd', 'e', 'f',
+                  'g', 'h', 'i', 'j', 'k', 'l',
+                  'm', 'n', 'o', 'p', 'q', 'r',
+                  's', 't', 'u', 'v', 'w', 'x',
+                  'y', 'z',
+              ]}
+              textColor={ '#5DAED2' }
+              textFontSize={ 24 }
+              textFontFamily={ 'Helvetica,Arial,sans-serif' }
+              pointers={[
+                  {
+                      value: 'z'
+                  }
+              ]}
+              ticksGroupSize={ 0 }
+              longerTickValuesOnly={ false }
+          />
+
+          <RoundSlider
+              data={[
+                  'a', 'b', 'c', 'd', 'e', 'f',
+                  'g', 'h', 'i', 'j', 'k', 'l',
+                  'm', 'n', 'o', 'p', 'q', 'r',
+                  's', 't', 'u', 'v', 'w', 'x',
+                  'y', 'z',
+              ]}
+              textColor={ '#5DAED2' }
+              textFontSize={ 24 }
+              textFontFamily={ 'Helvetica,Arial,sans-serif' }
+              pointers={[
+                  {
+                      value: 'a'
+                  }
+              ]}
+              ticksGroupSize={ 0 }
+              longerTickValuesOnly={ false }
+          />
+      </>
+  )
+};
+
+export const testStep = () => {
+    return (
+        <>
+            <RoundSlider
+                step={ 1 }
+            />
+
+            <RoundSlider
+                step={ 0.1 }
+                round={ 2 }
+            />
+
+            <RoundSlider
+                step={ 10 }
+            />
+        </>
+    )
+};
+
+export const testOverlap = () => {
+    return (
+        <>
+            <RoundSlider pointersOverlap={ true } />
+
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 90 }
+                pointersOverlap={ true }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+                pointersOverlap={ true }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathStartAngle={ 90 }
+                pathEndAngle={ 180 }
+                pointersOverlap={ true }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 270 }
+                pointersOverlap={ true }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 360 }
+                pointersOverlap={ true }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 360 }
+                pointersOverlap={ true }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 90 }
+                pointersOverlap={ true }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 180 }
+                pointersOverlap={ true }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathStartAngle={ 90 }
+                pathEndAngle={ 270 }
+                pointersOverlap={ true }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+            />
+
+        </>
+    )
+};
+
+export const testStyling = () => {
+    return (
+        <>
+            <RoundSlider
+                pathRadius={ 150 }
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+                pointers={[
+                    {
+                        value: 0,
+                    },
+                    {
+                        value: 25,
+                    },
+                    {
+                        value: 50,
+                    },
+                    {
+                        value: 75,
+                    },
+                    {
+                        value: 100,
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathRadius={ 150 }
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+                pointerBgColorSelected={ '#ff0000' }
+                pointers={[
+                    {
+                        value: 0,
+                    },
+                    {
+                        value: 25,
+                    },
+                    {
+                        value: 50,
+                    },
+                    {
+                        value: 75,
+                    },
+                    {
+                        value: 100,
+                    }
+                ]}
+            />
+
+            <RoundSlider
+                pathRadius={ 150 }
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+                pointers={[
+                    {
+                        value: 0,
+                        bgColor: '#8e3da4',
+                        bgColorSelected: '#702b80',
+                    },
+                    {
+                        value: 25,
+                        bgColor: '#fffc00',
+                        bgColorSelected: '#b9b822'
+                    },
+                    {
+                        value: 50,
+                        bgColor: '#b0fc7e',
+                        bgColorSelected: '#86c959'
+                    },
+                    {
+                        value: 75,
+                        bgColor: '#ff0000',
+                        bgColorSelected: '#b42929'
+                    },
+                    {
+                        value: 100,
+                        bgColor: '#ffb800',
+                        bgColorSelected: '#c48f08'
+                    }
+                ]}
+            />
+        </>
+    )
+};
+
+const App = () => {
+    return (
+        <>
+            {/*{ testCirclePathSegments() }*/}
+            {/*{ testBorder() }*/}
+            {/*{ test2PointersOnCircle() }*/}
+            {/*{ testMultiplePointers() }*/}
+            {/*{ testData() }*/}
+            {/*{ testStep() }*/}
+            {/*{ testOverlap() }*/}
+            { testStyling() }
         </>
     );
 };
 
 const init = () => {
-    const $root =  document.getElementById('root') as HTMLElement;
-    if(!$root) return;
+    const $root = document.getElementById('root') as HTMLElement;
+    if (!$root) return;
 
     const root = ReactDOM.createRoot($root);
     root.render(
         <React.StrictMode>
-            <App />
+            <App/>
         </React.StrictMode>
     );
 };

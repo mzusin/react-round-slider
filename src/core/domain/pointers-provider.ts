@@ -1,0 +1,274 @@
+import {
+    Vector2,
+    newId,
+    convertRange,
+    mod,
+    setDecimalPlaces,
+    v2Sub,
+    radiansToDegrees,
+    degreesToRadians, circleMovement, v2Distance
+} from 'mz-math';
+import { ISettings } from './settings-provider';
+import {
+    DEFAULT_PATH_END_ANGLE,
+    DEFAULT_PATH_START_ANGLE,
+    DEFAULT_POINTER_BG_COLOR, DEFAULT_POINTER_BG_COLOR_SELECTED,
+    DEFAULT_POINTER_BORDER,
+    DEFAULT_POINTER_BORDER_COLOR,
+    DEFAULT_POINTER_RADIUS,
+} from './defaults-provider';
+import { getNumber, getString } from './common-provider';
+import { IData } from './data-provider';
+import { getAnglesDistance } from './circle-provider';
+
+export interface IPointer {
+    id: string;
+    index: number;
+    radius: number;
+    angleDeg: number;
+    bgColor: string;
+    bgColorSelected: string;
+    border: number;
+    borderColor: string;
+}
+
+export interface IPointers {
+    pointers: IPointer[];
+    maxRadius: number;
+}
+
+export const getAngleByMouse = (
+    $svg: SVGSVGElement,
+    clientX: number,
+    clientY: number,
+    cx: number,
+    cy: number,
+    rx: number,
+    ry: number
+) => {
+    const { left, top } = $svg.getBoundingClientRect();
+
+    const relativeMouse: Vector2 = [
+        clientX - left,
+        clientY - top,
+    ];
+
+    const vector = v2Sub(relativeMouse, [ cx, cy ]);
+
+    let angleRad = Math.atan2(vector[1] / ry, vector[0] / rx);
+    if(angleRad < 0){
+        angleRad += 2 * Math.PI;
+    }
+
+    return radiansToDegrees(angleRad);
+};
+
+export const angle2value = (data: IData, angle: number, pathStartAngle: number, pathEndAngle: number) : string | number => {
+
+    if(pathEndAngle < pathStartAngle) {
+        pathStartAngle -= 360;
+    }
+
+    if(angle > 180) {
+        angle -= 360;
+    }
+
+    let value: string|number = convertRange(angle, pathStartAngle, pathEndAngle, data.min, data.max);
+
+    const minMaxRange = Math.abs(data.max - data.min);
+
+    if(value !== data.max) {
+        value = mod(value, minMaxRange);
+    }
+
+    if(data.data.length > 0) {
+        const index = Math.round(value);
+        value = data.data[index];
+    }
+    else{
+        value = setDecimalPlaces(value, data.round);
+    }
+
+    return value;
+};
+
+const value2angle = (data: IData, value: string | number, pathStartAngle: number, pathEndAngle: number) => {
+    let _value: number;
+
+    if(pathEndAngle < pathStartAngle) {
+        pathEndAngle += 360;
+    }
+
+    if(data.data.length > 0) {
+        const valueIndex = data.data.findIndex(item => item === value);
+        _value = valueIndex === -1 ? 0 : valueIndex;
+    }
+    else{
+        _value = typeof value !== 'number' ? data.min : value;
+    }
+
+    return mod(convertRange(_value, data.min, data.max, pathStartAngle, pathEndAngle), 360);
+};
+
+const initPointers = (
+    settings: ISettings,
+    data: IData
+) : IPointer[] => {
+
+    if(!settings || !settings.pointers || settings.pointers.length < 0 || !data) {
+        return [{
+            id: newId(),
+            index: 0,
+            radius: DEFAULT_POINTER_RADIUS,
+            angleDeg: mod(getNumber(settings.pathStartAngle, DEFAULT_PATH_START_ANGLE), 360),
+            bgColor: getString(settings.pointerBgColor, DEFAULT_POINTER_BG_COLOR),
+            bgColorSelected: settings.pointerBgColorSelected,
+            border: getNumber(settings.pointerBorder, DEFAULT_POINTER_BORDER),
+            borderColor: getString(settings.pointerBorderColor, DEFAULT_POINTER_BORDER_COLOR),
+        }]
+    }
+
+    const pointers: IPointer[] = [];
+
+    for(let i=0; i<settings.pointers.length; i++) {
+        const settingPointer = settings.pointers[i];
+
+        const bgColor = settingPointer.bgColor ? settingPointer.bgColor : getString(settings.pointerBgColor, DEFAULT_POINTER_BG_COLOR);
+        const bgColorSelected = settingPointer.bgColorSelected ? settingPointer.bgColorSelected : getString(settings.pointerBgColorSelected, DEFAULT_POINTER_BG_COLOR_SELECTED);
+        const border = settingPointer.border ? settingPointer.border : getNumber(settings.pointerBorder, DEFAULT_POINTER_BORDER);
+        const borderColor = settingPointer.borderColor ? settingPointer.borderColor : getString(settings.pointerBorderColor, DEFAULT_POINTER_BORDER_COLOR);
+
+        const angleDeg = value2angle(
+            data,
+            settingPointer.value,
+            getNumber(settings.pathStartAngle, DEFAULT_PATH_START_ANGLE),
+            getNumber(settings.pathEndAngle, DEFAULT_PATH_END_ANGLE),
+        );
+        const angleAfterStep = roundToStep(angleDeg, data.stepAngleDeg)
+
+        pointers.push({
+            id: newId(),
+            index: i,
+            radius: getNumber(settingPointer.radius, DEFAULT_POINTER_RADIUS),
+            angleDeg: angleAfterStep,
+            bgColor,
+            bgColorSelected,
+            border,
+            borderColor,
+        });
+    }
+
+    return pointers;
+};
+
+export const getPointers = (settings: ISettings, data: IData) : IPointers => {
+
+    const pointers = initPointers(settings, data);
+
+    return {
+        pointers,
+        maxRadius: getMaxRadius(pointers),
+    }
+};
+
+const getMaxRadius = (pointers: IPointer[]) : number => {
+    if(pointers.length <= 0) return 0;
+
+    let max = -Infinity;
+
+    for(const pointer of pointers){
+        max = Math.max(max, Math.max(0, pointer.radius + pointer.border/2));
+    }
+
+    return max;
+};
+
+export const getClosestPointer = (
+    pointers: IPointer[],
+    currentPlaceDegrees: number,
+    cx: number,
+    cy: number,
+    pathRadius: number
+) => {
+    if(!pointers || pointers.length <= 0) return null;
+
+    if(pointers.length === 1) return pointers[0];
+
+    const angleRad = convertRange(degreesToRadians(currentPlaceDegrees), 0, Math.PI * 2, 0, Math.PI); // [0, Math.PI*2] ---> [0, Math.PI]
+    const currentPointOnArc = circleMovement([ cx, cy ], angleRad, pathRadius);
+
+    let min: number|undefined = undefined;
+    let closestPointer: IPointer = null;
+
+    for(const pointer of pointers) {
+        const pointerAngleRad = convertRange(degreesToRadians(pointer.angleDeg), 0, Math.PI * 2, 0, Math.PI);
+        const pointOnArc = circleMovement([ cx, cy ], pointerAngleRad, pathRadius);
+        const distance = v2Distance(currentPointOnArc, pointOnArc);
+
+        if(min === undefined || distance < min) {
+            min = distance;
+            closestPointer = pointer;
+        }
+    }
+
+    return { ...closestPointer };
+};
+
+export const getClosestEdge = (
+    startAngleDegrees: number,
+    endAngleDegrees: number,
+    currentPlaceDegrees: number,
+    cx: number,
+    cy: number,
+    pathRadius: number
+) => {
+
+    const angleRad = convertRange(degreesToRadians(currentPlaceDegrees), 0, Math.PI * 2, 0, Math.PI); // [0, Math.PI*2] ---> [0, Math.PI]
+    const currentPointOnArc = circleMovement([ cx, cy ], angleRad, pathRadius);
+
+    const startAngleRad = convertRange(degreesToRadians(startAngleDegrees), 0, Math.PI * 2, 0, Math.PI); // [0, Math.PI*2] ---> [0, Math.PI]
+    const startPointOnArc = circleMovement([ cx, cy ], startAngleRad, pathRadius);
+
+    const endAngleRad = convertRange(degreesToRadians(endAngleDegrees), 0, Math.PI * 2, 0, Math.PI); // [0, Math.PI*2] ---> [0, Math.PI]
+    const endPointOnArc = circleMovement([ cx, cy ], endAngleRad, pathRadius);
+
+    const distance1 = v2Distance(currentPointOnArc, startPointOnArc);
+    const distance2 = v2Distance(currentPointOnArc, endPointOnArc);
+
+    return distance1 <= distance2 ? startAngleDegrees : endAngleDegrees;
+};
+
+export const getMinMaxDistancePointers = (pointers: IPointer[], pathStartAngle: number) : [IPointer, IPointer] | null => {
+    if(!pointers || pointers.length <= 0) return null;
+
+    let minDistance = undefined;
+    let maxDistance = undefined;
+    let minPointer = null;
+    let maxPointer = null;
+
+    for(const pointer of pointers) {
+
+        const distance = getAnglesDistance(pathStartAngle, pointer.angleDeg);
+
+        if(minDistance === undefined || distance < minDistance) {
+            minPointer = pointer;
+            minDistance = distance;
+        }
+
+        if(maxDistance === undefined || distance > maxDistance) {
+            maxPointer = pointer;
+            maxDistance = distance;
+        }
+    }
+
+    if(minPointer === null || maxPointer === null) return null;
+
+    return [
+        minPointer,
+        maxPointer
+    ];
+};
+
+export const roundToStep = (num: number, step: number) : number => {
+    return step === 0 ? 0 : Math.round(num / step) * step;
+};

@@ -1,94 +1,88 @@
-import { IConnection, IStatePointer } from '../interfaces';
-import { useEffect, useState } from 'react';
-import { getMinMaxPointer, getPointerPositionByPercent } from '../domain/slider-provider';
-import { Vector2 } from 'mz-math';
+import { ISettings } from '../domain/settings-provider';
+import { getBoolean, getString } from '../domain/common-provider';
+import { DEFAULT_CONNECTION_BG_COLOR } from '../domain/defaults-provider';
+import { getAngleByMouse, getClosestPointer, IPointer, IPointers } from '../domain/pointers-provider';
+import { MouseEvent, useEffect, useState } from 'react';
+import { getConnection, IConnection } from '../domain/connection-provider';
+import { ISvg } from '../domain/svg-provider';
 
-const Connection = (props: IConnection) => {
+interface IConnectionProps {
+    settings: ISettings;
+    pointers: IPointers;
+    svg: ISvg;
+    $svg: SVGSVGElement;
+    setPointer: (updatedPointer: IPointer) => void;
+}
 
-    const  {
-        pointers, ellipse, strokeWidth, svgCenter,
-        svgRadii, connectionBgColor,
-        connectionGradient, startEndAngle,
-        rangeDragging,
-    } = props;
-    const { start } = ellipse;
+const Connection = (props: IConnectionProps) => {
 
-    const [ startAngleDegrees, endAngleDegrees ] = startEndAngle;
+    const { settings, pointers, $svg, svg, setPointer } = props;
 
-    const [ connectionStartPoint, setConnectionStartPoint ] = useState<Vector2|null>(null);
-    const [ connectionEndPoint, setConnectionEndPoint ] = useState<Vector2|null>(null);
-    const [ connectionLargeArcFlag, setConnectionLargeArcFlag] = useState(0);
+    const [ connection, setConnection ] = useState<IConnection|null>(null);
 
     useEffect(() => {
-        if(!pointers || pointers.length <= 0) return;
-
-        // Slider has only 1 pointer.
-        if(pointers.length <= 1){
-            const pointer = pointers[0];
-
-            const { position: center, angleDegrees } = getPointerPositionByPercent(
-                pointer.percent,
-                startAngleDegrees,
-                endAngleDegrees,
-                svgRadii,
-                svgCenter
-            );
-
-            setConnectionStartPoint(start);
-            setConnectionEndPoint(center);
-            setConnectionLargeArcFlag(angleDegrees - startAngleDegrees <= 180 ? 0 : 1);
-            return;
-        }
-
-        // Slider has multiple pointers.
-        const minMax = getMinMaxPointer(pointers);
-        if(minMax === null) return;
-
-        const minPointer: IStatePointer = minMax[0];
-        const maxPointer: IStatePointer = minMax[1];
-
-        const { position: centerStart, angleDegrees: angleDegreesStart } = getPointerPositionByPercent(
-            minPointer.percent,
-            startAngleDegrees,
-            endAngleDegrees,
-            svgRadii,
-            svgCenter
-        );
-
-        const { position: centerEnd, angleDegrees: angleDegreesEnd } = getPointerPositionByPercent(
-            maxPointer.percent,
-            startAngleDegrees,
-            endAngleDegrees,
-            svgRadii,
-            svgCenter
-        );
-
-        setConnectionStartPoint(centerStart);
-        setConnectionEndPoint(centerEnd);
-        setConnectionLargeArcFlag(angleDegreesEnd - angleDegreesStart <= 180 ? 0 : 1);
+        setConnection(getConnection(
+            pointers,
+            svg.radius,
+            svg.cx,
+            svg.cy,
+            svg.startAngleDeg,
+            svg.endAngleDeg
+        ));
     }, [
-        endAngleDegrees,
         pointers,
-        start,
-        startAngleDegrees,
-        svgCenter,
-        svgRadii,
+        svg.radius,
+        svg.cx,
+        svg.cy,
+        svg.startAngleDeg,
+        svg.endAngleDeg
     ]);
+
+    const onClick = (evt: MouseEvent) => {
+        if(!$svg) return;
+
+        const degrees = getAngleByMouse(
+            $svg,
+            evt.clientX,
+            evt.clientY,
+            svg.cx,
+            svg.cy,
+            svg.radius,
+            svg.radius
+        );
+
+        const closestPointer = getClosestPointer(
+            pointers.pointers,
+            degrees,
+            svg.cx,
+            svg.cy,
+            svg.radius
+        );
+
+        if(!closestPointer) return;
+
+        closestPointer.angleDeg = degrees;
+        setPointer(closestPointer);
+    };
 
     return (
         <>
             {
-                connectionStartPoint !== null && connectionEndPoint !== null &&
-                <path
-                    data-type="connection"
-                    d={ `M ${ connectionStartPoint[0] } ${ connectionStartPoint[1] } A ${ svgRadii[0] } ${ svgRadii[1] } 0 ${ connectionLargeArcFlag } 1 ${ connectionEndPoint[0] } ${ connectionEndPoint[1] }` }
-                    stroke={ connectionGradient ? `url(#connection)` : connectionBgColor }
-                    strokeWidth={ strokeWidth + 1 }
+                !getBoolean(settings.hideConnection, false) && connection &&
+                <circle
+                    cx={ connection.cx }
+                    cy={ connection.cy }
+                    r={ connection.radius }
+                    strokeDasharray={ connection.strokeDasharray.join(' ') }
+                    strokeDashoffset={ connection.strokeOffset }
+                    stroke={ getString(settings.connectionBgColor, DEFAULT_CONNECTION_BG_COLOR) }
+                    strokeWidth={ svg.thickness + 1 }
                     fill="none"
                     shapeRendering="geometricPrecision"
                     strokeLinecap="round"
-                    cursor={ rangeDragging ? 'move' : 'pointer' }
-                    pointerEvents={ rangeDragging ? '' : 'none' }
+                    cursor={ 'pointer' }
+                    onClick={ onClick }
+                    data-type="connection"
                 />
             }
         </>

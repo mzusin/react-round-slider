@@ -21,7 +21,6 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "eslint": "eslint ./src/**",
-
     "typescript-declarations": "tsc --emitDeclarationOnly --noEmit false"
   },
   "keywords": [],
