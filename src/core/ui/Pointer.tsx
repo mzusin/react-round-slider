@@ -5,13 +5,14 @@ import {
     MouseEvent as ReactMouseEvent,
     TouchEvent as ReactTouchEvent,
     KeyboardEvent,
-    useRef, useCallback
+    useRef, useCallback, MutableRefObject
 } from 'react';
 import { circleMovement, convertRange, degreesToRadians, Vector2 } from 'mz-math';
 import { ISettings } from '../domain/settings-provider';
 import { ISvg } from '../domain/svg-provider';
 import { isAngleInArc } from '../domain/circle-provider';
 import { IData } from '../domain/data-provider';
+import { outlineNoneStyle } from '../domain/style-provider';
 
 export interface IPointerProps {
     settings: ISettings;
@@ -22,21 +23,37 @@ export interface IPointerProps {
     data: IData;
 }
 
-const noOutlineStyle = {
-    outline: 'none',
+const getPointerFill = (
+    pointer: IPointer,
+    pointerRef: MutableRefObject<SVGGElement>,
+    bgColor: string,
+    bgColorSelected: string,
+    bgColorDisabled: string
+) => {
+    if(pointer.disabled) return bgColorDisabled;
+
+    if(document.activeElement === pointerRef.current) {
+        return bgColorSelected || bgColor;
+    }
+
+    return bgColor;
 };
 
 const Pointer = (props: IPointerProps) => {
 
     const pointerRef = useRef<SVGGElement|null>(null);
 
-    const { pointer, svg, $svg, setPointer, data } = props;
+    const {
+        pointer, svg, $svg,
+        setPointer, data, settings,
+    } = props;
 
     const {
         radius,
         angleDeg,
         bgColor,
         bgColorSelected,
+        bgColorDisabled,
         border,
         borderColor,
     } = props.pointer;
@@ -57,7 +74,7 @@ const Pointer = (props: IPointerProps) => {
     ]);
 
     const onValueChange = useCallback((evt: MouseEvent | ReactMouseEvent | TouchEvent | ReactTouchEvent) => {
-        if(!$svg) return;
+        if(!$svg || settings.disabled || pointer.disabled) return;
 
         const mouseX = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientX : (evt as TouchEvent).touches[0].clientX;
         const mouseY = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientY : (evt as TouchEvent).touches[0].clientY;
@@ -100,6 +117,7 @@ const Pointer = (props: IPointerProps) => {
         svg.endAngleDeg,
         svg.radius,
         svg.startAngleDeg,
+        settings.disabled,
     ]);
 
     const onMouseUp = () => {
@@ -108,6 +126,8 @@ const Pointer = (props: IPointerProps) => {
     };
 
     const onMouseDown = (evt: ReactMouseEvent) => {
+        if(settings.disabled || pointer.disabled) return;
+
         const $target = evt.target as SVGGElement;
         if(!$target) return;
 
@@ -119,8 +139,7 @@ const Pointer = (props: IPointerProps) => {
 
     const onKeyDown = (evt: KeyboardEvent) => {
 
-        // TODO
-        // disabled || keyboardDisabled // pointer.disabled
+        if(settings.disabled || pointer.disabled || settings.keyboardDisabled) return;
 
         switch (evt.key) {
             case 'ArrowLeft': {
@@ -157,14 +176,16 @@ const Pointer = (props: IPointerProps) => {
         const $current = pointerRef.current;
 
         const onTouch = (evt: TouchEvent | ReactTouchEvent) => {
+            if(settings.disabled || pointer.disabled) return;
+
             evt.preventDefault();
             evt.stopPropagation();
             onValueChange(evt);
         };
 
         const onWheel = (evt: WheelEvent) => {
-            // if(disabled || mousewheelDisabled) return; TODO
-            if(document.activeElement !== $current) return;
+
+            if(settings.disabled || pointer.disabled || settings.mousewheelDisabled || document.activeElement !== $current) return;
 
             evt.stopPropagation();
             evt.preventDefault();
@@ -199,6 +220,8 @@ const Pointer = (props: IPointerProps) => {
         data.stepAngleDeg,
         pointer,
         setPointer,
+        settings.disabled,
+        settings.mousewheelDisabled,
     ]);
 
     return (
@@ -208,22 +231,27 @@ const Pointer = (props: IPointerProps) => {
                 <g
                     ref={ pointerRef }
                     transform={ `translate(${ center[0] - radius/2 }, ${ center[1] - radius/2 })` }
-                    data-type="pointer"
-                    cursor="pointer"
-                    tabIndex={ 0 }
+
                     role="slider"
+                    aria-disabled={ pointer.disabled ? true : undefined }
+
+                    data-type={ 'pointer' }
                     data-angle={ pointer.angleDeg }
                     data-id={ pointer.id }
                     data-index={ pointer.index }
+
                     onMouseDown={ onMouseDown }
                     onKeyDown={ onKeyDown }
-                    style={ noOutlineStyle }>
+                    tabIndex={ 0 }
+
+                    cursor={ pointer.disabled ? 'default' : 'pointer' }
+                    style={ outlineNoneStyle }>
                     <circle
                         cx={ radius/2 }
                         cy={ radius/2 }
                         r={ radius }
 
-                        fill={ document.activeElement === pointerRef.current ? (bgColorSelected || bgColor) : bgColor }
+                        fill={ getPointerFill(pointer, pointerRef, bgColor, bgColorSelected, bgColorDisabled) }
                         strokeWidth={ border }
                         stroke={ borderColor }
                     />

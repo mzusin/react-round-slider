@@ -15,6 +15,7 @@ import Ticks from './ui/Ticks';
 import Circle from './ui/Circle';
 import { mod } from 'mz-math';
 import { isAngleInArc } from './domain/circle-provider';
+import { outlineNoneStyle } from './domain/style-provider';
 
 export const RoundSlider = (props: ISettings) => {
 
@@ -56,7 +57,7 @@ export const RoundSlider = (props: ISettings) => {
     ]);
 
     const setPointersCallback = (updatedPointer: IPointer) => {
-        if(!pointers.pointers || !updatedPointer) return;
+        if(props.disabled || !pointers.pointers || !updatedPointer || updatedPointer.disabled) return;
 
         updatedPointer.angleDeg = roundToStep(updatedPointer.angleDeg, data.stepAngleDeg);
 
@@ -112,9 +113,8 @@ export const RoundSlider = (props: ISettings) => {
                     height={ svg.size }
                     tabIndex={ 0 }
                     focusable={ true }
-                    style={{
-                        outline: 'none',
-                    }}>
+                    aria-disabled={ props.disabled ? true : undefined }
+                    style={ outlineNoneStyle }>
 
                     <Ticks settings={ props } svg={ svg } data={ data } />
 

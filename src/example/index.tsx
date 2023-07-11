@@ -1001,6 +1001,44 @@ export const testStyling = () => {
     )
 };
 
+export const testDisabled = () => {
+  return (
+      <>
+          <RoundSlider />
+
+          <RoundSlider disabled={ true } />
+
+          <RoundSlider
+              disabled={ true }
+              pathStartAngle={ 0 }
+              pathEndAngle={ 90 }
+              pointers={[
+                  {
+                      value: 30
+                  },
+                  {
+                      value: 70
+                  }
+              ]}
+          />
+
+          <RoundSlider
+              pathStartAngle={ 0 }
+              pathEndAngle={ 90 }
+              pointers={[
+                  {
+                      value: 30
+                  },
+                  {
+                      value: 70,
+                      disabled: true,
+                  }
+              ]}
+          />
+      </>
+  )
+};
+
 const App = () => {
     return (
         <>
@@ -1011,7 +1049,8 @@ const App = () => {
             {/*{ testData() }*/}
             {/*{ testStep() }*/}
             {/*{ testOverlap() }*/}
-            { testStyling() }
+            {/*{ testStyling() }*/}
+            { testDisabled() }
         </>
     );
 };

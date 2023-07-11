@@ -38,7 +38,7 @@ const Circle = (props: ICircleProps) => {
     ]);
 
     const onClick = (evt: MouseEvent) => {
-        if(!$svg) return;
+        if(!$svg || settings.disabled) return;
 
         const degrees = getAngleByMouse(
             $svg,

@@ -18,11 +18,13 @@ export const DEFAULT_PATH_BORDER_COLOR = '#444444';
 export const DEFAULT_POINTER_RADIUS = 10;
 export const DEFAULT_POINTER_BG_COLOR = '#163a86';
 export const DEFAULT_POINTER_BG_COLOR_SELECTED = '#000';
+export const DEFAULT_POINTER_BG_COLOR_DISABLED = '#a8a8a8';
 export const DEFAULT_POINTER_BORDER = 0;
 export const DEFAULT_POINTER_BORDER_COLOR = '#000';
 
 // Connection Defaults ------------------
 export const DEFAULT_CONNECTION_BG_COLOR = '#5daed2';
+export const DEFAULT_CONNECTION_BG_COLOR_DISABLED = '#97b0bb';
 
 // Text Defaults ------------------------
 export const DEFAULT_TEXT_COLOR = '#000';

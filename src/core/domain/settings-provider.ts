@@ -21,6 +21,7 @@ export interface ISettings {
     pointers?: ISettingsPointer[];
     pointerBgColor?: string;
     pointerBgColorSelected?: string;
+    pointerBgColorDisabled?: string;
     pointerBorder?: number;
     pointerBorderColor?: string;
     pointersOverlap?: boolean;
@@ -28,6 +29,7 @@ export interface ISettings {
     // connection ------------
     hideConnection?: boolean;
     connectionBgColor?: string;
+    connectionBgColorDisabled?: string;
 
     // text ------------------
     hideText?: boolean;
@@ -54,6 +56,11 @@ export interface ISettings {
     tickValuesFontSize?: number;
     tickValuesFontFamily?: string;
     tickValuesDistance?: number;
+
+    // disabled --------------
+    disabled?: boolean;
+    keyboardDisabled?: boolean;
+    mousewheelDisabled?: boolean;
 }
 
 export interface ISettingsPointer {
@@ -61,6 +68,8 @@ export interface ISettingsPointer {
     value?: string | number;
     bgColor?: string;
     bgColorSelected?: string;
+    bgColorDisabled?: string;
     border?: number;
     borderColor?: string;
+    disabled?: boolean;
 }

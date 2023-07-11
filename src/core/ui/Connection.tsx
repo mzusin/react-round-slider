@@ -1,6 +1,6 @@
 import { ISettings } from '../domain/settings-provider';
 import { getBoolean, getString } from '../domain/common-provider';
-import { DEFAULT_CONNECTION_BG_COLOR } from '../domain/defaults-provider';
+import { DEFAULT_CONNECTION_BG_COLOR, DEFAULT_CONNECTION_BG_COLOR_DISABLED } from '../domain/defaults-provider';
 import { getAngleByMouse, getClosestPointer, IPointer, IPointers } from '../domain/pointers-provider';
 import { MouseEvent, useEffect, useState } from 'react';
 import { getConnection, IConnection } from '../domain/connection-provider';
@@ -39,7 +39,7 @@ const Connection = (props: IConnectionProps) => {
     ]);
 
     const onClick = (evt: MouseEvent) => {
-        if(!$svg) return;
+        if(!$svg || settings.disabled) return;
 
         const degrees = getAngleByMouse(
             $svg,
@@ -75,12 +75,16 @@ const Connection = (props: IConnectionProps) => {
                     r={ connection.radius }
                     strokeDasharray={ connection.strokeDasharray.join(' ') }
                     strokeDashoffset={ connection.strokeOffset }
-                    stroke={ getString(settings.connectionBgColor, DEFAULT_CONNECTION_BG_COLOR) }
+                    stroke={
+                        settings.disabled ?
+                        getString(settings.connectionBgColorDisabled, DEFAULT_CONNECTION_BG_COLOR_DISABLED) :
+                        getString(settings.connectionBgColor, DEFAULT_CONNECTION_BG_COLOR)
+                    }
                     strokeWidth={ svg.thickness + 1 }
                     fill="none"
                     shapeRendering="geometricPrecision"
                     strokeLinecap="round"
-                    cursor={ 'pointer' }
+                    cursor={ settings.disabled ? 'default' : 'pointer' }
                     onClick={ onClick }
                     data-type="connection"
                 />

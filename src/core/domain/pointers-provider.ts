@@ -12,12 +12,12 @@ import { ISettings } from './settings-provider';
 import {
     DEFAULT_PATH_END_ANGLE,
     DEFAULT_PATH_START_ANGLE,
-    DEFAULT_POINTER_BG_COLOR, DEFAULT_POINTER_BG_COLOR_SELECTED,
+    DEFAULT_POINTER_BG_COLOR, DEFAULT_POINTER_BG_COLOR_DISABLED, DEFAULT_POINTER_BG_COLOR_SELECTED,
     DEFAULT_POINTER_BORDER,
     DEFAULT_POINTER_BORDER_COLOR,
     DEFAULT_POINTER_RADIUS,
 } from './defaults-provider';
-import { getNumber, getString } from './common-provider';
+import { getBoolean, getNumber, getString } from './common-provider';
 import { IData } from './data-provider';
 import { getAnglesDistance } from './circle-provider';
 
@@ -28,8 +28,10 @@ export interface IPointer {
     angleDeg: number;
     bgColor: string;
     bgColorSelected: string;
+    bgColorDisabled: string;
     border: number;
     borderColor: string;
+    disabled: boolean;
 }
 
 export interface IPointers {
@@ -122,9 +124,11 @@ const initPointers = (
             radius: DEFAULT_POINTER_RADIUS,
             angleDeg: mod(getNumber(settings.pathStartAngle, DEFAULT_PATH_START_ANGLE), 360),
             bgColor: getString(settings.pointerBgColor, DEFAULT_POINTER_BG_COLOR),
-            bgColorSelected: settings.pointerBgColorSelected,
+            bgColorSelected: getString(settings.pointerBgColorSelected, DEFAULT_POINTER_BG_COLOR_SELECTED),
+            bgColorDisabled: getString(settings.pointerBgColorDisabled, DEFAULT_POINTER_BG_COLOR_DISABLED),
             border: getNumber(settings.pointerBorder, DEFAULT_POINTER_BORDER),
             borderColor: getString(settings.pointerBorderColor, DEFAULT_POINTER_BORDER_COLOR),
+            disabled: !!settings.disabled,
         }]
     }
 
@@ -135,8 +139,10 @@ const initPointers = (
 
         const bgColor = settingPointer.bgColor ? settingPointer.bgColor : getString(settings.pointerBgColor, DEFAULT_POINTER_BG_COLOR);
         const bgColorSelected = settingPointer.bgColorSelected ? settingPointer.bgColorSelected : getString(settings.pointerBgColorSelected, DEFAULT_POINTER_BG_COLOR_SELECTED);
+        const bgColorDisabled = settingPointer.bgColorDisabled ? settingPointer.bgColorDisabled : getString(settings.pointerBgColorDisabled, DEFAULT_POINTER_BG_COLOR_DISABLED);
         const border = settingPointer.border ? settingPointer.border : getNumber(settings.pointerBorder, DEFAULT_POINTER_BORDER);
         const borderColor = settingPointer.borderColor ? settingPointer.borderColor : getString(settings.pointerBorderColor, DEFAULT_POINTER_BORDER_COLOR);
+        const disabled = settingPointer.disabled !== undefined ? settingPointer.disabled : getBoolean(settings.disabled, false);
 
         const angleDeg = value2angle(
             data,
@@ -153,8 +159,10 @@ const initPointers = (
             angleDeg: angleAfterStep,
             bgColor,
             bgColorSelected,
+            bgColorDisabled,
             border,
             borderColor,
+            disabled,
         });
     }
 
@@ -200,7 +208,9 @@ export const getClosestPointer = (
     let min: number|undefined = undefined;
     let closestPointer: IPointer = null;
 
-    for(const pointer of pointers) {
+    const enabledPointers = pointers.filter(p => !p.disabled);
+
+    for(const pointer of enabledPointers) {
         const pointerAngleRad = convertRange(degreesToRadians(pointer.angleDeg), 0, Math.PI * 2, 0, Math.PI);
         const pointOnArc = circleMovement([ cx, cy ], pointerAngleRad, pathRadius);
         const distance = v2Distance(currentPointOnArc, pointOnArc);
