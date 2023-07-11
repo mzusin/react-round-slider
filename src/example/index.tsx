@@ -1133,6 +1133,24 @@ export const testEvents = () => {
     )
 };
 
+const testRangeDragging = () => {
+  return (
+      <>
+          <RoundSlider
+              rangeDragging={ true }
+              pointers={[
+                  {
+                      value: 30
+                  },
+                  {
+                      value: 70
+                  }
+              ]}
+          />
+      </>
+  )
+};
+
 const App = () => {
     return (
         <>
@@ -1145,7 +1163,8 @@ const App = () => {
             {/*{ testOverlap() }*/}
             {/*{ testStyling() }*/}
             {/*{ testDisabled() }*/}
-            { testEvents() }
+            {/*{ testEvents() }*/}
+            { testRangeDragging() }
         </>
     );
 };

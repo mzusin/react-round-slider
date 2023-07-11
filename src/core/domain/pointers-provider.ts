@@ -76,10 +76,6 @@ export const angle2value = (data: IData, angle: number, pathStartAngle: number, 
         angle += 360;
     }
 
-    /*if(mod(angle, 360) === mod(pathEndAngle, 360)) {
-        angle = pathStartAngle;
-    }*/
-
     let value: string|number = convertRange(angle, pathStartAngle, pathEndAngle, data.min, data.max);
 
     if(data.data.length > 0) {
@@ -286,6 +282,5 @@ export const getMinMaxDistancePointers = (pointers: IPointer[], pathStartAngle: 
 };
 
 export const roundToStep = (num: number, step: number) : number => {
-    console.log(num, step, step === 0 ? 0 : Math.round(num / step) * step)
     return step === 0 ? 0 : Math.round(num / step) * step;
 };

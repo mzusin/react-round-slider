@@ -146,9 +146,6 @@ const Pointer = (props: IPointerProps) => {
     const onMouseDown = (evt: ReactMouseEvent) => {
         if(settings.disabled || pointer.disabled) return;
 
-        const $target = evt.target as SVGGElement;
-        if(!$target) return;
-
         onValueChange(evt);
 
         window.addEventListener('mousemove', onValueChange);
@@ -238,9 +235,6 @@ const Pointer = (props: IPointerProps) => {
         settings.disabled,
         settings.mousewheelDisabled,
     ]);
-
-    // aria-valuemin
-    // aria-valuemax
 
     return (
         <>

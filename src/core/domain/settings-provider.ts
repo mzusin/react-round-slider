@@ -33,6 +33,7 @@ export interface ISettings {
     hideConnection?: boolean;
     connectionBgColor?: string;
     connectionBgColorDisabled?: string;
+    rangeDragging?: boolean;
 
     // text ------------------
     hideText?: boolean;
