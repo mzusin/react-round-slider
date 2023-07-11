@@ -1,4 +1,4 @@
-import { getAngleByMouse, getClosestEdge, IPointer } from '../domain/pointers-provider';
+import { angle2value, getAngleByMouse, getClosestEdge, IPointer } from '../domain/pointers-provider';
 import {
     useEffect,
     useState,
@@ -61,6 +61,22 @@ const Pointer = (props: IPointerProps) => {
     const { cx, cy } = svg;
 
     const [ center, setCenter ] = useState<Vector2|null>(null);
+    const [ value, setValue ] = useState<string>('');
+
+    useEffect(() => {
+        const value = angle2value(
+            data,
+            pointer.angleDeg,
+            svg.startAngleDeg,
+            svg.endAngleDeg
+        );
+        setValue(value === undefined ? '' : value.toString())
+    }, [
+        data,
+        pointer.angleDeg,
+        svg.startAngleDeg,
+        svg.endAngleDeg,
+    ]);
 
     useEffect(() => {
         const angleRad = convertRange(degreesToRadians(angleDeg), 0, Math.PI * 2, 0, Math.PI); // [0, Math.PI*2] ---> [0, Math.PI]
@@ -223,6 +239,9 @@ const Pointer = (props: IPointerProps) => {
         settings.mousewheelDisabled,
     ]);
 
+    // aria-valuemin
+    // aria-valuemax
+
     return (
         <>
             {
@@ -233,6 +252,9 @@ const Pointer = (props: IPointerProps) => {
 
                     role="slider"
                     aria-disabled={ pointer.disabled ? true : undefined }
+                    aria-valuenow={ pointer.angleDeg }
+                    aria-valuetext={ value }
+                    aria-label={ pointer.ariaLabel }
 
                     data-type={ 'pointer' }
                     data-angle={ pointer.angleDeg }

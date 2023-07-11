@@ -32,6 +32,7 @@ export interface IPointer {
     border: number;
     borderColor: string;
     disabled: boolean;
+    ariaLabel?: string;
 }
 
 export interface IPointers {
@@ -157,6 +158,7 @@ const initPointers = (
             border,
             borderColor,
             disabled,
+            ariaLabel: settingPointer.ariaLabel,
         });
     }
 

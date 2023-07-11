@@ -75,4 +75,5 @@ export interface ISettingsPointer {
     border?: number;
     borderColor?: string;
     disabled?: boolean;
+    ariaLabel?: string;
 }
