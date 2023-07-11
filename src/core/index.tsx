@@ -39,13 +39,20 @@ export const RoundSlider = (props: ISettings) => {
     useEffect(() => {
         if(!pointers) return;
 
+        const pathStartAngle = getNumber(props.pathStartAngle, DEFAULT_PATH_START_ANGLE);
+        let pathEndAngle = getNumber(props.pathEndAngle, DEFAULT_PATH_END_ANGLE);
+
+        if(pathEndAngle <= pathStartAngle) {
+            pathEndAngle += 360;
+        }
+
         setSvg(getSvg(
             getNumber(props.pathRadius, DEFAULT_PATH_RADIUS),
             getNumber(props.pathThickness, DEFAULT_PATH_THICKNESS),
             getNumber(props.pathBorder, DEFAULT_PATH_BORDER),
             pointers.maxRadius,
-            getNumber(props.pathStartAngle, DEFAULT_PATH_START_ANGLE),
-            getNumber(props.pathEndAngle, DEFAULT_PATH_END_ANGLE),
+            pathStartAngle,
+            pathEndAngle,
         ));
     }, [
         props.pathRadius,

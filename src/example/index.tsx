@@ -348,6 +348,19 @@ export const test2PointersOnCircle = () => {
                                 }
                         ]}
                     />
+
+                    <RoundSlider
+                        pathStartAngle={ 90 }
+                        pathEndAngle={ 90 }
+                        pointers={[
+                            {
+                                value: 30
+                            },
+                            {
+                                value: 70
+                            }
+                        ]}
+                    />
             </>
         )
 };
@@ -1035,6 +1048,10 @@ export const testDisabled = () => {
                   }
               ]}
           />
+
+          <RoundSlider keyboardDisabled={ true } />
+
+          <RoundSlider mousewheelDisabled={ true } />
       </>
   )
 };
@@ -1044,13 +1061,13 @@ const App = () => {
         <>
             {/*{ testCirclePathSegments() }*/}
             {/*{ testBorder() }*/}
-            {/*{ test2PointersOnCircle() }*/}
+            { test2PointersOnCircle() }
             {/*{ testMultiplePointers() }*/}
             {/*{ testData() }*/}
             {/*{ testStep() }*/}
             {/*{ testOverlap() }*/}
             {/*{ testStyling() }*/}
-            { testDisabled() }
+            {/*{ testDisabled() }*/}
         </>
     );
 };
