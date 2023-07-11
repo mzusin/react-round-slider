@@ -69,7 +69,7 @@ export const RoundSlider = (props: ISettings) => {
         newAngleDeg = roundToStep(newAngleDeg, data.stepAngleDeg);
         if(pointer.angleDeg === newAngleDeg) return;
 
-        const handleOverlap = !props.pointersOverlap && pointers.pointers.length > 1;
+        const handleOverlap = !props.pointersOverlap;
         if(handleOverlap) {
 
             let prevAngle, nextAngle;
