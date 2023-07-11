@@ -68,20 +68,14 @@ export const getAngleByMouse = (
 export const angle2value = (data: IData, angle: number, pathStartAngle: number, pathEndAngle: number) : string | number => {
 
     if(pathEndAngle < pathStartAngle) {
-        pathStartAngle -= 360;
+        pathEndAngle += 360;
     }
 
-    if(angle > 180) {
-        angle -= 360;
+    if(angle < pathStartAngle){
+        angle += 360;
     }
 
     let value: string|number = convertRange(angle, pathStartAngle, pathEndAngle, data.min, data.max);
-
-    const minMaxRange = Math.abs(data.max - data.min);
-
-    if(value !== data.max) {
-        value = mod(value, minMaxRange);
-    }
 
     if(data.data.length > 0) {
         const index = Math.round(value);

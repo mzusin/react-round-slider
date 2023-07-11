@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { getSvg, ISvg } from './domain/svg-provider';
-import { getClosestEdge, getPointers, IPointer, IPointers, roundToStep } from './domain/pointers-provider';
+import { angle2value, getClosestEdge, getPointers, IPointer, IPointers, roundToStep } from './domain/pointers-provider';
 import { ISettings } from './domain/settings-provider';
 import { getNumber } from './domain/common-provider';
 import {
@@ -63,10 +63,11 @@ export const RoundSlider = (props: ISettings) => {
         pointers,
     ]);
 
-    const setPointersCallback = (updatedPointer: IPointer) => {
-        if(props.disabled || !pointers.pointers || !updatedPointer || updatedPointer.disabled) return;
+    const setPointersCallback = (pointer: IPointer, newAngleDeg: number) => {
+        if(props.disabled || !pointers.pointers || !pointer || pointer.disabled) return;
 
-        updatedPointer.angleDeg = roundToStep(updatedPointer.angleDeg, data.stepAngleDeg);
+        newAngleDeg = roundToStep(newAngleDeg, data.stepAngleDeg);
+        if(pointer.angleDeg === newAngleDeg) return;
 
         const handleOverlap = !props.pointersOverlap && pointers.pointers.length > 1;
         if(handleOverlap) {
@@ -74,26 +75,26 @@ export const RoundSlider = (props: ISettings) => {
             let prevAngle, nextAngle;
 
             if(data.isClosedShape) {
-                const prevIndex = mod(updatedPointer.index - 1, pointers.pointers.length);
-                const nextIndex = mod(updatedPointer.index + 1, pointers.pointers.length);
+                const prevIndex = mod(pointer.index - 1, pointers.pointers.length);
+                const nextIndex = mod(pointer.index + 1, pointers.pointers.length);
 
                 prevAngle = pointers.pointers[prevIndex].angleDeg;
                 nextAngle = pointers.pointers[nextIndex].angleDeg;
             }
             else{
-                prevAngle = updatedPointer.index === 0 ? svg.startAngleDeg : pointers.pointers[updatedPointer.index - 1].angleDeg;
-                nextAngle = updatedPointer.index === pointers.pointers.length - 1 ? svg.endAngleDeg : pointers.pointers[updatedPointer.index + 1].angleDeg;
+                prevAngle = pointer.index === 0 ? svg.startAngleDeg : pointers.pointers[pointer.index - 1].angleDeg;
+                nextAngle = pointer.index === pointers.pointers.length - 1 ? svg.endAngleDeg : pointers.pointers[pointer.index + 1].angleDeg;
             }
 
             if(nextAngle <= prevAngle) {
                 nextAngle += 360;
             }
 
-            if(!isAngleInArc(prevAngle, nextAngle, updatedPointer.angleDeg)){
-                updatedPointer.angleDeg = getClosestEdge(
+            if(!isAngleInArc(prevAngle, nextAngle, newAngleDeg)){
+                newAngleDeg = getClosestEdge(
                     prevAngle,
                     nextAngle,
-                    updatedPointer.angleDeg,
+                    newAngleDeg,
                     svg.cx,
                     svg.cy,
                     svg.radius
@@ -101,12 +102,25 @@ export const RoundSlider = (props: ISettings) => {
             }
         }
 
+        if(pointer.angleDeg === newAngleDeg) return;
+
         const _pointers = { ...pointers };
         _pointers.pointers = [...pointers.pointers];
-        _pointers.pointers[updatedPointer.index] = updatedPointer;
+        _pointers.pointers[pointer.index].angleDeg = newAngleDeg;
         pointers.pointers = _pointers.pointers;
 
         setPointers(_pointers);
+
+        if(typeof props.onChange === 'function') {
+            const values = _pointers.pointers.map(pointer => angle2value(
+                data,
+                pointer.angleDeg,
+                svg.startAngleDeg,
+                svg.endAngleDeg
+            ));
+
+            props.onChange(values);
+        }
     };
 
     return (

@@ -19,7 +19,7 @@ export interface IPointerProps {
     pointer: IPointer;
     svg: ISvg;
     $svg: SVGSVGElement;
-    setPointer: (updatedPointer: IPointer) => void;
+    setPointer: (pointer: IPointer, newAngleDeg: number) => void;
     data: IData;
 }
 
@@ -89,12 +89,14 @@ const Pointer = (props: IPointerProps) => {
             svg.radius
         );
 
+        let newAngleDeg;
+
         if(!isAngleInArc(
             svg.startAngleDeg,
             svg.endAngleDeg,
             degrees
         )){
-            pointer.angleDeg = getClosestEdge(
+            newAngleDeg = getClosestEdge(
                 svg.startAngleDeg,
                 svg.endAngleDeg,
                 pointer.angleDeg,
@@ -104,10 +106,10 @@ const Pointer = (props: IPointerProps) => {
             );
         }
         else{
-            pointer.angleDeg = degrees;
+            newAngleDeg = degrees;
         }
 
-        setPointer(pointer);
+        setPointer(pointer, newAngleDeg);
     }, [
         $svg,
         pointer,
@@ -144,29 +146,25 @@ const Pointer = (props: IPointerProps) => {
         switch (evt.key) {
             case 'ArrowLeft': {
                 evt.preventDefault();
-                pointer.angleDeg += data.stepAngleDeg;
-                setPointer(pointer);
+                setPointer(pointer, pointer.angleDeg + data.stepAngleDeg);
                 break;
             }
 
             case 'ArrowRight': {
                 evt.preventDefault();
-                pointer.angleDeg -= data.stepAngleDeg;
-                setPointer(pointer);
+                setPointer(pointer, pointer.angleDeg - data.stepAngleDeg);
                 break;
             }
 
             case 'ArrowUp': {
                 evt.preventDefault();
-                pointer.angleDeg -= data.stepAngleDeg;
-                setPointer(pointer);
+                setPointer(pointer, pointer.angleDeg - data.stepAngleDeg);
                 break;
             }
 
             case 'ArrowDown': {
                 evt.preventDefault();
-                pointer.angleDeg += data.stepAngleDeg;
-                setPointer(pointer);
+                setPointer(pointer, pointer.angleDeg + data.stepAngleDeg);
                 break;
             }
         }
@@ -192,14 +190,15 @@ const Pointer = (props: IPointerProps) => {
 
             const scrollTop = evt.deltaY < 0;
 
+            let newAngleDeg;
             if(scrollTop) {
-                pointer.angleDeg += data.stepAngleDeg;
+                newAngleDeg = pointer.angleDeg + data.stepAngleDeg;
             }
             else{
-                pointer.angleDeg -= data.stepAngleDeg;
+                newAngleDeg = pointer.angleDeg - data.stepAngleDeg;
             }
 
-            setPointer(pointer);
+            setPointer(pointer, newAngleDeg);
         };
 
         $current?.addEventListener('touchmove', onTouch, {

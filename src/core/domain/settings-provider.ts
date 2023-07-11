@@ -1,5 +1,8 @@
 export interface ISettings {
 
+    // events ---------------
+    onChange?: (values: (string|number)[]) => void;
+
     // data -----------------
     min?: number | string;
     max?: number | string;

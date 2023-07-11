@@ -1056,18 +1056,96 @@ export const testDisabled = () => {
   )
 };
 
+export const testEvents = () => {
+    return (
+        <>
+            <RoundSlider
+                onChange={ (values) => {
+                    console.log(values);
+                }}
+            />
+
+            <RoundSlider
+                round={ 2 }
+                step={ 0.1 }
+                onChange={ (values) => {
+                    console.log(values);
+                }}
+            />
+
+            <RoundSlider
+                min={ -100 }
+                max={ 100 }
+                onChange={ (values) => {
+                    console.log(values);
+                }}
+            />
+
+            <RoundSlider
+                data={[
+                    'a', 'b', 'c', 'd', 'e', 'f',
+                    'g', 'h', 'i', 'j', 'k', 'l',
+                    'm', 'n', 'o', 'p', 'q', 'r',
+                    's', 't', 'u', 'v', 'w', 'x',
+                    'y', 'z',
+                ]}
+                textColor={ '#5DAED2' }
+                textFontSize={ 24 }
+                textFontFamily={ 'Helvetica,Arial,sans-serif' }
+                ticksGroupSize={ 0 }
+                longerTickValuesOnly={ false }
+                onChange={ (values) => {
+                    console.log(values);
+                }}
+            />
+
+            <RoundSlider
+                pathRadius={ 150 }
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+                pointers={[
+                    {
+                        value: 0,
+                        bgColor: '#8e3da4'
+                    },
+                    {
+                        value: 25,
+                        bgColor: '#fffc00'
+                    },
+                    {
+                        value: 50,
+                        bgColor: '#b0fc7e'
+                    },
+                    {
+                        value: 75,
+                        bgColor: '#ff0000'
+                    },
+                    {
+                        value: 100,
+                        bgColor: '#ffb800'
+                    }
+                ]}
+                onChange={ (values) => {
+                    console.log(values);
+                }}
+            />
+        </>
+    )
+};
+
 const App = () => {
     return (
         <>
             {/*{ testCirclePathSegments() }*/}
             {/*{ testBorder() }*/}
-            { test2PointersOnCircle() }
+            {/*{ test2PointersOnCircle() }*/}
             {/*{ testMultiplePointers() }*/}
             {/*{ testData() }*/}
             {/*{ testStep() }*/}
             {/*{ testOverlap() }*/}
             {/*{ testStyling() }*/}
             {/*{ testDisabled() }*/}
+            { testEvents() }
         </>
     );
 };

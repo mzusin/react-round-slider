@@ -14,7 +14,7 @@ interface ICircleProps {
     pointers: IPointers;
     svg: ISvg;
     $svg: SVGSVGElement;
-    setPointer: (updatedPointer: IPointer) => void;
+    setPointer: (pointer: IPointer, newAngleDeg: number) => void;
 }
 
 const Circle = (props: ICircleProps) => {
@@ -60,8 +60,7 @@ const Circle = (props: ICircleProps) => {
 
         if(!closestPointer) return;
 
-        closestPointer.angleDeg = degrees;
-        setPointer(closestPointer);
+        setPointer(closestPointer, degrees);
     };
 
     return (

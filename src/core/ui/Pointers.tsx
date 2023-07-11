@@ -9,7 +9,7 @@ export interface IPointersProps {
     settings: ISettings;
     svg: ISvg;
     $svg: SVGSVGElement;
-    setPointer: (updatedPointer: IPointer) => void;
+    setPointer: (pointer: IPointer, newAngleDeg: number) => void;
     data: IData;
 }
 

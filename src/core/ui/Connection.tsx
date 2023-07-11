@@ -11,7 +11,7 @@ interface IConnectionProps {
     pointers: IPointers;
     svg: ISvg;
     $svg: SVGSVGElement;
-    setPointer: (updatedPointer: IPointer) => void;
+    setPointer: (pointer: IPointer, newAngleDeg: number) => void;
 }
 
 const Connection = (props: IConnectionProps) => {
@@ -61,8 +61,7 @@ const Connection = (props: IConnectionProps) => {
 
         if(!closestPointer) return;
 
-        closestPointer.angleDeg = degrees;
-        setPointer(closestPointer);
+        setPointer(closestPointer, degrees);
     };
 
     return (
