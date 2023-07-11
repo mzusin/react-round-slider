@@ -1162,9 +1162,9 @@ const App = () => {
             {/*{ testStep() }*/}
             {/*{ testOverlap() }*/}
             {/*{ testStyling() }*/}
-            {/*{ testDisabled() }*/}
+            { testDisabled() }
             {/*{ testEvents() }*/}
-            { testRangeDragging() }
+            {/*{ testRangeDragging() }*/}
         </>
     );
 };
