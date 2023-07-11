@@ -1136,7 +1136,7 @@ export const testEvents = () => {
 const App = () => {
     return (
         <>
-            { testCirclePathSegments() }
+            {/*{ testCirclePathSegments() }*/}
             {/*{ testBorder() }*/}
             {/*{ test2PointersOnCircle() }*/}
             {/*{ testMultiplePointers() }*/}
@@ -1145,7 +1145,7 @@ const App = () => {
             {/*{ testOverlap() }*/}
             {/*{ testStyling() }*/}
             {/*{ testDisabled() }*/}
-            {/*{ testEvents() }*/}
+            { testEvents() }
         </>
     );
 };

@@ -76,6 +76,10 @@ export const angle2value = (data: IData, angle: number, pathStartAngle: number, 
         angle += 360;
     }
 
+    /*if(mod(angle, 360) === mod(pathEndAngle, 360)) {
+        angle = pathStartAngle;
+    }*/
+
     let value: string|number = convertRange(angle, pathStartAngle, pathEndAngle, data.min, data.max);
 
     if(data.data.length > 0) {
@@ -138,14 +142,20 @@ const initPointers = (
         const border = settingPointer.border ? settingPointer.border : getNumber(settings.pointerBorder, DEFAULT_POINTER_BORDER);
         const borderColor = settingPointer.borderColor ? settingPointer.borderColor : getString(settings.pointerBorderColor, DEFAULT_POINTER_BORDER_COLOR);
         const disabled = settingPointer.disabled !== undefined ? settingPointer.disabled : getBoolean(settings.disabled, false);
+        const pathStartAngle = getNumber(settings.pathStartAngle, DEFAULT_PATH_START_ANGLE);
+        const pathEndAngle = getNumber(settings.pathEndAngle, DEFAULT_PATH_END_ANGLE);
 
         const angleDeg = value2angle(
             data,
             settingPointer.value,
-            getNumber(settings.pathStartAngle, DEFAULT_PATH_START_ANGLE),
-            getNumber(settings.pathEndAngle, DEFAULT_PATH_END_ANGLE),
+            pathStartAngle,
+            pathEndAngle,
         );
-        const angleAfterStep = roundToStep(angleDeg, data.stepAngleDeg)
+        let angleAfterStep = roundToStep(angleDeg, data.stepAngleDeg);
+
+        if(data.isClosedShape && mod(angleAfterStep, 360) === mod(pathEndAngle, 360)){
+            angleAfterStep = pathStartAngle;
+        }
 
         pointers.push({
             id: newId(),
@@ -276,5 +286,6 @@ export const getMinMaxDistancePointers = (pointers: IPointer[], pathStartAngle: 
 };
 
 export const roundToStep = (num: number, step: number) : number => {
+    console.log(num, step, step === 0 ? 0 : Math.round(num / step) * step)
     return step === 0 ? 0 : Math.round(num / step) * step;
 };

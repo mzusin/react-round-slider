@@ -67,6 +67,10 @@ export const RoundSlider = (props: ISettings) => {
         if(props.disabled || !pointers.pointers || !pointer || pointer.disabled) return;
 
         newAngleDeg = roundToStep(newAngleDeg, data.stepAngleDeg);
+        if(data.isClosedShape && mod(newAngleDeg, 360) === mod(svg.endAngleDeg, 360)){
+            newAngleDeg = svg.startAngleDeg;
+        }
+
         if(pointer.angleDeg === newAngleDeg) return;
 
         const handleOverlap = !props.pointersOverlap;
