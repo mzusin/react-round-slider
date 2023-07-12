@@ -1250,16 +1250,29 @@ export const TestUseState = () => {
     return (
         <RoundSlider
             svgBgColor={ '#232323' }
+
             pathBgColor={ '#d0d0d0' }
-            pathThickness={ 15 }
+            pathThickness={ 5 }
+            pathInnerBgColor={ `hsl(${ value }, 100%, 43%)` }
             connectionBgColor={ '#939191' }
+
             pointerBgColor={ '#fff' }
             pointerBgColorSelected={ '#eeeeee' }
-            min={ 0 }
-            max={ 360 }
-            pathInnerBgColor={ `hsl(${ value }, 100%, 50%)` }
+            pointerRadius={ 20 }
+
             enableTicks={ true }
             ticksCount={ 36 }
+            ticksGroupSize={ 3 }
+            ticksDistanceToPanel={ 5 }
+            tickValuesSuffix={ '°' }
+
+            textColor={ '#fff' }
+            textFontSize={ 24 }
+            textSuffix={ '°' }
+            textPrefix={ ' '}
+
+            min={ 0 }
+            max={ 360 }
             onChange={ onChange }
         />
     );

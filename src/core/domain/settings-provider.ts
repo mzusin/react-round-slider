@@ -68,6 +68,8 @@ export interface ISettings {
     tickValuesFontSize?: number;
     tickValuesFontFamily?: string;
     tickValuesDistance?: number;
+    tickValuesPrefix?: string;
+    tickValuesSuffix?: string;
 
     // disabled --------------
     disabled?: boolean;

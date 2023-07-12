@@ -33,7 +33,7 @@ export const DEFAULT_TEXT_FONT_SIZE = 16;
 // Ticks Defaults -----------------------
 export const DEFAULT_TICKS_ENABLED = false;
 export const DEFAULT_TICKS_WIDTH = 3;
-export const DEFAULT_TICKS_HEIGHT = 20;
+export const DEFAULT_TICKS_HEIGHT = 10;
 export const DEFAULT_TICKS_COLOR = '#efefef';
 export const DEFAULT_TICKS_VALUES_COLOR = '#000';
 export const DEFAULT_TICKS_VALUES_FONT_SIZE = 12;

@@ -65,7 +65,8 @@ const Text = (props: ITextProps) => {
                     fontSize={ getNumber(settings.textFontSize, DEFAULT_TEXT_FONT_SIZE) }
                     fontFamily={ settings.textFontFamily }
                     style={{
-                        userSelect: 'none'
+                        userSelect: 'none',
+                        whiteSpace: 'pre',
                     }}
                     textAnchor="middle">
 

@@ -77,9 +77,10 @@ const Ticks = (props: ITicksProps) => {
                                             fontSize={ ticksSettings.tickValuesFontSize }
                                             fontFamily={ settings.tickValuesFontFamily }
                                             style={{
-                                                userSelect: 'none'
+                                                userSelect: 'none',
+                                                whiteSpace: 'pre',
                                             }}>
-                                            { tick.tickValue }
+                                            { settings.tickValuesPrefix }{ tick.tickValue }{ settings.tickValuesSuffix }
                                         </text>
                                     }
                                 </Fragment>
