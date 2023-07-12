@@ -594,7 +594,7 @@ export const testTicksProperties = () => {
                       radius: 3,
                   }
               ]}
-              ticsCount={ 5 }
+              ticksCount={ 5 }
               ticksGroupSize={ 5 }
               longerTickValuesOnly={ false }
               enableTicks={ true }
@@ -1259,7 +1259,7 @@ export const TestUseState = () => {
             max={ 360 }
             pathInnerBgColor={ `hsl(${ value }, 100%, 50%)` }
             enableTicks={ true }
-            ticsCount={ 36 }
+            ticksCount={ 36 }
             onChange={ onChange }
         />
     );

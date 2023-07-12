@@ -112,7 +112,7 @@ export const getTicks = (
         const normalizedDirectionVector = v2Normalize([svg.cx - x, svg.cy - y]);
         const tickEndVector = v2MulScalar(normalizedDirectionVector, desiredDistance);
 
-        const tickStartVector = v2MulScalar(normalizedDirectionVector, ticksSettings.ticksDistanceToPanel);
+        const tickStartVector = v2MulScalar(normalizedDirectionVector, ticksSettings.ticksDistanceToPanel + svg.thickness/2);
         x += tickStartVector[0];
         y += tickStartVector[1];
 
