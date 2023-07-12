@@ -19,6 +19,7 @@ export interface ISettings {
     pathRadius?: number;
     pathThickness?: number;
     pathBgColor?: string;
+    pathInnerBgColor?: string;
     pathBorder?: number;
     pathBorderColor?: string;
 

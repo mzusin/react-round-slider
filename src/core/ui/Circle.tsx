@@ -140,7 +140,7 @@ const Circle = (props: ICircleProps) => {
                 r={ svg.radius }
                 stroke={ getString(settings.pathBgColor, DEFAULT_PATH_BG_COLOR) }
                 strokeWidth={ svg.thickness }
-                fill="none"
+                fill={ settings.pathInnerBgColor ? settings.pathInnerBgColor : 'none' }
                 shapeRendering="geometricPrecision"
                 strokeLinecap="round"
                 cursor="pointer"

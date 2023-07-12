@@ -31,6 +31,7 @@ export const DEFAULT_TEXT_COLOR = '#000';
 export const DEFAULT_TEXT_FONT_SIZE = 16;
 
 // Ticks Defaults -----------------------
+export const DEFAULT_TICKS_DISABLED = true;
 export const DEFAULT_TICKS_WIDTH = 3;
 export const DEFAULT_TICKS_HEIGHT = 20;
 export const DEFAULT_TICKS_COLOR = '#efefef';
@@ -38,7 +39,6 @@ export const DEFAULT_TICKS_VALUES_COLOR = '#000';
 export const DEFAULT_TICKS_VALUES_FONT_SIZE = 12;
 export const DEFAULT_TICKS_GROUP_SIZE = 10;
 export const DEFAULT_TICKS_VALUES_DISTANCE = 15;
-
 
 // Animation Defaults -----------------------
 export const DEFAULT_ANIMATION_DURATION = 200;

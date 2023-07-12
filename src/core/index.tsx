@@ -148,8 +148,6 @@ export const RoundSlider = (props: ISettings) => {
                         </defs>
                     }
 
-                    <Ticks settings={ props } svg={ svg } data={ data } />
-
                     <Circle
                         settings={ props }
                         pointers={ pointers }
@@ -157,6 +155,8 @@ export const RoundSlider = (props: ISettings) => {
                         $svg={ svgRef.current }
                         setPointer={ setPointersCallback }
                     />
+
+                    <Ticks settings={ props } svg={ svg } data={ data } />
 
                     <Connection
                         settings={ props }
