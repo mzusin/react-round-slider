@@ -1028,17 +1028,11 @@ export const testStyling = () => {
                             <stop offset="0%" stopColor="#00bc9b" />
                             <stop offset="100%" stopColor="#5eaefd" />
                         </linearGradient>
-
-                        <linearGradient id="connection-selected" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="red" />
-                            <stop offset="100%" stopColor="black" />
-                        </linearGradient>
                     </>
                 }
                 pointerBgColor={ 'url(#pointer)' }
                 pointerBgColorSelected={ 'url(#pointer-selected)' }
                 connectionBgColor={ 'url(#connection)' }
-                connectionBgColorSelected={ 'url(#connection-selected)' }
                 pointers={[
                     {
                         value: 30
@@ -1199,10 +1193,10 @@ const App = () => {
             {/*{ testData() }*/}
             {/*{ testStep() }*/}
             {/*{ testOverlap() }*/}
-            { testStyling() }
+            {/*{ testStyling() }*/}
             {/*{ testDisabled() }*/}
             {/*{ testEvents() }*/}
-            {/*{ testRangeDragging() }*/}
+            { testRangeDragging() }
         </>
     );
 };

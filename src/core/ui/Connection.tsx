@@ -97,27 +97,16 @@ const Connection = (props: IConnectionProps) => {
             svg.radius
         );
 
-        if(rangeDraggingLastAngle.current !== undefined){
-            const diff = (mouseDegrees - rangeDraggingLastAngle.current);
-
-            const startAngleDeg = svg.startAngleDeg;
-            let endAngleDeg = svg.endAngleDeg;
-            if(endAngleDeg < endAngleDeg) endAngleDeg += 360;
-
-            const range = Math.abs(endAngleDeg - startAngleDeg);
-            if(diff !== 0 && Math.abs(diff) !== range) {
-
-                const isClockwise = Math.abs(diff) > range ? diff < 0 : diff > 0;
-                if(isClockwise) {
-                    setPointer(minPointer, minPointer.angleDeg + data.stepAngleDeg);
-                    setPointer(maxPointer, maxPointer.angleDeg + data.stepAngleDeg);
-                }
-                else{
-                    setPointer(minPointer, minPointer.angleDeg - data.stepAngleDeg);
-                    setPointer(maxPointer, maxPointer.angleDeg - data.stepAngleDeg);
-                }
-            }
+        if(rangeDraggingLastAngle.current === undefined) {
+            rangeDraggingLastAngle.current = mouseDegrees;
+            return;
         }
+
+        const diff = (mouseDegrees - rangeDraggingLastAngle.current);
+        if(diff === 0 || Math.abs(diff) < data.stepAngleDeg) return;
+
+        setPointer(minPointer, minPointer.angleDeg + diff);
+        setPointer(maxPointer, maxPointer.angleDeg + diff);
 
         rangeDraggingLastAngle.current = mouseDegrees;
     }, [
@@ -125,14 +114,12 @@ const Connection = (props: IConnectionProps) => {
         svg.cx,
         svg.cy,
         svg.radius,
-        svg.startAngleDeg,
-        svg.endAngleDeg,
-        settings.disabled,
         data.stepAngleDeg,
         pointers.pointers,
         setPointer,
-        rangeDraggingLastAngle,
+        settings.disabled,
         settings.rangeDragging,
+        svg.startAngleDeg,
     ]);
 
     const onMouseUp = () => {
