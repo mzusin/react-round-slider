@@ -17,6 +17,7 @@ import {
 import { getConnection, IConnection } from '../domain/connection-provider';
 import { ISvg } from '../domain/svg-provider';
 import { IData } from '../domain/data-provider';
+import { mod } from 'mz-math';
 
 interface IConnectionProps {
     settings: ISettings;
@@ -105,8 +106,8 @@ const Connection = (props: IConnectionProps) => {
         const diff = (mouseDegrees - rangeDraggingLastAngle.current);
         if(diff === 0 || Math.abs(diff) < data.stepAngleDeg) return;
 
-        setPointer(minPointer, minPointer.angleDeg + diff);
-        setPointer(maxPointer, maxPointer.angleDeg + diff);
+        setPointer(minPointer, mod(minPointer.angleDeg + diff, 360));
+        setPointer(maxPointer, mod(maxPointer.angleDeg + diff, 360));
 
         rangeDraggingLastAngle.current = mouseDegrees;
     }, [
