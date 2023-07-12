@@ -1294,8 +1294,8 @@ const App = () => {
             { testEvents() }*/}
 
             {/*{ testRangeDragging() }*/}
-            {/*{ testAnimateOnClick() }*/}
-            { <TestUseState /> }
+            { testAnimateOnClick() }
+            {/*{ <TestUseState /> }*/}
         </>
     );
 };
