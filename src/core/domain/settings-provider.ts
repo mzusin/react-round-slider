@@ -72,6 +72,10 @@ export interface ISettings {
 
     // other -----------------
     SvgDefs?: ReactNode;
+
+    // animation -------------
+    animateOnClick?: boolean;
+    animationDuration?: number;
 }
 
 export interface ISettingsPointer {

@@ -1,13 +1,16 @@
-import { useEffect, useState, MouseEvent } from 'react';
+import { useEffect, useState, MouseEvent, useRef } from 'react';
 import { getCircle, ICircle } from '../domain/circle-provider';
-import { getString } from '../domain/common-provider';
+import { getNumber, getString } from '../domain/common-provider';
 import { ISettings } from '../domain/settings-provider';
 import {
+    DEFAULT_ANIMATION_DURATION,
     DEFAULT_PATH_BG_COLOR,
     DEFAULT_PATH_BORDER_COLOR,
 } from '../domain/defaults-provider';
 import { ISvg } from '../domain/svg-provider';
 import { getAngleByMouse, getClosestPointer, IPointer, IPointers } from '../domain/pointers-provider';
+import { animate, IAnimationResult } from 'mz-math';
+import { getAnimationProgressAngle } from '../domain/animation-provider';
 
 interface ICircleProps {
     settings: ISettings;
@@ -20,10 +23,16 @@ interface ICircleProps {
 const Circle = (props: ICircleProps) => {
 
     const { settings, pointers, $svg, svg, setPointer } = props;
+
+    const [ animation, setAnimation ] = useState<IAnimationResult|null>(null);
     const [ circle, setCircle ] = useState<ICircle>({
         strokeDasharray: '0 1000000',
         strokeOffset: 0,
     });
+
+    const animationClosestPointer = useRef<IPointer|null>(null);
+    const animationSourceDegrees = useRef(0);
+    const animationTargetDegrees = useRef(0);
 
     useEffect(() => {
         setCircle(getCircle(
@@ -38,7 +47,7 @@ const Circle = (props: ICircleProps) => {
     ]);
 
     const onClick = (evt: MouseEvent) => {
-        if(!$svg || settings.disabled) return;
+        if(!$svg || settings.disabled || (animation && animation.isAnimating())) return;
 
         const degrees = getAngleByMouse(
             $svg,
@@ -60,8 +69,48 @@ const Circle = (props: ICircleProps) => {
 
         if(!closestPointer) return;
 
-        setPointer(closestPointer, degrees);
+        if(settings.animateOnClick) {
+            animationClosestPointer.current = closestPointer;
+            animationSourceDegrees.current = closestPointer.angleDeg;
+            animationTargetDegrees.current = degrees;
+            animation?.start();
+        }
+        else{
+            setPointer(closestPointer, degrees);
+        }
     };
+
+    // ANIMATE ON CLICK -------------------------------------------
+    useEffect(() => {
+        if(animation) {
+            animation.stop();
+        }
+
+        if(!settings.animateOnClick) {
+            setAnimation(null);
+            return;
+        }
+
+        const _animation = animate({
+            callback: (progress) => {
+                if(!animationClosestPointer.current) return;
+                const currentDegrees = getAnimationProgressAngle(
+                    progress,
+                    animationSourceDegrees.current,
+                    animationTargetDegrees.current
+                );
+                setPointer(animationClosestPointer.current, currentDegrees);
+            },
+            duration: getNumber(settings.animationDuration, DEFAULT_ANIMATION_DURATION),
+        });
+
+        setAnimation(_animation);
+    },
+        // eslint-disable-next-line
+        [
+        settings.animateOnClick,
+        settings.animationDuration,
+    ]);
 
     return (
         <g onClick={ onClick }>

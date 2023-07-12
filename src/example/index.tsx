@@ -1209,6 +1209,24 @@ export const testRangeDragging = () => {
   )
 };
 
+export const testAnimateOnClick = () => {
+    return (
+        <>
+            <RoundSlider
+                animateOnClick={ true }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+            />
+        </>
+    )
+};
+
 const App = () => {
     return (
         <>
@@ -1219,10 +1237,11 @@ const App = () => {
             {/*{ testData() }*/}
             {/*{ testStep() }*/}
             {/*{ testOverlap() }*/}
-            { testStyling() }
+            {/*{ testStyling() }*/}
             {/*{ testDisabled() }*/}
             {/*{ testEvents() }*/}
             {/*{ testRangeDragging() }*/}
+            { testAnimateOnClick() }
         </>
     );
 };

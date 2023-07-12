@@ -40,3 +40,7 @@ export const DEFAULT_TICKS_GROUP_SIZE = 10;
 export const DEFAULT_TICKS_VALUES_DISTANCE = 15;
 
 
+// Animation Defaults -----------------------
+export const DEFAULT_ANIMATION_DURATION = 200;
+
+

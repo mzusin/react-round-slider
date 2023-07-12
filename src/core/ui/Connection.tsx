@@ -1,6 +1,10 @@
 import { ISettings } from '../domain/settings-provider';
-import { getBoolean, getString } from '../domain/common-provider';
-import { DEFAULT_CONNECTION_BG_COLOR, DEFAULT_CONNECTION_BG_COLOR_DISABLED } from '../domain/defaults-provider';
+import { getBoolean, getNumber, getString } from '../domain/common-provider';
+import {
+    DEFAULT_ANIMATION_DURATION,
+    DEFAULT_CONNECTION_BG_COLOR,
+    DEFAULT_CONNECTION_BG_COLOR_DISABLED
+} from '../domain/defaults-provider';
 import {
     getAngleByMouse,
     getClosestPointer,
@@ -17,7 +21,8 @@ import {
 import { getConnection, IConnection } from '../domain/connection-provider';
 import { ISvg } from '../domain/svg-provider';
 import { IData } from '../domain/data-provider';
-import { mod } from 'mz-math';
+import { animate, IAnimationResult, mod } from 'mz-math';
+import { getAnimationProgressAngle } from '../domain/animation-provider';
 
 interface IConnectionProps {
     settings: ISettings;
@@ -33,8 +38,12 @@ const Connection = (props: IConnectionProps) => {
     const { settings, pointers, $svg, svg, data, setPointer } = props;
 
     const [ connection, setConnection ] = useState<IConnection|null>(null);
+    const [ animation, setAnimation ] = useState<IAnimationResult|null>(null);
 
     const rangeDraggingLastAngle = useRef<number>();
+    const animationClosestPointer = useRef<IPointer|null>(null);
+    const animationSourceDegrees = useRef(0);
+    const animationTargetDegrees = useRef(0);
 
     useEffect(() => {
         setConnection(getConnection(
@@ -55,7 +64,8 @@ const Connection = (props: IConnectionProps) => {
     ]);
 
     const onClick = (evt: ReactMouseEvent) => {
-        if(!$svg || settings.disabled) return;
+
+        if(!$svg || settings.disabled || (animation && animation.isAnimating())) return;
 
         const degrees = getAngleByMouse(
             $svg,
@@ -77,8 +87,18 @@ const Connection = (props: IConnectionProps) => {
 
         if(!closestPointer) return;
 
-        setPointer(closestPointer, degrees);
+        if(settings.animateOnClick) {
+            animationClosestPointer.current = closestPointer;
+            animationSourceDegrees.current = closestPointer.angleDeg;
+            animationTargetDegrees.current = degrees;
+            animation?.start();
+        }
+        else{
+            setPointer(closestPointer, degrees);
+        }
     };
+
+    // RANGE DRAGGING -------------------------------------------
 
     const onValueChange = useCallback((evt: MouseEvent | ReactMouseEvent) => {
         if(!$svg || settings.disabled || !settings.rangeDragging) return;
@@ -138,6 +158,39 @@ const Connection = (props: IConnectionProps) => {
         window.addEventListener('mousemove', onValueChange);
         window.addEventListener('mouseup', onMouseUp);
     };
+
+    // ANIMATE ON CLICK -------------------------------------------
+    useEffect(() => {
+        if(animation) {
+            animation.stop();
+        }
+
+        if(!settings.animateOnClick) {
+            setAnimation(null);
+            return;
+        }
+
+        const _animation = animate({
+            callback: (progress) => {
+                if(!animationClosestPointer.current) return;
+                const currentDegrees = getAnimationProgressAngle(
+                    progress,
+                    animationSourceDegrees.current,
+                    animationTargetDegrees.current
+                );
+                setPointer(animationClosestPointer.current, currentDegrees);
+            },
+            duration: getNumber(settings.animationDuration, DEFAULT_ANIMATION_DURATION),
+        });
+
+        setAnimation(_animation);
+
+    },
+        // eslint-disable-next-line
+        [
+        settings.animateOnClick,
+        settings.animationDuration,
+    ]);
 
     return (
         <>
