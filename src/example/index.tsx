@@ -1218,7 +1218,7 @@ export const testRangeDragging = () => {
 export const testAnimateOnClick = () => {
     return (
         <>
-            <RoundSlider
+            {/*<RoundSlider
                 animateOnClick={ true }
             />
 
@@ -1233,6 +1233,60 @@ export const testAnimateOnClick = () => {
                     }
                 ]}
             />
+
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 90 }
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 90 }
+                pathEndAngle={ 180 }
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 270 }
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 360 }
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 360 }
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 90 }
+                animateOnClick={ true }
+            />*/}
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 180 }
+                animateOnClick={ true }
+            />
+
+            {/*<RoundSlider
+                pathStartAngle={ 90 }
+                pathEndAngle={ 270 }
+                animateOnClick={ true }
+            />*/}
         </>
     )
 };

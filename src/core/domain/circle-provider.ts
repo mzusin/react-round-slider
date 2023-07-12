@@ -36,12 +36,7 @@ export const getCircle = (
         endAngleDeg += 360;
     }
 
-    const circumference = 2 * Math.PI *radius;
-
-    if(startAngleDeg > endAngleDeg) {
-        endAngleDeg += 360;
-    }
-
+    const circumference = 2 * Math.PI * radius;
     const angleDiff = endAngleDeg - startAngleDeg;
     const strokeOffset = -(startAngleDeg / 360) * circumference;
     const strokeDasharray = (angleDiff / 360) * circumference;

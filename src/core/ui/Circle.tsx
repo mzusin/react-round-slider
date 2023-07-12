@@ -97,7 +97,8 @@ const Circle = (props: ICircleProps) => {
                 const currentDegrees = getAnimationProgressAngle(
                     progress,
                     animationSourceDegrees.current,
-                    animationTargetDegrees.current
+                    animationTargetDegrees.current,
+                    svg.startAngleDeg
                 );
                 setPointer(animationClosestPointer.current, currentDegrees);
             },

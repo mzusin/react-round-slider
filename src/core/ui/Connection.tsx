@@ -176,7 +176,8 @@ const Connection = (props: IConnectionProps) => {
                 const currentDegrees = getAnimationProgressAngle(
                     progress,
                     animationSourceDegrees.current,
-                    animationTargetDegrees.current
+                    animationTargetDegrees.current,
+                    svg.startAngleDeg
                 );
                 setPointer(animationClosestPointer.current, currentDegrees);
             },
