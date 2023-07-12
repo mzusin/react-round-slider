@@ -1,6 +1,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RoundSlider } from '../core';
+import { useState } from 'react';
 
 export const testCirclePathSegments = () => {
     return (
@@ -1231,10 +1232,31 @@ export const testAnimateOnClick = () => {
     )
 };
 
+export const TestUseState = () => {
+
+    const [ value, setValue ] = useState(0);
+
+    const onChange = (values: (string|number)[]) => {
+        if(!onChange || onChange.length <= 0) return;
+        const val = Number(values[0]) || 0;
+        setValue(val);
+    };
+
+    return (
+        <RoundSlider
+            svgBgColor={ '#000' }
+            min={ 0 }
+            max={ 360 }
+            pathInnerBgColor={ `hsl(${ value }, 100%, 50%)` }
+            onChange={ onChange }
+        />
+    );
+};
+
 const App = () => {
     return (
         <>
-            { testCirclePathSegments() }
+           {/* { testCirclePathSegments() }
             { testBorder() }
             { test2PointersOnCircle() }
             { testMultiplePointers() }
@@ -1243,9 +1265,10 @@ const App = () => {
             { testOverlap() }
             { testStyling() }
             { testDisabled() }
-            { testEvents() }
+            { testEvents() }*/}
             {/*{ testRangeDragging() }*/}
             {/*{ testAnimateOnClick() }*/}
+            { <TestUseState /> }
         </>
     );
 };

@@ -139,7 +139,7 @@ export const RoundSlider = (props: ISettings) => {
                     tabIndex={ 0 }
                     focusable={ true }
                     aria-disabled={ props.disabled ? true : undefined }
-                    style={ outlineNoneStyle }>
+                    style={ props.svgBgColor ? { ...outlineNoneStyle, backgroundColor: props.svgBgColor } : outlineNoneStyle }>
 
                     {
                         (props.SvgDefs) &&

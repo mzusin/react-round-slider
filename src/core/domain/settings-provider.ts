@@ -2,6 +2,9 @@ import { ReactNode } from 'react';
 
 export interface ISettings {
 
+    // svg ------------------
+    svgBgColor?: string;
+
     // events ---------------
     onChange?: (values: (string|number)[]) => void;
 
