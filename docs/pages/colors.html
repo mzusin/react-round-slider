@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>React Round Slider Documentation</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png" />
+  <link id="favicon-48" rel="icon" type="image/png" sizes="48x48" href="/img/favicon/favicon-48.png" />
+  <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32.png" />
+  <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16.png" />
+
+  <link rel="stylesheet" href="/css/styles.1689160589794.css" />
+  <!--<link rel="stylesheet" href="/js/index.1689160589794.css" />-->
+
+</head>
+<body class="h-screen flex flex-col font-roboto bg-white dark:bg-slate-900 dark:text-slate-100">
+
+<header class="py-4 px-4 border-b shadow-sm bg-slate-100 dark:bg-slate-900 dark:text-slate-400 dark:border-black">
+  <div class="container mx-auto flex items-center justify-between">
+    <div class="flex items-center">
+      <!-- mobile menu button -->
+      <button
+              id="mobile-menu-btn"
+              type="button"
+              class="mr-4 pointer md:hidden">
+        <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                viewBox="0 0 24 24">
+          <path stroke="none" d="M0 0h24v24H0z"/>
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+      <a href="/" title="" class="flex items-center ml-6">
+        <svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                stroke-width="3.48" stroke="rgba(255, 255, 255, 1)"
+                class="mr-4"
+                fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="50%" cy="50%" r="50%" stroke="none" stroke-width="0" fill="rgba(40, 95, 104, 1)"/>
+          <g transform="translate(3.36, 3.36) scale(0.72)">
+            <g transform="rotate(25.2 12 12)">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M6 20v-16l6 14l6 -14v16"/>
+            </g>
+          </g>
+        </svg>
+        <span class="text-slate-600 dark:text-slate-400"><b>React Round Slider</b> Documentation</span>
+      </a>
+    </div>
+
+    <div class="flex items-center">
+
+      <!-- themes -->
+      <button type="button" id="move-to-dark-mode-btn" class="hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3 block" viewBox="0 0 24 24">
+          <path stroke="none" d="M0 0h24v24H0z"/>
+          <path d="M14.828 14.828a4 4 0 1 0-5.656-5.656 4 4 0 0 0 5.656 5.656zm-8.485 2.829-1.414 1.414M6.343 6.343 4.929 4.929m12.728 1.414 1.414-1.414m-1.414 12.728 1.414 1.414M4 12H2m10-8V2m8 10h2m-10 8v2"/>
+        </svg>
+      </button>
+
+      <button type="button" id="move-to-light-mode-btn" class="hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3 block" viewBox="0 0 24 24">
+          <path stroke="none" d="M0 0h24v24H0z"/>
+          <path fill="currentColor" stroke="none" d="M12 1.992a10 10 0 1 0 9.236 13.838c.341-.82-.476-1.644-1.298-1.31a6.5 6.5 0 0 1-6.864-10.787l.077-.08c.551-.63.113-1.653-.758-1.653h-.266l-.068-.006-.06-.002z"/>
+        </svg>
+      </button>
+
+      <a href="https://github.com/mzusin/react-round-slider" class="mx-3 block text-slate-400 hover:text-slate-500"><span class="sr-only">React Round Slider on GitHub</span><svg viewBox="0 0 16 16" class="w-5 h-5" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+
+    </div>
+  </div>
+</header>
+
+<div class="container mx-auto flex-1 overflow-hidden">
+  <div class="flex h-full">
+
+    <div class="side-menu border-r dark:border-slate-900 shadow-md overflow-y-auto h-full max-w-full min-w-270 md:w-350 absolute md:static md:left-auto bg-white dark:bg-slate-900 z-50" id="side-menu">
+      <div class="px-6 pb-4 flex flex-col relative">
+
+        <!-- mobile menu close -->
+        <button type="button" class="pointer absolute right-4 top-2 md:hidden" id="mobile-menu-close-btn">
+          <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24">
+            <path stroke="none" d="M0 0h24v24H0z"/>
+            <path d="M18 6 6 18M6 6l12 12"/>
+          </svg>
+        </button>
+
+        <div class="text-xl my-4 flex items-center cursor-pointer" data-collapsible-title data-opened="true" data-id="1-main">
+        Getting Started 
+        <svg data-arrow xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="#626e7f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="ml-2 rotate-90" viewBox="0 0 24 24">
+          <path stroke="none" d="M0 0h24v24H0z"/>
+          <path d="m7 7 5 5-5 5m6-10 5 5-5 5"/>
+        </svg>
+
+    </div><div class="flex flex-col" data-links><a href="/pages/basic-usage.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Basic Usage</a><a href="/pages/nodejs.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600  text-slate-500">Nodejs</a></div><div class="text-xl my-4 flex items-center cursor-pointer" data-collapsible-title data-opened="true" data-id="2-another">
+        Another 
+        <svg data-arrow xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="#626e7f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="ml-2 rotate-90" viewBox="0 0 24 24">
+          <path stroke="none" d="M0 0h24v24H0z"/>
+          <path d="m7 7 5 5-5 5m6-10 5 5-5 5"/>
+        </svg>
+
+    </div><div class="flex flex-col" data-links><a href="/pages/width-height-and-border-radius.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Width Height And Border Radius</a><a href="/pages/colors.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600  text-sky-500">Colors</a></div>
+      </div>
+    </div>
+
+    <div class="p-4 overflow-y-auto h-full md:w-100-350 dark:bg-slate-800">
+      <div class="w-800 max-w-full mx-auto my-10 leading-7 text-lg text-slate-800 dark:text-slate-200"><h2 class="text-3xl mb-8">Colors</h2>
+<div data-examples="colors"></div>
+<p class="mb-4">The library allows to customize the appearance of the slider, including colors, hover and focus states, shadows.</p>
+<p class="mb-4">To change the slider background colors use the following attributes: <strong class="font-bold">slider-bg</strong>, <strong class="font-bold">slider-bg-hover</strong>, and <strong class="font-bold">slider-bg-fill</strong>.</p>
+<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-tag">&lt;<span class="hljs-name">tc-range-slider</span>
+    <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;50&quot;</span>
+    <span class="hljs-attr">slider-height</span>=<span class="hljs-string">&quot;0.9rem&quot;</span>
+    
+    <span class="hljs-attr">slider-bg</span>=<span class="hljs-string">&quot;red&quot;</span>
+    <span class="hljs-attr">slider-bg-hover</span>=<span class="hljs-string">&quot;silver&quot;</span> 
+    <span class="hljs-attr">slider-bg-fill</span>=<span class="hljs-string">&quot;blue&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tc-range-slider</span>&gt;</span></code></pre>
+<div class="my-12 flex flex-col items-center">
+    <tc-range-slider
+        value="50"
+        slider-height="0.9rem"
+        slider-bg="red"
+        slider-bg-hover="silver"
+        slider-bg-fill="blue"></tc-range-slider>
+</div>
+<table class="border-collapse text-sm text-slate-800 table-auto w-full mb-10 mt-4 shadow-sm rounded border border-slate-100">
+<thead class="text-left">
+<tr class="border-slate-200 border-b last:border-0">
+<th class="px-6 py-4 border-b font-medium text-slate-400 text-base">HTML Attribute</th>
+<th class="px-6 py-4 border-b font-medium text-slate-400 text-base">Default Value</th>
+<th class="px-6 py-4 border-b font-medium text-slate-400 text-base">API Property</th>
+</tr>
+</thead>
+<tbody class="bg-slate-50">
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">slider-bg</td>
+<td class="px-6 py-2">#CBD5E1</td>
+<td class="px-6 py-2">sliderBg</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">slider-bg-hover</td>
+<td class="px-6 py-2">#94A3B8</td>
+<td class="px-6 py-2">sliderBgHover</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">slider-bg-fill</td>
+<td class="px-6 py-2">#47</td>
+<td class="px-6 py-2">sliderBgFill</td>
+</tr>
+</tbody>
+</table>
+<p class="mb-4">To change the pointer background colors use the following attributes: <strong class="font-bold">pointer-bg</strong>, <strong class="font-bold">pointer-bg-hover</strong>, and <strong class="font-bold">pointer-bg-focus</strong>.</p>
+<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-tag">&lt;<span class="hljs-name">tc-range-slider</span>
+    <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;50&quot;</span>
+    <span class="hljs-attr">pointer-bg</span>=<span class="hljs-string">&quot;silver&quot;</span>
+    <span class="hljs-attr">pointer-bg-hover</span>=<span class="hljs-string">&quot;blue&quot;</span>
+    <span class="hljs-attr">pointer-bg-focus</span>=<span class="hljs-string">&quot;red&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tc-range-slider</span>&gt;</span></code></pre>
+<div class="my-12 flex flex-col items-center">
+    <tc-range-slider
+        value="50"
+        pointer-bg="silver"
+        pointer-bg-hover="blue"
+        pointer-bg-focus="red"></tc-range-slider>
+</div>
+<table class="border-collapse text-sm text-slate-800 table-auto w-full mb-10 mt-4 shadow-sm rounded border border-slate-100">
+<thead class="text-left">
+<tr class="border-slate-200 border-b last:border-0">
+<th class="px-6 py-4 border-b font-medium text-slate-400 text-base">HTML Attribute</th>
+<th class="px-6 py-4 border-b font-medium text-slate-400 text-base">Default Value</th>
+<th class="px-6 py-4 border-b font-medium text-slate-400 text-base">API Property</th>
+</tr>
+</thead>
+<tbody class="bg-slate-50">
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer-bg</td>
+<td class="px-6 py-2">#fff</td>
+<td class="px-6 py-2">pointerBg</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer-bg-hover</td>
+<td class="px-6 py-2">#dcdcdc</td>
+<td class="px-6 py-2">pointerBgHover</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer-bg-focus</td>
+<td class="px-6 py-2">#dcdcdc</td>
+<td class="px-6 py-2">pointerBgFocus</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer2-bg</td>
+<td class="px-6 py-2">#fff</td>
+<td class="px-6 py-2">pointer2Bg</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer2-bg-hover</td>
+<td class="px-6 py-2">#dcdcdc</td>
+<td class="px-6 py-2">pointer2BgHover</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer2-bg-focus</td>
+<td class="px-6 py-2">#dcdcdc</td>
+<td class="px-6 py-2">pointer2BgFocus</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">etc…</td>
+<td class="px-6 py-2">…</td>
+<td class="px-6 py-2">…</td>
+</tr>
+</tbody>
+</table>
+<p class="mb-4">The pointer border can be customized using the following properties:</p>
+<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-tag">&lt;<span class="hljs-name">tc-range-slider</span>
+    <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;50&quot;</span>
+    <span class="hljs-attr">pointer-border</span>=<span class="hljs-string">&quot;1px solid red&quot;</span>
+    <span class="hljs-attr">pointer-border-hover</span>=<span class="hljs-string">&quot;1px solid blue&quot;</span>
+    <span class="hljs-attr">pointer-border-focus</span>=<span class="hljs-string">&quot;2px solid black&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tc-range-slider</span>&gt;</span></code></pre>
+<div class="my-12 flex flex-col items-center">
+    <tc-range-slider
+        value="50"
+        pointer-border="1px solid red"
+        pointer-border-hover="1px solid blue"
+        pointer-border-focus="2px solid black"></tc-range-slider>
+</div>
+<table class="border-collapse text-sm text-slate-800 table-auto w-full mb-10 mt-4 shadow-sm rounded border border-slate-100">
+<thead class="text-left">
+<tr class="border-slate-200 border-b last:border-0">
+<th class="px-6 py-4 border-b font-medium text-slate-400 text-base">HTML Attribute</th>
+<th class="px-6 py-4 border-b font-medium text-slate-400 text-base">Default Value</th>
+<th class="px-6 py-4 border-b font-medium text-slate-400 text-base">API Property</th>
+</tr>
+</thead>
+<tbody class="bg-slate-50">
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer-border</td>
+<td class="px-6 py-2">1px solid hsla(0, 0%, 88%, 0.5)</td>
+<td class="px-6 py-2">pointerBorder</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer-border-hover</td>
+<td class="px-6 py-2">1px solid #94A3B8</td>
+<td class="px-6 py-2">pointerBorderHover</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer-border-focus</td>
+<td class="px-6 py-2">1px solid #94A3B8</td>
+<td class="px-6 py-2">pointerBorderFocus</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer2-border</td>
+<td class="px-6 py-2">1px solid hsla(0, 0%, 88%, 0.5)</td>
+<td class="px-6 py-2">pointer2Border</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer2-border-hover</td>
+<td class="px-6 py-2">1px solid #94A3B8</td>
+<td class="px-6 py-2">pointer2BorderHover</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer2-border-focus</td>
+<td class="px-6 py-2">1px solid #94A3B8</td>
+<td class="px-6 py-2">pointer2BorderFocus</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">etc…</td>
+<td class="px-6 py-2">…</td>
+<td class="px-6 py-2">…</td>
+</tr>
+</tbody>
+</table>
+<p class="mb-4">The pointer shadow can be configured using <strong class="font-bold">pointer-shadow</strong>, <strong class="font-bold">pointer-shadow-hover</strong>, and <strong class="font-bold">pointer-shadow-focus</strong> attributes:</p>
+<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-tag">&lt;<span class="hljs-name">tc-range-slider</span>
+    <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;50&quot;</span>
+    <span class="hljs-attr">pointer-shadow</span>=<span class="hljs-string">&quot;0 0 5px blue&quot;</span>
+    <span class="hljs-attr">pointer-shadow-hover</span>=<span class="hljs-string">&quot;0 0 5px red&quot;</span>
+    <span class="hljs-attr">pointer-shadow-focus</span>=<span class="hljs-string">&quot;0 0 5px black&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tc-range-slider</span>&gt;</span></code></pre>
+<div class="my-12 flex flex-col items-center">
+    <tc-range-slider
+        value="50"
+        pointer-shadow="0 0 5px blue"
+        pointer-shadow-hover="0 0 5px red"
+        pointer-shadow-focus="0 0 5px black"></tc-range-slider>
+</div>
+<table class="border-collapse text-sm text-slate-800 table-auto w-full mb-10 mt-4 shadow-sm rounded border border-slate-100">
+<thead class="text-left">
+<tr class="border-slate-200 border-b last:border-0">
+<th class="px-6 py-4 border-b font-medium text-slate-400 text-base">HTML Attribute</th>
+<th class="px-6 py-4 border-b font-medium text-slate-400 text-base">Default Value</th>
+<th class="px-6 py-4 border-b font-medium text-slate-400 text-base">API Property</th>
+</tr>
+</thead>
+<tbody class="bg-slate-50">
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer-shadow</td>
+<td class="px-6 py-2">0 0 2px rgba(0, 0, 0, 0.8)</td>
+<td class="px-6 py-2">pointerShadow</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer-shadow-hover</td>
+<td class="px-6 py-2">0 0 2px rgb(0, 0, 0)</td>
+<td class="px-6 py-2">pointerShadowHover</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer-shadow-focus</td>
+<td class="px-6 py-2">0 0 2px rgb(0, 0, 0)</td>
+<td class="px-6 py-2">pointerShadowFocus</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer2-shadow</td>
+<td class="px-6 py-2">0 0 2px rgba(0, 0, 0, 0.8)</td>
+<td class="px-6 py-2">pointer2Shadow</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer2-shadow-hover</td>
+<td class="px-6 py-2">0 0 2px rgb(0, 0, 0)</td>
+<td class="px-6 py-2">pointer2ShadowHover</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">pointer2-shadow-focus</td>
+<td class="px-6 py-2">0 0 2px rgb(0, 0, 0)</td>
+<td class="px-6 py-2">pointer2ShadowFocus</td>
+</tr>
+<tr class="border-slate-200 border-b last:border-0">
+<td class="px-6 py-2">etc…</td>
+<td class="px-6 py-2">…</td>
+<td class="px-6 py-2">…</td>
+</tr>
+</tbody>
+</table>
+<p class="mb-4">By default, all pointers inherit the same styles. But it is possible to configure each pointer individually:</p>
+<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-tag">&lt;<span class="hljs-name">tc-range-slider</span>
+    <span class="hljs-attr">value1</span>=<span class="hljs-string">&quot;10&quot;</span>
+    <span class="hljs-attr">value2</span>=<span class="hljs-string">&quot;50&quot;</span>
+    <span class="hljs-attr">value3</span>=<span class="hljs-string">&quot;90&quot;</span>
+    
+    <span class="hljs-attr">pointer1-bg</span>=<span class="hljs-string">&quot;red&quot;</span>
+    <span class="hljs-attr">pointer1-border</span>=<span class="hljs-string">&quot;none&quot;</span>
+    
+    <span class="hljs-attr">pointer2-bg</span>=<span class="hljs-string">&quot;green&quot;</span>
+    <span class="hljs-attr">pointer2-border</span>=<span class="hljs-string">&quot;none&quot;</span>
+    
+    <span class="hljs-attr">pointer3-bg</span>=<span class="hljs-string">&quot;blue&quot;</span>
+    <span class="hljs-attr">pointer3-border</span>=<span class="hljs-string">&quot;none&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tc-range-slider</span>&gt;</span></code></pre>
+<div class="my-12 flex flex-col items-center">
+    <tc-range-slider
+        value1="10"
+        value2="50"
+        value3="90"
+        pointer1-bg="red"
+        pointer1-border="none"
+        pointer2-bg="green"
+        pointer2-border="none"
+        pointer3-bg="blue"
+        pointer3-border="none"></tc-range-slider>
+</div>
+<p class="mb-4">Each property can be changed via the API as follows:</p>
+<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-tag">&lt;<span class="hljs-name">tc-range-slider</span> 
+  <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;slider-1&quot;</span>
+  <span class="hljs-attr">value1</span>=<span class="hljs-string">&quot;10&quot;</span>
+  <span class="hljs-attr">value2</span>=<span class="hljs-string">&quot;50&quot;</span>
+  <span class="hljs-attr">value3</span>=<span class="hljs-string">&quot;90&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tc-range-slider</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;toolcool-range-slider.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+    <span class="hljs-comment">// get the reference</span>
+    <span class="hljs-keyword">const</span> $slider = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;slider-1&#x27;</span>);
+    
+    <span class="hljs-comment">// change properties</span>
+    $slider.<span class="hljs-property">sliderBg</span> = <span class="hljs-string">&#x27;#efefef&#x27;</span>;
+    $slider.<span class="hljs-property">sliderBgHover</span> = <span class="hljs-string">&#x27;#ddd&#x27;</span>;
+    $slider.<span class="hljs-property">sliderBgFill</span> = <span class="hljs-string">&#x27;#ccc&#x27;</span>;
+    
+    $slider.<span class="hljs-property">pointer1Bg</span> = <span class="hljs-string">&#x27;red&#x27;</span>;
+    $slider.<span class="hljs-property">pointer2Bg</span> = <span class="hljs-string">&#x27;green&#x27;</span>;
+    $slider.<span class="hljs-property">pointer3Bg</span> = <span class="hljs-string">&#x27;blue&#x27;</span>;
+
+    $slider.<span class="hljs-property">pointer1Border</span> = <span class="hljs-string">&#x27;none&#x27;</span>;
+    $slider.<span class="hljs-property">pointer2Border</span> = <span class="hljs-string">&#x27;none&#x27;</span>;
+    $slider.<span class="hljs-property">pointer3Border</span> = <span class="hljs-string">&#x27;none&#x27;</span>;
+
+    <span class="hljs-comment">// or </span>
+    <span class="hljs-comment">// $slider.setAttribute(&#x27;slider-bg&#x27;, &#x27;#efefef&#x27;);</span>
+    <span class="hljs-comment">// ...</span>
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+<div class="my-12 flex flex-col items-center">
+    <tc-range-slider
+      id="slider-10"
+      value1="10"
+      value2="50"
+      value3="90"></tc-range-slider>
+    <div class="flex items-center">
+        <button id="color-btn" type="button" class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-sky-50 text-sky-600 hover:bg-sky-100 hover:text-sky-700 focus:ring-sky-600 mt-8 mx-2">Change Styles</button>
+        <button id="color-reset" type="button" class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-gray-50 text-gray-600 hover:bg-gray-100 hover:text-gray-700 focus:ring-gray-600 mt-8 mx-2">Reset</button>
+    </div>
+</div></div>
+
+      <div class="w-800 max-w-full mx-auto grid  gap-8 items-center text-slate-500">
+<div class="flex justify-between items-start border border-slate-200 rounded p-4">
+  <a href="/pages/width-height-and-border-radius.html" title="" class="mr-4 hover:text-blue-500">
+    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
+    <path stroke="none" d="M0 0h24v24H0z"/>
+    <path d="M5 12h14M5 12l6 6m-6-6 6-6"/>
+  </svg>
+  </a>
+  <div class="flex flex-col items-end justify-center">
+    <div class="mb-2 text-sm text-slate-300">Previous</div>
+    <a href="/pages/width-height-and-border-radius.html" title="" class="hover:text-blue-500">Width Height And Border Radius</a>
+  </div>
+</div>      
+    </div>
+    </div>
+
+  </div>
+</div>
+
+<!--<footer class="py-2 px-4 border-t">
+  <div class="container mx-auto">
+    Footer
+  </div>
+</footer>-->
+
+<script src="/js/index.1689160589794.js"></script>
+</body>
+</html>

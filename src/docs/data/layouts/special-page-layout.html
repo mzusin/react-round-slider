@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% website-name %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png" />
+  <link id="favicon-48" rel="icon" type="image/png" sizes="48x48" href="/img/favicon/favicon-48.png" />
+  <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32.png" />
+  <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16.png" />
+
+  <link rel="stylesheet" href="/css/styles.{% css-hash %}.css" />
+  <!--<link rel="stylesheet" href="/js/index.{% js-hash %}.css" />-->
+
+</head>
+<body class="font-roboto bg-gray-900 text-gray-100" id="special-page">
+{% page-content %}
+
+<!--<footer class="px-4 py-4 py-6">
+  <div class="flex flex-wrap items-center justify-center text-center px-4 py-3">
+
+    <span class="flex items-center justify-center mx-4 my-2">
+        <a class="ml-2 underline" href="/">{% website-name %}</a>
+    </span>
+
+    <span class="flex items-center justify-center mx-4 my-2">© All rights reserved.</span>
+
+    <a href="mailto:{% email %}" title="" class="mx-4 my-2 flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
+        <path fill="#111" d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path>
+      </svg> <span class="ml-2 underline">Contact Us</span>
+    </a>
+
+  </div>
+</footer>-->
+
+<script src="/js/index.{% js-hash %}.js"></script>
+</body>
+</html>

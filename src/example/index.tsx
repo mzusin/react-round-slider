@@ -1214,6 +1214,10 @@ export const testAnimateOnClick = () => {
         <>
             <RoundSlider
                 animateOnClick={ true }
+            />
+
+            <RoundSlider
+                animateOnClick={ true }
                 pointers={[
                     {
                         value: 30
@@ -1230,18 +1234,18 @@ export const testAnimateOnClick = () => {
 const App = () => {
     return (
         <>
-            {/*{ testCirclePathSegments() }*/}
-            {/*{ testBorder() }*/}
-            {/*{ test2PointersOnCircle() }*/}
-            {/*{ testMultiplePointers() }*/}
-            {/*{ testData() }*/}
-            {/*{ testStep() }*/}
-            {/*{ testOverlap() }*/}
-            {/*{ testStyling() }*/}
-            {/*{ testDisabled() }*/}
-            {/*{ testEvents() }*/}
+            { testCirclePathSegments() }
+            { testBorder() }
+            { test2PointersOnCircle() }
+            { testMultiplePointers() }
+            { testData() }
+            { testStep() }
+            { testOverlap() }
+            { testStyling() }
+            { testDisabled() }
+            { testEvents() }
             {/*{ testRangeDragging() }*/}
-            { testAnimateOnClick() }
+            {/*{ testAnimateOnClick() }*/}
         </>
     );
 };

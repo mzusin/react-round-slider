@@ -21,7 +21,10 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "eslint": "eslint ./src/**",
-    "typescript-declarations": "tsc --emitDeclarationOnly --noEmit false"
+    "typescript-declarations": "tsc --emitDeclarationOnly --noEmit false",
+    "docs:website": "http-server ./docs",
+    "docs:build": "node ./src/docs/generator/index.js",
+    "docs:watch": "nodemon ./src/docs/generator/index.js"
   },
   "keywords": [],
   "author": "Miriam Zusin <miriam.zusin@gmail.com>",
@@ -38,6 +41,18 @@
   "peerDependencies": {
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      ".git",
+      "node_modules/**/node_modules"
+    ],
+    "verbose": false,
+    "watch": [
+      "src/"
+    ],
+    "ext": "js,json,html,css,md,ts,tsx,glsl"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.21.4",
@@ -57,6 +72,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
+    "markdown-documentation-maker": "^1.0.24",
     "mz-math": "^3.0.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
