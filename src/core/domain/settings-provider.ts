@@ -30,6 +30,8 @@ export interface ISettings {
     pointerBorder?: number;
     pointerBorderColor?: string;
     pointersOverlap?: boolean;
+    pointerSVG?: ReactNode;
+    pointerRadius?: number;
 
     // connection ------------
     hideConnection?: boolean;

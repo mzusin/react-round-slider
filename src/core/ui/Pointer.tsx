@@ -261,15 +261,26 @@ const Pointer = (props: IPointerProps) => {
 
                     cursor={ pointer.disabled ? 'default' : 'pointer' }
                     style={ outlineNoneStyle }>
-                    <circle
-                        cx={ radius/2 }
-                        cy={ radius/2 }
-                        r={ radius }
 
-                        fill={ getPointerFill(pointer, pointerRef, bgColor, bgColorSelected, bgColorDisabled) }
-                        strokeWidth={ border }
-                        stroke={ borderColor }
-                    />
+                    {
+                        !settings.pointerSVG &&
+                        <circle
+                            cx={ radius/2 }
+                            cy={ radius/2 }
+                            r={ radius }
+
+                            fill={ getPointerFill(pointer, pointerRef, bgColor, bgColorSelected, bgColorDisabled) }
+                            strokeWidth={ border }
+                            stroke={ borderColor }
+                        />
+                    }
+
+                    {
+                        settings.pointerSVG &&
+                        <g>
+                            { settings.pointerSVG }
+                        </g>
+                    }
                 </g>
             }
         </>

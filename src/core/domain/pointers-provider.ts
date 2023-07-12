@@ -116,7 +116,7 @@ const initPointers = (
         return [{
             id: newId(),
             index: 0,
-            radius: DEFAULT_POINTER_RADIUS,
+            radius: getNumber(settings.pointerRadius, DEFAULT_POINTER_RADIUS),
             angleDeg: mod(getNumber(settings.pathStartAngle, DEFAULT_PATH_START_ANGLE), 360),
             bgColor: getString(settings.pointerBgColor, DEFAULT_POINTER_BG_COLOR),
             bgColorSelected: getString(settings.pointerBgColorSelected, DEFAULT_POINTER_BG_COLOR_SELECTED),
@@ -132,6 +132,7 @@ const initPointers = (
     for(let i=0; i<settings.pointers.length; i++) {
         const settingPointer = settings.pointers[i];
 
+        const radius = settingPointer.radius !== undefined ? settingPointer.radius : getNumber(settings.pointerRadius, DEFAULT_POINTER_RADIUS);
         const bgColor = settingPointer.bgColor ? settingPointer.bgColor : getString(settings.pointerBgColor, DEFAULT_POINTER_BG_COLOR);
         const bgColorSelected = settingPointer.bgColorSelected ? settingPointer.bgColorSelected : getString(settings.pointerBgColorSelected, DEFAULT_POINTER_BG_COLOR_SELECTED);
         const bgColorDisabled = settingPointer.bgColorDisabled ? settingPointer.bgColorDisabled : getString(settings.pointerBgColorDisabled, DEFAULT_POINTER_BG_COLOR_DISABLED);
@@ -156,7 +157,7 @@ const initPointers = (
         pointers.push({
             id: newId(),
             index: i,
-            radius: getNumber(settingPointer.radius, DEFAULT_POINTER_RADIUS),
+            radius,
             angleDeg: angleAfterStep,
             bgColor,
             bgColorSelected,
