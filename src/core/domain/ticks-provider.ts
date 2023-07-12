@@ -11,7 +11,7 @@ import { IData } from './data-provider';
 import { ISettings } from './settings-provider';
 import { getBoolean, getNumber, getString } from './common-provider';
 import {
-    DEFAULT_TICKS_COLOR, DEFAULT_TICKS_DISABLED, DEFAULT_TICKS_GROUP_SIZE,
+    DEFAULT_TICKS_COLOR, DEFAULT_TICKS_ENABLED, DEFAULT_TICKS_GROUP_SIZE,
     DEFAULT_TICKS_HEIGHT, DEFAULT_TICKS_VALUES_COLOR,
     DEFAULT_TICKS_VALUES_DISTANCE, DEFAULT_TICKS_VALUES_FONT_SIZE,
     DEFAULT_TICKS_WIDTH
@@ -19,7 +19,7 @@ import {
 
 export interface ITicks {
     ticksCount: number;
-    disableTicks: boolean;
+    enableTicks: boolean;
     ticksWidth: number;
     ticksHeight: number;
     longerTicksHeight: number;
@@ -61,7 +61,7 @@ export const getTicksSettings = (settings: ISettings, data: IData) : ITicks => {
 
     return {
         ticksCount,
-        disableTicks: getBoolean(settings.disableTicks, DEFAULT_TICKS_DISABLED),
+        enableTicks: getBoolean(settings.enableTicks, DEFAULT_TICKS_ENABLED),
         ticksWidth: getNumber(settings.ticksWidth, DEFAULT_TICKS_WIDTH),
         ticksHeight,
         longerTicksHeight: getNumber(settings.longerTicksHeight, ticksHeight * 2),

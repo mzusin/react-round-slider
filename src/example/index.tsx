@@ -549,6 +549,7 @@ export const testTicksProperties = () => {
               pointerBorderColor={ '#8e3da4' }
               showTickValues={ true }
               ticksGroupSize={ 10 }
+              enableTicks={ true }
           />
 
           <RoundSlider
@@ -557,6 +558,7 @@ export const testTicksProperties = () => {
                       radius: 3,
                   }
               ]}
+              enableTicks={ true }
           />
 
           <RoundSlider
@@ -568,6 +570,7 @@ export const testTicksProperties = () => {
                       radius: 3,
                   }
               ]}
+              enableTicks={ true }
           />
 
           <RoundSlider
@@ -580,6 +583,7 @@ export const testTicksProperties = () => {
                       radius: 3,
                   }
               ]}
+              enableTicks={ true }
           />
 
           <RoundSlider
@@ -593,6 +597,7 @@ export const testTicksProperties = () => {
               ticsCount={ 5 }
               ticksGroupSize={ 5 }
               longerTickValuesOnly={ false }
+              enableTicks={ true }
           />
       </>
   )
@@ -1244,10 +1249,17 @@ export const TestUseState = () => {
 
     return (
         <RoundSlider
-            svgBgColor={ '#000' }
+            svgBgColor={ '#232323' }
+            pathBgColor={ '#d0d0d0' }
+            pathThickness={ 15 }
+            connectionBgColor={ '#939191' }
+            pointerBgColor={ '#fff' }
+            pointerBgColorSelected={ '#eeeeee' }
             min={ 0 }
             max={ 360 }
             pathInnerBgColor={ `hsl(${ value }, 100%, 50%)` }
+            enableTicks={ true }
+            ticksGroupSize={ 36 }
             onChange={ onChange }
         />
     );
@@ -1256,7 +1268,8 @@ export const TestUseState = () => {
 const App = () => {
     return (
         <>
-           {/* { testCirclePathSegments() }
+            { testTicksProperties() }
+            { testCirclePathSegments() }
             { testBorder() }
             { test2PointersOnCircle() }
             { testMultiplePointers() }
@@ -1265,10 +1278,11 @@ const App = () => {
             { testOverlap() }
             { testStyling() }
             { testDisabled() }
-            { testEvents() }*/}
+            { testEvents() }
+
             {/*{ testRangeDragging() }*/}
             {/*{ testAnimateOnClick() }*/}
-            { <TestUseState /> }
+            {/*{ <TestUseState /> }*/}
         </>
     );
 };

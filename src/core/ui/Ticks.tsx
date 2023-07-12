@@ -49,7 +49,7 @@ const Ticks = (props: ITicksProps) => {
     return (
         <>
             {
-                ticksSettings && !ticksSettings.disableTicks &&
+                ticksSettings && ticksSettings.enableTicks &&
                 <g>
                     {
                         ticks.map((tick, i) => {

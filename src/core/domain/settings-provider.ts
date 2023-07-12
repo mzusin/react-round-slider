@@ -52,7 +52,7 @@ export interface ISettings {
     textFontFamily?: string;
 
     // ticks -----------------
-    disableTicks?: boolean;
+    enableTicks?: boolean;
     ticksWidth?: number;
     ticksHeight?: number;
     longerTicksHeight?: number;
