@@ -1218,7 +1218,7 @@ export const testRangeDragging = () => {
 export const testAnimateOnClick = () => {
     return (
         <>
-            {/*<RoundSlider
+            <RoundSlider
                 animateOnClick={ true }
             />
 
@@ -1274,7 +1274,7 @@ export const testAnimateOnClick = () => {
                 pathStartAngle={ 270 }
                 pathEndAngle={ 90 }
                 animateOnClick={ true }
-            />*/}
+            />
 
             <RoundSlider
                 pathStartAngle={ 270 }
@@ -1282,11 +1282,194 @@ export const testAnimateOnClick = () => {
                 animateOnClick={ true }
             />
 
-            {/*<RoundSlider
+            <RoundSlider
                 pathStartAngle={ 90 }
                 pathEndAngle={ 270 }
                 animateOnClick={ true }
-            />*/}
+            />
+
+
+
+            <RoundSlider
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 90 }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 90 }
+                pathEndAngle={ 180 }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 270 }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 360 }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 360 }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 90 }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 180 }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 90 }
+                pathEndAngle={ 270 }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 90 }
+                pathEndAngle={ 90 }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+                animateOnClick={ true }
+            />
+
+            <RoundSlider
+                pathRadius={ 150 }
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+                pointers={[
+                    {
+                        value: 0,
+                        bgColor: '#8e3da4'
+                    },
+                    {
+                        value: 25,
+                        bgColor: '#fffc00'
+                    },
+                    {
+                        value: 50,
+                        bgColor: '#b0fc7e'
+                    },
+                    {
+                        value: 75,
+                        bgColor: '#ff0000'
+                    },
+                    {
+                        value: 100,
+                        bgColor: '#ffb800'
+                    }
+                ]}
+                animateOnClick={ true }
+            />
         </>
     )
 };

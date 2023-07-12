@@ -20,6 +20,7 @@ const initSlider1 = () => {
 
         return (
             <RoundSlider
+                animateOnClick={ true }
                 pathStartAngle={ 150 }
                 pathEndAngle={ 30 }
 
