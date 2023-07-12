@@ -26,13 +26,39 @@ export const RoundSlider = (props: ISettings) => {
     const svgRef = useRef<SVGSVGElement>(null);
 
     useEffect(() => {
-        setData(getData(props));
-    }, [ props ]);
+        const _data = getData(props);
+        const hasChanged = JSON.stringify(data) !== JSON.stringify(_data);
+        if(!hasChanged) return;
+
+        setData(_data);
+    }, [
+        data,
+        props
+    ]);
 
     useEffect(() => {
         setPointers(getPointers(props, data));
-    }, [
-        props,
+    },
+        // eslint-disable-next-line
+        [
+        props.pointerRadius,
+        props.pathStartAngle,
+        props.pointerBgColor,
+        props.pointerBgColorSelected,
+        props.pointerBgColorDisabled,
+        props.pointerBorder,
+        props.pointerBorderColor,
+        props.disabled,
+        props.pointers,
+        props.pointerRadius,
+        props.pointerBgColor,
+        props.pointerBgColorSelected,
+        props.pointerBgColorDisabled,
+        props.pointerBorder,
+        props.pointerBorderColor,
+        props.disabled,
+        props.pathStartAngle,
+        props.pathEndAngle,
         data,
     ]);
 
