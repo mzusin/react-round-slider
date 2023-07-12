@@ -47,7 +47,7 @@ export interface ITick {
 
 export const getTicksSettings = (settings: ISettings, data: IData) : ITicks => {
 
-    let ticksCount = getNumber(settings.ticsCount, 0);
+    let ticksCount = getNumber(settings.ticksCount, 0);
     if(!ticksCount) {
         if(data.data && data.data.length > 0) {
             ticksCount = data.data.length;
@@ -78,7 +78,7 @@ export const getTicksSettings = (settings: ISettings, data: IData) : ITicks => {
 
 export const getTicks = (
     ticksSettings: ITicks,
-    ticsCount: number,
+    ticksCount: number,
     pathStartAngle: number,
     pathEndAngle: number,
     svg: ISvg,
@@ -88,9 +88,9 @@ export const getTicks = (
     const ticks: ITick[] = [];
 
     const deltaAngle = Math.abs(pathEndAngle - pathStartAngle);
-    const oneTickAngleSize = ticsCount === 0 ? 0 : deltaAngle / ticsCount;
+    const oneTickAngleSize = ticksCount === 0 ? 0 : deltaAngle / ticksCount;
 
-    let count = ticsCount;
+    let count = ticksCount;
     if(!data.isClosedShape) {
         count++;
     }
@@ -123,7 +123,7 @@ export const getTicks = (
         let tickValue: string|undefined = undefined;
         if(ticksSettings.showTickValues && (!ticksSettings.longerTickValuesOnly || ticksSettings.longerTickValuesOnly && (isLonger || ticksSettings.ticksGroupSize === undefined))) {
 
-            let value: string|number = convertRange(i, 0, ticsCount, data.min, data.max);
+            let value: string|number = convertRange(i, 0, ticksCount, data.min, data.max);
 
             if(data.data.length > 0) {
                 const index = Math.round(value);

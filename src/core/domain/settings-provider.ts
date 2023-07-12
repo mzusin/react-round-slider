@@ -56,7 +56,7 @@ export interface ISettings {
     ticksWidth?: number;
     ticksHeight?: number;
     longerTicksHeight?: number;
-    ticsCount?: number;
+    ticksCount?: number;
     ticksGroupSize?: number;
     ticksDistanceToPanel?: number;
     ticksColor?: string;

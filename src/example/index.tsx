@@ -937,7 +937,7 @@ export const testOverlap = () => {
 export const testStyling = () => {
     return (
         <>
-            {/*<RoundSlider
+            <RoundSlider
                 pathRadius={ 150 }
                 pathStartAngle={ 0 }
                 pathEndAngle={ 180 }
@@ -1047,7 +1047,7 @@ export const testStyling = () => {
                         value: 70
                     }
                 ]}
-            />*/}
+            />
 
             <RoundSlider
                 pointerRadius={ 50 }
@@ -1259,7 +1259,7 @@ export const TestUseState = () => {
             max={ 360 }
             pathInnerBgColor={ `hsl(${ value }, 100%, 50%)` }
             enableTicks={ true }
-            ticksGroupSize={ 36 }
+            ticsCount={ 36 }
             onChange={ onChange }
         />
     );
@@ -1268,7 +1268,7 @@ export const TestUseState = () => {
 const App = () => {
     return (
         <>
-            { testTicksProperties() }
+            {/*{ testTicksProperties() }
             { testCirclePathSegments() }
             { testBorder() }
             { test2PointersOnCircle() }
@@ -1278,11 +1278,11 @@ const App = () => {
             { testOverlap() }
             { testStyling() }
             { testDisabled() }
-            { testEvents() }
+            { testEvents() }*/}
 
             {/*{ testRangeDragging() }*/}
             {/*{ testAnimateOnClick() }*/}
-            {/*{ <TestUseState /> }*/}
+            { <TestUseState /> }
         </>
     );
 };
