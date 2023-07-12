@@ -1010,6 +1010,44 @@ export const testStyling = () => {
                     }
                 ]}
             />
+
+            <RoundSlider
+                SvgDefs={
+                    <>
+                        <linearGradient id="pointer" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#8e50c4" />
+                            <stop offset="100%" stopColor="#422563" />
+                        </linearGradient>
+
+                        <linearGradient id="pointer-selected" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#f2c832" />
+                            <stop offset="100%" stopColor="#f19305" />
+                        </linearGradient>
+
+                        <linearGradient id="connection" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#00bc9b" />
+                            <stop offset="100%" stopColor="#5eaefd" />
+                        </linearGradient>
+
+                        <linearGradient id="connection-selected" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="red" />
+                            <stop offset="100%" stopColor="black" />
+                        </linearGradient>
+                    </>
+                }
+                pointerBgColor={ 'url(#pointer)' }
+                pointerBgColorSelected={ 'url(#pointer-selected)' }
+                connectionBgColor={ 'url(#connection)' }
+                connectionBgColorSelected={ 'url(#connection-selected)' }
+                pointers={[
+                    {
+                        value: 30
+                    },
+                    {
+                        value: 70
+                    }
+                ]}
+            />
         </>
     )
 };
@@ -1161,8 +1199,8 @@ const App = () => {
             {/*{ testData() }*/}
             {/*{ testStep() }*/}
             {/*{ testOverlap() }*/}
-            {/*{ testStyling() }*/}
-            { testDisabled() }
+            { testStyling() }
+            {/*{ testDisabled() }*/}
             {/*{ testEvents() }*/}
             {/*{ testRangeDragging() }*/}
         </>

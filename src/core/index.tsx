@@ -141,6 +141,13 @@ export const RoundSlider = (props: ISettings) => {
                     aria-disabled={ props.disabled ? true : undefined }
                     style={ outlineNoneStyle }>
 
+                    {
+                        (props.SvgDefs) &&
+                        <defs>
+                            { props.SvgDefs }
+                        </defs>
+                    }
+
                     <Ticks settings={ props } svg={ svg } data={ data } />
 
                     <Circle

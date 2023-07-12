@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface ISettings {
 
     // events ---------------
@@ -65,6 +67,9 @@ export interface ISettings {
     disabled?: boolean;
     keyboardDisabled?: boolean;
     mousewheelDisabled?: boolean;
+
+    // other -----------------
+    SvgDefs?: ReactNode;
 }
 
 export interface ISettingsPointer {
