@@ -1,4 +1,4 @@
-## Basic Usage
+## Basic Usage ✍️
 
 To start using the slider, first install the npm package **mz-react-round-slider**.
 
@@ -49,5 +49,7 @@ export const MyComponent = () => {
     );
 };
 ```
+
+> Read more about **ISettingsPointer** interface [here](isettings-pointer-interface.html).
 
 > The slider has a large set of options, which are described later in this documentation.

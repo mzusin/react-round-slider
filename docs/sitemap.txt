@@ -1,2 +1,3 @@
 https://react-round-slider.mzsoft.org
 https://react-round-slider.mzsoft.org/pages/basic-usage.html
+https://react-round-slider.mzsoft.org/pages/isettings-pointer-interface.html

@@ -118,7 +118,7 @@ export const renderSideMenu = (
     if(hasLinks){
       html += '<div class="flex flex-col" data-links>';
 
-      for(let i= 0; i<links.length; i++){
+      for(let i=0; i<links.length; i++){
         const link = links[i];
         const codeName = removeNumberOnStart(link);
         const isActive = activeItem === codeName;
