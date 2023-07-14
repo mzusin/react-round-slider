@@ -1,6 +1,6 @@
-# ミ☆ React Round Slider ミ☆
+# Multi-Pointer React Round Slider ミ☆ミ
 
-SVG and TypeScript React round slider library.
+React Round Slider component based on SVG and TypeScript.
 
 
 

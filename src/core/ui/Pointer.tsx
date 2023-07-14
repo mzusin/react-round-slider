@@ -33,7 +33,7 @@ const getPointerFill = (
     if(pointer.disabled) return bgColorDisabled;
 
     if(document.activeElement === pointerRef.current) {
-        return bgColorSelected || bgColor;
+        return bgColorSelected;
     }
 
     return bgColor;

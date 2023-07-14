@@ -1,7 +1,7 @@
 {
   "name": "mz-react-round-slider",
   "version": "1.0.0",
-  "description": "",
+  "description": "Multi-Pointer React Round Slider",
   "type": "module",
   "types": "./dist/index.d.ts",
   "main": "./dist/mz-react-round-slider.min.js",
