@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import * as React from 'react';
 import { RoundSlider } from '../../../../core';
 import { useState } from 'react';
+import { ISettingsPointer } from '../../../../core/domain/settings-provider';
 
 const initColorSlider = () => {
     const $slider = document.getElementById('color-slider') as HTMLElement;
@@ -10,16 +11,13 @@ const initColorSlider = () => {
 
     const Component = () => {
 
-        const [ value, setValue ] = useState(0);
-
-        const onChange = (values: (string|number)[]) => {
-            if(!onChange || onChange.length <= 0) return;
-            const val = Number(values[0]) || 0;
-            setValue(val);
-        };
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([{ value: 0 }]);
 
         return (
             <RoundSlider
+                pointers={ pointers }
+                onChange={ setPointers }
+
                 animateOnClick={ true }
                 pathStartAngle={ 150 }
                 pathEndAngle={ 30 }
@@ -49,19 +47,12 @@ const initColorSlider = () => {
 
                 min={ 0 }
                 max={ 360 }
-                onChange={ onChange }
-
-                pointers={[
-                    {
-                        value,
-                    }
-                ]}
 
                 SvgDefs={
                     <>
                         <linearGradient id="color-slider-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor={ `hsl(${ value }, 100%, 40%)` } />
-                            <stop offset="100%" stopColor={ `hsl(${ value }, 50%, 20%)` } />
+                            <stop offset="0%" stopColor={ `hsl(${ pointers[0].value }, 100%, 40%)` } />
+                            <stop offset="100%" stopColor={ `hsl(${ pointers[0].value }, 50%, 20%)` } />
                         </linearGradient>
                     </>
                 }

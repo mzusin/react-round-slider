@@ -16,8 +16,8 @@
   <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32.png" />
   <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16.png" />
 
-  <link rel="stylesheet" href="/css/styles.1689338451818.css" />
-  <!--<link rel="stylesheet" href="/js/index.1689338451818.css" />-->
+  <link rel="stylesheet" href="/css/styles.1689356721285.css" />
+  <!--<link rel="stylesheet" href="/js/index.1689356721285.css" />-->
 
 </head>
 <body class="h-screen flex flex-col font-roboto bg-white dark:bg-slate-900 dark:text-slate-100">
@@ -116,66 +116,55 @@
           <path d="m7 7 5 5-5 5m6-10 5 5-5 5"/>
         </svg>
 
-    </div><div class="flex flex-col" data-links><a href="/pages/basic-usage.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-sky-500">Basic Usage</a><a href="/pages/nodejs.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600  text-slate-500">Nodejs</a></div><div class="text-xl my-4 flex items-center cursor-pointer" data-collapsible-title data-opened="true" data-id="2-another">
-        Another 
-        <svg data-arrow xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="#626e7f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="ml-2 rotate-90" viewBox="0 0 24 24">
-          <path stroke="none" d="M0 0h24v24H0z"/>
-          <path d="m7 7 5 5-5 5m6-10 5 5-5 5"/>
-        </svg>
-
-    </div><div class="flex flex-col" data-links><a href="/pages/width-height-and-border-radius.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Width Height And Border Radius</a><a href="/pages/colors.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600  text-slate-500">Colors</a></div>
+    </div><div class="flex flex-col" data-links><a href="/pages/basic-usage.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600  text-sky-500">Basic Usage</a></div>
       </div>
     </div>
 
     <div class="p-4 overflow-y-auto h-full md:w-100-350 dark:bg-slate-800">
       <div class="w-800 max-w-full mx-auto my-10 leading-7 text-lg text-slate-800 dark:text-slate-200"><h2 class="text-3xl mb-8">Basic Usage</h2>
-<p class="mb-4">Download the latest <a href="https://github.com/toolcool-org/toolcool-range-slider/blob/main/dist/toolcool-range-slider.min.js" class="text-sky-500">toolcool-range-slider.min.js</a> script from GitHub and add the following HTML to the page:</p>
-<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-tag">&lt;<span class="hljs-name">tc-range-slider</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tc-range-slider</span>&gt;</span>
+<p class="mb-4">To start using the slider, first install the npm package <strong class="font-bold">mz-react-round-slider</strong>.</p>
+<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code>npm i mz-react-round-slider</code></pre>
+<br/>
+<div id="getting-started-slider"></div>
+<br/>
+<p class="mb-4">You can then import it like this:</p>
+<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-keyword">import</span> { <span class="hljs-title class_">RoundSlider</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;mz-react-round-slider&#x27;</span>;
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;toolcool-range-slider.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
-<div class="my-12 flex justify-center">
-    <tc-range-slider></tc-range-slider>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">MyComponent</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">const</span> [ pointers, setPointers ] = <span class="hljs-title function_">useState</span>([
+        { <span class="hljs-attr">value</span>: <span class="hljs-number">0</span> },
+        { <span class="hljs-attr">value</span>: <span class="hljs-number">25</span> }
+    ]);
+
+    <span class="hljs-keyword">return</span> (
+        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">RoundSlider</span>
+            <span class="hljs-attr">pointers</span>=<span class="hljs-string">{</span> <span class="hljs-attr">pointers</span> }
+            <span class="hljs-attr">onChange</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setPointers</span> }
+        /&gt;</span></span>
+    );
+};</code></pre>
+<p class="mb-4">Or in TypeScript:</p>
+<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-keyword">import</span> { <span class="hljs-title class_">RoundSlider</span>, <span class="hljs-title class_">ISettingsPointer</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;mz-react-round-slider&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">MyComponent</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">const</span> [ pointers, setPointers ] = useState&lt;<span class="hljs-title class_">ISettingsPointer</span>[]&gt;([
+        { <span class="hljs-attr">value</span>: <span class="hljs-number">0</span> },
+        { <span class="hljs-attr">value</span>: <span class="hljs-number">25</span> }
+    ]);
+
+    <span class="hljs-keyword">return</span> (
+        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">RoundSlider</span>
+            <span class="hljs-attr">pointers</span>=<span class="hljs-string">{</span> <span class="hljs-attr">pointers</span> }
+            <span class="hljs-attr">onChange</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setPointers</span> }
+        /&gt;</span></span>
+    );
+};</code></pre>
+<blockquote class="bg-gray-100 pt-4 px-4 flex my-10 border-l-4 border-blue-300 rounded dark:bg-sky-900">
+<p class="mb-4">The slider has a large set of options, which are described later in this documentation.</p>
+</blockquote>
 </div>
-<p class="mb-4"><strong class="font-bold">tc-range-slider</strong> is an alias for <strong class="font-bold">toolcool-range-slider</strong>:</p>
-<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-tag">&lt;<span class="hljs-name">toolcool-range-slider</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">toolcool-range-slider</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;toolcool-range-slider.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
-<p class="mb-4">The library is also available on the <a href="https://www.jsdelivr.com/package/npm/toolcool-range-slider" class="text-sky-500">jsDelivr CND</a>:</p>
-<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-tag">&lt;<span class="hljs-name">tc-range-slider</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tc-range-slider</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/npm/toolcool-range-slider/dist/toolcool-range-slider.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
-<p class="mb-4">The initial value is defined using the <strong class="font-bold">value</strong> attribute:</p>
-<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-tag">&lt;<span class="hljs-name">tc-range-slider</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;50&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tc-range-slider</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;toolcool-range-slider.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
-<div class="my-12 flex justify-center">
-    <tc-range-slider value="50"></tc-range-slider>
-</div>
-<p class="mb-4">You can add more pointers using the <strong class="font-bold">value2</strong>, <strong class="font-bold">value3</strong>, and so on attributes. Note that <strong class="font-bold">value</strong>, <strong class="font-bold">value0</strong>, and <strong class="font-bold">value1</strong> are synonymous and refer to the first value.</p>
-<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-tag">&lt;<span class="hljs-name">tc-range-slider</span> <span class="hljs-attr">value1</span>=<span class="hljs-string">&quot;20&quot;</span> <span class="hljs-attr">value2</span>=<span class="hljs-string">&quot;30&quot;</span> <span class="hljs-attr">value3</span>=<span class="hljs-string">&quot;40&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tc-range-slider</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;toolcool-range-slider.min.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
-<div class="my-12 flex justify-center">
-    <tc-range-slider value1="20" value2="50" value3="80"></tc-range-slider>
-</div>
-</div>
-
-      <div class="w-800 max-w-full mx-auto grid  gap-8 items-center text-slate-500">
-<div class="flex justify-between items-start border border-slate-200 rounded p-4">
-  
-  <div class="flex flex-col justify-center">
-    <div class="mb-2 text-sm text-slate-300">Next</div>
-    <a href="/pages/nodejs.html" title="" class="hover:text-blue-500">Nodejs</a>
-  </div>
-  
-  <a href="/pages/nodejs.html" title="" class="mr-4 hover:text-blue-500">
-    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
-     <path stroke="none" d="M0 0h24v24H0z"/>
-     <path d="M5 12h14m-6 6 6-6m-6-6 6 6"/>
-  </svg>
-  </a>
-</div>  
-    </div>
+      <div class="w-800 max-w-full mx-auto grid  gap-8 items-center text-slate-500"></div>
     </div>
 
   </div>
@@ -187,6 +176,6 @@
   </div>
 </footer>-->
 
-<script src="/js/index.1689338451818.js"></script>
+<script src="/js/index.1689356721285.js"></script>
 </body>
 </html>

@@ -1,5 +1,2 @@
 https://react-round-slider.mzsoft.org
 https://react-round-slider.mzsoft.org/pages/basic-usage.html
-https://react-round-slider.mzsoft.org/pages/nodejs.html
-https://react-round-slider.mzsoft.org/pages/width-height-and-border-radius.html
-https://react-round-slider.mzsoft.org/pages/colors.html

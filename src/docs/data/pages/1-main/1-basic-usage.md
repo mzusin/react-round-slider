@@ -1,56 +1,53 @@
 ## Basic Usage
 
-Download the latest [toolcool-range-slider.min.js](https://github.com/toolcool-org/toolcool-range-slider/blob/main/dist/toolcool-range-slider.min.js) script from GitHub and add the following HTML to the page:
-  
-```html
-<tc-range-slider></tc-range-slider>
-
-<script src="toolcool-range-slider.min.js"></script>
-```
-
-<div class="my-12 flex justify-center">
-    <tc-range-slider></tc-range-slider>
-</div>
-
-**tc-range-slider** is an alias for **toolcool-range-slider**:
+To start using the slider, first install the npm package **mz-react-round-slider**.
 
 ```html
-<toolcool-range-slider></toolcool-range-slider>
-
-<script src="toolcool-range-slider.min.js"></script>
+npm i mz-react-round-slider
 ```
 
-The library is also available on the [jsDelivr CND](https://www.jsdelivr.com/package/npm/toolcool-range-slider):
+<br/>
+<div id="getting-started-slider"></div>
+<br/>
 
-```html
-<tc-range-slider></tc-range-slider>
+You can then import it like this:
 
-<script src="https://cdn.jsdelivr.net/npm/toolcool-range-slider/dist/toolcool-range-slider.min.js"></script>
+```tsx
+import { RoundSlider } from 'mz-react-round-slider';
+
+export const MyComponent = () => {
+    const [ pointers, setPointers ] = useState([
+        { value: 0 },
+        { value: 25 }
+    ]);
+
+    return (
+        <RoundSlider
+            pointers={ pointers }
+            onChange={ setPointers }
+        />
+    );
+};
 ```
 
-The initial value is defined using the **value** attribute:
+Or in TypeScript:
 
-```html
-<tc-range-slider value="50"></tc-range-slider>
+```tsx
+import { RoundSlider, ISettingsPointer } from 'mz-react-round-slider';
 
-<script src="toolcool-range-slider.min.js"></script>
+export const MyComponent = () => {
+    const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+        { value: 0 },
+        { value: 25 }
+    ]);
+
+    return (
+        <RoundSlider
+            pointers={ pointers }
+            onChange={ setPointers }
+        />
+    );
+};
 ```
 
-<div class="my-12 flex justify-center">
-    <tc-range-slider value="50"></tc-range-slider>
-</div>
-
-You can add more pointers using the **value2**, **value3**, and so on attributes. Note that **value**, **value0**, and **value1** are synonymous and refer to the first value.
-
-```html
-<tc-range-slider value1="20" value2="30" value3="40"></tc-range-slider>
-
-<script src="toolcool-range-slider.min.js"></script>
-```
-
-<div class="my-12 flex justify-center">
-    <tc-range-slider value1="20" value2="50" value3="80"></tc-range-slider>
-</div>
-
-
-
+> The slider has a large set of options, which are described later in this documentation.

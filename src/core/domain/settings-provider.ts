@@ -6,7 +6,7 @@ export interface ISettings {
     svgBgColor?: string;
 
     // events ---------------
-    onChange?: (values: (string|number)[]) => void;
+    onChange?: (pointers: ISettingsPointer[]) => void;
 
     // data -----------------
     min?: number | string;

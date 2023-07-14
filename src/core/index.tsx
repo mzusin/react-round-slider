@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { getSvg, ISvg } from './domain/svg-provider';
 import { angle2value, getClosestEdge, getPointers, IPointer, IPointers, roundToStep } from './domain/pointers-provider';
-import { ISettings } from './domain/settings-provider';
+import { ISettings, ISettingsPointer } from './domain/settings-provider';
 import { getNumber } from './domain/common-provider';
 import {
     DEFAULT_PATH_BORDER, DEFAULT_PATH_END_ANGLE, DEFAULT_PATH_RADIUS, DEFAULT_PATH_START_ANGLE,
@@ -142,14 +142,30 @@ export const RoundSlider = (props: ISettings) => {
         setPointers(_pointers);
 
         if(typeof props.onChange === 'function') {
-            const values = _pointers.pointers.map(pointer => angle2value(
-                data,
-                pointer.angleDeg,
-                svg.startAngleDeg,
-                svg.endAngleDeg
-            ));
 
-            props.onChange(values);
+            const updatedPointers: ISettingsPointer[] = _pointers.pointers.map(pointer => {
+
+                const val = angle2value(
+                    data,
+                    pointer.angleDeg,
+                    svg.startAngleDeg,
+                    svg.endAngleDeg
+                );
+
+                return {
+                    radius: pointer.radius,
+                    value: val,
+                    bgColor: pointer.bgColor,
+                    bgColorSelected: pointer.bgColorSelected,
+                    bgColorDisabled: pointer.bgColorDisabled,
+                    border: pointer.border,
+                    borderColor: pointer.borderColor,
+                    disabled: pointer.disabled,
+                    ariaLabel: pointer.ariaLabel,
+                };
+            });
+
+            props.onChange(updatedPointers);
         }
     };
 

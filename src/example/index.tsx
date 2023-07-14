@@ -2,6 +2,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RoundSlider } from '../core';
 import { useState } from 'react';
+import { ISettingsPointer } from '../core/domain/settings-provider';
 
 export const testCirclePathSegments = () => {
     return (
@@ -1476,21 +1477,18 @@ export const testAnimateOnClick = () => {
 
 export const TestUseState = () => {
 
-    const [ value, setValue ] = useState(0);
-
-    const onChange = (values: (string|number)[]) => {
-        if(!onChange || onChange.length <= 0) return;
-        const val = Number(values[0]) || 0;
-        setValue(val);
-    };
+    const [pointers, setPointers ] = useState<ISettingsPointer[]>([{ value: 0 }]);
 
     return (
         <RoundSlider
+            pointers={ pointers }
+            onChange={ setPointers }
+
             svgBgColor={ '#232323' }
 
             pathBgColor={ '#d0d0d0' }
             pathThickness={ 5 }
-            pathInnerBgColor={ `hsl(${ value }, 100%, 43%)` }
+            pathInnerBgColor={ `hsl(${ pointers[0].value }, 100%, 43%)` }
             connectionBgColor={ '#939191' }
 
             pointerBgColor={ '#fff' }
@@ -1510,7 +1508,21 @@ export const TestUseState = () => {
 
             min={ 0 }
             max={ 360 }
-            onChange={ onChange }
+        />
+    );
+};
+
+export const TestUseState2 = () => {
+
+    const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+        { value: 0 },
+        { value: 50 }
+    ]);
+
+    return (
+        <RoundSlider
+            pointers={ pointers }
+            onChange={ setPointers }
         />
     );
 };
@@ -1531,8 +1543,9 @@ const App = () => {
             { testEvents() }*/}
 
             {/*{ testRangeDragging() }*/}
-            { testAnimateOnClick() }
+            {/*{ testAnimateOnClick() }*/}
             {/*{ <TestUseState /> }*/}
+            { <TestUseState2 /> }
         </>
     );
 };
