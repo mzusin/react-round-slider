@@ -13,7 +13,7 @@ import Connection from './ui/Connection';
 import Text from './ui/Text';
 import Ticks from './ui/Ticks';
 import Circle from './ui/Circle';
-import { mod } from 'mz-math';
+import { mod, setDecimalPlaces } from 'mz-math';
 import { isAngleInArc } from './domain/circle-provider';
 import { outlineNoneStyle } from './domain/style-provider';
 
@@ -108,8 +108,24 @@ export const RoundSlider = (props: ISettings) => {
                 const prevIndex = mod(pointer.index - 1, pointers.pointers.length);
                 const nextIndex = mod(pointer.index + 1, pointers.pointers.length);
 
-                prevAngle = pointers.pointers[prevIndex].angleDeg;
-                nextAngle = pointers.pointers[nextIndex].angleDeg;
+                const prevPointer = pointers.pointers[prevIndex];
+                const nextPointer = pointers.pointers[nextIndex];
+
+                prevAngle = prevPointer.angleDeg;
+                nextAngle = nextPointer.angleDeg;
+
+                if(pointers.pointers.length === 2) {
+                    const n = setDecimalPlaces(nextAngle + data.stepAngleDeg, 5);
+                    const p = setDecimalPlaces(prevAngle - data.stepAngleDeg, 5);
+                    const prevAngleDeg = setDecimalPlaces(pointer.prevAngleDeg, 5);
+                    const n1 = setDecimalPlaces(nextAngle - data.stepAngleDeg, 5);
+                    const p1 = setDecimalPlaces(prevAngle + data.stepAngleDeg, 5);
+
+                    if((newAngleDeg >= n && (prevAngleDeg === n1)) ||
+                        (newAngleDeg <= p && (prevAngleDeg === p1))){
+                        return;
+                    }
+                }
             }
             else{
                 prevAngle = pointer.index === 0 ? svg.startAngleDeg : pointers.pointers[pointer.index - 1].angleDeg;
@@ -136,6 +152,7 @@ export const RoundSlider = (props: ISettings) => {
 
         const _pointers = { ...pointers };
         _pointers.pointers = [...pointers.pointers];
+        _pointers.pointers[pointer.index].prevAngleDeg = _pointers.pointers[pointer.index].angleDeg;
         _pointers.pointers[pointer.index].angleDeg = newAngleDeg;
         pointers.pointers = _pointers.pointers;
 

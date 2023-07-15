@@ -26,6 +26,7 @@ export interface IPointer {
     index: number;
     radius: number;
     angleDeg: number;
+    prevAngleDeg: number;
     bgColor: string;
     bgColorSelected: string;
     bgColorDisabled: string;
@@ -113,11 +114,14 @@ const initPointers = (
 ) : IPointer[] => {
 
     if(!settings || !settings.pointers || settings.pointers.length < 0 || !data) {
+        const angleDeg = mod(getNumber(settings.pathStartAngle, DEFAULT_PATH_START_ANGLE), 360);
+
         return [{
             id: newId(),
             index: 0,
             radius: getNumber(settings.pointerRadius, DEFAULT_POINTER_RADIUS),
-            angleDeg: mod(getNumber(settings.pathStartAngle, DEFAULT_PATH_START_ANGLE), 360),
+            angleDeg,
+            prevAngleDeg: angleDeg,
             bgColor: getString(settings.pointerBgColor, DEFAULT_POINTER_BG_COLOR),
             bgColorSelected: getString(settings.pointerBgColorSelected, DEFAULT_POINTER_BG_COLOR_SELECTED),
             bgColorDisabled: getString(settings.pointerBgColorDisabled, DEFAULT_POINTER_BG_COLOR_DISABLED),
@@ -159,6 +163,7 @@ const initPointers = (
             index: i,
             radius,
             angleDeg: angleAfterStep,
+            prevAngleDeg: angleAfterStep,
             bgColor,
             bgColorSelected,
             bgColorDisabled,

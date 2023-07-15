@@ -1,4 +1,4 @@
-# Multi-Pointer React Round Slider ミ☆ミ
+# Multi-Pointer React Round Slider
 
 React Round Slider component based on SVG and TypeScript.
 

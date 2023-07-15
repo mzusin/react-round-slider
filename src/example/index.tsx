@@ -1515,7 +1515,7 @@ export const TestUseState = () => {
 export const TestUseState2 = () => {
 
     const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
-        { value: 0 },
+        { value: 0, bgColor: 'red' },
         { value: 50 }
     ]);
 
@@ -1530,18 +1530,17 @@ export const TestUseState2 = () => {
 const App = () => {
     return (
         <>
+            { testMultiplePointers() }
+            {/*{ test2PointersOnCircle() }*/}
             {/*{ testTicksProperties() }
             { testCirclePathSegments() }
             { testBorder() }
-            { test2PointersOnCircle() }
-            { testMultiplePointers() }
             { testData() }
             { testStep() }
             { testOverlap() }
             { testStyling() }
             { testDisabled() }
             { testEvents() }*/}
-
             {/*{ testRangeDragging() }*/}
             {/*{ testAnimateOnClick() }*/}
             {/*{ <TestUseState /> }*/}
