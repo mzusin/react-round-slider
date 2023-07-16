@@ -137,7 +137,10 @@ export const RoundSlider = (props: ISettings) => {
                         const counterClockwisePrev = isAngleInArc(splitPointDeg + 0.001, splitPointDeg + 90, prevAngleDegRef.current);
                         const counterClockwise = counterClockwiseNew && counterClockwisePrev;
 
-                        if(clockwise || counterClockwise) return;
+                        if(clockwise || counterClockwise) {
+                            updatePointer(pointer, splitPointDeg);
+                            return;
+                        }
 
                         if(newAngleDeg !== splitPointDeg) {
                            prevAngleDegRef.current = newAngleDeg;
@@ -168,6 +171,10 @@ export const RoundSlider = (props: ISettings) => {
 
         if(pointer.angleDeg === newAngleDeg) return;
 
+        updatePointer(pointer, newAngleDeg);
+    };
+
+    const updatePointer = (pointer: IPointer, newAngleDeg: number) => {
         const _pointers = { ...pointers };
         _pointers.pointers = [...pointers.pointers];
         _pointers.pointers[pointer.index].prevAngleDeg = _pointers.pointers[pointer.index].angleDeg;
