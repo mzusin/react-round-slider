@@ -131,11 +131,31 @@ export const RoundSlider = (props: ISettings) => {
 
                         const SAFE_ANGLE = 90;
 
+                        /*
+                         if(startAngleDeg < 0 && endAngleDeg < 0) {
+        startAngleDeg += 360;
+        endAngleDeg += 360;
+    }
+
+                         */
+
+                        let t1 = splitPointDeg - SAFE_ANGLE;
+                        let t2 = splitPointDeg - 0.001;
+
+                        if(t1 < 0) t1 += 360;
+                        if(t2 < 0) t2 += 360;
+
                         const clockwiseNew = isAngleInArc(splitPointDeg + 0.001, splitPointDeg + SAFE_ANGLE, newAngleDeg);
-                        const clockwisePrev = isAngleInArc(splitPointDeg - SAFE_ANGLE, splitPointDeg - 0.001, prevAngleDegRef.current);
+                        const clockwisePrev = isAngleInArc(t1, t2, prevAngleDegRef.current);
                         const clockwise = clockwiseNew && clockwisePrev;
 
-                        const counterClockwiseNew = isAngleInArc(splitPointDeg - SAFE_ANGLE, splitPointDeg - 0.001, newAngleDeg);
+                        let t3 = splitPointDeg - SAFE_ANGLE;
+                        let t4 = splitPointDeg - 0.001;
+
+                        if(t3 < 0) t3 += 360;
+                        if(t4 < 0) t4 += 360;
+
+                        const counterClockwiseNew = isAngleInArc(t3, t4, newAngleDeg);
                         const counterClockwisePrev = isAngleInArc(splitPointDeg + 0.001, splitPointDeg + SAFE_ANGLE, prevAngleDegRef.current);
                         const counterClockwise = counterClockwiseNew && counterClockwisePrev;
 
