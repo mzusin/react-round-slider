@@ -22,8 +22,9 @@ export const RoundSlider = (props: ISettings) => {
     const [ data, setData ] = useState<IData|null>(null);
     const [ svg, setSvg ] = useState<ISvg|null>(null);
     const [ pointers, setPointers ] = useState<IPointers|null>(null);
-    const prevAngleDegRef = useRef<number|null>(null);
+    const [ selectedPointerId, setSelectedPointerId ] = useState('');
 
+    const prevAngleDegRef = useRef<number|null>(null);
     const svgRef = useRef<SVGSVGElement>(null);
 
     useEffect(() => {
@@ -142,25 +143,6 @@ export const RoundSlider = (props: ISettings) => {
                            prevAngleDegRef.current = newAngleDeg;
                         }
                     }
-
-                    /*
-                    if(prevAngleDegRef.current === null) {
-                        prevAngleDegRef.current = newAngleDeg;
-                    }
-                    else{
-                        const up = newAngleDeg > 180 && newAngleDeg < 270 && prevAngleDegRef.current < 180 && prevAngleDegRef.current >= 90;
-                        const down = newAngleDeg > 90 && newAngleDeg < 180 && prevAngleDegRef.current > 180 && prevAngleDegRef.current <= 270;
-
-                        if(up || down){
-                            console.log(prevAngleDegRef.current)
-                            return;
-                        }
-
-                       if(newAngleDeg !== 180) {
-                           prevAngleDegRef.current = newAngleDeg;
-                       }
-                    }
-                     */
                 }
             }
             else{
@@ -267,8 +249,10 @@ export const RoundSlider = (props: ISettings) => {
                         pointers={ pointers }
                         svg={ svg }
                         $svg={ svgRef.current }
-                        setPointer={ setPointersCallback }
                         data={ data }
+                        setPointer={ setPointersCallback }
+                        setSelectedPointerId={ setSelectedPointerId }
+                        selectedPointerId={ selectedPointerId }
                     />
 
                     <Text

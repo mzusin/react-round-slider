@@ -5,7 +5,7 @@ import {
     MouseEvent as ReactMouseEvent,
     TouchEvent as ReactTouchEvent,
     KeyboardEvent,
-    useRef, useCallback, MutableRefObject
+    useRef, useCallback,
 } from 'react';
 import { circleMovement, convertRange, degreesToRadians, Vector2 } from 'mz-math';
 import { ISettings } from '../domain/settings-provider';
@@ -19,20 +19,22 @@ export interface IPointerProps {
     pointer: IPointer;
     svg: ISvg;
     $svg: SVGSVGElement;
-    setPointer: (pointer: IPointer, newAngleDeg: number) => void;
     data: IData;
+    setPointer: (pointer: IPointer, newAngleDeg: number) => void;
+    setSelectedPointerId: (value: (((prevState: string) => string) | string)) => void;
+    selectedPointerId: string;
 }
 
 const getPointerFill = (
     pointer: IPointer,
-    pointerRef: MutableRefObject<SVGGElement>,
+    selectedPointerId: string,
     bgColor: string,
     bgColorSelected: string,
     bgColorDisabled: string
 ) => {
     if(pointer.disabled) return bgColorDisabled;
 
-    if(document.activeElement === pointerRef.current) {
+    if(pointer.id === selectedPointerId) {
         return bgColorSelected;
     }
 
@@ -44,8 +46,8 @@ const Pointer = (props: IPointerProps) => {
     const pointerRef = useRef<SVGGElement|null>(null);
 
     const {
-        pointer, svg, $svg,
-        setPointer, data, settings,
+        pointer, svg, $svg, data, settings,
+        setPointer, setSelectedPointerId, selectedPointerId,
     } = props;
 
     const {
@@ -92,6 +94,8 @@ const Pointer = (props: IPointerProps) => {
     const onValueChange = useCallback((evt: MouseEvent | ReactMouseEvent | TouchEvent | ReactTouchEvent) => {
         if(!$svg || settings.disabled || pointer.disabled) return;
 
+        setSelectedPointerId(pointer.id);
+
         const mouseX = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientX : (evt as TouchEvent).touches[0].clientX;
         const mouseY = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientY : (evt as TouchEvent).touches[0].clientY;
 
@@ -136,6 +140,7 @@ const Pointer = (props: IPointerProps) => {
         svg.radius,
         svg.startAngleDeg,
         settings.disabled,
+        setSelectedPointerId,
     ]);
 
     const onMouseUp = () => {
@@ -269,7 +274,7 @@ const Pointer = (props: IPointerProps) => {
                             cy={ radius/2 }
                             r={ radius }
 
-                            fill={ getPointerFill(pointer, pointerRef, bgColor, bgColorSelected, bgColorDisabled) }
+                            fill={ getPointerFill(pointer, selectedPointerId, bgColor, bgColorSelected, bgColorDisabled) }
                             strokeWidth={ border }
                             stroke={ borderColor }
                         />
