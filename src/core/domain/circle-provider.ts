@@ -11,8 +11,8 @@ export const isAngleInArc = (startAngleDeg: number, endAngleDeg: number, current
         endAngleDeg += 360;
     }
 
-    return currentDegrees >= startAngleDeg && currentDegrees <= endAngleDeg ||
-        (currentDegrees + 360) >= startAngleDeg && (currentDegrees + 360) <= endAngleDeg;
+    return (currentDegrees >= startAngleDeg && currentDegrees <= endAngleDeg) ||
+        ((currentDegrees + 360) >= startAngleDeg && (currentDegrees + 360) <= endAngleDeg);
 };
 
 export const getAnglesDistance = (startAngle: number, endAngle: number) => {

@@ -1523,6 +1523,7 @@ export const TestUseState2 = () => {
         <RoundSlider
             pointers={ pointers }
             onChange={ setPointers }
+            step={ 1 }
         />
     );
 };
@@ -1530,7 +1531,7 @@ export const TestUseState2 = () => {
 const App = () => {
     return (
         <>
-            { testMultiplePointers() }
+            {/*{ testMultiplePointers() }*/}
             {/*{ test2PointersOnCircle() }*/}
             {/*{ testTicksProperties() }
             { testCirclePathSegments() }

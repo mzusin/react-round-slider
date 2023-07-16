@@ -22,6 +22,7 @@ export const RoundSlider = (props: ISettings) => {
     const [ data, setData ] = useState<IData|null>(null);
     const [ svg, setSvg ] = useState<ISvg|null>(null);
     const [ pointers, setPointers ] = useState<IPointers|null>(null);
+    const prevAngleDegRef = useRef<number|null>(null);
 
     const svgRef = useRef<SVGSVGElement>(null);
 
@@ -114,17 +115,52 @@ export const RoundSlider = (props: ISettings) => {
                 prevAngle = prevPointer.angleDeg;
                 nextAngle = nextPointer.angleDeg;
 
-                if(pointers.pointers.length === 2) {
-                    const n = setDecimalPlaces(nextAngle + data.stepAngleDeg, 5);
-                    const p = setDecimalPlaces(prevAngle - data.stepAngleDeg, 5);
-                    const prevAngleDeg = setDecimalPlaces(pointer.prevAngleDeg, 5);
-                    const n1 = setDecimalPlaces(nextAngle - data.stepAngleDeg, 5);
-                    const p1 = setDecimalPlaces(prevAngle + data.stepAngleDeg, 5);
+                if(pointers.pointers.length === 2 && (prevAngle === nextAngle)) {
 
-                    if((newAngleDeg >= n && (prevAngleDeg === n1)) ||
-                        (newAngleDeg <= p && (prevAngleDeg === p1))){
-                        return;
+                    const splitPointDeg = prevAngle; // === nextAngle
+
+                    if(prevAngleDegRef.current === null) {
+                        prevAngleDegRef.current = newAngleDeg;
                     }
+                    else{
+                        // UP: new angle in (splitPointDeg, splitPointDeg + 90]
+                        // UP: prev angle in [splitPointDeg - 90, splitPointDeg)
+                        // Down: new angle in [splitPointDeg - 90, splitPointDeg)
+                        // Down: prev angle in (splitPointDeg, splitPointDeg + 90]
+
+                        const upNew = isAngleInArc(splitPointDeg + data.stepAngleDeg, splitPointDeg + 90, newAngleDeg);
+                        const upPrev = isAngleInArc(splitPointDeg - 90, splitPointDeg - data.stepAngleDeg, prevAngleDegRef.current);
+                        const up = upNew && upPrev;
+
+                        const downNew = isAngleInArc(splitPointDeg - 90, splitPointDeg - data.stepAngleDeg, newAngleDeg);
+                        const downPrev = isAngleInArc(splitPointDeg + data.stepAngleDeg, splitPointDeg + 90, prevAngleDegRef.current);
+                        const down = downNew && downPrev;
+
+                        if(up || down) return;
+
+                       if(newAngleDeg !== splitPointDeg) {
+                           prevAngleDegRef.current = newAngleDeg;
+                       }
+                    }
+
+                    /*
+                    if(prevAngleDegRef.current === null) {
+                        prevAngleDegRef.current = newAngleDeg;
+                    }
+                    else{
+                        const up = newAngleDeg > 180 && newAngleDeg < 270 && prevAngleDegRef.current < 180 && prevAngleDegRef.current >= 90;
+                        const down = newAngleDeg > 90 && newAngleDeg < 180 && prevAngleDegRef.current > 180 && prevAngleDegRef.current <= 270;
+
+                        if(up || down){
+                            console.log(prevAngleDegRef.current)
+                            return;
+                        }
+
+                       if(newAngleDeg !== 180) {
+                           prevAngleDegRef.current = newAngleDeg;
+                       }
+                    }
+                     */
                 }
             }
             else{
