@@ -1515,8 +1515,8 @@ export const TestUseState = () => {
 export const TestUseState2 = () => {
 
     const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
-        { value: 0, bgColor: 'red' },
-        { value: 50 }
+        { value: 80, bgColor: 'red' },
+        { value: 89 }
     ]);
 
     return (

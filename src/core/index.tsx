@@ -13,7 +13,7 @@ import Connection from './ui/Connection';
 import Text from './ui/Text';
 import Ticks from './ui/Ticks';
 import Circle from './ui/Circle';
-import { mod, setDecimalPlaces } from 'mz-math';
+import { mod } from 'mz-math';
 import { isAngleInArc } from './domain/circle-provider';
 import { outlineNoneStyle } from './domain/style-provider';
 
@@ -128,12 +128,13 @@ export const RoundSlider = (props: ISettings) => {
                         // Down: new angle in [splitPointDeg - 90, splitPointDeg)
                         // Down: prev angle in (splitPointDeg, splitPointDeg + 90]
 
-                        const upNew = isAngleInArc(splitPointDeg + data.stepAngleDeg, splitPointDeg + 90, newAngleDeg);
-                        const upPrev = isAngleInArc(splitPointDeg - 90, splitPointDeg - data.stepAngleDeg, prevAngleDegRef.current);
+                        const upNew = isAngleInArc(splitPointDeg + 0.001, splitPointDeg + 90, newAngleDeg);
+                        const upPrev = isAngleInArc(splitPointDeg - 90, splitPointDeg - 0.001, prevAngleDegRef.current);
                         const up = upNew && upPrev;
+                        //console.log(`upNew: [${ splitPointDeg + data.stepAngleDeg }] <= ${ newAngleDeg } <= ${ splitPointDeg + 90 }`, upNew)
 
-                        const downNew = isAngleInArc(splitPointDeg - 90, splitPointDeg - data.stepAngleDeg, newAngleDeg);
-                        const downPrev = isAngleInArc(splitPointDeg + data.stepAngleDeg, splitPointDeg + 90, prevAngleDegRef.current);
+                        const downNew = isAngleInArc(splitPointDeg - 90, splitPointDeg - 0.001, newAngleDeg);
+                        const downPrev = isAngleInArc(splitPointDeg + 0.001, splitPointDeg + 90, prevAngleDegRef.current);
                         const down = downNew && downPrev;
 
                         if(up || down) return;
