@@ -1,6 +1,5 @@
 import {
     Vector2,
-    newId,
     convertRange,
     mod,
     setDecimalPlaces,
@@ -117,7 +116,7 @@ const initPointers = (
         const angleDeg = mod(getNumber(settings.pathStartAngle, DEFAULT_PATH_START_ANGLE), 360);
 
         return [{
-            id: newId(),
+            id: '0',
             index: 0,
             radius: getNumber(settings.pointerRadius, DEFAULT_POINTER_RADIUS),
             angleDeg,
@@ -159,7 +158,7 @@ const initPointers = (
         }
 
         pointers.push({
-            id: newId(),
+            id: i.toString(),
             index: i,
             radius,
             angleDeg: angleAfterStep,
