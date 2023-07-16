@@ -64,11 +64,17 @@ const Ticks = (props: ITicksProps) => {
                                         y2={ y1 }
                                         strokeWidth={ ticksSettings.ticksWidth }
                                         stroke={ ticksSettings.ticksColor }
+
+                                        data-type="tick"
+                                        className="mz-round-slider-tick"
                                     />
 
                                     {
                                         showText &&
                                         <text
+                                            data-type="tick-text"
+                                            className="mz-round-slider-tick-text"
+
                                             x={ textX }
                                             y={ textY }
                                             textAnchor="middle"

@@ -1515,8 +1515,8 @@ export const TestUseState = () => {
 export const TestUseState2 = () => {
 
     const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
-        { value: 0, bgColor: 'red' },
-        { value: 90 }
+        { value: 6, bgColor: 'red' },
+        { value: 10 }
     ]);
 
     return (
@@ -1528,11 +1528,28 @@ export const TestUseState2 = () => {
     );
 };
 
+export const TestSmallCircle = () => {
+    const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+        { value: 0, bgColor: 'red' },
+        { value: 90 }
+    ]);
+
+    return (
+        <RoundSlider
+            pathRadius={ 50 }
+            pointers={ pointers }
+            onChange={ setPointers }
+            step={ 1 }
+        />
+    );
+};
+
 const App = () => {
     return (
         <>
-            { testMultiplePointers() }
-            { test2PointersOnCircle() }
+            {/*{ TestSmallCircle() }*/}
+            {/*{ testMultiplePointers() }
+            { test2PointersOnCircle() }*/}
             {/*{ testTicksProperties() }
             { testCirclePathSegments() }
             { testBorder() }

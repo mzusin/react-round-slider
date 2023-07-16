@@ -199,6 +199,7 @@ const Connection = (props: IConnectionProps) => {
                 !getBoolean(settings.hideConnection, false) && connection &&
                 <circle
                     data-type="connection"
+                    className="mz-round-slider-connection"
 
                     cx={ connection.cx }
                     cy={ connection.cy }

@@ -255,7 +255,8 @@ const Pointer = (props: IPointerProps) => {
                     aria-valuetext={ value }
                     aria-label={ pointer.ariaLabel }
 
-                    data-type={ 'pointer' }
+                    data-type="pointer"
+                    className={ `mz-round-slider-pointer ${ pointer.disabled ? 'mz-round-slider-pointer-disabled' : '' }` }
                     data-angle={ pointer.angleDeg }
                     data-id={ pointer.id }
                     data-index={ pointer.index }

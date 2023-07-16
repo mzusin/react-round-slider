@@ -130,6 +130,7 @@ const Circle = (props: ICircleProps) => {
                     strokeLinecap="round"
                     cursor="pointer"
                     data-type="path-border"
+                    className="mz-round-slider-path-border"
                 />
             }
 
@@ -146,6 +147,7 @@ const Circle = (props: ICircleProps) => {
                 strokeLinecap="round"
                 cursor="pointer"
                 data-type="path"
+                className="mz-round-slider-path"
             />
         </g>
     )

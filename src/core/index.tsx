@@ -129,12 +129,14 @@ export const RoundSlider = (props: ISettings) => {
                         // CounterClockwise: new angle in [splitPointDeg - 90, splitPointDeg)
                         // CounterClockwise: prev angle in (splitPointDeg, splitPointDeg + 90]
 
-                        const clockwiseNew = isAngleInArc(splitPointDeg + 0.001, splitPointDeg + 90, newAngleDeg);
-                        const clockwisePrev = isAngleInArc(splitPointDeg - 90, splitPointDeg - 0.001, prevAngleDegRef.current);
+                        const SAFE_ANGLE = 90;
+
+                        const clockwiseNew = isAngleInArc(splitPointDeg + 0.001, splitPointDeg + SAFE_ANGLE, newAngleDeg);
+                        const clockwisePrev = isAngleInArc(splitPointDeg - SAFE_ANGLE, splitPointDeg - 0.001, prevAngleDegRef.current);
                         const clockwise = clockwiseNew && clockwisePrev;
 
-                        const counterClockwiseNew = isAngleInArc(splitPointDeg - 90, splitPointDeg - 0.001, newAngleDeg);
-                        const counterClockwisePrev = isAngleInArc(splitPointDeg + 0.001, splitPointDeg + 90, prevAngleDegRef.current);
+                        const counterClockwiseNew = isAngleInArc(splitPointDeg - SAFE_ANGLE, splitPointDeg - 0.001, newAngleDeg);
+                        const counterClockwisePrev = isAngleInArc(splitPointDeg + 0.001, splitPointDeg + SAFE_ANGLE, prevAngleDegRef.current);
                         const counterClockwise = counterClockwiseNew && counterClockwisePrev;
 
                         if(clockwise || counterClockwise) {
@@ -223,7 +225,8 @@ export const RoundSlider = (props: ISettings) => {
                     tabIndex={ 0 }
                     focusable={ true }
                     aria-disabled={ props.disabled ? true : undefined }
-                    style={ props.svgBgColor ? { ...outlineNoneStyle, backgroundColor: props.svgBgColor } : outlineNoneStyle }>
+                    style={ props.svgBgColor ? { ...outlineNoneStyle, backgroundColor: props.svgBgColor } : outlineNoneStyle }
+                    className="mz-round-slider">
 
                     {
                         (props.SvgDefs) &&

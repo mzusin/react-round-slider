@@ -59,6 +59,9 @@ const Text = (props: ITextProps) => {
             {
                 !hideText &&
                 <text
+                    data-type="text"
+                    className="mz-round-slider-text"
+
                     x={ cx }
                     y={ cy }
                     fill={ getString(settings.textColor, DEFAULT_TEXT_COLOR) }
