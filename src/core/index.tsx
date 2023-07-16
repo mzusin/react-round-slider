@@ -123,25 +123,24 @@ export const RoundSlider = (props: ISettings) => {
                         prevAngleDegRef.current = newAngleDeg;
                     }
                     else{
-                        // UP: new angle in (splitPointDeg, splitPointDeg + 90]
-                        // UP: prev angle in [splitPointDeg - 90, splitPointDeg)
-                        // Down: new angle in [splitPointDeg - 90, splitPointDeg)
-                        // Down: prev angle in (splitPointDeg, splitPointDeg + 90]
+                        // Clockwise: new angle in (splitPointDeg, splitPointDeg + 90]
+                        // Clockwise: prev angle in [splitPointDeg - 90, splitPointDeg)
+                        // CounterClockwise: new angle in [splitPointDeg - 90, splitPointDeg)
+                        // CounterClockwise: prev angle in (splitPointDeg, splitPointDeg + 90]
 
-                        const upNew = isAngleInArc(splitPointDeg + 0.001, splitPointDeg + 90, newAngleDeg);
-                        const upPrev = isAngleInArc(splitPointDeg - 90, splitPointDeg - 0.001, prevAngleDegRef.current);
-                        const up = upNew && upPrev;
-                        //console.log(`upNew: [${ splitPointDeg + data.stepAngleDeg }] <= ${ newAngleDeg } <= ${ splitPointDeg + 90 }`, upNew)
+                        const clockwiseNew = isAngleInArc(splitPointDeg + 0.001, splitPointDeg + 90, newAngleDeg);
+                        const clockwisePrev = isAngleInArc(splitPointDeg - 90, splitPointDeg - 0.001, prevAngleDegRef.current);
+                        const clockwise = clockwiseNew && clockwisePrev;
 
-                        const downNew = isAngleInArc(splitPointDeg - 90, splitPointDeg - 0.001, newAngleDeg);
-                        const downPrev = isAngleInArc(splitPointDeg + 0.001, splitPointDeg + 90, prevAngleDegRef.current);
-                        const down = downNew && downPrev;
+                        const counterClockwiseNew = isAngleInArc(splitPointDeg - 90, splitPointDeg - 0.001, newAngleDeg);
+                        const counterClockwisePrev = isAngleInArc(splitPointDeg + 0.001, splitPointDeg + 90, prevAngleDegRef.current);
+                        const counterClockwise = counterClockwiseNew && counterClockwisePrev;
 
-                        if(up || down) return;
+                        if(clockwise || counterClockwise) return;
 
-                       if(newAngleDeg !== splitPointDeg) {
+                        if(newAngleDeg !== splitPointDeg) {
                            prevAngleDegRef.current = newAngleDeg;
-                       }
+                        }
                     }
 
                     /*

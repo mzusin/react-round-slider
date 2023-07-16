@@ -1515,8 +1515,8 @@ export const TestUseState = () => {
 export const TestUseState2 = () => {
 
     const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
-        { value: 80, bgColor: 'red' },
-        { value: 89 }
+        { value: 0, bgColor: 'red' },
+        { value: 90 }
     ]);
 
     return (
@@ -1531,8 +1531,8 @@ export const TestUseState2 = () => {
 const App = () => {
     return (
         <>
-            {/*{ testMultiplePointers() }*/}
-            {/*{ test2PointersOnCircle() }*/}
+            { testMultiplePointers() }
+            { test2PointersOnCircle() }
             {/*{ testTicksProperties() }
             { testCirclePathSegments() }
             { testBorder() }

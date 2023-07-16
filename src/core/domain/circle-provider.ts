@@ -7,6 +7,11 @@ export interface ICircle {
 
 export const isAngleInArc = (startAngleDeg: number, endAngleDeg: number, currentDegrees: number) : boolean => {
 
+    if(startAngleDeg < 0 && endAngleDeg < 0) {
+        startAngleDeg += 360;
+        endAngleDeg += 360;
+    }
+
     if(startAngleDeg > endAngleDeg) {
         endAngleDeg += 360;
     }
