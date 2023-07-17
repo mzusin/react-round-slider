@@ -110,7 +110,6 @@ const pathOptionsSlider = () => {
                 pathInnerBgColor={ '#efefef' }
                 pathBorder={ 2 }
                 pathBorderColor={ '#28586c' }
-
                 pointers={ pointers }
                 onChange={ setPointers }
             />

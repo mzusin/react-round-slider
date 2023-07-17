@@ -16,8 +16,8 @@
   <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32.png" />
   <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16.png" />
 
-  <link rel="stylesheet" href="/css/styles.1689611484066.css" />
-  <!--<link rel="stylesheet" href="/js/index.1689611484066.css" />-->
+  <link rel="stylesheet" href="/css/styles.1689611816420.css" />
+  <!--<link rel="stylesheet" href="/js/index.1689611816420.css" />-->
 
 </head>
 <body class="h-screen flex flex-col font-roboto bg-white dark:bg-slate-900 dark:text-slate-100">
@@ -158,6 +158,11 @@
     <span class="hljs-comment">// This color is applied to the circular track inside the slider path. </span>
     <span class="hljs-comment">// The default value = undefined.</span>
     pathInnerBgColor?: <span class="hljs-built_in">string</span>;
+
+    <span class="hljs-comment">// A boolean specifying the whether the inner background </span>
+    <span class="hljs-comment">// will be the full circle.</span>
+    <span class="hljs-comment">// The default value = undefine</span>
+    pathInnerBgFull?: <span class="hljs-built_in">boolean</span>;
     
     <span class="hljs-comment">// A number representing the border width of the slider path. </span>
     <span class="hljs-comment">// This determines the width of the border around the circular track. </span>
@@ -176,41 +181,24 @@
 
     <span class="hljs-keyword">const</span> [ pointers, setPointers ] = useState&lt;<span class="hljs-title class_">ISettingsPointer</span>[]&gt;([
         {
-            <span class="hljs-attr">value</span>: <span class="hljs-number">0</span>,
-            <span class="hljs-attr">radius</span>: <span class="hljs-number">25</span>,
-            <span class="hljs-attr">bgColor</span>: <span class="hljs-string">&#x27;#c20cff&#x27;</span>,
-            <span class="hljs-attr">bgColorSelected</span>: <span class="hljs-string">&#x27;#8e3da4&#x27;</span>,
-            <span class="hljs-attr">border</span>: <span class="hljs-number">1</span>,
-            <span class="hljs-attr">borderColor</span>: <span class="hljs-string">&#x27;#501062&#x27;</span>,
-        },
-        {
-            <span class="hljs-attr">value</span>: <span class="hljs-number">25</span>,
-            <span class="hljs-attr">radius</span>: <span class="hljs-number">20</span>,
-            <span class="hljs-attr">bgColor</span>: <span class="hljs-string">&#x27;#4be28c&#x27;</span>,
-            <span class="hljs-attr">bgColorSelected</span>: <span class="hljs-string">&#x27;#368c75&#x27;</span>,
-            <span class="hljs-attr">border</span>: <span class="hljs-number">1</span>,
-            <span class="hljs-attr">borderColor</span>: <span class="hljs-string">&#x27;#226452&#x27;</span>,
-        },
-        {
-            <span class="hljs-attr">value</span>: <span class="hljs-number">50</span>,
-            <span class="hljs-attr">radius</span>: <span class="hljs-number">15</span>,
-            <span class="hljs-attr">bgColor</span>: <span class="hljs-string">&#x27;#5691d5&#x27;</span>,
-            <span class="hljs-attr">bgColorSelected</span>: <span class="hljs-string">&#x27;#3173b4&#x27;</span>,
-            <span class="hljs-attr">border</span>: <span class="hljs-number">1</span>,
-            <span class="hljs-attr">borderColor</span>: <span class="hljs-string">&#x27;#18388a&#x27;</span>,
-        },
-        {
-            <span class="hljs-attr">value</span>: <span class="hljs-number">75</span>,
-            <span class="hljs-attr">radius</span>: <span class="hljs-number">10</span>,
-            <span class="hljs-attr">bgColor</span>: <span class="hljs-string">&#x27;#ffb800&#x27;</span>,
-            <span class="hljs-attr">bgColorSelected</span>: <span class="hljs-string">&#x27;#bd8802&#x27;</span>,
-            <span class="hljs-attr">border</span>: <span class="hljs-number">1</span>,
-            <span class="hljs-attr">borderColor</span>: <span class="hljs-string">&#x27;#775403&#x27;</span>,
+            <span class="hljs-attr">value</span>: <span class="hljs-number">50</span>
         }
     ]);
 
     <span class="hljs-keyword">return</span> (
         <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">RoundSlider</span>
+            <span class="hljs-attr">pathStartAngle</span>=<span class="hljs-string">{</span> <span class="hljs-attr">0</span> }
+            <span class="hljs-attr">pathEndAngle</span>=<span class="hljs-string">{</span> <span class="hljs-attr">180</span> }
+            
+            <span class="hljs-attr">pathRadius</span>=<span class="hljs-string">{</span> <span class="hljs-attr">150</span> }
+            <span class="hljs-attr">pathThickness</span>=<span class="hljs-string">{</span> <span class="hljs-attr">15</span> }
+            
+            <span class="hljs-attr">pathBgColor</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">efefef</span>&#x27; }
+            <span class="hljs-attr">pathInnerBgColor</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">efefef</span>&#x27; }
+            
+            <span class="hljs-attr">pathBorder</span>=<span class="hljs-string">{</span> <span class="hljs-attr">2</span> }
+            <span class="hljs-attr">pathBorderColor</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">28586c</span>&#x27; }
+            
             <span class="hljs-attr">pointers</span>=<span class="hljs-string">{</span> <span class="hljs-attr">pointers</span> }
             <span class="hljs-attr">onChange</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setPointers</span> }
         /&gt;</span></span>
@@ -243,6 +231,6 @@
   </div>
 </footer>-->
 
-<script src="/js/index.1689611484066.js"></script>
+<script src="/js/index.1689611816420.js"></script>
 </body>
 </html>

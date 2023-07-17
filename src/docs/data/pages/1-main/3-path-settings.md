@@ -39,6 +39,11 @@ export interface ISettings {
     // This color is applied to the circular track inside the slider path. 
     // The default value = undefined.
     pathInnerBgColor?: string;
+
+    // A boolean specifying the whether the inner background 
+    // will be the full circle.
+    // The default value = undefine
+    pathInnerBgFull?: boolean;
     
     // A number representing the border width of the slider path. 
     // This determines the width of the border around the circular track. 
@@ -61,41 +66,24 @@ const Component = () => {
 
     const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
         {
-            value: 0,
-            radius: 25,
-            bgColor: '#c20cff',
-            bgColorSelected: '#8e3da4',
-            border: 1,
-            borderColor: '#501062',
-        },
-        {
-            value: 25,
-            radius: 20,
-            bgColor: '#4be28c',
-            bgColorSelected: '#368c75',
-            border: 1,
-            borderColor: '#226452',
-        },
-        {
-            value: 50,
-            radius: 15,
-            bgColor: '#5691d5',
-            bgColorSelected: '#3173b4',
-            border: 1,
-            borderColor: '#18388a',
-        },
-        {
-            value: 75,
-            radius: 10,
-            bgColor: '#ffb800',
-            bgColorSelected: '#bd8802',
-            border: 1,
-            borderColor: '#775403',
+            value: 50
         }
     ]);
 
     return (
         <RoundSlider
+            pathStartAngle={ 0 }
+            pathEndAngle={ 180 }
+            
+            pathRadius={ 150 }
+            pathThickness={ 15 }
+            
+            pathBgColor={ '#efefef' }
+            pathInnerBgColor={ '#efefef' }
+            
+            pathBorder={ 2 }
+            pathBorderColor={ '#28586c' }
+            
             pointers={ pointers }
             onChange={ setPointers }
         />
