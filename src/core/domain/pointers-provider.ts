@@ -11,7 +11,10 @@ import { ISettings } from './settings-provider';
 import {
     DEFAULT_PATH_END_ANGLE,
     DEFAULT_PATH_START_ANGLE,
-    DEFAULT_POINTER_BG_COLOR, DEFAULT_POINTER_BG_COLOR_DISABLED, DEFAULT_POINTER_BG_COLOR_SELECTED,
+    DEFAULT_POINTER_BG_COLOR,
+    DEFAULT_POINTER_BG_COLOR_DISABLED,
+    DEFAULT_POINTER_BG_COLOR_HOVER,
+    DEFAULT_POINTER_BG_COLOR_SELECTED,
     DEFAULT_POINTER_BORDER,
     DEFAULT_POINTER_BORDER_COLOR,
     DEFAULT_POINTER_RADIUS,
@@ -26,11 +29,15 @@ export interface IPointer {
     radius: number;
     angleDeg: number;
     prevAngleDeg: number;
+
     bgColor: string;
     bgColorSelected: string;
     bgColorDisabled: string;
+    bgColorHover: string;
+
     border: number;
     borderColor: string;
+
     disabled: boolean;
     ariaLabel?: string;
 }
@@ -115,15 +122,21 @@ const initPointers = (
     if(!settings || !settings.pointers || settings.pointers.length < 0 || !data) {
         const angleDeg = mod(getNumber(settings.pathStartAngle, DEFAULT_PATH_START_ANGLE), 360);
 
+        const bgColor = getString(settings.pointerBgColor, DEFAULT_POINTER_BG_COLOR);
+        const bgColorSelected = getString(settings.pointerBgColorSelected, DEFAULT_POINTER_BG_COLOR_SELECTED);
+        const bgColorDisabled = getString(settings.pointerBgColorDisabled, DEFAULT_POINTER_BG_COLOR_DISABLED);
+        const bgColorHover = getString(settings.pointerBgColorHover, DEFAULT_POINTER_BG_COLOR_HOVER);
+
         return [{
             id: '0',
             index: 0,
             radius: getNumber(settings.pointerRadius, DEFAULT_POINTER_RADIUS),
             angleDeg,
             prevAngleDeg: angleDeg,
-            bgColor: getString(settings.pointerBgColor, DEFAULT_POINTER_BG_COLOR),
-            bgColorSelected: getString(settings.pointerBgColorSelected, DEFAULT_POINTER_BG_COLOR_SELECTED),
-            bgColorDisabled: getString(settings.pointerBgColorDisabled, DEFAULT_POINTER_BG_COLOR_DISABLED),
+            bgColor,
+            bgColorSelected,
+            bgColorDisabled,
+            bgColorHover,
             border: getNumber(settings.pointerBorder, DEFAULT_POINTER_BORDER),
             borderColor: getString(settings.pointerBorderColor, DEFAULT_POINTER_BORDER_COLOR),
             disabled: !!settings.disabled,
@@ -139,8 +152,11 @@ const initPointers = (
         const bgColor = settingPointer.bgColor ? settingPointer.bgColor : getString(settings.pointerBgColor, DEFAULT_POINTER_BG_COLOR);
         const bgColorSelected = settingPointer.bgColorSelected ? settingPointer.bgColorSelected : getString(settings.pointerBgColorSelected, DEFAULT_POINTER_BG_COLOR_SELECTED);
         const bgColorDisabled = settingPointer.bgColorDisabled ? settingPointer.bgColorDisabled : getString(settings.pointerBgColorDisabled, DEFAULT_POINTER_BG_COLOR_DISABLED);
+        const bgColorHover = settingPointer.bgColorHover ? settingPointer.bgColorHover : getString(settings.pointerBgColorHover, DEFAULT_POINTER_BG_COLOR_HOVER);
+
         const border = settingPointer.border ? settingPointer.border : getNumber(settings.pointerBorder, DEFAULT_POINTER_BORDER);
         const borderColor = settingPointer.borderColor ? settingPointer.borderColor : getString(settings.pointerBorderColor, DEFAULT_POINTER_BORDER_COLOR);
+
         const disabled = settingPointer.disabled !== undefined ? settingPointer.disabled : getBoolean(settings.disabled, false);
         const pathStartAngle = getNumber(settings.pathStartAngle, DEFAULT_PATH_START_ANGLE);
         const pathEndAngle = getNumber(settings.pathEndAngle, DEFAULT_PATH_END_ANGLE);
@@ -163,11 +179,15 @@ const initPointers = (
             radius,
             angleDeg: angleAfterStep,
             prevAngleDeg: angleAfterStep,
+
             bgColor,
             bgColorSelected,
             bgColorDisabled,
+            bgColorHover,
+
             border,
             borderColor,
+
             disabled,
             ariaLabel: settingPointer.ariaLabel,
         });

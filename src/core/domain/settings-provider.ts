@@ -31,6 +31,7 @@ export interface ISettings {
     pointerBgColor?: string;
     pointerBgColorSelected?: string;
     pointerBgColorDisabled?: string;
+    pointerBgColorHover?: string;
     pointerBorder?: number;
     pointerBorderColor?: string;
     pointersOverlap?: boolean;
@@ -90,6 +91,7 @@ export interface ISettingsPointer {
     bgColor?: string;
     bgColorSelected?: string;
     bgColorDisabled?: string;
+    bgColorHover?: string;
     border?: number;
     borderColor?: string;
     disabled?: boolean;

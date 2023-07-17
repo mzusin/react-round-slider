@@ -13,6 +13,7 @@ import { ISvg } from '../domain/svg-provider';
 import { isAngleInArc } from '../domain/circle-provider';
 import { IData } from '../domain/data-provider';
 import { outlineNoneStyle } from '../domain/style-provider';
+import { DEFAULT_POINTER_BG_COLOR } from '../domain/defaults-provider';
 
 export interface IPointerProps {
     settings: ISettings;
@@ -30,9 +31,13 @@ const getPointerFill = (
     selectedPointerId: string,
     bgColor: string,
     bgColorSelected: string,
-    bgColorDisabled: string
+    bgColorDisabled: string,
+    bgColorHover: string,
+    isMouseOver: boolean
 ) => {
     if(pointer.disabled) return bgColorDisabled;
+
+    if(isMouseOver) return bgColorHover;
 
     if(pointer.id === selectedPointerId) {
         return bgColorSelected;
@@ -56,6 +61,7 @@ const Pointer = (props: IPointerProps) => {
         bgColor,
         bgColorSelected,
         bgColorDisabled,
+        bgColorHover,
         border,
         borderColor,
     } = props.pointer;
@@ -64,6 +70,28 @@ const Pointer = (props: IPointerProps) => {
 
     const [ center, setCenter ] = useState<Vector2|null>(null);
     const [ value, setValue ] = useState<string>('');
+    const [ fill, setFill ] = useState(DEFAULT_POINTER_BG_COLOR);
+    const [ isMouseOver, setIsMouseOver ] = useState(false);
+
+    useEffect(() => {
+        setFill(getPointerFill(
+            pointer,
+            selectedPointerId,
+            bgColor,
+            bgColorSelected,
+            bgColorDisabled,
+            bgColorHover,
+            isMouseOver
+        ));
+    }, [
+        pointer,
+        selectedPointerId,
+        bgColor,
+        bgColorSelected,
+        bgColorDisabled,
+        bgColorHover,
+        isMouseOver
+    ]);
 
     useEffect(() => {
         const value = angle2value(
@@ -241,6 +269,14 @@ const Pointer = (props: IPointerProps) => {
         settings.mousewheelDisabled,
     ]);
 
+    const onMouseOver = () => {
+        setIsMouseOver(true);
+    };
+
+    const onMouseOut = () => {
+        setIsMouseOver(false);
+    };
+
     return (
         <>
             {
@@ -263,6 +299,8 @@ const Pointer = (props: IPointerProps) => {
 
                     onMouseDown={ onMouseDown }
                     onKeyDown={ onKeyDown }
+                    onMouseOver={ onMouseOver }
+                    onMouseOut={ onMouseOut }
                     tabIndex={ 0 }
 
                     cursor={ pointer.disabled ? 'default' : 'pointer' }
@@ -274,8 +312,7 @@ const Pointer = (props: IPointerProps) => {
                             cx={ radius/2 }
                             cy={ radius/2 }
                             r={ radius }
-
-                            fill={ getPointerFill(pointer, selectedPointerId, bgColor, bgColorSelected, bgColorDisabled) }
+                            fill={ fill }
                             strokeWidth={ border }
                             stroke={ borderColor }
                         />
