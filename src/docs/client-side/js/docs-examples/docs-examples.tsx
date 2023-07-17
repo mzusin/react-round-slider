@@ -19,6 +19,7 @@ const gettingStartedSlider = () => {
             <RoundSlider
                 pointers={ pointers }
                 onChange={ setPointers }
+                textColor={ '#8993B7' }
             />
         );
     };
@@ -76,6 +77,7 @@ const pointerOptionsSlider = () => {
             <RoundSlider
                 pointers={ pointers }
                 onChange={ setPointers }
+                textColor={ '#8993B7' }
             />
         );
     };
