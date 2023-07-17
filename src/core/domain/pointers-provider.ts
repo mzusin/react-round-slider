@@ -13,7 +13,6 @@ import {
     DEFAULT_PATH_START_ANGLE,
     DEFAULT_POINTER_BG_COLOR,
     DEFAULT_POINTER_BG_COLOR_DISABLED,
-    DEFAULT_POINTER_BG_COLOR_HOVER,
     DEFAULT_POINTER_BG_COLOR_SELECTED,
     DEFAULT_POINTER_BORDER,
     DEFAULT_POINTER_BORDER_COLOR,
@@ -125,7 +124,7 @@ const initPointers = (
         const bgColor = getString(settings.pointerBgColor, DEFAULT_POINTER_BG_COLOR);
         const bgColorSelected = getString(settings.pointerBgColorSelected, DEFAULT_POINTER_BG_COLOR_SELECTED);
         const bgColorDisabled = getString(settings.pointerBgColorDisabled, DEFAULT_POINTER_BG_COLOR_DISABLED);
-        const bgColorHover = getString(settings.pointerBgColorHover, DEFAULT_POINTER_BG_COLOR_HOVER);
+        const bgColorHover = getString(settings.pointerBgColorHover, bgColorSelected);
 
         return [{
             id: '0',
@@ -152,7 +151,7 @@ const initPointers = (
         const bgColor = settingPointer.bgColor ? settingPointer.bgColor : getString(settings.pointerBgColor, DEFAULT_POINTER_BG_COLOR);
         const bgColorSelected = settingPointer.bgColorSelected ? settingPointer.bgColorSelected : getString(settings.pointerBgColorSelected, DEFAULT_POINTER_BG_COLOR_SELECTED);
         const bgColorDisabled = settingPointer.bgColorDisabled ? settingPointer.bgColorDisabled : getString(settings.pointerBgColorDisabled, DEFAULT_POINTER_BG_COLOR_DISABLED);
-        const bgColorHover = settingPointer.bgColorHover ? settingPointer.bgColorHover : getString(settings.pointerBgColorHover, DEFAULT_POINTER_BG_COLOR_HOVER);
+        const bgColorHover = settingPointer.bgColorHover ? settingPointer.bgColorHover : getString(settings.pointerBgColorHover, bgColorSelected);
 
         const border = settingPointer.border ? settingPointer.border : getNumber(settings.pointerBorder, DEFAULT_POINTER_BORDER);
         const borderColor = settingPointer.borderColor ? settingPointer.borderColor : getString(settings.pointerBorderColor, DEFAULT_POINTER_BORDER_COLOR);
