@@ -263,6 +263,10 @@ const Connection = (props: IConnectionProps) => {
                     onMouseDown={ onMouseDown }
                     onMouseOver={ onMouseOver }
                     onMouseOut={ onMouseOut }
+
+                    style={{
+                        transition: '0.2s stroke',
+                    }}
                 />
             }
         </>

@@ -315,6 +315,9 @@ const Pointer = (props: IPointerProps) => {
                             fill={ fill }
                             strokeWidth={ border }
                             stroke={ borderColor }
+                            style={{
+                                transition: '0.3s fill',
+                            }}
                         />
                     }
 
