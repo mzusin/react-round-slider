@@ -25,6 +25,7 @@ const initColorSlider = () => {
                 pathBgColor={ '#d0d0d0' }
                 pathThickness={ 5 }
                 pathInnerBgColor={ 'url(#color-slider-gradient)' }
+                pathInnerBgFull={ true }
                 connectionBgColor={ '#939191' }
 
                 pointerBgColor={ '#fff' }

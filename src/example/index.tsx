@@ -939,6 +939,16 @@ export const testStyling = () => {
     return (
         <>
             <RoundSlider
+                pathStartAngle={ 45 }
+                pathEndAngle={ 190 }
+                pathRadius={ 150 }
+                pathThickness={ 15 }
+                pathBgColor={ '#efefef' }
+                pathBorder={ 2 }
+                pathBorderColor={ '#28586c' }
+            />
+
+            <RoundSlider
                 pathRadius={ 150 }
                 pathStartAngle={ 0 }
                 pathEndAngle={ 180 }
@@ -1545,9 +1555,73 @@ export const TestSmallCircle = () => {
     );
 };
 
+export const testInnerCircle = () => {
+    return (
+        <>
+            <RoundSlider pathInnerBgColor={ '#fff7b1' } />
+
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 90 }
+                pathInnerBgColor={ '#fff7b1' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+                pathInnerBgColor={ '#fff7b1' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 90 }
+                pathEndAngle={ 180 }
+                pathInnerBgColor={ '#fff7b1' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 270 }
+                pathInnerBgColor={ '#fff7b1' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 180 }
+                pathEndAngle={ 360 }
+                pathInnerBgColor={ '#fff7b1' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 360 }
+                pathInnerBgColor={ '#fff7b1' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 90 }
+                pathInnerBgColor={ '#fff7b1' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 180 }
+                pathInnerBgColor={ '#fff7b1' }
+            />
+
+            <RoundSlider
+                pathStartAngle={ 90 }
+                pathEndAngle={ 270 }
+                pathInnerBgColor={ '#fff7b1' }
+            />
+
+        </>
+    )
+};
+
 const App = () => {
     return (
         <>
+            { testInnerCircle() }
             {/*{ TestSmallCircle() }*/}
             {/*{ testMultiplePointers() }
             { test2PointersOnCircle() }*/}
@@ -1559,7 +1633,7 @@ const App = () => {
             { testOverlap() }
             { testDisabled() }
             { testEvents() }*/}
-            { testStyling() }
+            {/*{ testStyling() }*/}
             {/*{ testRangeDragging() }*/}
             {/*{ testAnimateOnClick() }*/}
             {/*{ <TestUseState /> }*/}

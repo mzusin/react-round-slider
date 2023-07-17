@@ -9,8 +9,9 @@ import {
 } from '../domain/defaults-provider';
 import { ISvg } from '../domain/svg-provider';
 import { getAngleByMouse, getClosestPointer, IPointer, IPointers } from '../domain/pointers-provider';
-import { animate, IAnimationResult } from 'mz-math';
+import { animate, IAnimationResult, newId } from 'mz-math';
 import { getAnimationProgressAngle } from '../domain/animation-provider';
+import InnerCircle from './InnerCircle';
 
 interface ICircleProps {
     settings: ISettings;
@@ -25,6 +26,7 @@ const Circle = (props: ICircleProps) => {
     const { settings, pointers, $svg, svg, setPointer } = props;
 
     const [ animation, setAnimation ] = useState<IAnimationResult|null>(null);
+    const [ maskId ] = useState(newId());
     const [ circle, setCircle ] = useState<ICircle>({
         strokeDasharray: '0 1000000',
         strokeOffset: 0,
@@ -118,19 +120,11 @@ const Circle = (props: ICircleProps) => {
 
             {
                 settings.pathInnerBgColor &&
-                <circle
-                    strokeDasharray={ circle.strokeDasharray }
-                    strokeDashoffset={ circle.strokeOffset }
-                    cx={ svg.cx }
-                    cy={ svg.cy }
-                    r={ svg.radius }
-                    stroke={ 'transparent' }
-                    strokeWidth={ svg.thickness }
-                    fill={ settings.pathInnerBgColor }
-                    shapeRendering="geometricPrecision"
-                    strokeLinecap="round"
-                    data-type="path-inner"
-                    className="mz-round-slider-path-inner"
+                <InnerCircle
+                    maskId={ maskId }
+                    settings={ settings }
+                    svg={ svg }
+                    circle={ circle }
                 />
             }
 
