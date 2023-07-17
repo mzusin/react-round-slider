@@ -1,6 +1,6 @@
-# ISettingsPointer Interface  
+# Pointer Settings
 
-This interface represents the configuration options for the slider pointers:
+ISettingsPointer interface represents the configuration options for the slider pointers:
 
 <br/>
 <div id="pointer-options-slider"></div>
@@ -30,6 +30,10 @@ export interface ISettingsPointer {
     // The background color of the pointer when it is disabled.
     // Default value = #a8a8a8.
     bgColorDisabled?: string;
+
+    // The background color of the pointer when it is hovered.
+    // Default value is the same as bgColor.
+    bgColorHover?: string;
 
     // The width of the border around the pointer in SVG units.
     // Default value = 0.

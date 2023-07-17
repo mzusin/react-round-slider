@@ -115,6 +115,25 @@ const Circle = (props: ICircleProps) => {
 
     return (
         <g onClick={ onClick }>
+
+            {
+                settings.pathInnerBgColor &&
+                <circle
+                    strokeDasharray={ circle.strokeDasharray }
+                    strokeDashoffset={ circle.strokeOffset }
+                    cx={ svg.cx }
+                    cy={ svg.cy }
+                    r={ svg.radius }
+                    stroke={ 'transparent' }
+                    strokeWidth={ svg.thickness }
+                    fill={ settings.pathInnerBgColor }
+                    shapeRendering="geometricPrecision"
+                    strokeLinecap="round"
+                    data-type="path-inner"
+                    className="mz-round-slider-path-inner"
+                />
+            }
+
             {
                 svg.border > 0 &&
                 <circle
@@ -142,7 +161,7 @@ const Circle = (props: ICircleProps) => {
                 r={ svg.radius }
                 stroke={ getString(settings.pathBgColor, DEFAULT_PATH_BG_COLOR) }
                 strokeWidth={ svg.thickness }
-                fill={ settings.pathInnerBgColor ? settings.pathInnerBgColor : 'none' }
+                fill="none"
                 shapeRendering="geometricPrecision"
                 strokeLinecap="round"
                 cursor="pointer"

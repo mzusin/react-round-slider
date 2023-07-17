@@ -16,8 +16,8 @@
   <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32.png" />
   <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16.png" />
 
-  <link rel="stylesheet" href="/css/styles.1689538570699.css" />
-  <!--<link rel="stylesheet" href="/js/index.1689538570699.css" />-->
+  <link rel="stylesheet" href="/css/styles.1689605463009.css" />
+  <!--<link rel="stylesheet" href="/js/index.1689605463009.css" />-->
 
 </head>
 <body class="h-screen flex flex-col font-roboto bg-white dark:bg-slate-900 dark:text-slate-100">
@@ -116,13 +116,13 @@
           <path d="m7 7 5 5-5 5m6-10 5 5-5 5"/>
         </svg>
 
-    </div><div class="flex flex-col" data-links><a href="/pages/basic-usage.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Basic Usage</a><a href="/pages/isettings-pointer-interface.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600  text-sky-500">ISettingsPointer Interface</a></div>
+    </div><div class="flex flex-col" data-links><a href="/pages/basic-usage.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Basic Usage</a><a href="/pages/pointer-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-sky-500">Pointer Settings</a><a href="/pages/path-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600  text-slate-500">Path Settings</a></div>
       </div>
     </div>
 
     <div class="p-4 overflow-y-auto h-full md:w-100-350 dark:bg-slate-800">
-      <div class="w-800 max-w-full mx-auto my-10 leading-7 text-lg text-slate-800 dark:text-slate-200"><h1 class="text-3xl mb-8">ISettingsPointer Interface</h1>
-<p class="mb-4">This interface represents the configuration options for the slider pointers:</p>
+      <div class="w-800 max-w-full mx-auto my-10 leading-7 text-lg text-slate-800 dark:text-slate-200"><h1 class="text-3xl mb-8">Pointer Settings</h1>
+<p class="mb-4">ISettingsPointer interface represents the configuration options for the slider pointers:</p>
 <br/>
 <div id="pointer-options-slider"></div>
 <br/>
@@ -149,6 +149,10 @@
     <span class="hljs-comment">// The background color of the pointer when it is disabled.</span>
     <span class="hljs-comment">// Default value = #a8a8a8.</span>
     bgColorDisabled?: <span class="hljs-built_in">string</span>;
+
+    <span class="hljs-comment">// The background color of the pointer when it is hovered.</span>
+    <span class="hljs-comment">// Default value is the same as bgColor.</span>
+    bgColorHover?: <span class="hljs-built_in">string</span>;
 
     <span class="hljs-comment">// The width of the border around the pointer in SVG units.</span>
     <span class="hljs-comment">// Default value = 0.</span>
@@ -215,7 +219,7 @@
 };</code></pre>
 </div>
 
-      <div class="w-800 max-w-full mx-auto grid  gap-8 items-center text-slate-500">
+      <div class="w-800 max-w-full mx-auto grid lg:grid-cols-2 gap-8 items-center text-slate-500">
 <div class="flex justify-between items-start border border-slate-200 rounded p-4">
   <a href="/pages/basic-usage.html" title="" class="mr-4 hover:text-blue-500">
     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
@@ -228,6 +232,21 @@
     <a href="/pages/basic-usage.html" title="" class="hover:text-blue-500">Basic Usage</a>
   </div>
 </div>      
+    
+<div class="flex justify-between items-start border border-slate-200 rounded p-4">
+  
+  <div class="flex flex-col justify-center">
+    <div class="mb-2 text-sm text-slate-300">Next</div>
+    <a href="/pages/path-settings.html" title="" class="hover:text-blue-500">Path Settings</a>
+  </div>
+  
+  <a href="/pages/path-settings.html" title="" class="mr-4 hover:text-blue-500">
+    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
+     <path stroke="none" d="M0 0h24v24H0z"/>
+     <path d="M5 12h14m-6 6 6-6m-6-6 6 6"/>
+  </svg>
+  </a>
+</div>  
     </div>
     </div>
 
@@ -240,6 +259,6 @@
   </div>
 </footer>-->
 
-<script src="/js/index.1689538570699.js"></script>
+<script src="/js/index.1689605463009.js"></script>
 </body>
 </html>

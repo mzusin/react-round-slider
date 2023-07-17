@@ -88,8 +88,45 @@ const pointerOptionsSlider = () => {
     );
 };
 
-export const initDocsExamples = () => {
+const pathOptionsSlider = () => {
+    const $slider = document.getElementById('path-options-slider') as HTMLElement;
+    if(!$slider) return;
 
+    const Component = () => {
+
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+            {
+                value: 50
+            }
+        ]);
+
+        return (
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+                pathRadius={ 150 }
+                pathThickness={ 15 }
+                pathBgColor={ '#efefef' }
+                pathInnerBgColor={ '#efefef' }
+                pathBorder={ 2 }
+                pathBorderColor={ '#28586c' }
+
+                pointers={ pointers }
+                onChange={ setPointers }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
+export const initDocsExamples = () => {
     gettingStartedSlider();
     pointerOptionsSlider();
+    pathOptionsSlider();
 };

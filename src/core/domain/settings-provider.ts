@@ -17,8 +17,8 @@ export interface ISettings {
     round?: number;
 
     // path -----------------
-    pathStartAngle?: number,
-    pathEndAngle?: number,
+    pathStartAngle?: number;
+    pathEndAngle?: number;
     pathRadius?: number;
     pathThickness?: number;
     pathBgColor?: string;
