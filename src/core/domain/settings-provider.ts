@@ -53,6 +53,8 @@ export interface ISettings {
     textColor?: string;
     textFontSize?: number;
     textFontFamily?: string;
+    textOffsetX?: number;
+    textOffsetY?: number;
 
     // ticks -----------------
     enableTicks?: boolean;

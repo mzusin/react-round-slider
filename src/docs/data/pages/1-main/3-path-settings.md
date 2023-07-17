@@ -74,16 +74,21 @@ const Component = () => {
         <RoundSlider
             pathStartAngle={ 0 }
             pathEndAngle={ 180 }
-            
+
             pathRadius={ 150 }
             pathThickness={ 15 }
-            
+
             pathBgColor={ '#efefef' }
             pathInnerBgColor={ '#efefef' }
-            
+
             pathBorder={ 2 }
             pathBorderColor={ '#28586c' }
-            
+
+            textOffsetY={ 70 }
+            textFontSize={ 24 }
+            textSuffix={ '°' }
+            textPrefix={ ' '}
+
             pointers={ pointers }
             onChange={ setPointers }
         />

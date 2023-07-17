@@ -62,15 +62,18 @@ const Text = (props: ITextProps) => {
                     data-type="text"
                     className="mz-round-slider-text"
 
-                    x={ cx }
-                    y={ cy }
+                    x={ cx + getNumber(settings.textOffsetX, 0) }
+                    y={ cy + getNumber(settings.textOffsetY, 0) }
+
                     fill={ getString(settings.textColor, DEFAULT_TEXT_COLOR) }
                     fontSize={ getNumber(settings.textFontSize, DEFAULT_TEXT_FONT_SIZE) }
                     fontFamily={ settings.textFontFamily }
+
                     style={{
                         userSelect: 'none',
                         whiteSpace: 'pre',
                     }}
+
                     textAnchor="middle">
 
                     { value }
