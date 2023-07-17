@@ -33,17 +33,53 @@ interface IConnectionProps {
     setPointer: (pointer: IPointer, newAngleDeg: number) => void;
 }
 
+const getStroke = (
+    disabled: boolean,
+    connectionBgColorDisabled: string,
+    connectionBgColor: string,
+    isMouseOver: boolean,
+    connectionBgColorHover: string
+) => {
+    if(disabled) return getString(connectionBgColorDisabled, DEFAULT_CONNECTION_BG_COLOR_DISABLED);
+
+    const bgColor = getString(connectionBgColor, DEFAULT_CONNECTION_BG_COLOR);
+
+    if(isMouseOver) {
+        return getString(connectionBgColorHover, bgColor);
+    }
+
+    return bgColor;
+};
+
 const Connection = (props: IConnectionProps) => {
 
     const { settings, pointers, $svg, svg, data, setPointer } = props;
 
     const [ connection, setConnection ] = useState<IConnection|null>(null);
     const [ animation, setAnimation ] = useState<IAnimationResult|null>(null);
+    const [ stroke, setStroke ] = useState(DEFAULT_CONNECTION_BG_COLOR);
+    const [ isMouseOver, setIsMouseOver ] = useState(false);
 
     const rangeDraggingLastAngle = useRef<number>();
     const animationClosestPointer = useRef<IPointer|null>(null);
     const animationSourceDegrees = useRef(0);
     const animationTargetDegrees = useRef(0);
+
+    useEffect(() => {
+        setStroke(getStroke(
+            settings.disabled,
+            settings.connectionBgColorDisabled,
+            settings.connectionBgColor,
+            isMouseOver,
+            settings.connectionBgColorHover
+        ));
+    }, [
+        settings.disabled,
+        settings.connectionBgColorDisabled,
+        settings.connectionBgColor,
+        settings.connectionBgColorHover,
+        isMouseOver,
+    ]);
 
     useEffect(() => {
         setConnection(getConnection(
@@ -193,6 +229,14 @@ const Connection = (props: IConnectionProps) => {
         settings.animationDuration,
     ]);
 
+    const onMouseOver = () => {
+        setIsMouseOver(true);
+    };
+
+    const onMouseOut = () => {
+        setIsMouseOver(false);
+    };
+
     return (
         <>
             {
@@ -207,11 +251,7 @@ const Connection = (props: IConnectionProps) => {
 
                     strokeDasharray={ connection.strokeDasharray.join(' ') }
                     strokeDashoffset={ connection.strokeOffset }
-                    stroke={
-                        settings.disabled ?
-                        getString(settings.connectionBgColorDisabled, DEFAULT_CONNECTION_BG_COLOR_DISABLED) :
-                        getString(settings.connectionBgColor, DEFAULT_CONNECTION_BG_COLOR)
-                    }
+                    stroke={ stroke }
                     strokeWidth={ svg.thickness + 1 }
 
                     fill="none"
@@ -221,6 +261,8 @@ const Connection = (props: IConnectionProps) => {
 
                     onClick={ onClick }
                     onMouseDown={ onMouseDown }
+                    onMouseOver={ onMouseOver }
+                    onMouseOut={ onMouseOut }
                 />
             }
         </>

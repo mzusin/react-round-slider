@@ -959,6 +959,7 @@ export const testStyling = () => {
                         value: 100,
                     }
                 ]}
+                connectionBgColorHover={ '#163a86' }
             />
 
             <RoundSlider
@@ -1556,13 +1557,13 @@ const App = () => {
             { testData() }
             { testStep() }
             { testOverlap() }
-            { testStyling() }
             { testDisabled() }
             { testEvents() }*/}
+            { testStyling() }
             {/*{ testRangeDragging() }*/}
             {/*{ testAnimateOnClick() }*/}
             {/*{ <TestUseState /> }*/}
-            { <TestUseState2 /> }
+            {/*{ <TestUseState2 /> }*/}
         </>
     );
 };
