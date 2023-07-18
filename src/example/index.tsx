@@ -1621,18 +1621,18 @@ export const testInnerCircle = () => {
 const App = () => {
     return (
         <>
-            { testInnerCircle() }
+            {/*{ testInnerCircle() }*/}
             {/*{ TestSmallCircle() }*/}
             {/*{ testMultiplePointers() }
             { test2PointersOnCircle() }*/}
-            {/*{ testTicksProperties() }
+            {/*{ testTicksProperties() }*/}
             { testCirclePathSegments() }
-            { testBorder() }
-            { testData() }
-            { testStep() }
-            { testOverlap() }
-            { testDisabled() }
-            { testEvents() }*/}
+            {/*{ testBorder() }*/}
+            {/*{ testData() }*/}
+            {/*{ testStep() }*/}
+            {/*{ testOverlap() }*/}
+            {/*{ testDisabled() }*/}
+            {/*{ testEvents() }*/}
             {/*{ testStyling() }*/}
             {/*{ testRangeDragging() }*/}
             {/*{ testAnimateOnClick() }*/}

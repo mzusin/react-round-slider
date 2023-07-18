@@ -91,6 +91,22 @@ export const RoundSlider = (props: ISettings) => {
         pointers,
     ]);
 
+    useEffect(() => {
+        const clearSelectedPointer = (evt: MouseEvent) => {
+            const $target = evt.target as HTMLElement;
+            const $pointer = $target.closest('[data-type="pointer"]');
+            if($pointer) return;
+
+            setSelectedPointerId('');
+        };
+
+        document.addEventListener('click', clearSelectedPointer);
+
+        return () => {
+            document.removeEventListener('click', clearSelectedPointer);
+        };
+    }, []);
+
     const setPointersCallback = (pointer: IPointer, newAngleDeg: number) => {
         if(props.disabled || !pointers.pointers || !pointer || pointer.disabled) return;
 
