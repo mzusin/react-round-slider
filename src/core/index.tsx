@@ -115,7 +115,10 @@ export const RoundSlider = (props: ISettings) => {
             newAngleDeg = svg.startAngleDeg;
         }
 
-        if(pointer.angleDeg === newAngleDeg) return;
+        if(pointer.angleDeg === newAngleDeg){
+            updatePointer(pointer, newAngleDeg, false);
+            return;
+        }
 
         const handleOverlap = !props.pointersOverlap;
         if(handleOverlap) {
@@ -147,14 +150,6 @@ export const RoundSlider = (props: ISettings) => {
 
                         const SAFE_ANGLE = 90;
 
-                        /*
-                         if(startAngleDeg < 0 && endAngleDeg < 0) {
-        startAngleDeg += 360;
-        endAngleDeg += 360;
-    }
-
-                         */
-
                         let t1 = splitPointDeg - SAFE_ANGLE;
                         let t2 = splitPointDeg - 0.001;
 
@@ -176,7 +171,7 @@ export const RoundSlider = (props: ISettings) => {
                         const counterClockwise = counterClockwiseNew && counterClockwisePrev;
 
                         if(clockwise || counterClockwise) {
-                            updatePointer(pointer, splitPointDeg);
+                            updatePointer(pointer, splitPointDeg, true);
                             return;
                         }
 
@@ -207,51 +202,53 @@ export const RoundSlider = (props: ISettings) => {
             }
         }
 
-        if(pointer.angleDeg === newAngleDeg) return;
-
-        updatePointer(pointer, newAngleDeg);
+        updatePointer(pointer, newAngleDeg, pointer.angleDeg !== newAngleDeg);
     };
 
-    const updatePointer = (pointer: IPointer, newAngleDeg: number) => {
-        const _pointers = { ...pointers };
-        _pointers.pointers = [...pointers.pointers];
-        _pointers.pointers[pointer.index].prevAngleDeg = _pointers.pointers[pointer.index].angleDeg;
-        _pointers.pointers[pointer.index].angleDeg = newAngleDeg;
-        pointers.pointers = _pointers.pointers;
+    const updatePointer = (pointer: IPointer, newAngleDeg: number, angleChanged: boolean) => {
 
-        setPointers(_pointers);
+        if(angleChanged) {
+            const _pointers = { ...pointers };
+            _pointers.pointers = [...pointers.pointers];
+            _pointers.pointers[pointer.index].prevAngleDeg = _pointers.pointers[pointer.index].angleDeg;
+            _pointers.pointers[pointer.index].angleDeg = newAngleDeg;
+            pointers.pointers = _pointers.pointers;
+
+            setPointers(_pointers);
+
+            if(typeof props.onChange === 'function') {
+
+                const updatedPointers: ISettingsPointer[] = _pointers.pointers.map(pointer => {
+
+                    const val = angle2value(
+                        data,
+                        pointer.angleDeg,
+                        svg.startAngleDeg,
+                        svg.endAngleDeg
+                    );
+
+                    return {
+                        radius: pointer.radius,
+                        value: val,
+                        bgColor: pointer.bgColor,
+                        bgColorSelected: pointer.bgColorSelected,
+                        bgColorDisabled: pointer.bgColorDisabled,
+                        border: pointer.border,
+                        borderColor: pointer.borderColor,
+                        disabled: pointer.disabled,
+                        ariaLabel: pointer.ariaLabel,
+                    };
+                });
+
+                props.onChange(updatedPointers);
+            }
+        }
+
         setSelectedPointerId(pointer.id);
 
         const $pointer = svgRef.current?.querySelector(`[data-id="${ pointer.id }"]`) as HTMLElement;
         if($pointer) {
             $pointer.focus();
-        }
-
-        if(typeof props.onChange === 'function') {
-
-            const updatedPointers: ISettingsPointer[] = _pointers.pointers.map(pointer => {
-
-                const val = angle2value(
-                    data,
-                    pointer.angleDeg,
-                    svg.startAngleDeg,
-                    svg.endAngleDeg
-                );
-
-                return {
-                    radius: pointer.radius,
-                    value: val,
-                    bgColor: pointer.bgColor,
-                    bgColorSelected: pointer.bgColorSelected,
-                    bgColorDisabled: pointer.bgColorDisabled,
-                    border: pointer.border,
-                    borderColor: pointer.borderColor,
-                    disabled: pointer.disabled,
-                    ariaLabel: pointer.ariaLabel,
-                };
-            });
-
-            props.onChange(updatedPointers);
         }
     };
 
