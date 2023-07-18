@@ -188,25 +188,25 @@ const Pointer = (props: IPointerProps) => {
         switch (evt.key) {
             case 'ArrowLeft': {
                 evt.preventDefault();
-                setPointer(pointer, pointer.angleDeg + data.stepAngleDeg);
+                setPointer(pointer, pointer.angleDeg + data.arrowStepAngleDeg);
                 break;
             }
 
             case 'ArrowRight': {
                 evt.preventDefault();
-                setPointer(pointer, pointer.angleDeg - data.stepAngleDeg);
+                setPointer(pointer, pointer.angleDeg - data.arrowStepAngleDeg);
                 break;
             }
 
             case 'ArrowUp': {
                 evt.preventDefault();
-                setPointer(pointer, pointer.angleDeg - data.stepAngleDeg);
+                setPointer(pointer, pointer.angleDeg - data.arrowStepAngleDeg);
                 break;
             }
 
             case 'ArrowDown': {
                 evt.preventDefault();
-                setPointer(pointer, pointer.angleDeg + data.stepAngleDeg);
+                setPointer(pointer, pointer.angleDeg + data.arrowStepAngleDeg);
                 break;
             }
         }
@@ -234,10 +234,10 @@ const Pointer = (props: IPointerProps) => {
 
             let newAngleDeg;
             if(scrollTop) {
-                newAngleDeg = pointer.angleDeg + data.stepAngleDeg;
+                newAngleDeg = pointer.angleDeg + data.arrowStepAngleDeg;
             }
             else{
-                newAngleDeg = pointer.angleDeg - data.stepAngleDeg;
+                newAngleDeg = pointer.angleDeg - data.arrowStepAngleDeg;
             }
 
             setPointer(pointer, newAngleDeg);
@@ -258,7 +258,7 @@ const Pointer = (props: IPointerProps) => {
     }, [
         center,
         onValueChange,
-        data.stepAngleDeg,
+        data.arrowStepAngleDeg,
         pointer,
         setPointer,
         settings.disabled,

@@ -154,6 +154,7 @@ const dataOptionsSlider = () => {
                 step={ 0.01 }
                 arrowStep={ 1 }
                 round={ 2 }
+                textColor={ '#8993B7' }
 
                 pointers={ pointers }
                 onChange={ setPointers }
@@ -198,6 +199,7 @@ const valuesListSlider = () => {
                 enableTicks={ true }
                 showTickValues={ true }
                 ticksGroupSize={ 1 }
+                tickValuesColor={ '#8993B7' }
 
                 pointers={ pointers }
                 onChange={ setPointers }
