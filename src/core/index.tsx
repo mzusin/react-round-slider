@@ -148,7 +148,7 @@ export const RoundSlider = (props: ISettings) => {
                         // CounterClockwise: new angle in [splitPointDeg - 90, splitPointDeg)
                         // CounterClockwise: prev angle in (splitPointDeg, splitPointDeg + 90]
 
-                        const SAFE_ANGLE = 90;
+                        const SAFE_ANGLE = 150;
 
                         let t1 = splitPointDeg - SAFE_ANGLE;
                         let t2 = splitPointDeg - 0.001;
