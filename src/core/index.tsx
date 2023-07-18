@@ -222,6 +222,11 @@ export const RoundSlider = (props: ISettings) => {
         setPointers(_pointers);
         setSelectedPointerId(pointer.id);
 
+        const $pointer = svgRef.current?.querySelector(`[data-id="${ pointer.id }"]`) as HTMLElement;
+        if($pointer) {
+            $pointer.focus();
+        }
+
         if(typeof props.onChange === 'function') {
 
             const updatedPointers: ISettingsPointer[] = _pointers.pointers.map(pointer => {
