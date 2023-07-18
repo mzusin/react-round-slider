@@ -215,10 +215,52 @@ const valuesListSlider = () => {
     );
 };
 
+const connectionOptionsSlider = () => {
+    const $slider = document.getElementById('connection-options-slider') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+            {
+                value: 0
+            },
+
+            {
+                value: 50
+            }
+        ]);
+
+        return (
+            <RoundSlider
+                connectionBgColor={ '#e28bff' }
+                connectionBgColorHover={ '#b154cc' }
+                connectionBgColorDisabled={ '#969696' }
+
+                pathThickness={ 20 }
+                pointerRadius={ 25 }
+                pointerBgColor={ '#9c2dd7' }
+                pointerBgColorSelected={ '#6b1b96' }
+
+                pointers={ pointers }
+                onChange={ setPointers }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
 export const initDocsExamples = () => {
     gettingStartedSlider();
     pointerOptionsSlider();
     pathOptionsSlider();
     dataOptionsSlider();
     valuesListSlider();
+    connectionOptionsSlider();
 };

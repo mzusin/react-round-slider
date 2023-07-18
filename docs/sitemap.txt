@@ -4,3 +4,4 @@ https://react-round-slider.mzsoft.org/pages/pointer-settings.html
 https://react-round-slider.mzsoft.org/pages/path-settings.html
 https://react-round-slider.mzsoft.org/pages/data-settings.html
 https://react-round-slider.mzsoft.org/pages/values-list.html
+https://react-round-slider.mzsoft.org/pages/connection-settings.html
