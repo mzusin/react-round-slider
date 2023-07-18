@@ -11,7 +11,6 @@ export interface IPointersProps {
     $svg: SVGSVGElement;
     data: IData;
     setPointer: (pointer: IPointer, newAngleDeg: number) => void;
-    setSelectedPointerId: (value: (((prevState: string) => string) | string)) => void;
     selectedPointerId: string;
 }
 
@@ -19,7 +18,7 @@ const Pointers = (props: IPointersProps) => {
 
     const {
         pointers, settings, svg, $svg, data,
-        setPointer, setSelectedPointerId, selectedPointerId,
+        setPointer, selectedPointerId,
     } = props;
 
     return (
@@ -36,7 +35,6 @@ const Pointers = (props: IPointersProps) => {
                             $svg={ $svg }
                             data={ data }
                             setPointer={ setPointer }
-                            setSelectedPointerId={ setSelectedPointerId }
                             selectedPointerId={ selectedPointerId }
                         />
                     )

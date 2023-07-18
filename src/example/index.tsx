@@ -1623,10 +1623,10 @@ const App = () => {
         <>
             {/*{ testInnerCircle() }*/}
             {/*{ TestSmallCircle() }*/}
-            {/*{ testMultiplePointers() }
-            { test2PointersOnCircle() }*/}
+            {/*{ testMultiplePointers() */}
+            { test2PointersOnCircle() }
             {/*{ testTicksProperties() }*/}
-            { testCirclePathSegments() }
+            {/*{ testCirclePathSegments() }*/}
             {/*{ testBorder() }*/}
             {/*{ testData() }*/}
             {/*{ testStep() }*/}

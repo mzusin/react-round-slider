@@ -22,7 +22,6 @@ export interface IPointerProps {
     $svg: SVGSVGElement;
     data: IData;
     setPointer: (pointer: IPointer, newAngleDeg: number) => void;
-    setSelectedPointerId: (value: (((prevState: string) => string) | string)) => void;
     selectedPointerId: string;
 }
 
@@ -52,7 +51,7 @@ const Pointer = (props: IPointerProps) => {
 
     const {
         pointer, svg, $svg, data, settings,
-        setPointer, setSelectedPointerId, selectedPointerId,
+        setPointer, selectedPointerId,
     } = props;
 
     const {
@@ -122,8 +121,6 @@ const Pointer = (props: IPointerProps) => {
     const onValueChange = useCallback((evt: MouseEvent | ReactMouseEvent | TouchEvent | ReactTouchEvent) => {
         if(!$svg || settings.disabled || pointer.disabled) return;
 
-        setSelectedPointerId(pointer.id);
-
         const mouseX = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientX : (evt as TouchEvent).touches[0].clientX;
         const mouseY = evt.type.indexOf('mouse') !== -1 ? (evt as MouseEvent).clientY : (evt as TouchEvent).touches[0].clientY;
 
@@ -168,7 +165,6 @@ const Pointer = (props: IPointerProps) => {
         svg.radius,
         svg.startAngleDeg,
         settings.disabled,
-        setSelectedPointerId,
     ]);
 
     const onMouseUp = () => {

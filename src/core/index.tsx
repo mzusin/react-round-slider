@@ -220,6 +220,7 @@ export const RoundSlider = (props: ISettings) => {
         pointers.pointers = _pointers.pointers;
 
         setPointers(_pointers);
+        setSelectedPointerId(pointer.id);
 
         if(typeof props.onChange === 'function') {
 
@@ -297,7 +298,6 @@ export const RoundSlider = (props: ISettings) => {
                         $svg={ svgRef.current }
                         data={ data }
                         setPointer={ setPointersCallback }
-                        setSelectedPointerId={ setSelectedPointerId }
                         selectedPointerId={ selectedPointerId }
                     />
 
