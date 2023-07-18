@@ -116,7 +116,7 @@
           <path d="m7 7 5 5-5 5m6-10 5 5-5 5"/>
         </svg>
 
-    </div><div class="flex flex-col" data-links><a href="/pages/basic-usage.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Basic Usage</a><a href="/pages/pointer-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Pointer Settings</a><a href="/pages/path-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Path Settings</a><a href="/pages/data-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Data Settings</a><a href="/pages/values-list.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Values List</a><a href="/pages/connection.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Connection</a><a href="/pages/text-values.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600  text-sky-500">Text Values</a></div><div class="text-xl my-4 flex items-center cursor-pointer" data-collapsible-title data-opened="true" data-id="2-ticks">
+    </div><div class="flex flex-col" data-links><a href="/pages/basic-usage.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Basic Usage</a><a href="/pages/pointer-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Pointer Settings</a><a href="/pages/path-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Path Settings</a><a href="/pages/data-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Data Settings</a><a href="/pages/values-list.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Values List</a><a href="/pages/connection.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-sky-500">Connection</a><a href="/pages/text-values.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600  text-slate-500">Text Values</a></div><div class="text-xl my-4 flex items-center cursor-pointer" data-collapsible-title data-opened="true" data-id="2-ticks">
         Ticks 
         <svg data-arrow xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="#626e7f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="ml-2 rotate-90" viewBox="0 0 24 24">
           <path stroke="none" d="M0 0h24v24H0z"/>
@@ -128,53 +128,40 @@
     </div>
 
     <div class="p-4 overflow-y-auto h-full md:w-100-350 dark:bg-slate-800">
-      <div class="w-800 max-w-full mx-auto my-10 leading-7 text-lg text-slate-800 dark:text-slate-200"><h1 class="text-3xl mb-8">Text Values</h1>
-<p class="mb-4">Each pointer can print a text value in the middle of the circle. The interface below represents the configuration options for a text elements.</p>
+      <div class="w-800 max-w-full mx-auto my-10 leading-7 text-lg text-slate-800 dark:text-slate-200"><h1 class="text-3xl mb-8">Connection Settings</h1>
+<p class="mb-4">The connection line joins the slider pointer with the start angle. If there are multiple pointers, a connection line is connected between them.</p>
+<p class="mb-4">The following properties represent connection line configuration options.</p>
 <br/>
-<div id="text-values-slider"></div>
+<div id="connection-options-slider"></div>
 <br/>
 <br/>
 <pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ISettings</span> {
     <span class="hljs-comment">// ... other settings ...</span>
 
-    <span class="hljs-comment">// A boolean value indicating whether to hide the text </span>
-    <span class="hljs-comment">// displayed on the slider.</span>
+    <span class="hljs-comment">// A boolean value indicating whether to hide the connection line. </span>
+    <span class="hljs-comment">// If set to true, the connection line will not be visible. </span>
     <span class="hljs-comment">// The default value is false.</span>
-    hideText?: <span class="hljs-built_in">boolean</span>;
+    hideConnection?: <span class="hljs-built_in">boolean</span>;
     
-    <span class="hljs-comment">// A string specifying the prefix to be displayed </span>
-    <span class="hljs-comment">// before the slider&#x27;s value text. </span>
-    <span class="hljs-comment">// This allows for adding additional text </span>
-    <span class="hljs-comment">// or symbols to the displayed value. </span>
-    <span class="hljs-comment">// The default value is undefined.</span>
-    textPrefix?: <span class="hljs-built_in">string</span>;
+    <span class="hljs-comment">// A string specifying the background color of the connection line. </span>
+    <span class="hljs-comment">// The default value is #5daed2.</span>
+    connectionBgColor?: <span class="hljs-built_in">string</span>;
     
-    <span class="hljs-comment">// A string specifying the suffix to be displayed </span>
-    <span class="hljs-comment">// after the slider&#x27;s value text. </span>
-    <span class="hljs-comment">// This allows for adding additional text </span>
-    <span class="hljs-comment">// or symbols to the displayed value. </span>
-    <span class="hljs-comment">// The default value is undefined.</span>
-    textSuffix?: <span class="hljs-built_in">string</span>;
+    <span class="hljs-comment">// A string specifying the background color of the connection line </span>
+    <span class="hljs-comment">// when the slider is in a disabled state. </span>
+    <span class="hljs-comment">// The default value is #97b0bb.</span>
+    connectionBgColorDisabled?: <span class="hljs-built_in">string</span>;
     
-    <span class="hljs-comment">// A string specifying the color of the slider&#x27;s value text. </span>
-    <span class="hljs-comment">// The default value is #000.</span>
-    textColor?: <span class="hljs-built_in">string</span>;
+    <span class="hljs-comment">// A string specifying the background color of the connection line </span>
+    <span class="hljs-comment">// when the slider is being hovered over. </span>
+    <span class="hljs-comment">// The default value is equal to connectionBgColor property.</span>
+    connectionBgColorHover?: <span class="hljs-built_in">string</span>;
     
-    <span class="hljs-comment">// A number specifying the font size of the slider&#x27;s value text. </span>
-    <span class="hljs-comment">// The default value is 16.</span>
-    textFontSize?: <span class="hljs-built_in">number</span>;
-    
-    <span class="hljs-comment">// A string specifying the font family of the slider&#x27;s value text. </span>
-    <span class="hljs-comment">// The default value is undefined.</span>
-    textFontFamily?: <span class="hljs-built_in">string</span>;
-    
-    <span class="hljs-comment">// A number specifying the horizontal offset of the displayed value text. </span>
-    <span class="hljs-comment">// The default value is 0.</span>
-    textOffsetX?: <span class="hljs-built_in">number</span>;
-    
-    <span class="hljs-comment">// A number specifying the vertical offset of the displayed value text. </span>
-    <span class="hljs-comment">// The default value is 0.</span>
-    textOffsetY?: <span class="hljs-built_in">number</span>;
+    <span class="hljs-comment">// A boolean value indicating whether to enable range dragging. </span>
+    <span class="hljs-comment">// If set to true, the slider connection line can be dragged </span>
+    <span class="hljs-comment">// in a circular range, allowing for continuous circular movement. </span>
+    <span class="hljs-comment">// The default value is false.</span>
+    rangeDragging?: <span class="hljs-built_in">boolean</span>;
 
     <span class="hljs-comment">// ... other settings ...</span>
 }</code></pre>
@@ -193,14 +180,14 @@
 
     <span class="hljs-keyword">return</span> (
         <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">RoundSlider</span>
-            <span class="hljs-attr">hideText</span>=<span class="hljs-string">{</span> <span class="hljs-attr">false</span> }
-            <span class="hljs-attr">textPrefix</span>=<span class="hljs-string">{</span> &#x27; &#x27; }
-            <span class="hljs-attr">textSuffix</span>=<span class="hljs-string">{</span> &#x27;<span class="hljs-attr">px</span>&#x27; }
-            <span class="hljs-attr">textColor</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">8993B7</span>&#x27; }
-            <span class="hljs-attr">textFontSize</span>=<span class="hljs-string">{</span> <span class="hljs-attr">24</span> }
-            <span class="hljs-attr">textFontFamily</span>=<span class="hljs-string">{</span> &#x27;<span class="hljs-attr">Helvetica</span>,<span class="hljs-attr">Arial</span>,<span class="hljs-attr">sans-serif</span>&#x27; }
-            <span class="hljs-attr">textOffsetX</span>=<span class="hljs-string">{</span> <span class="hljs-attr">0</span> }
-            <span class="hljs-attr">textOffsetY</span>=<span class="hljs-string">{</span> <span class="hljs-attr">0</span> }
+            <span class="hljs-attr">connectionBgColor</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">e28bff</span>&#x27; }
+            <span class="hljs-attr">connectionBgColorHover</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">b154cc</span>&#x27; }
+            <span class="hljs-attr">connectionBgColorDisabled</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">969696</span>&#x27; }
+
+            <span class="hljs-attr">pathThickness</span>=<span class="hljs-string">{</span> <span class="hljs-attr">20</span> }
+            <span class="hljs-attr">pointerRadius</span>=<span class="hljs-string">{</span> <span class="hljs-attr">25</span> }
+            <span class="hljs-attr">pointerBgColor</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">9c2dd7</span>&#x27; }
+            <span class="hljs-attr">pointerBgColorSelected</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">6b1b96</span>&#x27; }
 
             <span class="hljs-attr">pointers</span>=<span class="hljs-string">{</span> <span class="hljs-attr">pointers</span> }
             <span class="hljs-attr">onChange</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setPointers</span> }
@@ -211,7 +198,7 @@
 
       <div class="w-800 max-w-full mx-auto grid lg:grid-cols-2 gap-8 items-center text-slate-500">
 <div class="flex justify-between items-start border border-slate-200 rounded p-4">
-  <a href="/pages/connection.html" title="" class="mr-4 hover:text-blue-500">
+  <a href="/pages/values-list.html" title="" class="mr-4 hover:text-blue-500">
     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
     <path stroke="none" d="M0 0h24v24H0z"/>
     <path d="M5 12h14M5 12l6 6m-6-6 6-6"/>
@@ -219,7 +206,7 @@
   </a>
   <div class="flex flex-col items-end justify-center">
     <div class="mb-2 text-sm text-slate-300">Previous</div>
-    <a href="/pages/connection.html" title="" class="hover:text-blue-500">Connection</a>
+    <a href="/pages/values-list.html" title="" class="hover:text-blue-500">Values List</a>
   </div>
 </div>      
     
@@ -227,10 +214,10 @@
   
   <div class="flex flex-col justify-center">
     <div class="mb-2 text-sm text-slate-300">Next</div>
-    <a href="/pages/ticks-settings.html" title="" class="hover:text-blue-500">Ticks Settings</a>
+    <a href="/pages/text-values.html" title="" class="hover:text-blue-500">Text Values</a>
   </div>
   
-  <a href="/pages/ticks-settings.html" title="" class="mr-4 hover:text-blue-500">
+  <a href="/pages/text-values.html" title="" class="mr-4 hover:text-blue-500">
     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
      <path stroke="none" d="M0 0h24v24H0z"/>
      <path d="M5 12h14m-6 6 6-6m-6-6 6 6"/>

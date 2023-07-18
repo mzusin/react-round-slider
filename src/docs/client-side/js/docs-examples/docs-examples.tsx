@@ -297,6 +297,51 @@ const textValuesSlider = () => {
     );
 };
 
+const ticksSettingsSlider = () => {
+    const $slider = document.getElementById('ticks-settings-slider') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+            {
+                value: 0
+            },
+
+            {
+                value: 50
+            }
+        ]);
+
+        return (
+            <RoundSlider
+                pathStartAngle={ 0 }
+                pathEndAngle={ 270 }
+
+                enableTicks={ true }
+                ticksWidth={ 3 }
+                ticksHeight={ 10 }
+                longerTicksHeight={ 25 }
+                ticksCount={ 100 }
+                ticksGroupSize={ 5 }
+                longerTickValuesOnly={ true }
+                ticksDistanceToPanel={ 3 }
+                ticksColor={ '#efefef' }
+
+                pointers={ pointers }
+                onChange={ setPointers }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
 export const initDocsExamples = () => {
     gettingStartedSlider();
     pointerOptionsSlider();
@@ -305,4 +350,5 @@ export const initDocsExamples = () => {
     valuesListSlider();
     connectionOptionsSlider();
     textValuesSlider();
+    ticksSettingsSlider();
 };

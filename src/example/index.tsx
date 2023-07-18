@@ -1624,7 +1624,7 @@ const App = () => {
             {/*{ testInnerCircle() }*/}
             {/*{ TestSmallCircle() }*/}
             {/*{ testMultiplePointers() */}
-            { test2PointersOnCircle() }
+            {/*{ test2PointersOnCircle() }*/}
             {/*{ testTicksProperties() }*/}
             {/*{ testCirclePathSegments() }*/}
             {/*{ testBorder() }*/}
