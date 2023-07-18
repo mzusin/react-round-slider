@@ -116,63 +116,58 @@
           <path d="m7 7 5 5-5 5m6-10 5 5-5 5"/>
         </svg>
 
-    </div><div class="flex flex-col" data-links><a href="/pages/basic-usage.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Basic Usage</a><a href="/pages/pointer-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Pointer Settings</a><a href="/pages/path-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-sky-500">Path Settings</a><a href="/pages/data-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Data Settings</a><a href="/pages/values-list.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Values List</a><a href="/pages/connection-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Connection Settings</a><a href="/pages/text-values.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600  text-slate-500">Text Values</a></div>
+    </div><div class="flex flex-col" data-links><a href="/pages/basic-usage.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Basic Usage</a><a href="/pages/pointer-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Pointer Settings</a><a href="/pages/path-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Path Settings</a><a href="/pages/data-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Data Settings</a><a href="/pages/values-list.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Values List</a><a href="/pages/connection-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Connection Settings</a><a href="/pages/text-values.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600  text-sky-500">Text Values</a></div>
       </div>
     </div>
 
     <div class="p-4 overflow-y-auto h-full md:w-100-350 dark:bg-slate-800">
-      <div class="w-800 max-w-full mx-auto my-10 leading-7 text-lg text-slate-800 dark:text-slate-200"><h1 class="text-3xl mb-8">Path Settings</h1>
-<p class="mb-4">The properties below represents the configuration options for the slider path.</p>
+      <div class="w-800 max-w-full mx-auto my-10 leading-7 text-lg text-slate-800 dark:text-slate-200"><h1 class="text-3xl mb-8">Text Values</h1>
+<p class="mb-4">Each pointer can print a text value in the middle of the circle. The interface below represents the configuration options for a text elements.</p>
 <br/>
-<div id="path-options-slider" style="margin-top: -130px;"></div>
+<div id="text-values-slider"></div>
 <br/>
 <br/>
 <pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ISettings</span> {
     <span class="hljs-comment">// ... other settings ...</span>
-    
-    <span class="hljs-comment">// A number representing the starting angle of the slider path. </span>
-    <span class="hljs-comment">// The angle is measured in degrees, and the default value = 0.</span>
-    pathStartAngle?: <span class="hljs-built_in">number</span>;
-    
-    <span class="hljs-comment">// A number representing the ending angle of the slider path. </span>
-    <span class="hljs-comment">// The angle is measured in degrees, and the default = 360.</span>
-    pathEndAngle?: <span class="hljs-built_in">number</span>;
-    
-    <span class="hljs-comment">// A number specifying the radius of the slider path. </span>
-    <span class="hljs-comment">// This determines the size of the circular track on which the slider moves.</span>
-    <span class="hljs-comment">// The default value = 150.</span>
-    pathRadius?: <span class="hljs-built_in">number</span>;
-    
-    <span class="hljs-comment">// A number representing the thickness or width of the slider path. </span>
-    <span class="hljs-comment">// This determines the visual thickness of the circular track. </span>
-    <span class="hljs-comment">// The default value = 5.</span>
-    pathThickness?: <span class="hljs-built_in">number</span>;
-    
-    <span class="hljs-comment">// A string specifying the background color of the slider path. </span>
-    <span class="hljs-comment">// This color is applied to the circular track </span>
-    <span class="hljs-comment">// that represents the background of the slider. </span>
-    <span class="hljs-comment">// The default value = #efefef.</span>
-    pathBgColor?: <span class="hljs-built_in">string</span>;
-    
-    <span class="hljs-comment">// A string specifying the inner background color of the slider path. </span>
-    <span class="hljs-comment">// This color is applied to the circular track inside the slider path. </span>
-    <span class="hljs-comment">// The default value = undefined.</span>
-    pathInnerBgColor?: <span class="hljs-built_in">string</span>;
 
-    <span class="hljs-comment">// A boolean specifying the whether the inner background </span>
-    <span class="hljs-comment">// will be the full circle.</span>
-    <span class="hljs-comment">// The default value = undefine</span>
-    pathInnerBgFull?: <span class="hljs-built_in">boolean</span>;
+    <span class="hljs-comment">// A boolean value indicating whether to hide the text </span>
+    <span class="hljs-comment">// displayed on the slider.</span>
+    <span class="hljs-comment">// The default value is false.</span>
+    hideText?: <span class="hljs-built_in">boolean</span>;
     
-    <span class="hljs-comment">// A number representing the border width of the slider path. </span>
-    <span class="hljs-comment">// This determines the width of the border around the circular track. </span>
-    <span class="hljs-comment">// The default value = 0.</span>
-    pathBorder?: <span class="hljs-built_in">number</span>;
+    <span class="hljs-comment">// A string specifying the prefix to be displayed </span>
+    <span class="hljs-comment">// before the slider&#x27;s value text. </span>
+    <span class="hljs-comment">// This allows for adding additional text </span>
+    <span class="hljs-comment">// or symbols to the displayed value. </span>
+    <span class="hljs-comment">// The default value is undefined.</span>
+    textPrefix?: <span class="hljs-built_in">string</span>;
     
-    <span class="hljs-comment">// A string specifying the border color of the slider path. </span>
-    <span class="hljs-comment">// This color is applied to the border around the circular track. </span>
-    <span class="hljs-comment">// The default value = #444444.</span>
-    pathBorderColor?: <span class="hljs-built_in">string</span>;
+    <span class="hljs-comment">// A string specifying the suffix to be displayed </span>
+    <span class="hljs-comment">// after the slider&#x27;s value text. </span>
+    <span class="hljs-comment">// This allows for adding additional text </span>
+    <span class="hljs-comment">// or symbols to the displayed value. </span>
+    <span class="hljs-comment">// The default value is undefined.</span>
+    textSuffix?: <span class="hljs-built_in">string</span>;
+    
+    <span class="hljs-comment">// A string specifying the color of the slider&#x27;s value text. </span>
+    <span class="hljs-comment">// The default value is #000.</span>
+    textColor?: <span class="hljs-built_in">string</span>;
+    
+    <span class="hljs-comment">// A number specifying the font size of the slider&#x27;s value text. </span>
+    <span class="hljs-comment">// The default value is 16.</span>
+    textFontSize?: <span class="hljs-built_in">number</span>;
+    
+    <span class="hljs-comment">// A string specifying the font family of the slider&#x27;s value text. </span>
+    <span class="hljs-comment">// The default value is undefined.</span>
+    textFontFamily?: <span class="hljs-built_in">string</span>;
+    
+    <span class="hljs-comment">// A number specifying the horizontal offset of the displayed value text. </span>
+    <span class="hljs-comment">// The default value is 0.</span>
+    textOffsetX?: <span class="hljs-built_in">number</span>;
+    
+    <span class="hljs-comment">// A number specifying the vertical offset of the displayed value text. </span>
+    <span class="hljs-comment">// The default value is 0.</span>
+    textOffsetY?: <span class="hljs-built_in">number</span>;
 
     <span class="hljs-comment">// ... other settings ...</span>
 }</code></pre>
@@ -181,28 +176,24 @@
 
     <span class="hljs-keyword">const</span> [ pointers, setPointers ] = useState&lt;<span class="hljs-title class_">ISettingsPointer</span>[]&gt;([
         {
+            <span class="hljs-attr">value</span>: <span class="hljs-number">0</span>
+        },
+
+        {
             <span class="hljs-attr">value</span>: <span class="hljs-number">50</span>
         }
     ]);
 
     <span class="hljs-keyword">return</span> (
         <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">RoundSlider</span>
-            <span class="hljs-attr">pathStartAngle</span>=<span class="hljs-string">{</span> <span class="hljs-attr">0</span> }
-            <span class="hljs-attr">pathEndAngle</span>=<span class="hljs-string">{</span> <span class="hljs-attr">180</span> }
-
-            <span class="hljs-attr">pathRadius</span>=<span class="hljs-string">{</span> <span class="hljs-attr">150</span> }
-            <span class="hljs-attr">pathThickness</span>=<span class="hljs-string">{</span> <span class="hljs-attr">15</span> }
-
-            <span class="hljs-attr">pathBgColor</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">efefef</span>&#x27; }
-            <span class="hljs-attr">pathInnerBgColor</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">efefef</span>&#x27; }
-
-            <span class="hljs-attr">pathBorder</span>=<span class="hljs-string">{</span> <span class="hljs-attr">2</span> }
-            <span class="hljs-attr">pathBorderColor</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">28586c</span>&#x27; }
-
-            <span class="hljs-attr">textOffsetY</span>=<span class="hljs-string">{</span> <span class="hljs-attr">70</span> }
+            <span class="hljs-attr">hideText</span>=<span class="hljs-string">{</span> <span class="hljs-attr">false</span> }
+            <span class="hljs-attr">textPrefix</span>=<span class="hljs-string">{</span> &#x27; &#x27; }
+            <span class="hljs-attr">textSuffix</span>=<span class="hljs-string">{</span> &#x27;<span class="hljs-attr">px</span>&#x27; }
+            <span class="hljs-attr">textColor</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">8993B7</span>&#x27; }
             <span class="hljs-attr">textFontSize</span>=<span class="hljs-string">{</span> <span class="hljs-attr">24</span> }
-            <span class="hljs-attr">textSuffix</span>=<span class="hljs-string">{</span> &#x27;°&#x27; }
-            <span class="hljs-attr">textPrefix</span>=<span class="hljs-string">{</span> &#x27; &#x27;}
+            <span class="hljs-attr">textFontFamily</span>=<span class="hljs-string">{</span> &#x27;<span class="hljs-attr">Helvetica</span>,<span class="hljs-attr">Arial</span>,<span class="hljs-attr">sans-serif</span>&#x27; }
+            <span class="hljs-attr">textOffsetX</span>=<span class="hljs-string">{</span> <span class="hljs-attr">0</span> }
+            <span class="hljs-attr">textOffsetY</span>=<span class="hljs-string">{</span> <span class="hljs-attr">0</span> }
 
             <span class="hljs-attr">pointers</span>=<span class="hljs-string">{</span> <span class="hljs-attr">pointers</span> }
             <span class="hljs-attr">onChange</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setPointers</span> }
@@ -211,9 +202,9 @@
 };</code></pre>
 </div>
 
-      <div class="w-800 max-w-full mx-auto grid lg:grid-cols-2 gap-8 items-center text-slate-500">
+      <div class="w-800 max-w-full mx-auto grid  gap-8 items-center text-slate-500">
 <div class="flex justify-between items-start border border-slate-200 rounded p-4">
-  <a href="/pages/pointer-settings.html" title="" class="mr-4 hover:text-blue-500">
+  <a href="/pages/connection-settings.html" title="" class="mr-4 hover:text-blue-500">
     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
     <path stroke="none" d="M0 0h24v24H0z"/>
     <path d="M5 12h14M5 12l6 6m-6-6 6-6"/>
@@ -221,24 +212,9 @@
   </a>
   <div class="flex flex-col items-end justify-center">
     <div class="mb-2 text-sm text-slate-300">Previous</div>
-    <a href="/pages/pointer-settings.html" title="" class="hover:text-blue-500">Pointer Settings</a>
+    <a href="/pages/connection-settings.html" title="" class="hover:text-blue-500">Connection Settings</a>
   </div>
 </div>      
-    
-<div class="flex justify-between items-start border border-slate-200 rounded p-4">
-  
-  <div class="flex flex-col justify-center">
-    <div class="mb-2 text-sm text-slate-300">Next</div>
-    <a href="/pages/data-settings.html" title="" class="hover:text-blue-500">Data Settings</a>
-  </div>
-  
-  <a href="/pages/data-settings.html" title="" class="mr-4 hover:text-blue-500">
-    <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
-     <path stroke="none" d="M0 0h24v24H0z"/>
-     <path d="M5 12h14m-6 6 6-6m-6-6 6 6"/>
-  </svg>
-  </a>
-</div>  
     </div>
     </div>
 

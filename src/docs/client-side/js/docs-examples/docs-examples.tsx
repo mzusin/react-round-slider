@@ -256,6 +256,47 @@ const connectionOptionsSlider = () => {
     );
 };
 
+const textValuesSlider = () => {
+    const $slider = document.getElementById('text-values-slider') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+            {
+                value: 0
+            },
+
+            {
+                value: 50
+            }
+        ]);
+
+        return (
+            <RoundSlider
+                hideText={ false }
+                textPrefix={ ' ' }
+                textSuffix={ 'px' }
+                textColor={ '#8993B7' }
+                textFontSize={ 24 }
+                textFontFamily={ 'Helvetica,Arial,sans-serif' }
+                textOffsetX={ 0 }
+                textOffsetY={ 0 }
+
+                pointers={ pointers }
+                onChange={ setPointers }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
 export const initDocsExamples = () => {
     gettingStartedSlider();
     pointerOptionsSlider();
@@ -263,4 +304,5 @@ export const initDocsExamples = () => {
     dataOptionsSlider();
     valuesListSlider();
     connectionOptionsSlider();
+    textValuesSlider();
 };
