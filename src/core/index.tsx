@@ -100,10 +100,10 @@ export const RoundSlider = (props: ISettings) => {
             setSelectedPointerId('');
         };
 
-        document.addEventListener('click', clearSelectedPointer);
+        document.addEventListener('mousedown', clearSelectedPointer);
 
         return () => {
-            document.removeEventListener('click', clearSelectedPointer);
+            document.removeEventListener('mousedown', clearSelectedPointer);
         };
     }, []);
 
