@@ -135,8 +135,88 @@ const pathOptionsSlider = () => {
     );
 };
 
+const dataOptionsSlider = () => {
+    const $slider = document.getElementById('data-options-slider') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+            {
+                value: -100
+            }
+        ]);
+
+        return (
+            <RoundSlider
+                min={ -100 }
+                max={ 100 }
+                step={ 0.01 }
+                arrowStep={ 1 }
+                round={ 2 }
+
+                pointers={ pointers }
+                onChange={ setPointers }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
+const valuesListSlider = () => {
+    const $slider = document.getElementById('values-list-slider') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+            {
+                value: 'a',
+            }
+        ]);
+
+        return (
+            <RoundSlider
+                data={[
+                    'a', 'b', 'c', 'd', 'e', 'f',
+                    'g', 'h', 'i', 'j', 'k', 'l',
+                    'm', 'n', 'o', 'p', 'q', 'r',
+                    's', 't', 'u', 'v', 'w', 'x',
+                    'y', 'z',
+                ]}
+
+                textColor={ '#5DAED2' }
+                textFontSize={ 24 }
+                textFontFamily={ 'Helvetica,Arial,sans-serif' }
+
+                enableTicks={ true }
+                showTickValues={ true }
+                ticksGroupSize={ 1 }
+
+                pointers={ pointers }
+                onChange={ setPointers }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
 export const initDocsExamples = () => {
     gettingStartedSlider();
     pointerOptionsSlider();
     pathOptionsSlider();
+    dataOptionsSlider();
+    valuesListSlider();
 };

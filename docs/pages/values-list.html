@@ -116,72 +116,74 @@
           <path d="m7 7 5 5-5 5m6-10 5 5-5 5"/>
         </svg>
 
-    </div><div class="flex flex-col" data-links><a href="/pages/basic-usage.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-sky-500">Basic Usage</a><a href="/pages/pointer-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Pointer Settings</a><a href="/pages/path-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Path Settings</a><a href="/pages/data-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Data Settings</a><a href="/pages/values-list.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600  text-slate-500">Values List</a></div>
+    </div><div class="flex flex-col" data-links><a href="/pages/basic-usage.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Basic Usage</a><a href="/pages/pointer-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Pointer Settings</a><a href="/pages/path-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Path Settings</a><a href="/pages/data-settings.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600 pb-2 text-slate-500">Data Settings</a><a href="/pages/values-list.html" title="" class="pl-3 border-l border-slate-150 dark:border-slate-600  text-sky-500">Values List</a></div>
       </div>
     </div>
 
     <div class="p-4 overflow-y-auto h-full md:w-100-350 dark:bg-slate-800">
-      <div class="w-800 max-w-full mx-auto my-10 leading-7 text-lg text-slate-800 dark:text-slate-200"><h2 class="text-3xl mb-8">Basic Usage ✍️</h2>
-<p class="mb-4">To start using the slider, first install the npm package <strong class="font-bold">mz-react-round-slider</strong>.</p>
-<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code>npm i mz-react-round-slider</code></pre>
+      <div class="w-800 max-w-full mx-auto my-10 leading-7 text-lg text-slate-800 dark:text-slate-200"><h1 class="text-3xl mb-8">Values List</h1>
+<p class="mb-4">It is possible to pass a list of values instead of just minimum and maximum. These values can be numbers or text values.</p>
 <br/>
-<div id="getting-started-slider"></div>
+<div id="values-list-slider"></div>
 <br/>
-<p class="mb-4">You can then import it like this:</p>
-<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-keyword">import</span> { <span class="hljs-title class_">RoundSlider</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;mz-react-round-slider&#x27;</span>;
+<br/>
+<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ISettings</span> {
+    <span class="hljs-comment">// ... other settings ...</span>
+    
+    <span class="hljs-comment">// An array of strings or numbers representing custom data </span>
+    <span class="hljs-comment">// associated with each position on the slider. </span>
+    <span class="hljs-comment">// The default value = undefined.</span>
+    data?: (<span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span>)[];
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">MyComponent</span> = (<span class="hljs-params"></span>) =&gt; {
-    <span class="hljs-keyword">const</span> [ pointers, setPointers ] = <span class="hljs-title function_">useState</span>([
-        { <span class="hljs-attr">value</span>: <span class="hljs-number">0</span> },
-        { <span class="hljs-attr">value</span>: <span class="hljs-number">25</span> }
-    ]);
+    <span class="hljs-comment">// ... other settings ...</span>
+}</code></pre>
+<p class="mb-4">For example:</p>
+<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-keyword">const</span> <span class="hljs-title function_">Component</span> = (<span class="hljs-params"></span>) =&gt; {
 
-    <span class="hljs-keyword">return</span> (
-        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">RoundSlider</span>
-            <span class="hljs-attr">pointers</span>=<span class="hljs-string">{</span> <span class="hljs-attr">pointers</span> }
-            <span class="hljs-attr">onChange</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setPointers</span> }
-        /&gt;</span></span>
-    );
-};</code></pre>
-<p class="mb-4">Or in TypeScript:</p>
-<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-keyword">import</span> { <span class="hljs-title class_">RoundSlider</span>, <span class="hljs-title class_">ISettingsPointer</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;mz-react-round-slider&#x27;</span>;
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">MyComponent</span> = (<span class="hljs-params"></span>) =&gt; {
     <span class="hljs-keyword">const</span> [ pointers, setPointers ] = useState&lt;<span class="hljs-title class_">ISettingsPointer</span>[]&gt;([
-        { <span class="hljs-attr">value</span>: <span class="hljs-number">0</span> },
-        { <span class="hljs-attr">value</span>: <span class="hljs-number">25</span> }
+        {
+            <span class="hljs-attr">value</span>: <span class="hljs-string">&#x27;a&#x27;</span>,
+        }
     ]);
 
     <span class="hljs-keyword">return</span> (
         <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">RoundSlider</span>
+            <span class="hljs-attr">data</span>=<span class="hljs-string">{[</span>
+                &#x27;<span class="hljs-attr">a</span>&#x27;, &#x27;<span class="hljs-attr">b</span>&#x27;, &#x27;<span class="hljs-attr">c</span>&#x27;, &#x27;<span class="hljs-attr">d</span>&#x27;, &#x27;<span class="hljs-attr">e</span>&#x27;, &#x27;<span class="hljs-attr">f</span>&#x27;,
+                &#x27;<span class="hljs-attr">g</span>&#x27;, &#x27;<span class="hljs-attr">h</span>&#x27;, &#x27;<span class="hljs-attr">i</span>&#x27;, &#x27;<span class="hljs-attr">j</span>&#x27;, &#x27;<span class="hljs-attr">k</span>&#x27;, &#x27;<span class="hljs-attr">l</span>&#x27;,
+                &#x27;<span class="hljs-attr">m</span>&#x27;, &#x27;<span class="hljs-attr">n</span>&#x27;, &#x27;<span class="hljs-attr">o</span>&#x27;, &#x27;<span class="hljs-attr">p</span>&#x27;, &#x27;<span class="hljs-attr">q</span>&#x27;, &#x27;<span class="hljs-attr">r</span>&#x27;,
+                &#x27;<span class="hljs-attr">s</span>&#x27;, &#x27;<span class="hljs-attr">t</span>&#x27;, &#x27;<span class="hljs-attr">u</span>&#x27;, &#x27;<span class="hljs-attr">v</span>&#x27;, &#x27;<span class="hljs-attr">w</span>&#x27;, &#x27;<span class="hljs-attr">x</span>&#x27;,
+                &#x27;<span class="hljs-attr">y</span>&#x27;, &#x27;<span class="hljs-attr">z</span>&#x27;,
+            ]}
+
+            <span class="hljs-attr">textColor</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">5DAED2</span>&#x27; }
+            <span class="hljs-attr">textFontSize</span>=<span class="hljs-string">{</span> <span class="hljs-attr">24</span> }
+            <span class="hljs-attr">textFontFamily</span>=<span class="hljs-string">{</span> &#x27;<span class="hljs-attr">Helvetica</span>,<span class="hljs-attr">Arial</span>,<span class="hljs-attr">sans-serif</span>&#x27; }
+
+            <span class="hljs-attr">enableTicks</span>=<span class="hljs-string">{</span> <span class="hljs-attr">true</span> }
+            <span class="hljs-attr">showTickValues</span>=<span class="hljs-string">{</span> <span class="hljs-attr">true</span> }
+            <span class="hljs-attr">ticksGroupSize</span>=<span class="hljs-string">{</span> <span class="hljs-attr">1</span> }
+
             <span class="hljs-attr">pointers</span>=<span class="hljs-string">{</span> <span class="hljs-attr">pointers</span> }
             <span class="hljs-attr">onChange</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setPointers</span> }
         /&gt;</span></span>
     );
 };</code></pre>
-<blockquote class="bg-gray-100 pt-4 px-4 flex my-10 border-l-4 border-blue-300 rounded dark:bg-sky-900">
-<p class="mb-4">Read more about <strong class="font-bold">ISettingsPointer</strong> interface <a href="isettings-pointer-interface.html" class="text-sky-500">here</a>.</p>
-</blockquote>
-<blockquote class="bg-gray-100 pt-4 px-4 flex my-10 border-l-4 border-blue-300 rounded dark:bg-sky-900">
-<p class="mb-4">The slider has a large set of options, which are described later in this documentation.</p>
-</blockquote>
 </div>
 
       <div class="w-800 max-w-full mx-auto grid  gap-8 items-center text-slate-500">
 <div class="flex justify-between items-start border border-slate-200 rounded p-4">
-  
-  <div class="flex flex-col justify-center">
-    <div class="mb-2 text-sm text-slate-300">Next</div>
-    <a href="/pages/pointer-settings.html" title="" class="hover:text-blue-500">Pointer Settings</a>
-  </div>
-  
-  <a href="/pages/pointer-settings.html" title="" class="mr-4 hover:text-blue-500">
+  <a href="/pages/data-settings.html" title="" class="mr-4 hover:text-blue-500">
     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24">
-     <path stroke="none" d="M0 0h24v24H0z"/>
-     <path d="M5 12h14m-6 6 6-6m-6-6 6 6"/>
+    <path stroke="none" d="M0 0h24v24H0z"/>
+    <path d="M5 12h14M5 12l6 6m-6-6 6-6"/>
   </svg>
   </a>
-</div>  
+  <div class="flex flex-col items-end justify-center">
+    <div class="mb-2 text-sm text-slate-300">Previous</div>
+    <a href="/pages/data-settings.html" title="" class="hover:text-blue-500">Data Settings</a>
+  </div>
+</div>      
     </div>
     </div>
 
