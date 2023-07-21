@@ -342,6 +342,90 @@ const ticksSettingsSlider = () => {
     );
 };
 
+const ticksValuesSlider = () => {
+    const $slider = document.getElementById('ticks-values-slider') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+            {
+                value: 0
+            },
+
+            {
+                value: 50
+            }
+        ]);
+
+        return (
+            <RoundSlider
+                textPrefix={ ' ' }
+                textSuffix={ '°' }
+                textColor={ '#5DAED2' }
+
+                enableTicks={ true }
+                ticksWidth={ 3 }
+                ticksHeight={ 10 }
+                longerTicksHeight={ 25 }
+                ticksCount={ 100 }
+                ticksGroupSize={ 5 }
+                ticksDistanceToPanel={ 3 }
+                ticksColor={ '#efefef' }
+
+                showTickValues={ true }
+                longerTickValuesOnly={ true }
+                tickValuesColor={ '#6093a3' }
+                tickValuesFontSize={ 11 }
+                tickValuesFontFamily={ 'Arial' }
+                tickValuesDistance={ 15 }
+                tickValuesPrefix={ ' ' }
+                tickValuesSuffix={ '°' }
+
+                pointers={ pointers }
+                onChange={ setPointers }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
+const animationSettingsSlider = () => {
+    const $slider = document.getElementById('animation-settings-slider') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+            { value: 0 },
+            { value: 25 }
+        ]);
+
+        return (
+            <RoundSlider
+                pointers={ pointers }
+                onChange={ setPointers }
+                textColor={ '#8993B7' }
+                animateOnClick={ true }
+                animationDuration={ 200 }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
 export const initDocsExamples = () => {
     gettingStartedSlider();
     pointerOptionsSlider();
@@ -351,4 +435,6 @@ export const initDocsExamples = () => {
     connectionOptionsSlider();
     textValuesSlider();
     ticksSettingsSlider();
+    ticksValuesSlider();
+    animationSettingsSlider();
 };
