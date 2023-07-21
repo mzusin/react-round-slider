@@ -9,3 +9,4 @@ https://react-round-slider.mzsoft.org/pages/text-values.html
 https://react-round-slider.mzsoft.org/pages/ticks-settings.html
 https://react-round-slider.mzsoft.org/pages/ticks-values.html
 https://react-round-slider.mzsoft.org/pages/animation.html
+https://react-round-slider.mzsoft.org/pages/disabled-state.html
