@@ -59,7 +59,7 @@ const Component = () => {
             pointerBgColorSelected={ 'url(#pointer-selected)' }
             connectionBgColor={ 'url(#connection)' }
 
-            textColor={ '#fff' }
+            textColor={ '#8993B7' }
             textFontSize={ 24 }
         />
     );
