@@ -1,5 +1,6 @@
-# Pointer Settings
+# Individual Pointer Settings
 
+You can specify different settings for each pointer.
 ISettingsPointer interface represents the configuration options for the slider pointers:
 
 <br/>
@@ -9,6 +10,8 @@ ISettingsPointer interface represents the configuration options for the slider p
 
 ```ts
 export interface ISettingsPointer {
+
+    // ... other settings ...
     
     // The radius of the pointer in SVG units. 
     // Default value = 10.
@@ -52,6 +55,8 @@ export interface ISettingsPointer {
     // This label will be used as the aria-label attribute for the pointer element.
     // Default value = undefined.
     ariaLabel?: string;
+
+    // ... other settings ...
 }
 ```
 

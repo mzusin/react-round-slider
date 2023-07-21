@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import * as React from 'react';
 import { RoundSlider } from '../../../../core';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { ISettingsPointer } from '../../../../core/domain/settings-provider';
 
 const gettingStartedSlider = () => {
@@ -20,6 +20,52 @@ const gettingStartedSlider = () => {
                 pointers={ pointers }
                 onChange={ setPointers }
                 textColor={ '#8993B7' }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
+const generalPointerOptionsSlider = () => {
+    const $slider = document.getElementById('general-pointer-options-slider') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+            {
+                value: 0,
+            },
+            {
+                value: 25,
+            },
+            {
+                value: 50,
+            },
+            {
+                value: 75,
+            }
+        ]);
+
+        return (
+            <RoundSlider
+                pointers={ pointers }
+                onChange={ setPointers }
+                textColor={ '#8993B7' }
+
+                pointerBgColor={ '#d3bbdc' }
+                pointerBgColorSelected={ '#45c479' }
+                pointerBgColorDisabled={ '#cecece' }
+                pointerBgColorHover={ '#56dc8b' }
+                pointerBorder={ 2 }
+                pointerBorderColor={ '#8e3da4' }
+                pointerRadius={ 20 }
             />
         );
     };
@@ -583,6 +629,7 @@ const pointerGradientSlider = () => {
 
 export const initDocsExamples = () => {
     gettingStartedSlider();
+    generalPointerOptionsSlider();
     pointerOptionsSlider();
     pathOptionsSlider();
     dataOptionsSlider();
