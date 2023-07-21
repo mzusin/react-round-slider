@@ -55,6 +55,10 @@ export interface ISettings {
     // The default value = #444444.
     pathBorderColor?: string;
 
+    // A string specifying the backgroun color of the SVG. 
+    // The default value is undefined.
+    svgBgColor?: string;
+
     // ... other settings ...
 }
 ```

@@ -10,3 +10,5 @@ https://react-round-slider.mzsoft.org/pages/ticks-settings.html
 https://react-round-slider.mzsoft.org/pages/ticks-values.html
 https://react-round-slider.mzsoft.org/pages/animation.html
 https://react-round-slider.mzsoft.org/pages/disabled-state.html
+https://react-round-slider.mzsoft.org/pages/circle-gradient.html
+https://react-round-slider.mzsoft.org/pages/pointer-and-connection-gradient.html

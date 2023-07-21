@@ -458,6 +458,129 @@ const disabledSettingsSlider = () => {
     );
 };
 
+const circleGradientSlider = () => {
+
+    const $slider = document.getElementById('circle-gradient-slider') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([{ value: 0 }]);
+
+        return (
+            <RoundSlider
+                pointers={ pointers }
+                onChange={ setPointers }
+
+                SvgDefs={
+                    <>
+                        <linearGradient id="color-slider-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor={ `hsl(${ pointers[0].value }, 100%, 40%)` } />
+                            <stop offset="100%" stopColor={ `hsl(${ pointers[0].value }, 50%, 20%)` } />
+                        </linearGradient>
+                    </>
+                }
+
+                animateOnClick={ true }
+                pathStartAngle={ 150 }
+                pathEndAngle={ 30 }
+
+                pathBgColor={ '#d0d0d0' }
+                pathThickness={ 5 }
+                pathInnerBgColor={ 'url(#color-slider-gradient)' }
+                pathInnerBgFull={ true }
+                connectionBgColor={ '#939191' }
+
+                pointerBgColor={ '#cbcbcb' }
+                pointerBgColorSelected={ '#d7d7d7' }
+                pointerRadius={ 20 }
+
+                enableTicks={ true }
+                ticksCount={ 36 }
+                ticksGroupSize={ 3 }
+                ticksDistanceToPanel={ 5 }
+                tickValuesPrefix={ ' ' }
+                tickValuesSuffix={ '°' }
+                tickValuesDistance={ 20 }
+                tickValuesColor={ '#e1e1e1' }
+
+                textColor={ '#fff' }
+                textFontSize={ 24 }
+                textSuffix={ '°' }
+                textPrefix={ ' '}
+
+                min={ 0 }
+                max={ 360 }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
+const pointerGradientSlider = () => {
+
+    const $slider = document.getElementById('pointer-gradient-slider') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+            {
+                value: 30
+            },
+            {
+                value: 70
+            }
+        ]);
+
+        return (
+            <RoundSlider
+                pointers={ pointers }
+                onChange={ setPointers }
+
+                SvgDefs={
+                    <>
+                        <linearGradient id="pointer" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#8e50c4" />
+                            <stop offset="100%" stopColor="#422563" />
+                        </linearGradient>
+
+                        <linearGradient id="pointer-selected" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#f2c832" />
+                            <stop offset="100%" stopColor="#f19305" />
+                        </linearGradient>
+
+                        <linearGradient id="connection" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#00bc9b" />
+                            <stop offset="100%" stopColor="#5eaefd" />
+                        </linearGradient>
+                    </>
+                }
+
+                pointerBgColor={ 'url(#pointer)' }
+                pointerBgColorSelected={ 'url(#pointer-selected)' }
+                connectionBgColor={ 'url(#connection)' }
+
+                textColor={ '#fff' }
+                textFontSize={ 24 }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
 export const initDocsExamples = () => {
     gettingStartedSlider();
     pointerOptionsSlider();
@@ -470,4 +593,6 @@ export const initDocsExamples = () => {
     ticksValuesSlider();
     animationSettingsSlider();
     disabledSettingsSlider();
+    circleGradientSlider();
+    pointerGradientSlider();
 };
