@@ -135,6 +135,46 @@ const initHorseshoeSlider = () => {
     );
 };
 
+const cssFramworksSlider = () => {
+    const $slider = document.getElementById('css-framworks-slider') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        return (
+            <RoundSlider
+                animateOnClick={ true }
+
+                pointers={[
+                    {
+                        value: 0,
+                    },
+                    {
+                        value: 50,
+                    }
+                ]}
+
+                SvgDefs={
+                    <>
+                        <linearGradient id="horseshoe-slider-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#2d95a8" />
+                            <stop offset="50%" stopColor="#67CD67" />
+                            <stop offset="100%" stopColor="#cccc68" />
+                        </linearGradient>
+                    </>
+                }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
 export const initHomePage = () => {
     if(hljs){
         hljs.highlightAll();
@@ -142,4 +182,5 @@ export const initHomePage = () => {
 
     initColorSlider();
     initHorseshoeSlider();
+    cssFramworksSlider();
 };
