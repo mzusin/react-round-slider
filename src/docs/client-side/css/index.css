@@ -21,6 +21,16 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
     color-scheme: dark;
 }
 
+.hp-bg {
+    /* @apply bg-gray-900; */
+    background: linear-gradient(90deg, #1f2936 21px, transparent 1%) center, linear-gradient(#1f2936 21px, transparent 1%) center, #8597b0;
+    background-size: 22px 22px;
+}
+
+.top-message {
+    background: linear-gradient(45deg, #4097A6, #86CD67);
+}
+
 @layer components {
     .w-350{
         width: 350px;

@@ -70,7 +70,7 @@ const initColorSlider = () => {
 };
 
 const initHorseshoeSlider = () => {
-    const $slider = document.getElementById('color-slider') as HTMLElement;
+    const $slider = document.getElementById('horseshoe-slider') as HTMLElement;
     if(!$slider) return;
 
     const Component = () => {
