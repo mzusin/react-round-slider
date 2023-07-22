@@ -93,7 +93,7 @@
             <li class="bg-amber-400 rounded-full w-2.5 h-2.5 mr-2"></li>
             <li class="bg-lime-500 rounded-full w-2.5 h-2.5 mr-2"></li>
           </ul>
-          <div class="flex-1 text-center">Range Slider</div>
+          <div class="flex-1 text-center">React Round Slider</div>
         </div>
 
         <div class="bg-slate-800 flex-1 py-4 px-2">
@@ -137,7 +137,7 @@ return (
     </div>
   </section>
 
-  <!-- aaa -->
+  <!-- Sleek Design with SVG -->
   <section class="py-10 lg:py-24 my-14">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-20">
 
@@ -152,13 +152,13 @@ return (
           </svg>
         </div>
 
-        <h2 class="mt-8 font-semibold text-sky-500">Slider Type</h2>
+        <h2 class="mt-8 font-semibold text-sky-500">SVG</h2>
 
-        <p class="mt-4 text-3xl sm:text-4xl text-slate-400 font-extrabold tracking-tight">Direction &amp; Orientation</p>
+        <p class="mt-4 text-3xl sm:text-4xl text-slate-400 font-extrabold tracking-tight">Sleek Design with SVG</p>
 
-        <p class="mt-4 max-w-3xl space-y-6">The library supports horizontal and <a class="underline" href="/pages/vertical-slider.html" title="">vertical orientation</a>. It also supports left to right and <a class="underline" href="/pages/right-to-left-support.html" title="">right to left</a> directions for a horizontal slider, and top to bottom and <a class="underline" href="/pages/vertical-slider.html" title="">bottom to top</a> for vertical sliders.</p>
+        <p class="mt-4 max-w-3xl space-y-6">Leverage the power of SVG (Scalable Vector Graphics) to achieve sharp, high-quality visuals that scale effortlessly across devices, from desktops to mobile.</p>
 
-        <a class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-sky-50 text-sky-600 hover:bg-sky-100 hover:text-sky-700 focus:ring-sky-600 mt-8" href="/pages/vertical-slider.html">Learn more<svg class="overflow-visible ml-3 text-sky-300 group-hover:text-sky-400" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0L3 3L0 6"></path></svg></a>
+        <a class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-sky-50 text-sky-600 hover:bg-sky-100 hover:text-sky-700 focus:ring-sky-600 mt-8 pt-px" href="/pages/path-settings.html">Learn more<svg class="overflow-visible ml-3 text-sky-300 group-hover:text-sky-400" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0L3 3L0 6"></path></svg></a>
       </div>
 
       <div class="text-gray-200 text-sm rounded-xl overflow-hidden flex flex-col max-w-full shadow-xl">
@@ -169,28 +169,32 @@ return (
             <li class="bg-amber-400 rounded-full w-2.5 h-2.5 mr-2"></li>
             <li class="bg-lime-500 rounded-full w-2.5 h-2.5 mr-2"></li>
           </ul>
-          <div class="flex-1 text-center">Range Slider</div>
+          <div class="flex-1 text-center">React Round Slider</div>
         </div>
 
         <div class="bg-slate-800 flex-1 p-4" style="background-color: #4d2852">
-        <pre><code class="break-space hljs language-xml" style="background-color: inherit"><span class="hljs-tag">&lt;<span class="hljs-name">tc-range-slider</span>
-  <span class="hljs-attr">type</span>=<span class="hljs-string">"vertical"</span>
-  <span class="hljs-attr">value1</span>=<span class="hljs-string">"30"</span>
-  <span class="hljs-attr">value2</span>=<span class="hljs-string">"70"</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">tc-range-slider</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">tc-range-slider</span>
-  <span class="hljs-attr">rtl</span>=<span class="hljs-string">"true"</span>
-  <span class="hljs-attr">value</span>=<span class="hljs-string">"50"</span>
-  <span class="hljs-attr">generate-labels</span>=<span class="hljs-string">"true"</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">tc-range-slider</span>&gt;</span></code></pre>
+        <pre><code class="break-space hljs language-xml" style="background-color: inherit"><span class="hljs-tag">
+  &lt;RoundSlider
+      pathStartAngle={ 0 }
+      pathEndAngle={ 180 }
+      pathRadius={ 150 }
+      pathThickness={ 15 }
+      pathBgColor={ '#efefef' }
+      pathInnerBgColor={ '#efefef' }
+      pathBorder={ 2 }
+      pathBorderColor={ '#28586c' }
+      textOffsetY={ 70 }
+      textFontSize={ 24 }
+      pointers={ pointers }
+  />
+        </span></code></pre>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- aaa -->
+  <!-- Numbers, Text, or Rang -->
   <section>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 my-24 grid lg:grid-cols-2 gap-20 my-24">
 
@@ -214,13 +218,13 @@ return (
 
         <p class="mt-4 max-w-3xl space-y-6">The slider range can be defined by a minimum and maximum numbers. Another option is to provide a list of individual (discrete) values. Both text and numeric data are supported.</p>
 
-        <a class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-sky-50 text-sky-600 hover:bg-sky-100 hover:text-sky-700 focus:ring-sky-600 mt-8" href="/pages/list-of-individual-values-and-text-data.html">Learn more<svg class="overflow-visible ml-3 text-sky-300 group-hover:text-sky-400" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0L3 3L0 6"></path></svg></a>
+        <a class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-sky-50 text-sky-600 hover:bg-sky-100 hover:text-sky-700 focus:ring-sky-600 mt-8 pt-px" href="/pages/values-list.html">Learn more<svg class="overflow-visible ml-3 text-sky-300 group-hover:text-sky-400" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0L3 3L0 6"></path></svg></a>
       </div>
 
     </div>
   </section>
 
-  <!-- aaa -->
+  <!-- Styles, Design, Animation -->
   <section class="py-10 lg:py-24 mb-14">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-20">
 
@@ -241,9 +245,9 @@ return (
 
         <p class="mt-4 text-3xl sm:text-4xl text-slate-400 font-extrabold tracking-tight">Styles, Design, Animation</p>
 
-        <p class="mt-4 max-w-3xl space-y-6">The library has multiple options for customizing the appearance of the slider. <a class="underline" href="/pages/width-height-and-border-radius.html" title="">Width, height, border radius</a>, <a class="underline" href="/pages/colors.html" title="">colors, hover and focus</a>, and other properties can be customized using the slider attributes. <a class="underline" href="/pages/images-and-svgs-as-pointers.html" title="">Images and SVGs</a> can be used as pointers. It has a standalone <a class="underline" href="/pages/moving-tooltip-plugin.html" title="">moving tooltip plugin</a>.</p>
+        <p class="mt-4 max-w-3xl space-y-6">The library has multiple options for customizing the appearance of the slider. Circle radius, start &amp; end angles, border size, colors, hover and focus, and other properties can be customized using the slider attributes. <a class="underline" href="/pages/custom-pointer-shape.html" title="">Custom SVGs</a> can be used as pointers, and there is an <a class="underline" href="/pages/animation.html" title="">on-click animation</a>.</p>
 
-        <a class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-sky-50 text-sky-600 hover:bg-sky-100 hover:text-sky-700 focus:ring-sky-600 mt-8" href="/pages/colors.html">Learn more<svg class="overflow-visible ml-3 text-sky-300 group-hover:text-sky-400" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0L3 3L0 6"></path></svg></a>
+        <a class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-sky-50 text-sky-600 hover:bg-sky-100 hover:text-sky-700 focus:ring-sky-600 mt-8 pt-px" href="/pages/basic-usage.html">Learn more<svg class="overflow-visible ml-3 text-sky-300 group-hover:text-sky-400" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0L3 3L0 6"></path></svg></a>
       </div>
 
       <img src="/img/homepage/styles.jpeg" alt="" title="" class="max-w-full rounded-xl shadow-xl border-8 border-white order-1 lg:order-2">
@@ -501,25 +505,25 @@ $slider.<span class="hljs-property">value</span> = <span class="hljs-number">50<
 
         <p class="mt-4 max-w-3xl space-y-6">The library is free to use in any personal or commercial project.</p>
 
-        <a class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-sky-50 text-sky-600 hover:bg-sky-100 hover:text-sky-700 focus:ring-sky-600 mt-8" href="https://github.com/mzusin/toolcool-range-slider/blob/main/LICENSE">Read License<svg class="overflow-visible ml-3 text-sky-300 group-hover:text-sky-400" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0L3 3L0 6"></path></svg></a>
+        <a class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-sky-50 text-sky-600 hover:bg-sky-100 hover:text-sky-700 focus:ring-sky-600 mt-8 pt-px" href="https://github.com/mzusin/react-round-slider/blob/main/LICENSE">Read License<svg class="overflow-visible ml-3 text-sky-300 group-hover:text-sky-400" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0L3 3L0 6"></path></svg></a>
       </div>
 
     </div>
   </section>
 
   <!-- footer -->
-  <footer class="px-4 py-4 py-6">
+  <footer class="px-4 py-4 py-6 text-slate-400">
     <div class="flex flex-wrap items-center justify-center text-center px-4 py-3">
 
         <span class="flex items-center justify-center mx-4 my-2">
-            <a class="ml-2 underline" href="/">Tool Cool Range Slider</a>
+            <a class="ml-2 underline" href="/">React Round Slider</a>
         </span>
 
       <span class="flex items-center justify-center mx-4 my-2">© All rights reserved.</span>
 
       <a href="mailto:miriam.zusin@gmail.com" title="" class="mx-4 my-2 flex items-center">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="20" height="20">
-          <path fill="#111" d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path>
+          <path fill="#5A6577" d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path>
         </svg> <span class="ml-2 underline">Contact Us</span>
       </a>
 
