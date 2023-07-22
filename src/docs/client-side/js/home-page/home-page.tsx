@@ -11,7 +11,7 @@ const initColorSlider = () => {
 
     const Component = () => {
 
-        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([{ value: 0 }]);
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([{ value: 90 }]);
 
         return (
             <RoundSlider
@@ -22,14 +22,14 @@ const initColorSlider = () => {
                 pathStartAngle={ 150 }
                 pathEndAngle={ 30 }
 
-                pathBgColor={ '#d0d0d0' }
+                pathBgColor={ '#b4b4b4' }
                 pathThickness={ 5 }
                 pathInnerBgColor={ 'url(#color-slider-gradient)' }
                 pathInnerBgFull={ true }
-                connectionBgColor={ '#939191' }
+                connectionBgColor={ '#fff' }
 
                 pointerBgColor={ '#fff' }
-                pointerBgColorSelected={ '#eeeeee' }
+                pointerBgColorSelected={ '#dcdcdc' }
                 pointerRadius={ 20 }
 
                 enableTicks={ true }

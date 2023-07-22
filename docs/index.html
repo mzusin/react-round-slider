@@ -19,11 +19,11 @@
   <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32.png" />
   <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16.png" />
 
-  <link rel="stylesheet" href="/css/styles.1690019591325.css" />
-  <!--<link rel="stylesheet" href="/js/index.1690019591325.css" />-->
+  <link rel="stylesheet" href="/css/styles.1690020865143.css" />
+  <!--<link rel="stylesheet" href="/js/index.1690020865143.css" />-->
 
 </head>
-<body class="font-josefin_sans text-lg text-gray-100 hp-bg" id="special-page">
+<body class="font-josefin_sans text-lg text-gray-100 hp-bg dark" id="special-page">
   <div class="flex justify-center items-center top-message mb-2">
   <p class="text-center p-2 text-sm">
     🤩 If you like this project, please support us by starring our <a target="_blank" rel="noopener noreferrer" href="https://github.com/mzusin/react-round-slider" class="underline">GitHub repository</a> 🤩</p>
@@ -87,8 +87,7 @@
         <div class="w-16 h-16 rounded-full ring-1 ring-slate-900/10 shadow-md overflow-hidden flex items-center justify-center text-slate-400 bg-indigo-50">
           <svg xmlns="http://www.w3.org/2000/svg" width="80%" height="80%" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24">
             <path stroke="none" d="M0 0h24v24H0z"></path>
-            <path d="M18 8V5a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h9m3-9h2" fill="rgba(255, 255, 255, 0.5)"></path>
-            <rect width="8" height="12" x="13" y="8" rx="1" fill="rgba(255, 255, 255, 0.3)"></rect>
+            <path d="m7 8-4 4 4 4m10-8 4 4-4 4M14 4l-4 16"></path>
           </svg>
         </div>
 
@@ -108,7 +107,7 @@
     </div>
   </section>
 
-  <!-- aaa -->
+  <!-- Multiple Pointers -->
   <section>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 my-24 grid lg:grid-cols-2 gap-20 my-24">
 
@@ -123,12 +122,20 @@
           <div class="flex-1 text-center">Range Slider</div>
         </div>
 
-        <div class="bg-slate-800 flex-1 p-4">
-        <pre><code class="break-space hljs language-xml" style="background: #1E293B"><span class="hljs-tag">&lt;<span class="hljs-name">tc-range-slider</span>
-  <span class="hljs-attr">value1</span>=<span class="hljs-string">"10"</span>
-  <span class="hljs-attr">value2</span>=<span class="hljs-string">"50"</span>
-  <span class="hljs-attr">value3</span>=<span class="hljs-string">"90"</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">tc-range-slider</span>&gt;</span></code></pre>
+        <div class="bg-slate-800 flex-1 py-4 px-2">
+        <pre><code class="break-space hljs language-tsx" style="background: #1E293B"><span class="hljs-tag">
+const [pointers, setPointers] = useState&lt;ISettingsPointer[]>([
+    { value: 0, radius: 25, bgColor: '#c20cff' },
+    { value: 25, radius: 20, bgColor: '#4be28c' }
+]);
+
+return (
+    &lt;RoundSlider
+        pointers={ pointers }
+        onChange={ setPointers }
+    />
+);
+        </span></code></pre>
         </div>
       </div>
 
@@ -146,11 +153,11 @@
 
         <h2 class="mt-8 font-semibold text-sky-500">Knobs</h2>
 
-        <p class="mt-4 text-3xl sm:text-4xl text-slate-400 font-extrabold tracking-tight">Any Number of Pointers</p>
+        <p class="mt-4 text-3xl sm:text-4xl text-slate-400 font-extrabold tracking-tight">Multiple Pointers</p>
 
-        <p class="mt-4 max-w-3xl space-y-6">The library supports any number of pointers (knobs/handles): one-pointer range slider, two-pointers range slider, or as many as you need.</p>
+        <p class="mt-4 max-w-3xl space-y-6">The library support any number of pointers (knobs/handles). You can fine-tune each pointer's appearance, color, and behavior with ease, adapting the slider to fit your unique project requirements.</p>
 
-        <a class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-sky-50 text-sky-600 hover:bg-sky-100 hover:text-sky-700 focus:ring-sky-600 mt-8" href="/pages/basic-usage.html">Learn more<svg class="overflow-visible ml-3 text-sky-300 group-hover:text-sky-400" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0L3 3L0 6"></path></svg></a>
+        <a class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-sky-50 text-sky-600 hover:bg-sky-100 hover:text-sky-700 focus:ring-sky-600 mt-8 pt-px" href="/pages/individual-pointer-settings.html">Learn more<svg class="overflow-visible ml-3 text-sky-300 group-hover:text-sky-400" width="3" height="6" viewBox="0 0 3 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0L3 3L0 6"></path></svg></a>
       </div>
 
     </div>
@@ -547,6 +554,6 @@ $slider.<span class="hljs-property">value</span> = <span class="hljs-number">50<
 
 </div>
 
-  <script src="/js/index.1690019591325.js"></script>
+  <script src="/js/index.1690020865143.js"></script>
 </body>
 </html>
