@@ -150,9 +150,26 @@ const cssFramworksSlider = () => {
                         value: 0,
                     },
                     {
+                        value: 25,
+                    },
+                    {
                         value: 50,
                     }
                 ]}
+
+                pathStartAngle={ 0 }
+                pathEndAngle={ 180 }
+
+                textColor={ '#94A3B8' }
+                textOffsetY={ 20 }
+                textFontSize={ 24 }
+
+                pointerRadius={ 15 }
+                pointerBgColorSelected={ '#98d32a' }
+
+                connectionBgColorHover={ '#4a96b6' }
+
+                /*
 
                 SvgDefs={
                     <>
@@ -162,7 +179,7 @@ const cssFramworksSlider = () => {
                             <stop offset="100%" stopColor="#cccc68" />
                         </linearGradient>
                     </>
-                }
+                }*/
             />
         );
     };
