@@ -1,6 +1,9 @@
 # Multi-Pointer React Round Slider
 
-React Round Slider component based on SVG and TypeScript.
+Experience an accessible and mobile-friendly React Round Slider library, powered by TypeScript and SVG.
+
+
+## Documentation 🔖
 
 
 

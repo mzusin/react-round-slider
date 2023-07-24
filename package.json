@@ -26,7 +26,20 @@
     "docs:build": "node ./src/docs/generator/index.js",
     "docs:watch": "nodemon ./src/docs/generator/index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "slider",
+    "range slider",
+    "circular round slider",
+    "circular slider",
+    "radial slider",
+    "react range slider component",
+    "circle slider",
+    "react round slider",
+    "react circle slider",
+    "react circular slider",
+    "react radial slider",
+    "react range slider"
+  ],
   "author": "Miriam Zusin <miriam.zusin@gmail.com>",
   "repository": {
     "type": "git",
