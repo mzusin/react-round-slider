@@ -2,6 +2,8 @@
 
 Experience an accessible and mobile-friendly React Round Slider library, powered by TypeScript and SVG.
 
+![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/1-1.gif?raw=true)
+
 ## Features
 - Any number of pointers.
 - Mobile Ready.
@@ -18,8 +20,6 @@ Experience an accessible and mobile-friendly React Round Slider library, powered
 - Works well with Bootstrap and other CSS frameworks.
 - Supports two (and more) pointers overlap, pointers max and min distance.
 - MIT license.
-
-![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/1-1.gif?raw=true)
 
 ![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/2-2.gif?raw=true)
 
