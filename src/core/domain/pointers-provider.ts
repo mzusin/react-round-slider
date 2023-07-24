@@ -113,7 +113,7 @@ const value2angle = (data: IData, value: string | number, pathStartAngle: number
     return mod(convertRange(_value, data.min, data.max, pathStartAngle, pathEndAngle), 360);
 };
 
-const initPointers = (
+export const initPointers = (
     settings: ISettings,
     data: IData
 ) : IPointer[] => {

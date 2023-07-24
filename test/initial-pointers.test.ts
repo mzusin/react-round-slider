@@ -1,54 +1,59 @@
-import { IUserSettingsPointer } from '../src/core/interfaces';
-import { getInitialPointers } from '../src/core/domain/slider-provider';
+import { initPointers } from '../src/core/domain/pointers-provider';
+import { ISettings } from '../src/core/domain/settings-provider';
+import { IData } from '../types/core/domain/data-provider';
 
 describe('Initial Pointers', () => {
-    const userSettingsPointers: IUserSettingsPointer[] = [
-        { rx: 1, ry: 2, value: 10 },
-        { rx: 2, ry: 3, value: 20 },
-        { rx: 3, ry: 4, value: 30 },
-    ];
 
-    const min = 0;
-    const max = 100;
+    const data: IData = {
+        min: 0,
+        max: 100,
+        stepAngleDeg: 0,
+        arrowStepAngleDeg: 360,
+        round: 0,
+        data: [],
+        isClosedShape: true
+    };
 
-    it('should return an array of IStatePointer objects', () => {
-        const result = getInitialPointers(userSettingsPointers, min, max);
+    it('should return an array of IPointer objects', () => {
+        const settings: ISettings = {
+            pointers: [
+                { radius: 1, value: 10 },
+                { radius: 2, value: 20 },
+                { radius: 3, value: 30 },
+            ]
+        };
+
+        const result = initPointers(settings, data);
 
         expect(result).toBeDefined();
         expect(Array.isArray(result)).toBe(true);
-        expect(result.length).toBe(userSettingsPointers.length);
-        expect(result[0]).toHaveProperty('pointerRadii');
-        expect(result[0]).toHaveProperty('percent');
+        expect(result.length).toBe(settings.pointers.length);
         expect(result[0]).toHaveProperty('id');
         expect(result[0]).toHaveProperty('index');
     });
 
-    it('should filter out invalid userSettingsPointers', () => {
-        const invalidUserSettingsPointers: IUserSettingsPointer[] = [
-            { rx: -1, ry: 2, value: 10 },
-            { rx: 2, ry: 0, value: 20 },
-        ];
+    it('should filter out invalid pointers', () => {
+        const settings: ISettings = {
+            pointers: [
+                { radius: -1, value: 10 },
+                { radius: 2, value: 20 },
+            ]
+        };
 
-        const result = getInitialPointers(invalidUserSettingsPointers, min, max);
-
+        const result = initPointers(settings, null);
         expect(result.length).toBe(1);
     });
 
-    it('should sort pointers by percent', () => {
-        const unsortedUserSettingsPointers: IUserSettingsPointer[] = [
-            { rx: 2, ry: 3, value: 20 },
-            { rx: 1, ry: 2, value: 10 },
-            { rx: 3, ry: 4, value: 30 },
-        ];
-
-        const result = getInitialPointers(unsortedUserSettingsPointers, min, max);
-
-        expect(result[0].percent).toBeLessThan(result[1].percent);
-        expect(result[1].percent).toBeLessThan(result[2].percent);
-    });
-
     it('should set index property correctly', () => {
-        const result = getInitialPointers(userSettingsPointers, min, max);
+        const settings: ISettings = {
+            pointers: [
+                { radius: 2, value: 20 },
+                { radius: 1, value: 10 },
+                { radius: 3, value: 30 },
+            ]
+        };
+
+        const result = initPointers(settings, null);
 
         for (let i = 0; i < result.length; i++) {
             expect(result[i].index).toBe(i);
@@ -56,18 +61,20 @@ describe('Initial Pointers', () => {
     });
 
     it('should return an empty array if no valid pointers exist', () => {
-        const invalidUserSettingsPointers: IUserSettingsPointer[] = [
-            { rx: -1, ry: 2, value: 10 },
-            { rx: 2, ry: 0, value: 20 },
-        ];
+        const settings: ISettings = {
+            pointers: [
+                { radius: -1, value: 10 },
+                { radius: 2, value: 20 },
+            ]
+        };
 
-        const result = getInitialPointers(invalidUserSettingsPointers, min, max);
+        const result = initPointers(settings, null);
 
         expect(result.length).toBe(1);
         expect(result[0].id).toBeDefined();
         expect(result[0].index).toBe(0);
-        expect(result[0].percent).toBe(0);
-        expect(result[0].pointerRadii).toStrictEqual([ 10, 10 ]);
+        expect(result[0].angleDeg).toBe(0);
+        expect(result[0].radius).toStrictEqual(10);
     });
 
 });
