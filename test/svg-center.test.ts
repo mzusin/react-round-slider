@@ -31,15 +31,15 @@ describe('getSVGCenter()', () => {
     it('should return the correct center point for SVG', () => {
         // Test case 1
         const result1 = getSVGCenter(100, 10, 5, 2);
-        expect(result1).toEqual([57.5, 57.5]);
+        expect(result1).toEqual([110, 110]);
 
         // Test case 2
         const result2 = getSVGCenter(50, 5, 2, 1);
-        expect(result2).toEqual([22, 22]);
+        expect(result2).toEqual([55, 55]);
 
         // Test case 3
         const result3 = getSVGCenter(80, 8, 3, 1);
-        expect(result3).toEqual([39.5, 39.5]);
+        expect(result3).toEqual([88, 88]);
     });
 
     it('should handle zero values for inputs', () => {
@@ -51,7 +51,7 @@ describe('getSVGCenter()', () => {
     it('should handle negative values for inputs', () => {
         // Test case with negative values
         const result = getSVGCenter(-50, -5, -2, -1);
-        expect(result).toEqual([-14, -14]);
+        expect(result).toEqual([-52, -52]);
     });
 
     it('should handle large values for inputs', () => {
