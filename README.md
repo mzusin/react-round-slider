@@ -19,6 +19,18 @@ Experience an accessible and mobile-friendly React Round Slider library, powered
 - Supports two (and more) pointers overlap, pointers max and min distance.
 - MIT license.
 
+![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/1-1.gif?raw=true)
+
+![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/2-2.gif?raw=true)
+
+![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/3-3.gif?raw=true)
+
+![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/4-4.gif?raw=true)
+
+![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/5-5.gif?raw=true)
+
+![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/6-6.gif?raw=true)
+
 ## Documentation 🔖
 ### Getting Started 
 - [Basic Usage](https://react-round-slider.mzsoft.org/pages/basic-usage.html)
