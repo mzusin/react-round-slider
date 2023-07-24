@@ -2,6 +2,22 @@
 
 Experience an accessible and mobile-friendly React Round Slider library, powered by TypeScript and SVG.
 
+## Features
+- Any number of pointers.
+- Mobile Ready.
+- Accessibility.
+- Optional ticks/marks.
+- ES6 JavaScript & Typescript.
+- Styles & Design options.
+- Range slider.
+- Numbers, text, ot range.
+- Range dragging.
+- Disabled/enabled, including keyboard and mousewheel.
+- Possibility to disable only one pointer.
+- Optional animation on panel click.
+- Works well with Bootstrap and other CSS frameworks.
+- Supports two (and more) pointers overlap, pointers max and min distance.
+- MIT license.
 
 ## Documentation 🔖
 ### Getting Started 
