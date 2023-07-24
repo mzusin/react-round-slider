@@ -275,6 +275,7 @@ const designSlider = () => {
 
                 min={ 0 }
                 max={ 359 }
+                pathRadius={ 120 }
 
                 textColor={ '#94A3B8' }
                 textFontSize={ 40 }
