@@ -234,7 +234,7 @@ export const test2PointersOnCircle = () => {
                         ]}
                     />
 
-                    {/*<RoundSlider
+                    <RoundSlider
                         pathStartAngle={ 0 }
                         pathEndAngle={ 90 }
                         pointers={[
@@ -362,7 +362,7 @@ export const test2PointersOnCircle = () => {
                                 value: 70
                             }
                         ]}
-                    />*/}
+                    />
             </>
         )
 };
@@ -1623,8 +1623,8 @@ const App = () => {
         <>
             {/*{ testInnerCircle() }*/}
             {/*{ TestSmallCircle() }*/}
-            {/*{ testMultiplePointers() */}
-            { test2PointersOnCircle() }
+            {/*{ testMultiplePointers() }*/}
+            {/*{ test2PointersOnCircle() }*/}
             {/*{ testTicksProperties() }*/}
             {/*{ testCirclePathSegments() }*/}
             {/*{ testBorder() }*/}
@@ -1634,7 +1634,7 @@ const App = () => {
             {/*{ testDisabled() }*/}
             {/*{ testEvents() }*/}
             {/*{ testStyling() }*/}
-            {/*{ testRangeDragging() }*/}
+            { testRangeDragging() }
             {/*{ testAnimateOnClick() }*/}
             {/*{ <TestUseState /> }*/}
             {/*{ <TestUseState2 /> }*/}

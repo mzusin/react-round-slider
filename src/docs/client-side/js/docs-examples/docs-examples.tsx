@@ -708,6 +708,35 @@ const customPointerSlider = () => {
     );
 };
 
+const rangeDraggingSlider = () => {
+    const $slider = document.getElementById('range-dragging-slider') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+            { value: 0 },
+            { value: 25 }
+        ]);
+
+        return (
+            <RoundSlider
+                pointers={ pointers }
+                onChange={ setPointers }
+                textColor={ '#8993B7' }
+                rangeDragging={ true }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
 export const initDocsExamples = () => {
     gettingStartedSlider();
     generalPointerOptionsSlider();
@@ -725,4 +754,5 @@ export const initDocsExamples = () => {
     pointerGradientSlider();
     pointersOverlapSlider();
     customPointerSlider();
+    rangeDraggingSlider();
 };

@@ -54,7 +54,10 @@ Experience an accessible and mobile-friendly React Round Slider library, powered
 - [Pointer & Connection Gradient](https://react-round-slider.mzsoft.org/pages/pointer-and-connection-gradient.html)
 - [Pointers Overlap](https://react-round-slider.mzsoft.org/pages/pointers-overlap.html)
 - [Custom Pointer Shape](https://react-round-slider.mzsoft.org/pages/custom-pointer-shape.html)
+- [Range Dragging](https://react-round-slider.mzsoft.org/pages/range-dragging.html)
 ------------------------------
+
+
 
 
 

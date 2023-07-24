@@ -1,4 +1,4 @@
-import { getMinMaxDistancePointers, IPointers } from './pointers-provider';
+import { IPointers } from './pointers-provider';
 import { getAnglesDistance } from './circle-provider';
 
 export interface IConnection {
@@ -42,13 +42,16 @@ export const getConnection = (
         result.endAngleDeg = pointers.pointers[0].angleDeg;
     }
     else{
-        const minMaxResult = getMinMaxDistancePointers(pointers.pointers, pathStartAngle);
+        result.startAngleDeg = pointers.pointers[0].angleDeg;
+        result.endAngleDeg = pointers.pointers[pointers.pointers.length - 1].angleDeg;
+
+        /*const minMaxResult = getMinMaxDistancePointers(pointers.pointers, pathStartAngle);
         if(!minMaxResult) return null;
 
         const [ minPointer, maxPointer ] = minMaxResult;
 
         result.startAngleDeg = minPointer.angleDeg;
-        result.endAngleDeg = maxPointer.angleDeg;
+        result.endAngleDeg = maxPointer.angleDeg;*/
     }
 
     const pathAnglesDistance = getAnglesDistance(pathStartAngle, pathEndAngle);

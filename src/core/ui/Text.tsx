@@ -52,6 +52,7 @@ const Text = (props: ITextProps) => {
         svg.endAngleDeg,
         settings.textPrefix,
         settings.textSuffix,
+        settings.textBetween,
     ]);
 
     const hideText = getBoolean(settings.hideText, false);

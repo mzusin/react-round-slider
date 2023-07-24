@@ -15,3 +15,4 @@ https://react-round-slider.mzsoft.org/pages/circle-gradient.html
 https://react-round-slider.mzsoft.org/pages/pointer-and-connection-gradient.html
 https://react-round-slider.mzsoft.org/pages/pointers-overlap.html
 https://react-round-slider.mzsoft.org/pages/custom-pointer-shape.html
+https://react-round-slider.mzsoft.org/pages/range-dragging.html
