@@ -4,11 +4,9 @@ import { RoundSlider } from '../src/core'; // https://testing-library.com/docs/d
 describe('Rendering', () => {
     test('When no params: SVG should exist', () => {
         const { container} = render(
-            <RoundSlider/>
+            <RoundSlider />
         );
         const $svg = container.querySelector('svg') as SVGSVGElement;
         expect($svg).toBeDefined();
     });
-
-
 });

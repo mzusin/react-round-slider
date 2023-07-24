@@ -44,7 +44,7 @@ export const getSvg = (
     } as ISvg;
 };
 
-const getSVGCenter = (
+export const getSVGCenter = (
     circleRadius: number,
     maxPointerRadius: number,
     circleThickness: number,
@@ -66,7 +66,7 @@ const getSVGCenter = (
     ];
 };
 
-const getSVGSize = (
+export const getSVGSize = (
     circleRadius: number,
     maxPointerRadius: number,
     circleThickness: number,
