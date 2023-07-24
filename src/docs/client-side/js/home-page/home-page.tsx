@@ -136,7 +136,7 @@ const initHorseshoeSlider = () => {
 };
 
 const cssFrameworksSlider = () => {
-    const $slider = document.getElementById('css-framworks-slider') as HTMLElement;
+    const $slider = document.getElementById('css-frameworks-slider') as HTMLElement;
     if(!$slider) return;
 
     const Component = () => {
@@ -199,6 +199,67 @@ const cssFrameworksSlider = () => {
     );
 };
 
+const advancedFeaturesSlider = () => {
+    const $slider = document.getElementById('advanced-features-slider') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        return (
+            <RoundSlider
+                animateOnClick={ true }
+
+                pointers={[
+                    {
+                        value: 20,
+                    },
+                    {
+                        value: 80,
+                    }
+                ]}
+
+                pathStartAngle={ 0 }
+                pathEndAngle={ 270 }
+
+                textColor={ '#94A3B8' }
+                textOffsetY={ 20 }
+                textFontSize={ 24 }
+                textBetween={ ' / ' }
+
+                pointerRadius={ 15 }
+                pointerBgColor={ 'url(#advanced-features-slider-gradient)' }
+                pointerBgColorSelected={ 'url(#advanced-features-slider-gradient-2)' }
+
+                enableTicks={ true }
+                ticksCount={ 50 }
+                ticksWidth={ 2 }
+                ticksColor={ '#94A3B8' }
+                tickValuesColor={ '#94A3B8' }
+
+                SvgDefs={
+                    <>
+                        <radialGradient id="advanced-features-slider-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#B595EE" />
+                            <stop offset="100%" stopColor="#4D2852" />
+                        </radialGradient>
+                        <radialGradient id="advanced-features-slider-gradient-2" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#B595EE" />
+                            <stop offset="80%" stopColor="#4D2852" />
+                        </radialGradient>
+                    </>
+                }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
 export const initHomePage = () => {
     if(hljs){
         hljs.highlightAll();
@@ -207,4 +268,5 @@ export const initHomePage = () => {
     initColorSlider();
     initHorseshoeSlider();
     cssFrameworksSlider();
+    advancedFeaturesSlider();
 };
