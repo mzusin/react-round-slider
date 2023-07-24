@@ -14,6 +14,9 @@ Experience an accessible and mobile-friendly React Round Slider library, powered
 - Range slider.
 - Numbers, text, ot range.
 - Range dragging.
+- Touch support.
+- Keyboard support.
+- Mousewheel support.
 - Disabled/enabled, including keyboard and mousewheel.
 - Possibility to disable only one pointer.
 - Optional animation on panel click.
@@ -52,6 +55,18 @@ Experience an accessible and mobile-friendly React Round Slider library, powered
 - [Pointers Overlap](https://react-round-slider.mzsoft.org/pages/pointers-overlap.html)
 - [Custom Pointer Shape](https://react-round-slider.mzsoft.org/pages/custom-pointer-shape.html)
 ------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## License
