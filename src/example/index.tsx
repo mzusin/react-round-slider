@@ -607,7 +607,58 @@ export const testTicksProperties = () => {
 export const testTextProperties = () => {
   return (
       <>
-          <RoundSlider
+          <div style={{ background: '#111', display: 'inline-flex' }}>
+              <RoundSlider
+                  animateOnClick={ true }
+                  pathStartAngle={ 150 }
+                  pathEndAngle={ 30 }
+
+                  pathBgColor={ '#2C2C2F' }
+                  pathThickness={ 15 }
+                  connectionBgColor={ 'url(#horseshoe-slider-gradient)' }
+
+                  pointerBgColor={ '#fff' }
+                  pointerBgColorSelected={ '#eeeeee' }
+                  pointerRadius={ 20 }
+
+                  enableTicks={ true }
+                  ticksCount={ 100 }
+                  ticksGroupSize={ 10 }
+                  ticksWidth={ 1 }
+                  ticksDistanceToPanel={ 5 }
+                  tickValuesDistance={ 20 }
+                  tickValuesColor={ '#e1e1e1' }
+
+                  textColor={ '#fff' }
+                  textFontSize={ 24 }
+                  textSuffix={ '“' }
+                  textPrefix={ ' '}
+
+                  min={ 0 }
+                  max={ 100 }
+
+                  pointers={[
+                      {
+                          value: 0,
+                      },
+                      {
+                          value: 100,
+                      }
+                  ]}
+
+                  SvgDefs={
+                      <>
+                          <linearGradient id="horseshoe-slider-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                              <stop offset="0%" stopColor="#2d95a8" />
+                              <stop offset="50%" stopColor="#67CD67" />
+                              <stop offset="100%" stopColor="#cccc68" />
+                          </linearGradient>
+                      </>
+                  }
+              />
+          </div>
+
+          {/*<RoundSlider
               pathRadius={ 150 }
               pathStartAngle={ 270 }
               pathEndAngle={ 45 }
@@ -655,7 +706,7 @@ export const testTextProperties = () => {
               textSuffix={ 'px' }
               textFontFamily={ 'Arial' }
               round={ 2 }
-          />
+          />*/}
       </>
   )
 };
@@ -1634,10 +1685,11 @@ const App = () => {
             {/*{ testDisabled() }*/}
             {/*{ testEvents() }*/}
             {/*{ testStyling() }*/}
-            { testRangeDragging() }
+            {/*{ testRangeDragging() }*/}
             {/*{ testAnimateOnClick() }*/}
             {/*{ <TestUseState /> }*/}
             {/*{ <TestUseState2 /> }*/}
+            { testTextProperties() }
         </>
     );
 };

@@ -166,7 +166,8 @@ const initPointers = (
             pathStartAngle,
             pathEndAngle,
         );
-        let angleAfterStep = roundToStep(angleDeg, data.stepAngleDeg);
+
+        let angleAfterStep = roundToStep(angleDeg, data.stepAngleDeg, pathStartAngle, pathEndAngle);
 
         if(data.isClosedShape && mod(angleAfterStep, 360) === mod(pathEndAngle, 360)){
             angleAfterStep = pathStartAngle;
@@ -305,6 +306,8 @@ export const getMinMaxDistancePointers = (pointers: IPointer[], pathStartAngle: 
     ];
 };
 
-export const roundToStep = (num: number, step: number) : number => {
-    return step === 0 ? 0 : Math.round(num / step) * step;
+export const roundToStep = (angleDeg: number, step: number, pathStartAngle: number, pathEndAngle: number) : number => {
+    if((mod(angleDeg, 360) === mod(pathStartAngle, 360)) ||
+        (mod(angleDeg, 360) === mod(pathEndAngle, 360))) return angleDeg;
+    return step === 0 ? 0 : Math.round(angleDeg / step) * step;
 };

@@ -110,7 +110,7 @@ export const RoundSlider = (props: ISettings) => {
     const setPointersCallback = (pointer: IPointer, newAngleDeg: number) => {
         if(props.disabled || !pointers.pointers || !pointer || pointer.disabled) return;
 
-        newAngleDeg = roundToStep(newAngleDeg, data.stepAngleDeg);
+        newAngleDeg = roundToStep(newAngleDeg, data.stepAngleDeg, svg.startAngleDeg, svg.endAngleDeg);
         if(data.isClosedShape && mod(newAngleDeg, 360) === mod(svg.endAngleDeg, 360)){
             newAngleDeg = svg.startAngleDeg;
         }
