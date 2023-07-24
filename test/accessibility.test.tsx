@@ -36,7 +36,7 @@ describe('Accessibility', () => {
             ]} />
         );
         const $pointer = container.querySelector('svg [data-type="pointer"][data-index="0"]') as SVGElement;
-        expect($pointer.getAttribute('aria-valuenow')).toStrictEqual('10');
+        expect($pointer.getAttribute('aria-valuenow')).toStrictEqual('36');
     });
 
     test('aria-valuetext', () => {

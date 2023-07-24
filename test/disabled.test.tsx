@@ -7,7 +7,7 @@ describe('Disabled', () => {
             <RoundSlider disabled={ true } />
         );
         const $svg = container.querySelector('svg') as SVGSVGElement;
-        expect($svg.classList.contains('disabled')).toStrictEqual(true);
+        expect($svg.classList.contains('mz-round-slider-disabled')).toStrictEqual(true);
         expect($svg.getAttribute('aria-disabled')).toStrictEqual('true');
     });
 
@@ -16,7 +16,7 @@ describe('Disabled', () => {
             <RoundSlider />
         );
         const $svg = container.querySelector('svg') as SVGSVGElement;
-        expect($svg.classList.contains('disabled')).toStrictEqual(false);
+        expect($svg.classList.contains('mz-round-slider-disabled')).toStrictEqual(false);
         expect($svg.getAttribute('aria-disabled')).toStrictEqual(null);
     });
 
@@ -25,32 +25,26 @@ describe('Disabled', () => {
             <RoundSlider
                 pointers={[
                     {
-                        rx: 50,
-                        ry: 50,
+                        radius: 50,
                         value: 5,
                         bgColor: 'blue',
                         disabled: true,
                     },
 
                     {
-                        rx: 15,
-                        ry: 15,
+                        radius: 15,
                         value: 10,
                     },
 
                     {
-                        rx: 55,
-                        ry: 55,
+                        radius: 55,
                         value: 15,
-                        disabled: true,
-                        pointerSVG: <image href="settings-icon.png" height="20" width="20" />
+                        disabled: true
                     },
 
                     {
-                        rx: 25,
-                        ry: 25,
-                        value: 20,
-                        pointerSVG: <image href="settings-icon.png" height="20" width="20" />
+                        radius: 25,
+                        value: 20
                     },
 
                 ]}
@@ -62,10 +56,10 @@ describe('Disabled', () => {
         const $thirdPointer = $svg.querySelector('[data-type="pointer"][data-index="2"]') as SVGElement;
         const $fourthPointer = $svg.querySelector('[data-type="pointer"][data-index="3"]') as SVGElement;
 
-        expect($firstPointer.classList.contains('disabled')).toStrictEqual(true);
-        expect($secondPointer.classList.contains('disabled')).toStrictEqual(false);
-        expect($thirdPointer.classList.contains('disabled')).toStrictEqual(true);
-        expect($fourthPointer.classList.contains('disabled')).toStrictEqual(false);
+        expect($firstPointer.classList.contains('mz-round-slider-pointer-disabled')).toStrictEqual(true);
+        expect($secondPointer.classList.contains('mz-round-slider-pointer-disabled')).toStrictEqual(false);
+        expect($thirdPointer.classList.contains('mz-round-slider-pointer-disabled')).toStrictEqual(true);
+        expect($fourthPointer.classList.contains('mz-round-slider-pointer-disabled')).toStrictEqual(false);
 
         expect($firstPointer.getAttribute('aria-disabled')).toStrictEqual('true');
         expect($secondPointer.hasAttribute('aria-disabled')).toStrictEqual(false);

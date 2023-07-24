@@ -370,7 +370,7 @@ export const test2PointersOnCircle = () => {
 export const testMultiplePointers = () => {
     return (
         <>
-            <RoundSlider
+            {/*<RoundSlider
                 pathRadius={ 150 }
                 pathStartAngle={ 0 }
                 pathEndAngle={ 180 }
@@ -467,7 +467,7 @@ export const testMultiplePointers = () => {
                         value: 90,
                     }
                 ]}
-            />
+            />*/}
 
             <RoundSlider
                 pathRadius={ 150 }
@@ -486,7 +486,7 @@ export const testMultiplePointers = () => {
                 ]}
             />
 
-            <RoundSlider
+            {/*<RoundSlider
                 pathRadius={ 150 }
                 pathStartAngle={ 270 }
                 pathEndAngle={ 0 }
@@ -518,7 +518,7 @@ export const testMultiplePointers = () => {
                         value: 90,
                     }
                 ]}
-            />
+            />*/}
         </>
     )
 };
@@ -658,7 +658,7 @@ export const testTextProperties = () => {
               />
           </div>
 
-          {/*<RoundSlider
+          <RoundSlider
               pathRadius={ 150 }
               pathStartAngle={ 270 }
               pathEndAngle={ 45 }
@@ -706,7 +706,7 @@ export const testTextProperties = () => {
               textSuffix={ 'px' }
               textFontFamily={ 'Arial' }
               round={ 2 }
-          />*/}
+          />
       </>
   )
 };
@@ -1674,7 +1674,7 @@ const App = () => {
         <>
             {/*{ testInnerCircle() }*/}
             {/*{ TestSmallCircle() }*/}
-            {/*{ testMultiplePointers() }*/}
+            { testMultiplePointers() }
             {/*{ test2PointersOnCircle() }*/}
             {/*{ testTicksProperties() }*/}
             {/*{ testCirclePathSegments() }*/}
@@ -1689,7 +1689,7 @@ const App = () => {
             {/*{ testAnimateOnClick() }*/}
             {/*{ <TestUseState /> }*/}
             {/*{ <TestUseState2 /> }*/}
-            { testTextProperties() }
+            {/*{ testTextProperties() }*/}
         </>
     );
 };

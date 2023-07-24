@@ -265,7 +265,7 @@ export const RoundSlider = (props: ISettings) => {
                     focusable={ true }
                     aria-disabled={ props.disabled ? true : undefined }
                     style={ props.svgBgColor ? { ...outlineNoneStyle, backgroundColor: props.svgBgColor } : outlineNoneStyle }
-                    className="mz-round-slider">
+                    className={ `mz-round-slider ${ props.disabled ? 'mz-round-slider-disabled' : '' }` }>
 
                     {
                         (props.SvgDefs) &&

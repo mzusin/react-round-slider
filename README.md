@@ -110,6 +110,13 @@ Experience an accessible and mobile-friendly React Round Slider library, powered
 
 
 
+
+
+
+
+
+
+
 ## License
 
 [MIT license](https://github.com/mzusin/mz-react-input-number/blob/main/LICENSE)
