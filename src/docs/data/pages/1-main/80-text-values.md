@@ -50,6 +50,11 @@ export interface ISettings {
     // The default value is 0.
     textOffsetY?: number;
 
+    // A string specifying the text betwen slider's pointer values (for
+    // example, •, | or -).
+    // The default value is undefined.
+    textBetween?: string;
+
     // ... other settings ...
 }
 ```
@@ -72,13 +77,14 @@ const Component = () => {
     return (
         <RoundSlider
             hideText={ false }
-            textPrefix={ ' ' }
+            textPrefix={ '' }
             textSuffix={ 'px' }
             textColor={ '#8993B7' }
             textFontSize={ 24 }
             textFontFamily={ 'Helvetica,Arial,sans-serif' }
             textOffsetX={ 0 }
             textOffsetY={ 0 }
+            textBetween={ ' • '}
 
             pointers={ pointers }
             onChange={ setPointers }

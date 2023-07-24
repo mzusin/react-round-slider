@@ -55,6 +55,7 @@ export interface ISettings {
     textFontFamily?: string;
     textOffsetX?: number;
     textOffsetY?: number;
+    textBetween?: string;
 
     // ticks -----------------
     enableTicks?: boolean;

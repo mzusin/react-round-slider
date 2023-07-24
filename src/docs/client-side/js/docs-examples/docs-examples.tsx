@@ -321,13 +321,14 @@ const textValuesSlider = () => {
         return (
             <RoundSlider
                 hideText={ false }
-                textPrefix={ ' ' }
+                textPrefix={ '' }
                 textSuffix={ 'px' }
                 textColor={ '#8993B7' }
                 textFontSize={ 24 }
                 textFontFamily={ 'Helvetica,Arial,sans-serif' }
                 textOffsetX={ 0 }
                 textOffsetY={ 0 }
+                textBetween={ ' • '}
 
                 pointers={ pointers }
                 onChange={ setPointers }

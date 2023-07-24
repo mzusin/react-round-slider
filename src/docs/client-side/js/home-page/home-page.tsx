@@ -135,7 +135,7 @@ const initHorseshoeSlider = () => {
     );
 };
 
-const cssFramworksSlider = () => {
+const cssFrameworksSlider = () => {
     const $slider = document.getElementById('css-framworks-slider') as HTMLElement;
     if(!$slider) return;
 
@@ -163,11 +163,18 @@ const cssFramworksSlider = () => {
                 textColor={ '#94A3B8' }
                 textOffsetY={ 20 }
                 textFontSize={ 24 }
+                textBetween={ ' • ' }
 
                 pointerRadius={ 15 }
                 pointerBgColorSelected={ '#98d32a' }
 
                 connectionBgColorHover={ '#4a96b6' }
+
+                enableTicks={ true }
+                ticksCount={ 50 }
+                ticksWidth={ 2 }
+                ticksColor={ '#94A3B8' }
+                tickValuesColor={ '#94A3B8' }
 
                 /*
 
@@ -199,5 +206,5 @@ export const initHomePage = () => {
 
     initColorSlider();
     initHorseshoeSlider();
-    cssFramworksSlider();
+    cssFrameworksSlider();
 };

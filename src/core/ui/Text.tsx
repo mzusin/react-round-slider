@@ -41,7 +41,9 @@ const Text = (props: ITextProps) => {
         });
 
         const texts = values.map(value => `${ settings.textPrefix || '' }${ value }${ settings.textSuffix || '' }`);
-        setValue(texts.join(' '));
+
+        const textBetween = getString(settings.textBetween, ' ');
+        setValue(texts.join(textBetween));
 
     }, [
         data,

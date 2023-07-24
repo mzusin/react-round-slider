@@ -16,8 +16,8 @@
   <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32.png" />
   <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16.png" />
 
-  <link rel="stylesheet" href="/css/styles.1690040828708.css" />
-  <!--<link rel="stylesheet" href="/js/index.1690040828708.css" />-->
+  <link rel="stylesheet" href="/css/styles.1690181199516.css" />
+  <!--<link rel="stylesheet" href="/js/index.1690181199516.css" />-->
 
 </head>
 <body class="h-screen flex flex-col font-roboto bg-white dark:bg-slate-900 dark:text-slate-100">
@@ -183,6 +183,11 @@
     <span class="hljs-comment">// The default value is 0.</span>
     textOffsetY?: <span class="hljs-built_in">number</span>;
 
+    <span class="hljs-comment">// A string specifying the text betwen slider&#x27;s pointer values (for</span>
+    <span class="hljs-comment">// example, •, | or -).</span>
+    <span class="hljs-comment">// The default value is undefined.</span>
+    textBetween?: <span class="hljs-built_in">string</span>;
+
     <span class="hljs-comment">// ... other settings ...</span>
 }</code></pre>
 <p class="mb-4">For example:</p>
@@ -201,13 +206,14 @@
     <span class="hljs-keyword">return</span> (
         <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">RoundSlider</span>
             <span class="hljs-attr">hideText</span>=<span class="hljs-string">{</span> <span class="hljs-attr">false</span> }
-            <span class="hljs-attr">textPrefix</span>=<span class="hljs-string">{</span> &#x27; &#x27; }
+            <span class="hljs-attr">textPrefix</span>=<span class="hljs-string">{</span> &#x27;&#x27; }
             <span class="hljs-attr">textSuffix</span>=<span class="hljs-string">{</span> &#x27;<span class="hljs-attr">px</span>&#x27; }
             <span class="hljs-attr">textColor</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">8993B7</span>&#x27; }
             <span class="hljs-attr">textFontSize</span>=<span class="hljs-string">{</span> <span class="hljs-attr">24</span> }
             <span class="hljs-attr">textFontFamily</span>=<span class="hljs-string">{</span> &#x27;<span class="hljs-attr">Helvetica</span>,<span class="hljs-attr">Arial</span>,<span class="hljs-attr">sans-serif</span>&#x27; }
             <span class="hljs-attr">textOffsetX</span>=<span class="hljs-string">{</span> <span class="hljs-attr">0</span> }
             <span class="hljs-attr">textOffsetY</span>=<span class="hljs-string">{</span> <span class="hljs-attr">0</span> }
+            <span class="hljs-attr">textBetween</span>=<span class="hljs-string">{</span> &#x27; • &#x27;}
 
             <span class="hljs-attr">pointers</span>=<span class="hljs-string">{</span> <span class="hljs-attr">pointers</span> }
             <span class="hljs-attr">onChange</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setPointers</span> }
@@ -256,6 +262,6 @@
   </div>
 </footer>-->
 
-<script src="/js/index.1690040828708.js"></script>
+<script src="/js/index.1690181199516.js"></script>
 </body>
 </html>
