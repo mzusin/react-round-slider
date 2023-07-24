@@ -325,6 +325,58 @@ const designSlider = () => {
     );
 };
 
+const lettersSlider = () => {
+    const $slider = document.getElementById('letters-slider') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        return (
+            <RoundSlider
+                animateOnClick={ true }
+
+                pointers={[
+                    {
+                        value: 'a',
+                    },
+                ]}
+
+                data={[
+                    'a', 'b', 'c', 'd', 'e', 'f',
+                    'g', 'h', 'i', 'j', 'k', 'l',
+                    'm', 'n', 'o', 'p', 'q', 'r',
+                    's', 't', 'u', 'v', 'w', 'x',
+                    'y', 'z',
+                ]}
+
+                pointerBgColor={ '#f19305' }
+                pointerBgColorSelected={ '#ffb800' }
+                pointerRadius={ 15 }
+
+                textColor={ '#5DAED2' }
+                textFontSize={ 30 }
+                textFontFamily={ 'Helvetica,Arial,sans-serif' }
+                textOffsetY={ 10 }
+
+                enableTicks={ true }
+                showTickValues={ true }
+                ticksGroupSize={ 1 }
+                tickValuesColor={ '#94A3B8' }
+                ticksColor={ '#94A3B8' }
+                ticksWidth={ 2 }
+                ticksHeight={ 5 }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
 export const initHomePage = () => {
     if(hljs){
         hljs.highlightAll();
@@ -335,4 +387,5 @@ export const initHomePage = () => {
     cssFrameworksSlider();
     advancedFeaturesSlider();
     designSlider();
+    lettersSlider();
 };
