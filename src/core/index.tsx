@@ -189,6 +189,12 @@ export const RoundSlider = (props: ISettings) => {
             if(nextAngle <= prevAngle) {
                 nextAngle += 360;
             }
+            else{
+                if(mod(prevAngle, 360) <= mod(nextAngle, 360)) {
+                    prevAngle = mod(prevAngle, 360);
+                    nextAngle = mod(nextAngle, 360);
+                }
+            }
 
             if(!isAngleInArc(prevAngle, nextAngle, newAngleDeg)){
                 newAngleDeg = getClosestEdge(

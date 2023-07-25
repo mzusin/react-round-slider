@@ -370,7 +370,7 @@ export const test2PointersOnCircle = () => {
 export const testMultiplePointers = () => {
     return (
         <>
-            {/*<RoundSlider
+            <RoundSlider
                 pathRadius={ 150 }
                 pathStartAngle={ 0 }
                 pathEndAngle={ 180 }
@@ -467,7 +467,7 @@ export const testMultiplePointers = () => {
                         value: 90,
                     }
                 ]}
-            />*/}
+            />
 
             <RoundSlider
                 pathRadius={ 150 }
@@ -486,7 +486,7 @@ export const testMultiplePointers = () => {
                 ]}
             />
 
-            {/*<RoundSlider
+            <RoundSlider
                 pathRadius={ 150 }
                 pathStartAngle={ 270 }
                 pathEndAngle={ 0 }
@@ -518,7 +518,7 @@ export const testMultiplePointers = () => {
                         value: 90,
                     }
                 ]}
-            />*/}
+            />
         </>
     )
 };
@@ -1674,8 +1674,8 @@ const App = () => {
         <>
             {/*{ testInnerCircle() }*/}
             {/*{ TestSmallCircle() }*/}
-            { testMultiplePointers() }
-            {/*{ test2PointersOnCircle() }*/}
+            {/*{ testMultiplePointers() }*/}
+            { test2PointersOnCircle() }
             {/*{ testTicksProperties() }*/}
             {/*{ testCirclePathSegments() }*/}
             {/*{ testBorder() }*/}
