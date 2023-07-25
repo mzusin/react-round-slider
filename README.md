@@ -14,24 +14,24 @@
 </p>
 
 ## Features
-- Any number of pointers.
-- Mobile Ready.
-- Accessibility.
-- Optional ticks/marks.
-- ES6 JavaScript & Typescript.
-- Styles & Design options.
-- Range slider.
-- Numbers, text, ot range.
-- Range dragging.
-- Touch support.
-- Keyboard support.
-- Mousewheel support.
-- Disabled/enabled, including keyboard and mousewheel.
-- Possibility to disable only one pointer.
-- Optional animation on panel click.
-- Works well with Bootstrap and other CSS frameworks.
-- Supports two (and more) pointers overlap.
-- MIT license.
+- Any number of pointers 🔵 🟣 🟡
+- Mobile Ready 📱
+- Accessibility 
+- Optional ticks/marks 
+- ES6 JavaScript & Typescript ✔
+- Styles & Design options ☀️
+- Range slider 
+- Numbers, text, ot range 
+- Range dragging 
+- Touch support 
+- Keyboard support ⌨️
+- Mousewheel support 🐭
+- Disabled/enabled, including keyboard and mousewheel 
+- Possibility to disable only one pointer 
+- Optional animation on panel click 
+- Works well with Bootstrap and other CSS frameworks 
+- Supports two (and more) pointers overlap 
+- MIT license 🎁
 
 
 <img width="200" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/2-2.gif?raw=true" />
