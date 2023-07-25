@@ -1,8 +1,10 @@
-# Multi-Pointer React Round Slider
+<h1 align="center"><img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/1-1.gif?raw=true" /><br> React Round Slider</h1>
 
-Experience an accessible and mobile-friendly React Round Slider library, powered by TypeScript and SVG.
+<p align="center">
+  <b>Experience an accessible and mobile-friendly React Round Slider library, powered by TypeScript and SVG.</b>
+</p>
 
-![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/1-1.gif?raw=true)
+
 
 ## Features
 - Any number of pointers.
