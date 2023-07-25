@@ -21,7 +21,7 @@ Experience an accessible and mobile-friendly React Round Slider library, powered
 - Possibility to disable only one pointer.
 - Optional animation on panel click.
 - Works well with Bootstrap and other CSS frameworks.
-- Supports two (and more) pointers overlap, pointers max and min distance.
+- Supports two (and more) pointers overlap.
 - MIT license.
 
 ![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/2-2.gif?raw=true)
@@ -56,6 +56,7 @@ Experience an accessible and mobile-friendly React Round Slider library, powered
 - [Custom Pointer Shape](https://react-round-slider.mzsoft.org/pages/custom-pointer-shape.html)
 - [Range Dragging](https://react-round-slider.mzsoft.org/pages/range-dragging.html)
 ------------------------------
+
 
 
 
