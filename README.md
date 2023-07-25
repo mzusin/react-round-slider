@@ -33,23 +33,21 @@
 - Supports two (and more) pointers overlap.
 - MIT license.
 
-<p align="left">
 
-<img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/2-2.gif?raw=true" />
+<img width="200" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/2-2.gif?raw=true" />
+<br/>
 
-<img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/3-3.gif?raw=true" />
+<img width="200" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/3-3.gif?raw=true" />
+<br/>
 
-<img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/4-4.gif?raw=true" />
+<img width="200" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/4-4.gif?raw=true" />
+<br/>
 
-</p>
+<img width="200" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/5-5.gif?raw=true" />
+<br/>
 
-<p align="left">
-
-<img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/5-5.gif?raw=true" />
-
-<img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/6-6.gif?raw=true" />
-
-</p>
+<img width="200" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/6-6.gif?raw=true" />
+<br/>
 
 ## Documentation 🔖
 ### Getting Started 
