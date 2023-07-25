@@ -1,7 +1,7 @@
 <h1 align="center"><img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/1-1.gif?raw=true" /><br> React Round Slider</h1>
 
 <p align="center">
-  <b>Experience an accessible and mobile-friendly React Round Slider library, powered by TypeScript and SVG.</b>
+  <b>Experience an accessible and mobile-friendly React Round Slider library,<br /> powered by TypeScript and SVG.</b>
 </p>
 
 
