@@ -1,6 +1,15 @@
 <h1 align="center"><img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/1-1.gif?raw=true" /><br> React Round Slider</h1>
 
 <p align="center">
+  <a href="https://github.com/mzusin/react-round-slider/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+  </a>
+  <a href="https://npmjs.org/package/mz-react-round-slider">
+    <img src="https://img.shields.io/npm/v/mz-react-round-slider.svg" alt="version" />
+  </a>
+</p>
+
+<p align="center">
   <b>Experience an accessible and mobile-friendly React Round Slider library,<br /> powered by TypeScript and SVG.</b>
 </p>
 
