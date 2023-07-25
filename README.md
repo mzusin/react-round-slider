@@ -32,6 +32,10 @@
 
 <img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/4-4.gif?raw=true" />
 
+</p>
+
+<p align="left">
+
 <img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/5-5.gif?raw=true" />
 
 <img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/6-6.gif?raw=true" />
