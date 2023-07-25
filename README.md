@@ -4,8 +4,6 @@
   <b>Experience an accessible and mobile-friendly React Round Slider library,<br /> powered by TypeScript and SVG.</b>
 </p>
 
-
-
 ## Features
 - Any number of pointers.
 - Mobile Ready.
@@ -26,15 +24,19 @@
 - Supports two (and more) pointers overlap.
 - MIT license.
 
-![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/2-2.gif?raw=true)
+<p align="left">
 
-![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/3-3.gif?raw=true)
+<img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/2-2.gif?raw=true" />
 
-![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/4-4.gif?raw=true)
+<img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/3-3.gif?raw=true" />
 
-![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/5-5.gif?raw=true)
+<img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/4-4.gif?raw=true" />
 
-![](https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/6-6.gif?raw=true)
+<img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/5-5.gif?raw=true" />
+
+<img height="150" src="https://github.com/mzusin/react-round-slider/blob/main/docs/img/preview/6-6.gif?raw=true" />
+
+</p>
 
 ## Documentation 🔖
 ### Getting Started 
