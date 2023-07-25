@@ -1,5 +1,5 @@
 /* 
-MZ React Round Slider v1.0.0
+MZ React Round Slider v1.0.1
 https://github.com/mzusin/react-round-slider
 MIT License      
 Copyright (c) 2023-present, Miriam Zusin          
