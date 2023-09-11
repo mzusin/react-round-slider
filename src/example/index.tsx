@@ -5,11 +5,18 @@ import { useState } from 'react';
 import { ISettingsPointer } from '../core/domain/settings-provider';
 
 export const testCirclePathSegments = () => {
+    const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+        { value: 0 },
+    ]);
+
     return (
         <>
             <RoundSlider
                 pathStartAngle={ 270 }
                 pathEndAngle={ 270 }
+                pointers={ pointers }
+                onChange={ setPointers }
+                textColor={ '#8993B7' }
             />
 
             <RoundSlider />
