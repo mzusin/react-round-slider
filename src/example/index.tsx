@@ -7,6 +7,11 @@ import { ISettingsPointer } from '../core/domain/settings-provider';
 export const testCirclePathSegments = () => {
     return (
         <>
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 270 }
+            />
+
             <RoundSlider />
 
             <RoundSlider
@@ -1675,9 +1680,9 @@ const App = () => {
             {/*{ testInnerCircle() }*/}
             {/*{ TestSmallCircle() }*/}
             {/*{ testMultiplePointers() }*/}
-            { test2PointersOnCircle() }
+            {/*{ test2PointersOnCircle() }*/}
             {/*{ testTicksProperties() }*/}
-            {/*{ testCirclePathSegments() }*/}
+            { testCirclePathSegments() }
             {/*{ testBorder() }*/}
             {/*{ testData() }*/}
             {/*{ testStep() }*/}

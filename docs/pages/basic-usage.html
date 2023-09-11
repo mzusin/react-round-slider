@@ -16,8 +16,8 @@
   <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32.png" />
   <link id="favicon-16" rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16.png" />
 
-  <link rel="stylesheet" href="/css/styles.1690268894072.css" />
-  <!--<link rel="stylesheet" href="/js/index.1690268894072.css" />-->
+  <link rel="stylesheet" href="/css/styles.1694421606066.css" />
+  <!--<link rel="stylesheet" href="/js/index.1694421606066.css" />-->
 
 </head>
 <body class="h-screen flex flex-col font-roboto bg-white dark:bg-slate-900 dark:text-slate-100">
@@ -179,6 +179,27 @@
 <blockquote class="bg-gray-100 pt-4 px-4 flex my-10 border-l-4 border-blue-300 rounded dark:bg-sky-900">
 <p class="mb-4">The slider has a large set of options, which are described later in this documentation.</p>
 </blockquote>
+<p class="mb-4">To place the starting point at the top, you can use the <a href="/pages/path-settings.html" class="text-sky-500">pathStartAngle</a> and <a href="/pages/path-settings.html" class="text-sky-500">pathEndAngle</a> properties like this:</p>
+<br/>
+<div id="getting-started-slider-top-point"></div>
+<br/>
+<pre class="hljs p-4 mb-4 rounded-md shadow-xl overflow-auto whitespace-pre-wrap text-base"><code><span class="hljs-keyword">import</span> { <span class="hljs-title class_">RoundSlider</span>, <span class="hljs-title class_">ISettingsPointer</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;mz-react-round-slider&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">MyComponent</span> = (<span class="hljs-params"></span>) =&gt; {
+    <span class="hljs-keyword">const</span> [ pointers, setPointers ] = useState&lt;<span class="hljs-title class_">ISettingsPointer</span>[]&gt;([
+        { <span class="hljs-attr">value</span>: <span class="hljs-number">0</span> },
+    ]);
+
+    <span class="hljs-keyword">return</span> (
+        <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">RoundSlider</span>
+            <span class="hljs-attr">pathStartAngle</span>=<span class="hljs-string">{</span> <span class="hljs-attr">270</span> }
+            <span class="hljs-attr">pathEndAngle</span>=<span class="hljs-string">{</span> <span class="hljs-attr">269.999</span> }
+            <span class="hljs-attr">pointers</span>=<span class="hljs-string">{</span> <span class="hljs-attr">pointers</span> }
+            <span class="hljs-attr">onChange</span>=<span class="hljs-string">{</span> <span class="hljs-attr">setPointers</span> }
+            <span class="hljs-attr">textColor</span>=<span class="hljs-string">{</span> &#x27;#<span class="hljs-attr">8993B7</span>&#x27; }
+        /&gt;</span></span>
+    );
+};</code></pre>
 </div>
 
       <div class="w-800 max-w-full mx-auto grid  gap-8 items-center text-slate-500">
@@ -208,6 +229,6 @@
   </div>
 </footer>-->
 
-<script src="/js/index.1690268894072.js"></script>
+<script src="/js/index.1694421606066.js"></script>
 </body>
 </html>

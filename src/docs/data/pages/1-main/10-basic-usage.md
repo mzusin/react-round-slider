@@ -53,3 +53,29 @@ export const MyComponent = () => {
 > Read more about **ISettingsPointer** interface [here](isettings-pointer-interface.html).
 
 > The slider has a large set of options, which are described later in this documentation.
+
+To place the starting point at the top, you can use the [pathStartAngle](/pages/path-settings.html) and [pathEndAngle](/pages/path-settings.html) properties like this:
+
+<br/>
+<div id="getting-started-slider-top-point"></div>
+<br/>
+
+```tsx
+import { RoundSlider, ISettingsPointer } from 'mz-react-round-slider';
+
+export const MyComponent = () => {
+    const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+        { value: 0 },
+    ]);
+
+    return (
+        <RoundSlider
+            pathStartAngle={ 270 }
+            pathEndAngle={ 269.999 }
+            pointers={ pointers }
+            onChange={ setPointers }
+            textColor={ '#8993B7' }
+        />
+    );
+};
+```

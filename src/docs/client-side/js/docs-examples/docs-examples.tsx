@@ -32,6 +32,35 @@ const gettingStartedSlider = () => {
     );
 };
 
+const gettingStartedSliderTopPoint = () => {
+    const $slider = document.getElementById('getting-started-slider-top-point') as HTMLElement;
+    if(!$slider) return;
+
+    const Component = () => {
+
+        const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
+            { value: 0 },
+        ]);
+
+        return (
+            <RoundSlider
+                pathStartAngle={ 270 }
+                pathEndAngle={ 269.999 }
+                pointers={ pointers }
+                onChange={ setPointers }
+                textColor={ '#8993B7' }
+            />
+        );
+    };
+
+    const slider = ReactDOM.createRoot($slider);
+    slider.render(
+        <React.StrictMode>
+            <Component />
+        </React.StrictMode>
+    );
+};
+
 const generalPointerOptionsSlider = () => {
     const $slider = document.getElementById('general-pointer-options-slider') as HTMLElement;
     if(!$slider) return;
@@ -739,6 +768,7 @@ const rangeDraggingSlider = () => {
 
 export const initDocsExamples = () => {
     gettingStartedSlider();
+    gettingStartedSliderTopPoint();
     generalPointerOptionsSlider();
     pointerOptionsSlider();
     pathOptionsSlider();
