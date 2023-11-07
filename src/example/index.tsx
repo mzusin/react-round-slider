@@ -4,7 +4,7 @@ import { RoundSlider } from '../core';
 import { useState } from 'react';
 import { ISettingsPointer } from '../core/domain/settings-provider';
 
-export const testCirclePathSegments = () => {
+export const TestCirclePathSegments = () => {
     const [ pointers, setPointers ] = useState<ISettingsPointer[]>([
         { value: 0 },
     ]);
@@ -1681,6 +1681,40 @@ export const testInnerCircle = () => {
     )
 };
 
+/**
+ * https://github.com/mzusin/react-round-slider/issues/3
+ */
+export const testIssue3 = () => {
+    return (
+        <RoundSlider
+            min={0}
+            max={3}
+            step={0.1}
+            arrowStep={0.1}
+            round={20}
+            enableTicks={true}
+            ticksCount={30}
+            ticksColor="#80BA26"
+            pathStartAngle={90}
+            pathEndAngle={360}
+            pathRadius={125}
+            hideText={true}
+            showTickValues={false}
+            ticksWidth={3}
+            ticksHeight={13}
+            pathBgColor={"#e2e2e2"}
+            pointerBgColor={"#80BA26"}
+            pointerBgColorSelected={"#80BA26"}
+            animateOnClick={true}
+            animationDuration={500}
+            onChange={(value) => {
+                const num = Number(value[0].value);
+                console.log(num);
+            } }
+        />
+    )
+};
+
 const App = () => {
     return (
         <>
@@ -1689,7 +1723,7 @@ const App = () => {
             {/*{ testMultiplePointers() }*/}
             {/*{ test2PointersOnCircle() }*/}
             {/*{ testTicksProperties() }*/}
-            { testCirclePathSegments() }
+            {/*{ TestCirclePathSegments() }*/}
             {/*{ testBorder() }*/}
             {/*{ testData() }*/}
             {/*{ testStep() }*/}
@@ -1702,6 +1736,7 @@ const App = () => {
             {/*{ <TestUseState /> }*/}
             {/*{ <TestUseState2 /> }*/}
             {/*{ testTextProperties() }*/}
+            { testIssue3() }
         </>
     );
 };

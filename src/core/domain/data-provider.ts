@@ -47,8 +47,8 @@ export const getData = (setting: ISettings) : IData => {
     const pathEndAngle = getNumber(setting.pathEndAngle, DEFAULT_PATH_END_ANGLE);
     const isClosedShape = mod(pathStartAngle, 360) === mod(pathEndAngle, 360);
 
-    const stepAngleDeg = step * 360 / (max - min);
-    const arrowStepAngleDeg = arrowStep * 360 / (max - min);
+    const stepAngleDeg = step * (pathEndAngle - pathStartAngle) / (max - min);
+    const arrowStepAngleDeg = arrowStep * (pathEndAngle - pathStartAngle) / (max - min);
 
     return {
         min,
